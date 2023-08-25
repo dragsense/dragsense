@@ -1,0 +1,123 @@
+import { Col, Row, Form, Space, Divider, Input, Button, Steps, message } from "antd";
+import { useEffect, useState } from "react";
+import DownloadProject from "./Download";
+
+const { Step } = Steps;
+const { TextArea } = Input;
+
+const Setting = ({ project, onSubmit, loading }) => {
+    const [form] = Form.useForm();
+    const [isFormChanged, setFormChanged] = useState(false);
+
+    useEffect(() => {
+        if (!project) {
+            return;
+        }
+        form.setFieldsValue(project);
+    }, [project]);
+
+    const onSubmitForm = async (values) => {
+        form
+            .validateFields()
+            .then(async (values) => {
+                await onSubmit(values);
+                setFormChanged(false);
+            })
+            .catch((info) => {
+                setFormChanged(false);
+                message.error("Validate Failed.");
+            });
+    };
+
+    const handleFormChange = () => {
+        setFormChanged(true);
+    };
+
+    const handleResetForm = () => {
+        form.resetFields();
+        setFormChanged(false);
+    };
+
+    return (
+        <>
+            <Row gutter={16} style={{ marginTop: 10 }}>
+                <Col span={12}>
+                    <Form
+                        layout="vertical"
+                        form={form}
+                        initialValues={{}}
+                        onFinish={onSubmitForm}
+                        onValuesChange={handleFormChange}
+                    >
+                        <Form.Item
+                            label="Name"
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please enter the project name (alphanumeric).",
+                                    pattern: /^[a-zA-Z0-9\s]+$/,
+                                },
+                                {
+                                    min: 4,
+                                    message: "Project name must be at least 4 characters long",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Name" name="name" />
+                        </Form.Item>
+                        <Form.Item label="Description" name="desc">
+                            <TextArea rows={4} />
+                        </Form.Item>
+                        <Form.Item
+                            label="API Url"
+                            name="url"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input a valid URL!",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Url" name="url" type="url" />
+                        </Form.Item>
+                        <Form.Item className="text-right">
+                            <Space>
+                            <Button onClick={handleResetForm}>Reset</Button>
+
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    loading={loading}
+                                    disabled={!isFormChanged}
+                                >
+                                    {project._id !== -1 ? "Update" : "Create"}
+                                </Button>
+                            </Space>
+                        </Form.Item>
+                    </Form>
+                </Col>
+                <Col span={12}>
+                    {<DownloadProject id={project._id} name={project.name} apikey={project.apikey} />}
+                    <a href="#get-help">How to Install the website?</a>
+                </Col>
+            </Row>
+            <div id="get-help">
+                <Divider orientation="left" orientationMargin="0">
+                    Help
+                </Divider>
+                <Steps direction="vertical" current={8} size="small">
+                    <Step title="Hosting Requirements" description="Ensure you have the following hosting requirements:" />
+                    <Step title="Download Project" description="Download the project files (your-project-name.rar)." />
+                    <Step title="Upload and Extract Files" description="Upload the project files and extract them into the root folder of your hosting environment." />
+                    <Step title="Run Commands" description="Run the following commands in the project's root folder: 1. npm install 2. npm run build 3. npm run start" />
+                    <Step title="Check Readiness" description="Check if the Coming Soon Page is displayed, indicating that your environment is ready for creating pages and content." />
+                    <Step title="Finally" description="Back to AutoCode to create pages and content." />
+
+                </Steps>
+            </div>
+        </>
+    );
+};
+
+export default Setting;
