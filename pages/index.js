@@ -113,9 +113,10 @@ export default function Home({ isLoggedin, user }) {
     </header>
 
 
-    <section className="banner-area-2" style={{ 
+    <section className="banner-area-2" style={{
       overflow: 'hidden',
-      backgroundImage: "url(./assets/images/banner/banner-shape-4.svg)" }}>
+      backgroundImage: "url(./assets/images/banner/banner-shape-4.svg)"
+    }}>
       <div className="banner-shapes">
         <div className="shape">
           <img src="/images/banner-shape-4.svg" alt="shapes" />
@@ -138,24 +139,28 @@ export default function Home({ isLoggedin, user }) {
           <div className="col-xxl-8 col-md-7">
             <div className="banner-left pr-60 wow fadeInLeft">
               <Title level={1}> Create Your <br /> Website with, <br />
-                <span style={{ color: colorPrimary }}>  [Editor Name] </span>
+                <span style={{ color: colorPrimary }}>  GrabSense </span>
               </Title>
 
               <p className="banner-para" style={{ color: colorText }}>
-                Make your own website easily using [Your Web Builder Name]. Create web pages and organized collections effortlessly.
-                <br /><br />No coding required. <br />Just drag, drop. <br /> It's FREE.
+                Whether it's for personal use or clients, Create web pages and organized collections effortlessly.
+                <br /><br />NodeJS App. <br />Just drag, drop. <br /> It's FREE.
               </p>
               {isLoggedin ?
-                <Button href="/admin/projects" type="primary" 
-                style={{ height: 50, fontSize: 24, paddingLeft: 40, paddingRight: 40 }} size="large">
-                  Go to projects</Button>:
+                <Button href="/admin/projects" type="primary"
+                  style={{ height: 50, fontSize: 24, paddingLeft: 40, paddingRight: 40 }} size="large">
+                  Go to projects</Button> :
 
-                  <Button href="/auth/register"
+                <Button href="/auth/register"
                   style={{ height: 50, fontSize: 24, paddingLeft: 40, paddingRight: 40 }}
                   type="primary"
                   size="large">
                   Get Started
                 </Button>}
+
+              <p style={{ fontSize: 14, color: colorText }}>
+                <b>Note:</b> Our app is currently in testing mode to ensure a top-notch experience.
+              </p>
             </div>
           </div>
           <div className="col-xxl-4 col-md-5">
@@ -169,9 +174,13 @@ export default function Home({ isLoggedin, user }) {
       </div>
     </section>
 
-    <div style={{ width: 10, height: 10, margin: 'auto', background: colorPrimary, borderRadius: 50 }}></div>
+    <section style={{ overflow: 'hidden', zIndex: 1 }}>
+      <div style={{ width: 10, height: 10, margin: 'auto', background: colorPrimary, borderRadius: 50 }}></div>
+      <img src={`/images/${isDark ? 'projects-dark' : 'projects'}.png`} 
+      style={{ margin: 'auto', rotate: '-3deg', zIndex: 1, maxWidth: '90%' }} alt="" />
 
-    <img src={`/images/${isDark ? 'projects-dark' : 'projects'}.png`} style={{ margin: 'auto', rotate: '-3deg', zIndex: 1, maxWidth: '100%' }} alt="" />
+    </section>
+
 
     <section className="product-box-area" style={{ overflow: 'hidden' }}>
       <div className="container">
@@ -257,7 +266,7 @@ export default function Home({ isLoggedin, user }) {
                   </div>
                 </div>
                 <div className="product-hero-box-2" >
-                  <img src="./images/element-editor.png" style={{margin: 'auto'}} alt="" />
+                  <img src="./images/element-editor.png" style={{ margin: 'auto' }} alt="" />
                 </div>
               </div>
               <div className="product-dotted-line down"></div>
@@ -315,7 +324,7 @@ export default function Home({ isLoggedin, user }) {
       </div>
     </section>
 
-    <section  style={{ overflow: 'hidden' }} className="features-area-13 pt-135 pb-120" >
+    <section style={{ overflow: 'hidden' }} className="features-area-13 pt-135 pb-120" >
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -412,7 +421,7 @@ export default function Home({ isLoggedin, user }) {
     </section>
 
 
-    <section  style={{ overflow: 'hidden' }} className="app-clients-area pt-120 pb-90">
+    <section style={{ overflow: 'hidden' }} className="app-clients-area pt-120 pb-90">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -459,7 +468,7 @@ export default function Home({ isLoggedin, user }) {
       </div>
     </section>
 
-    <section  className="contact-area-2" style={{ overflow: 'hidden', background: isDark ? colorBgContainer : colorPrimaryBgHover }}
+    <section className="contact-area-2" style={{ overflow: 'hidden', background: isDark ? colorBgContainer : colorPrimaryBgHover }}
     >
       <div className="container">
         <div className="row">
@@ -525,9 +534,10 @@ export default function Home({ isLoggedin, user }) {
 
 
 
-    <footer className="footer-pos footer-software footer-hrm bg-aqua pt-120" style={{ 
+    <footer className="footer-pos footer-software footer-hrm bg-aqua pt-120" style={{
       overflow: 'hidden',
-      background: isDark ? colorBgContainer : colorPrimaryBgHover }}>
+      background: isDark ? colorBgContainer : colorPrimaryBgHover
+    }}>
 
 
       <div className="bg-shapes">
@@ -544,7 +554,7 @@ export default function Home({ isLoggedin, user }) {
 
       <div className="container">
         <div className="footer-bottom wow fadeInUp" data-wow-delay="0.1s">
-          <div className="row align-items-center" style={{textAlign: 'center'}}>
+          <div className="row align-items-center" style={{ textAlign: 'center' }}>
             <div className="col-lg-1 text-sm-center text-md-start">
               <ul>
                 <li>

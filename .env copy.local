@@ -1,0 +1,16 @@
+NODE_VERSION=18.16.0
+AUTH_SECRET="B65DAD3149638"
+GITHUB_ID="Iv1.d380a8bb198f4a28"
+GITHUB_SECRET="56ea1c6e4ed6770c161da41e4f753b36aaebc8e5"
+GOOGLE_ID="383846612570-cue1gl9f67l2pp5u8tnar7k7c2lss6s0.apps.googleusercontent.com"
+GOOGLE_SECRET="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"
+JWT_SECRET="173C6E9F7AB65"
+MONGODB_URI="mongodb://127.0.0.1:27017/autocodedb?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6"
+NEXTAUTH_URL="https://dragsense.com"
+NEXTAUTH_URL_INTERNAL="http://localhost:3000"
+NODE_ENV="production"
+NX_DAEMON=""
+SECRET="enJ"HgM>9TdlextpM)O]"
+
+URL="https://dragsense.com/"
+

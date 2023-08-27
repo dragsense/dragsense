@@ -3,6 +3,11 @@
 # dependencies
 /node_modules
 
+
+
+/public/alloyeditor/node_modules
+
+
 # testing
 /coverage
 
