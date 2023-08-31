@@ -24,22 +24,27 @@ export default function Editor({ info, cookies }) {
 
   useEffect(() => {
 
-    if (info) {
-      setLoading(true)
-      const iframe = iframeRef.current;
+    try {
+      if (info) {
+        setLoading(true)
+        const iframe = iframeRef.current;
 
-      const customProtocol = 'autocode-editor://open';
-      const encodedInfo = encodeURIComponent(JSON.stringify(info));
-      const encodedCookies = encodeURIComponent(JSON.stringify(cookies));
+        const customProtocol = 'autocode-editor://open';
+        const encodedInfo = encodeURIComponent(JSON.stringify(info));
+        const encodedCookies = encodeURIComponent(JSON.stringify(cookies));
 
-      const url = `${customProtocol}?info=${encodedInfo}&cookies=${encodedCookies}`;
-      iframe.src = url;
+        const url = `${customProtocol}?info=${encodedInfo}&cookies=${encodedCookies}`;
+        iframe.src = url;
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 800)
+        setTimeout(() => {
+          setLoading(false);
+        }, 800)
+      }
+    } catch (e) {
 
     }
+
+
   }, [isOpen]);
 
 
@@ -54,7 +59,7 @@ export default function Editor({ info, cookies }) {
       justifyContent: 'center'
     }}>
 
-      <img src="/images/logo/nav-logo.png" alt="autocode-logo"  />
+      <img src="/images/logo/nav-logo.png" alt="autocode-logo" />
 
       <Title> Opening Autocode {" "}
         <span style={{ color: colorPrimary }}>Editor</span>
@@ -67,7 +72,7 @@ export default function Editor({ info, cookies }) {
           event.preventDefault();
           setOpen(!isOpen);
         }}>Open Autocode Editor</a> to open the desktop app.</h3>
-        <h4>Don’t have the app yet? <a href="#">Download it here</a>.</h4>
+        <h4>Don’t have the app yet? <a href="/Autocode Editor Setup 1.0.0.zip" download>Download it here</a>.</h4>
 
       </Card>
       <iframe style={{ display: 'none' }} ref={iframeRef} title="Autocode Editor" width="0" height="0" frameBorder="0" />

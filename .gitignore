@@ -5,7 +5,7 @@ dragsense-website
 # dependencies
 /node_modules
 
-
+public
 
 /public/alloyeditor/node_modules
 
