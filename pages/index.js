@@ -3,7 +3,7 @@ import React from "react";
 
 import { useSession } from "next-auth/react"
 import { useState } from "react";
-import { Layout, Typography, theme, Button, Image } from "antd";
+import { Layout, Typography, theme, Button, Image, Alert } from "antd";
 
 const { Title } = Typography;
 import { getSession } from "next-auth/react"
@@ -38,6 +38,7 @@ export default function Home({ isLoggedin, user }) {
     message: ""
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -46,20 +47,54 @@ export default function Home({ isLoggedin, user }) {
     }));
   };
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (values.email === "" || values.name === "")
-      return alert("name or email is empty");
 
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
+    // Initialize loading and error states
+    setLoading(true);
+    setError(null);
+
+    if (values.email === "" || values.name === "") {
+      setError("Name or email is empty");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit data");
+      }
+
+      // Display success message
+      setMessage("Data submitted successfully");
+
+      setValues({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      // Set error message
+      setError("An error occurred while submitting data");
+    } finally {
+      // Reset loading state
+      setLoading(false);
+    }
   };
-
   function adjustAlpha(colorValue, alpha) {
 
 
@@ -103,7 +138,7 @@ export default function Home({ isLoggedin, user }) {
                 <><Button type="text" href="/auth/register" style={{ color: colorText }} size="large">
                   Sign Up</Button>
 
-                  <Button type="default" href="/auth/login" size="large">
+                  <Button type="default" style={{ color: colorText }} href="/auth/login" size="large">
                     Sign In</Button>
                 </>}
             </div>
@@ -144,7 +179,7 @@ export default function Home({ isLoggedin, user }) {
 
               <p className="banner-para" style={{ color: colorText }}>
                 Whether it's for personal use or clients, Create web pages and organized collections effortlessly.
-                <br /><br />NodeJS App. <br />Just drag, drop. <br /> It's FREE.
+                <br /><br />NodeJS App. <br /> Static Pages. <br />Just drag, drop. <br /> It's FREE.
               </p>
               {isLoggedin ?
                 <Button href="/admin/projects" type="primary"
@@ -176,8 +211,8 @@ export default function Home({ isLoggedin, user }) {
 
     <section style={{ overflow: 'hidden', zIndex: 1 }}>
       <div style={{ width: 10, height: 10, margin: 'auto', background: colorPrimary, borderRadius: 50 }}></div>
-      <img src={`/images/${isDark ? 'projects-dark' : 'projects'}.png`} 
-      style={{ margin: 'auto', rotate: '-3deg', zIndex: 1, maxWidth: '90%' }} alt="" />
+      <img src={`/images/${isDark ? 'projects-dark' : 'projects'}.png`}
+        style={{ margin: 'auto', rotate: '-3deg', zIndex: 1, maxWidth: '90%' }} alt="" />
 
     </section>
 
@@ -283,9 +318,14 @@ export default function Home({ isLoggedin, user }) {
           <div className="col-lg-6">
             <div className="features-content features-content-four">
               <h2 style={{ color: colorText }}>Total Control Over </h2>
-              <h3 style={{ color: colorText }}>Hosting and Domain, <span>Effortless</span> Content Management</h3>
+              <h5 style={{ color: colorText }}>Hosting, <span style={{ color: colorPrimary }}>Effortless</span> Content Management</h5>
               <p style={{ color: colorText, fontSize: 18 }}>
-                With our solution, you have complete control over your hosting and domain. Seamlessly connect to our platform for hassle-free editing and content uploading. Upload files directly to your server with ease, making the process as simple as it sounds. Say goodbye to complicated transfers. Experience a new level of content management, all while maintaining total control over your hosting and domain.
+                With our solution, you have complete control over your hosting and domain.
+                <br /><br />
+                Seamlessly connect to our platform for
+                hassle-free editing and content uploading.
+                <br /><br />
+                Experience a new level of content management, all while maintaining total control over your hosting and domain.
               </p>
             </div>
           </div>
@@ -330,8 +370,7 @@ export default function Home({ isLoggedin, user }) {
           <div className="col-md-12">
             <div className="section-title-center">
               <h2 className="wow fadeInUp" style={{ color: colorText }}>Transform Creativity with</h2>
-              <p className="wow fadeInUp" data-wow-delay="0.2s" style={{ color: colorText, fontSize: 18 }}>
-                Themes offer effortless visual consistency through global variables, Animations provide captivating CSS animations minus the coding, Components introduce reusable building blocks for efficiency, and States empower dynamic content logic handling – all accessible without complex code.                </p>
+
             </div>
           </div>
         </div>
@@ -501,25 +540,35 @@ export default function Home({ isLoggedin, user }) {
                     <form onSubmit={onSubmit}
                     >
                       <div className="contact-form-name">
-                        <label for="name" className="">Name*</label>
-                        <input type="text" id="name" name="name" placeholder="" onChange={handleChange} />
+                        <label htmlFor="name" className="">Name*</label>
+                        <input type="text" id="name" value={values.name} name="name" placeholder="" onChange={handleChange} />
                       </div>
 
                       <div className="contact-form-email">
                         <label htmlFor="email">Email*</label>
-                        <input type="text" id="email" name="email" placeholder="" onChange={handleChange} />
+                        <input type="text" id="email" value={values.email} name="email" placeholder="" onChange={handleChange} />
                       </div>
                       <div className="contact-form-name">
                         <label htmlFor="subject" className="">Subject*</label>
-                        <input type="text" id="subject" name="subject" placeholder="" onChange={handleChange} />
+                        <input type="text" id="subject" value={values.subject} name="subject" placeholder="" onChange={handleChange} />
                       </div>
                       <div className="contact-form-message">
                         <label htmlFor="textarea">Message</label>
-                        <textarea id="textarea" name="message" placeholder="" onChange={handleChange}></textarea>
+                        <textarea id="textarea" value={values.message} name="message" placeholder="" onChange={handleChange}></textarea>
                       </div>
                       <div className="contact-form-button">
-                        <a href="#" className="btn btn-red">Send Message</a>
+                        <Button
+                          loading={loading}
+                          disabled={loading}
+                          style={{ height: 50, fontSize: 20, paddingLeft: 40, paddingRight: 40 }}
+
+                          type="primary" size="large" htmlType="submit" >Send Message</Button>
                       </div>
+                      <br/>
+
+                      {message && <Alert type="success" message={message}></Alert>}
+                      {error && <Alert type="error" message={error}></Alert>}
+
                     </form>
                   </div>
                 </div>
@@ -534,8 +583,8 @@ export default function Home({ isLoggedin, user }) {
 
 
 
-    <footer className="footer-pos footer-software footer-hrm bg-aqua pt-120" style={{
-      overflow: 'hidden',
+    <footer className="footer-pos footer-software  bg-aqua pt-20" style={{
+
       background: isDark ? colorBgContainer : colorPrimaryBgHover
     }}>
 
@@ -558,7 +607,7 @@ export default function Home({ isLoggedin, user }) {
             <div className="col-lg-1 text-sm-center text-md-start">
               <ul>
                 <li>
-                  <a href="#"><img className="d-md-block d-sm-inline-block" src="/images/logo/nav-logo.png" alt="Footer Logo" /></a>
+                  <a href="/"><img className="d-md-block d-sm-inline-block" src="/images/logo/nav-logo.png" alt="Footer Logo" /></a>
                 </li>
               </ul>
             </div>
@@ -568,26 +617,19 @@ export default function Home({ isLoggedin, user }) {
             <div className="col-lg-5">
               <div className="footer-bottom-menu">
                 <ul className="" >
-                  <li><a style={{ color: colorPrimary }} href="#">Terms & Conditions</a></li>
-                  <li><a style={{ color: colorPrimary }} href="#">Privacy Policy</a></li>
-                  <li><a style={{ color: colorPrimary }} href="#">Legal Notice</a></li>
+                  <li><a style={{ color: colorPrimary }} href="/terms">Terms & Conditions</a></li>
+                  <li><a style={{ color: colorPrimary }} href="/privacypolicy">Privacy Policy</a></li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-3">
               <ul className="social-link-bg-2">
+               
                 <li>
-                  <a href="#" style={{ color: colorPrimaryBg }}><i className="fab fa-facebook-f"></i></a>
+                  <a href="https://twitter.com/dragsense" style={{ color: colorPrimaryBg }}><i className="fab fa-twitter"></i></a>
                 </li>
-                <li>
-                  <a href="#" style={{ color: colorPrimaryBg }}><i className="fab fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="#" style={{ color: colorPrimaryBg }}><i className="fab fa-linkedin-in"></i></a>
-                </li>
-                <li>
-                  <a href="#" style={{ color: colorPrimaryBg }}><i className="fab fa-instagram"></i></a>
-                </li>
+               
+            
               </ul>
             </div>
           </div>

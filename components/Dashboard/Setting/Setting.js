@@ -526,7 +526,8 @@ export default function Setting() {
 
                             <Divider orientation="left" orientationMargin="0"> {"Images"} </Divider>
 
-                            <Space direction="horizontal" className="wrapper" style={{ overflow: 'auto' }}>
+                            <Space direction="horizontal" className="wrapper" 
+                            style={{ overflow: 'auto', flexWrap: 'wrap' }}>
                                 <Form.Item label="Favicon" className="font-500">
 
 

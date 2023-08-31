@@ -46,15 +46,40 @@
 Auth layout
 /**********************************/
 
+@media only screen and (max-width: 600px) {
+  .auth-container .bg:nth-child(1) {
+   position: absolute;
+  }
+
+  .auth-container .bg:nth-child(1) {
+    position: absolute;
+   }
+  
+  .auth-container .bg:nth-child(3) {
+    position: absolute;
+
+  }
+
+  .logo-container {
+
+    width: 90% !important;
+  
+  }
+  
+}
+
+
 .auth-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   min-height: 100vh !important;
+ 
 }
 
 .auth-container .bg:nth-child(1) {
   align-self: flex-end;
+
 }
 
 .auth-container .bg:nth-child(3) {
@@ -66,7 +91,9 @@ Auth layout
   position: relative;
   margin-top: 10px;
   margin-bottom: 30px;
-  width: 25%;
+  min-width: 400px;
+  z-index: 1;
+
 }
 
 .logo-container .logo:first-child {

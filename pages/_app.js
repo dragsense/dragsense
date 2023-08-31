@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react'
 import { Loading } from '../components';
 import { Merriweather } from 'next/font/google'
 
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = theme;
 
@@ -79,7 +80,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
           <div style={{ position: 'fixed', bottom: 0, right: 0, zIndex: 10000 }}>
             <Button type='text' onClick={handleClick}>
-              {isDarkMode ? "Light" : "Dark"}
+            {isDarkMode ? <FaSun /> : <FaMoon />}            
             </Button>
           </div>
 

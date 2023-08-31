@@ -1,21 +1,22 @@
 import { database } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
+import nodemailer from 'nodemailer';
 
 const handler = nc(ncOpts);
 
 handler.use(database);
 handler.options(async (req, res) => {
-    return res.status(200).json({});
+  return res.status(200).json({});
 
 });
 
 handler.post(async (req, res, next) => {
 
-    const { name, email, subject, message } = req.body
- 
+  const { name, email, subject, message } = req.body
 
-    const emailBody = `<!DOCTYPE html>
+
+  const emailBody = `<!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
@@ -29,24 +30,42 @@ handler.post(async (req, res, next) => {
     </body>
     </html>`;
 
+  const emailUser = process.env.EMAIL_USER;
+  const emailPass = process.env.EMAIL_PASS;
+  const host = process.env.EMAIL_HOST;
+  const port = process.env.EMAIL_PORT;
 
+  try {
 
-    try {
-       await transporter.sendMail({
-            from: 'info@autocode.com',
-            from: 'info@autocode.com',
-            subject: subject,
-            html: emailBody
-        });
+    const transporter = nodemailer.createTransport({
+      host: host, 
+      port: port, 
+      secure: false, 
+      auth: {
+        user: emailUser,
+        pass: emailPass,
+      },
+    });
 
+    await transporter.sendMail({
+      from: emailUser,
+      to: emailUser,
+      port: 587,
+      subject: subject,
+      html: emailBody,
+   
+    });
 
-        res.json({ status: true });
+    console.log(emailBody)
 
-    } catch (e) {
+    res.json({ status: true });
 
-        return res.status(403)
-            .json({ error: { message: 'Something Went Wrong.' } });
-    }
+  } catch (e) {
+    console.log(e?.message)
+
+    return res.status(403)
+      .json({ error: { message: 'Something Went Wrong.' } });
+  }
 
 });
 

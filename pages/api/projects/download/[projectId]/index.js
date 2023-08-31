@@ -38,9 +38,8 @@ handler.get(async (req, res) => {
 
                 let fileContent = fs.readFileSync(filePath, 'utf-8');
 
-                if (file === '.env.local' || file === '.env') {
-                    fileContent = fileContent.replace('APP_PORT=3001', `APP_PORT=3000`);
-                    fileContent = fileContent.replace('AUTCODE_API_KEY=1234', `AUTCODE_API_KEY=${project.apikey}`);
+                if (file === '.env.example') {
+                    fileContent = fileContent.replace('AUTCODE_API_KEY=', `AUTCODE_API_KEY=${project.apikey}`);
                 }
 
                 zip.file(path.join(folderName, file), fileContent);
@@ -54,7 +53,7 @@ handler.get(async (req, res) => {
         });
     };
 
-    addFilesToZip('./autocode-project', '');
+    addFilesToZip('./dragsense-website', '');
 
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename=${project.name}-${getCurrentDate()}.zip`);
