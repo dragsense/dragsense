@@ -116,13 +116,13 @@ export default function AddUser({ onSubmit, role = {} }) {
             },
           ]}
         >
-          <Checkbox.Group onChange={handlePermissionsChange} valuePropName="value">
+          <Checkbox.Group disabled={true} onChange={handlePermissionsChange} valuePropName="value">
             <Checkbox value="all" onChange={handleAllCheckboxChange}>
               All
             </Checkbox>
-            <Checkbox value="pages">Pages</Checkbox>
+            {/* <Checkbox value="pages">Pages</Checkbox>
             <Checkbox value="collections">Collections</Checkbox>
-            <Checkbox value="forms">Forms</Checkbox>
+            <Checkbox value="forms">Forms</Checkbox> */}
           </Checkbox.Group>
         </Form.Item>
       </Form>
