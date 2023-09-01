@@ -6,11 +6,11 @@ GOOGLE_ID="383846612570-cue1gl9f67l2pp5u8tnar7k7c2lss6s0.apps.googleusercontent.
 GOOGLE_SECRET="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"
 JWT_SECRET="173C6E9F7AB65"
 MONGODB_URI="mongodb://127.0.0.1:27017/autocodedb?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6"
-NEXTAUTH_URL="https://dragsense.com"
+NEXTAUTH_URL="https://app.dragsense.com"
 NEXTAUTH_URL_INTERNAL="http://localhost:3000"
 NODE_ENV="production"
 NX_DAEMON=""
 SECRET="enJ"HgM>9TdlextpM)O]"
 
-URL="https://dragsense.com/"
+URL="https://app.dragsense.com/"
 
