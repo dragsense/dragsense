@@ -667,7 +667,7 @@ export default function Setting() {
                             </Form.Item>
                             <Form.Item label="ignoreTLS?" className="font-500">
                                 <Checkbox className="font-500"
-                                    onChange={() => setState({ ...state, email: { ...state.email, secure: !state.email.ignoreTLS } })}
+                                    onChange={() => setState({ ...state, email: { ...state.email, ignoreTLS: !state.email.ignoreTLS } })}
                                     checked={state.email.ignoreTLS}
                                 >Yes</Checkbox>
                             </Form.Item>

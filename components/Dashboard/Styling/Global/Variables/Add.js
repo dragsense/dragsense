@@ -24,7 +24,7 @@ export default function AddVariable({ onSubmit, variable = {} }) {
     return (
         <Modal
             visible={variableModal}
-            title={`${variable?.id === -1 ? "Add a new" : "Edit"} variable`}
+            title={`${variable?._uid === -1 ? "Add a new" : "Edit"} variable`}
             okText="Save"
             cancelText="Cancel"
             onCancel={onCancel}

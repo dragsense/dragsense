@@ -134,6 +134,8 @@ handler.patch(authorize,
       return;
     }
 
+    console.log(name)
+
     await updateUserById(req.db, user._id, {
       name,
       enable2FA,

@@ -100,7 +100,7 @@ const SideBar = () => {
                         Custom CSS
                     </Menu.Item>
                     <Menu.Item key="8" icon={<MdEmail size="1.5em" />} onClick={() => router.push('/admin/dashboard/forms')}>
-                        Form
+                        Forms
                     </Menu.Item>
                     <Menu.Item key="9" icon={<MdSettings size="1.5em" />} onClick={() => router.push('/admin/dashboard/setting')}>
                         Setting

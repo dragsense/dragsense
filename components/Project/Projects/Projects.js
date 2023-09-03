@@ -34,7 +34,7 @@ const reducer = (state, action) => {
     const updateProject = () => {
         let index = state.projects.findIndex(project => project._id === action.project?._id);
         if (index !== -1) {
-            state.projects[index] = action.page;
+            state.projects[index] = action.project;
 
         }
     }
@@ -151,7 +151,7 @@ export default function Projects({ shared }) {
 
         } catch (e) {
 
-            dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            dispatch({ type: 'error', error: e?.error?.message || 'Something went wrong.' });
         } finally {
             dispatch({ type: 'finish' });
         }

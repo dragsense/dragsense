@@ -142,6 +142,10 @@ export default function AddForm({ _form, onSubmit }) {
     };
 
     const emailValidator = (_, value) => {
+
+        if(!value && 'setting.to' !== _.field)
+        return true;
+
         if (!value) {
             return Promise.reject('Please enter at least one email address');
         }
@@ -164,7 +168,7 @@ export default function AddForm({ _form, onSubmit }) {
     };
 
 
-
+ 
     return (
         <>
 
@@ -237,11 +241,13 @@ export default function AddForm({ _form, onSubmit }) {
                                 <Input placeholder="Enter To addresses separated by commas" />
                             </Form.Item>
 
-                            <Form.Item label="Cc" name={['setting', 'cc']} rules={[{ validator: emailValidator }]}>
+                            <Form.Item label="Cc" name={['setting', 'cc']} 
+                            rules={[{ validator: emailValidator }]}>
                                 <Input placeholder="Enter Cc addresses separated by commas" />
                             </Form.Item>
 
-                            <Form.Item label="Bcc" name={['setting', 'bcc']} rules={[{ validator: emailValidator }]}>
+                            <Form.Item label="Bcc" name={['setting', 'bcc']} 
+                            rules={[{ validator: emailValidator }]}>
                                 <Input placeholder="Enter Bcc addresses separated by commas" />
                             </Form.Item>
 

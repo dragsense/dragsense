@@ -138,7 +138,7 @@ const CollectionList = ({ collections, onClone, page, total, setPage, onEdit, on
                         }} />
 
                     </Tooltip>
-                    <Tooltip title="Edit Colelction Entries"><Button onClick={async (e) => {
+                    <Tooltip title="Edit Collection Entries"><Button onClick={async (e) => {
 
                         e.preventDefault();
                         onEditDocuments({ ...record });

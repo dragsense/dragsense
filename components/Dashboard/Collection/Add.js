@@ -100,11 +100,12 @@ export default function AddCollection({ collection, onSubmit }) {
                         collection = res.collection;
                     }
                 }
-                form.setFieldsValue({ 
-                    name: collection?.name, 
+                form.setFieldsValue({
+                    name: collection?.name,
                     slug: collection?.slug,
-                     layout: collection?.layout })
-            
+                    layout: collection?.layout
+                })
+
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
                 dispatch({ type: 'loadCollections', data: collection.populatedRelationships || [] });
@@ -252,7 +253,10 @@ export default function AddCollection({ collection, onSubmit }) {
 
     const handleChangeForm = (value, option) => {
 
-        state.form = { _id: value, name: option.label, slug: option.slug }
+        if (value)
+            state.form = { _id: value, name: option.label, slug: option.slug }
+        else
+            state.form = undefined;
         setState({ ...state });
 
     }
@@ -310,7 +314,7 @@ export default function AddCollection({ collection, onSubmit }) {
             .then(async (values) => {
                 const slug = values.slug.toLowerCase().replace(/\s+/g, "-");
 
-                onSubmit({...state, slug});
+                onSubmit({ ...state, slug });
             })
             .catch((info) => {
                 message.error('Validate Failed.');
@@ -493,7 +497,7 @@ export default function AddCollection({ collection, onSubmit }) {
                                 }}
                                 alt={preview?.alt}
                                 src={preview?.src || state.populatedImage?.[0]?.src || "/images/default/default-img.png"}
-                                 />
+                            />
                         </Form.Item>
 
 
@@ -551,7 +555,6 @@ export default function AddCollection({ collection, onSubmit }) {
 
                     >
 
-                        <Option value=''> None </Option>
                         {states.collections.map(col => <Option
                             key={col._id}
                             value={col._id}
@@ -565,7 +568,7 @@ export default function AddCollection({ collection, onSubmit }) {
                 </Form.Item>
 
 
-                <Divider orientation="left" orientationMargin="0">{"Forms"}
+                {/* <Divider orientation="left" orientationMargin="0">{"Forms"}
                     <Tooltip title="Form with a collection"> <QuestionCircleFilled /></Tooltip>
                 </Divider>
 
@@ -615,7 +618,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         </Option>)}
                     </Select>
 
-                </Form.Item>
+                </Form.Item> */}
 
 
                 <Divider></Divider>
@@ -628,7 +631,7 @@ export default function AddCollection({ collection, onSubmit }) {
                                 onClick={() => setNewState({ ...initialState })}
                                 icon={<PlusOutlined />}> </Button></Tooltip></>}
                     >
-                   
+
                         {newState ? <AddStateComponent newState={newState} onAdd={onAddState} setNewState={setNewState} />
 
                             :

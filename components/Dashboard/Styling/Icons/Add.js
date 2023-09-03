@@ -26,7 +26,7 @@ export default function AddIcon({ icon, onSubmit }) {
     return <>
         <Modal
             open={iconModal}
-            title="Edit Icon"
+            title="Add/Edit Icon"
             okText="Save"
             cancelText="Cancel"
             onCancel={onCancel}

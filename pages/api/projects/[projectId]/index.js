@@ -16,15 +16,20 @@ handler.get(async (req, res) => {
     return res.status(403).status(403)
       .json({ error: { message: 'Project Not Found.' } });
 
-
-
   try {
     const connection = await fetcher(`${project.url}`, {
       method: 'GET',
       headers: { 'x-api-key': project.apikey }
-    });
 
+    });
     project.status = connection?.status;
+  } catch (e) {
+    
+  }
+
+
+
+  try {
     const creator = project.creator;
 
     res.json({ project: { ...project, creator: { name: creator.name, image: creator.image } } });

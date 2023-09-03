@@ -67,7 +67,7 @@ export default function AddFont({ onSubmit, font = {} }) {
 
             <Modal
                 open={fontModal}
-                title={`${font?.id == -1 ? 'Add a new' : 'Edit'} font`}
+                title={`${font?._uid == -1 ? 'Add a new' : 'Edit'} font`}
                 okText="Save"
                 cancelText="Cancel"
                 onCancel={onCancel}

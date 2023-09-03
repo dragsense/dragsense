@@ -84,6 +84,9 @@ export default function Dashboard() {
                 <Descriptions.Item label="Total Users">
                     {state.project.roles?.length}
                 </Descriptions.Item>
+                <Descriptions.Item label="Description">
+                {state.project?.desc}
+                </Descriptions.Item>
                 <Descriptions.Item label="Status">
                     <Badge status={status ? 'success' : 'danger'} text={status ? "Connected" : "Disonnected"} />
                 </Descriptions.Item>

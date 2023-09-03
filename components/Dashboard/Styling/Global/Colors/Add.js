@@ -25,23 +25,32 @@ export default function AddColor({ onSubmit, color = {} }) {
             return;
         }
 
-        const generatedPalette = generatePalette(selectedColor);
-        setPalette(generatedPalette);
+        setTimeout(() => {
+            const generatedPalette = generatePalette(selectedColor);
+            setPalette([...generatedPalette]);
+        })
+   
     }, [selectedColor]);
 
     const onCancel = () => setColorModalOpen(false);
 
     const handleColorChange = (colorValue) => {
-        setPalette([]);
-        console.log(colorValue)
 
+        if(colorValue !== selectedColor) {
         setSelectedColor(colorValue);
         form.setFieldsValue({ color: colorValue });
+
+    
+        setPalette([]);
+        }
+
 
       };
 
     const handleColorSelection = (color) => {
         form.setFieldsValue({ color });
+        setSelectedColor(color);
+
        
     };
 
@@ -64,7 +73,7 @@ export default function AddColor({ onSubmit, color = {} }) {
     return (
         <Modal
             visible={colorModal}
-            title={`${color?.id === -1 ? "Add a new" : "Edit"} color`}
+            title={`${color?._uid === -1 ? "Add a new" : "Edit"} color`}
             okText="Save"
             cancelText="Cancel"
             afterOpenChange={handleAfterOpenChange}
@@ -128,7 +137,7 @@ export default function AddColor({ onSubmit, color = {} }) {
                                 margin: "5px",
                                 cursor: "pointer",
                             }}
-                            onClick={() => handleColorSelection(color)}
+                            onClick={() => handleColorChange(color)}
                         ></div>
                     ))}
                 </div>

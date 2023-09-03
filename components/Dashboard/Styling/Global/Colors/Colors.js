@@ -20,7 +20,7 @@ const initial = {
 const initialColor = {
     _uid: -1,
     name: '',
-    color: null,
+    color:  '#000',
 }
 
 const reducer = (state, action) => {
