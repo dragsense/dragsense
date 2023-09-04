@@ -27,7 +27,7 @@ const ProjectLists = ({ total, projects, onDownlaod, onEdit, onDelete }) => {
 
   return total == 0 ? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> : <>
     <Row gutter={[16, 16]} style={{ marginBottom: 10 }}>
-      {projects.map(project => <Col span={8}>
+      {projects.map((project, index) => <Col key={index} span={8}>
         <Card style={gridStyle} className="actions-item-card"
           hoverable
           actions={[

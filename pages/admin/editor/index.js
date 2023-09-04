@@ -4,7 +4,7 @@
 import { getSession } from "next-auth/react";
 import React, { useState, useRef, useEffect } from 'react';
 
-import { Spin, theme, Card, Typography } from 'antd';
+import { Spin, theme, Card, Typography, Layout } from 'antd';
 import Link from "next/link";
 
 const { Title } = Typography;
@@ -18,7 +18,7 @@ export default function Editor({ info, cookies }) {
 
 
   const {
-    token: { colorPrimary },
+    token: { colorPrimary, colorBgLayout },
   } = theme.useToken();
 
 
@@ -50,7 +50,7 @@ export default function Editor({ info, cookies }) {
 
 
   return (
-    <div style={{
+    <Layout style={{
       minHeight: '100vh',
       gap: 20,
       flexDirection: 'column',
@@ -77,7 +77,7 @@ export default function Editor({ info, cookies }) {
       </Card>
       <iframe style={{ display: 'none' }} ref={iframeRef} title="Autocode Editor" width="0" height="0" frameBorder="0" />
 
-    </div>
+    </Layout>
   )
 
 }
@@ -103,6 +103,11 @@ export async function getServerSideProps(context) {
     return {
       notFound: true,
     }
+
+    const protocol = req.connection.encrypted ? 'https' : 'http';
+    const host = req.headers.host;
+
+    info.url = host ? `${protocol}://${host}` : 'http://localhost:3000';
 
   info.userName = session.user.name;
   const cookies = req.cookies;
