@@ -10,6 +10,7 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
     };
 
     const handleAddValue = () => {
+        console.log(inputValue)
         const values = inputValue.split(",").filter((value) => value !== "");
         onAdd(values);
         setInputValue("");
@@ -24,7 +25,7 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
             states = {};
 
 
-        setInputValue(Object.values(states).flatMap((value) => value))
+        setInputValue(Object.values(states).flatMap((value) => value.value).join(","))
     }, [state])
 
     return (
@@ -32,6 +33,7 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
             <Col flex="auto">
                 <Form.Item>
                     <Input.TextArea
+                        maxLength={100000}
                         rows={4}
                         value={inputValue}
                         onChange={handleInputChange}
@@ -51,18 +53,20 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
             </Col>
             <Col flex="auto">
                 {Object.values(states).map((value, idx) => (
-                        <Form.Item key={idx}>
-                            <Input
-                                type="text"
-                                placeholder={`Value #${idx + 1}`}
-                                value={value}
-                                onChange={(e) => handleArrayValueChange(e, idx)}
-                                addonAfter={
-                                    <MinusCircleOutlined onClick={() => onRemove(idx)} />
-                                }
-                            />
-                        </Form.Item>
-                    ))}
+                    <Form.Item key={idx}>
+                        <Input
+                            maxLength={500}
+
+                            type="text"
+                            placeholder={`Value #${idx + 1}`}
+                            value={value.value}
+                            onChange={(e) => handleArrayValueChange(e, value.idx)}
+                            addonAfter={
+                                <MinusCircleOutlined onClick={() => onRemove(value.idx)} />
+                            }
+                        />
+                    </Form.Item>
+                ))}
             </Col>
         </Row>
     );

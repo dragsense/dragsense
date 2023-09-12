@@ -1,4 +1,6 @@
 
+
+
 import { useState, useEffect, useReducer } from "react";
 import {
     Space,
@@ -29,8 +31,10 @@ const { TextArea } = Input;
 import SettingServices from '@/lib/services/setting';
 import PageServices from "@/lib/services/pages";
 
+
+
 const initial = {
-    webtitle: '',
+    webTitle: '',
     tagLine: '',
     desc: '',
     lang: '',
@@ -88,7 +92,7 @@ export default function Setting() {
             setIsLoading(true);
             const res = await SettingServices.get();
             const data = { ...initial, ...res.setting };
-            form.setFieldsValue({ webtitle: res.setting?.webtitle, email: res.setting?.email })
+            form.setFieldsValue({ webTitle: res.setting?.webTitle, email: res.setting?.email })
 
             setState(data);
 
@@ -227,7 +231,7 @@ export default function Setting() {
         if (mediaModal.type)
             setState({ ...state, images: { ...state.images, [mediaModal.type]: newImage } })
 
-            setIsChange(true)
+        setIsChange(true)
 
     }
 
@@ -256,8 +260,10 @@ export default function Setting() {
 
 
     const emailValidator = (_, value) => {
+
+
         if (!value) {
-            return Promise.reject('Please enter at least one email address');
+            return Promise.resolve();
         }
 
         const emails = value.split(',').map((email) => email.trim());
@@ -286,6 +292,7 @@ export default function Setting() {
                     const data = res.setting;
                     setState(data);
                     setIsChange(false)
+                    message.success('Data submitted!');
 
                 } catch (e) {
                     message.error(e?.message || 'Something went wrong.');
@@ -322,7 +329,7 @@ export default function Setting() {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="Website Title"
-                                name="webtitle"
+                                name="webTitle"
                                 rules={[
                                     {
                                         required: true,
@@ -336,9 +343,10 @@ export default function Setting() {
                                 ]}
 
                                 className="font-500">
-                                <Input placeholder="Name" name="webtitle"
+                                <Input placeholder="Name" name="webTitle"
+                                    maxLength={500}
                                     onChange={onChange}
-                                    value={state.webtitle}
+                                    value={state.webTitle}
                                     required />
                             </Form.Item>
                             <Form.Item label="Tag Line"
@@ -351,6 +359,9 @@ export default function Setting() {
 
                                 className="font-500">
                                 <Input placeholder="Tag Line" name="tagLine"
+
+                                    maxLength={500}
+
                                     onChange={onChange}
                                     value={state.tagLine}
                                     required />
@@ -367,6 +378,7 @@ export default function Setting() {
                                 className="font-500">
                                 <TextArea rows={4} placeholder="Desc" name="desc"
                                     onChange={onChange}
+                                    maxLength={500}
                                     value={state.desc}
                                     required />
                             </Form.Item>
@@ -382,6 +394,7 @@ export default function Setting() {
                                 className="font-500">
                                 <Input placeholder="author" name="author"
                                     onChange={onChange}
+                                    maxLength={500}
                                     value={state.author}
                                     required />
                             </Form.Item>
@@ -392,6 +405,7 @@ export default function Setting() {
                                 className="font-500">
                                 <TextArea rows={4} placeholder="Keywords" name="keywords"
                                     onChange={onChange}
+                                    maxLength={2000}
                                     value={state.keywords}
                                     required />
                             </Form.Item>
@@ -509,8 +523,8 @@ export default function Setting() {
                                     }}
                                     dropdownRender={dropdownRender}
                                     optionFilterProp="label"
-                                    defaultValue={state.maintenancePage?._id|| ""}
-                                    value={state.maintenancePage?._id|| ""}
+                                    defaultValue={state.maintenancePage?._id || ""}
+                                    value={state.maintenancePage?._id || ""}
                                 >
                                     <Option value="">None</Option>
                                     {state.maintenancePage && <Option
@@ -526,8 +540,8 @@ export default function Setting() {
 
                             <Divider orientation="left" orientationMargin="0"> {"Images"} </Divider>
 
-                            <Space direction="horizontal" className="wrapper" 
-                            style={{ overflow: 'auto', flexWrap: 'wrap' }}>
+                            <Space direction="horizontal" className="wrapper"
+                                style={{ overflow: 'auto', flexWrap: 'wrap' }}>
                                 <Form.Item label="Favicon" className="font-500">
 
 
@@ -623,11 +637,11 @@ export default function Setting() {
                             <Space direction="horizontal" className="wrapper" style={{ overflow: 'auto' }}>
 
                                 <Form.Item label="Head" className="font-500">
-                                    <HTMLEditor title="Edit Script" 
-                                    content={state.scripts.head}
-                                     onSave={(_content) => {
-                                        onChangeScript(_content, 'head');
-                                    }} />
+                                    <HTMLEditor title="Edit Script"
+                                        content={state.scripts.head}
+                                        onSave={(_content) => {
+                                            onChangeScript(_content, 'head');
+                                        }} />
                                 </Form.Item>
                                 <Form.Item label="After Content" className="font-500">
                                     <HTMLEditor title="Edit Script" content={state.scripts.footer} onSave={(_content) => {
@@ -648,26 +662,47 @@ export default function Setting() {
 
                             <Form.Item label="Host" className="font-500">
                                 <Input placeholder="your.email.server.com" name="host"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, host: e.target.value } })}
+                                    onChange={(e) => {
+
+                                        setState({ ...state, email: { ...state.email, host: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    maxLength={1000}
                                     value={state.email.host}
                                     required />
                             </Form.Item>
                             <Form.Item label="Port" className="font-500">
                                 <Input placeholder="587" name="email port"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, port: e.target.value } })}
+                                    maxLength={100}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, port: e.target.value } })
+
+                                        setIsChange(true)
+                                    }
+                                    }
                                     value={state.email.port}
                                     type="number"
                                     required />
                             </Form.Item>
                             <Form.Item label="isSecure?" className="font-500">
                                 <Checkbox className="font-500"
-                                    onChange={() => setState({ ...state, email: { ...state.email, secure: !state.email.secure } })}
+                                    onChange={() => {
+                                        setState({ ...state, email: { ...state.email, secure: !state.email.secure } })
+                                        setIsChange(true)
+                                    }
+
+                                    }
                                     checked={state.email.secure}
                                 >Yes</Checkbox>
                             </Form.Item>
                             <Form.Item label="ignoreTLS?" className="font-500">
                                 <Checkbox className="font-500"
-                                    onChange={() => setState({ ...state, email: { ...state.email, ignoreTLS: !state.email.ignoreTLS } })}
+                                    onChange={() => {
+                                        setState({ ...state, email: { ...state.email, ignoreTLS: !state.email.ignoreTLS } })
+                                        setIsChange(true)
+                                    }
+                                    }
                                     checked={state.email.ignoreTLS}
                                 >Yes</Checkbox>
                             </Form.Item>
@@ -676,14 +711,24 @@ export default function Setting() {
 
                             <Form.Item label="User" className="font-500">
                                 <Input placeholder="youremail@yourdomain.com" name="user"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, auth: { ...state.email.auth, user: e.target.value } } })}
+                                    maxLength={1000}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, auth: { ...state.email.auth, user: e.target.value } } })
+                                        setIsChange(true)
+                                    }
+                                    }
                                     value={state.email.auth.user}
                                     required />
                             </Form.Item>
 
                             <Form.Item label="Password" className="font-500">
                                 <Input.Password
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, auth: { ...state.email.auth, pass: e.target.value } } })}
+                                    maxLength={1000}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, auth: { ...state.email.auth, pass: e.target.value } } })
+                                        setIsChange(true)
+                                    }
+                                    }
                                     value={state.email.auth.pass}
                                     placeholder="*******"
                                     iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
@@ -697,15 +742,24 @@ export default function Setting() {
 
                             <Form.Item label="Subject" className="font-500">
                                 <TextArea rows={2} placeholder="Subject" name="subject"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, subject: e.target.value } })}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, subject: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
                                     value={state.email.subject}
-
+                                    maxLength={500}
                                     required />
                             </Form.Item>
 
                             <Form.Item label="From" className="font-500">
                                 <Input placeholder="Enter From address" name="email"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, from: e.target.value } })}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, from: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    maxLength={1000}
                                     value={state.email.from}
                                     type="email"
                                     multiple
@@ -714,7 +768,12 @@ export default function Setting() {
                             <Form.Item label="To" name={['email', 'to']} rules={[{ validator: emailValidator }]}>
 
                                 <Input placeholder="Enter To addresses separated by commas" name="email"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, to: e.target.value } })}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, to: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    maxLength={1000}
                                     value={state.email.to}
                                     type="email"
                                     multiple
@@ -723,27 +782,43 @@ export default function Setting() {
 
                             <Form.Item label="CC" name={['email', 'cc']} rules={[{ validator: emailValidator }]}>
                                 <Input placeholder="Enter Cc addresses separated by commas" name="email"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, cc: e.target.value } })}
+                                    onChange={(e) => {
+
+                                        setState({ ...state, email: { ...state.email, cc: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    maxLength={1000}
                                     value={state.email.cc}
                                     type="email"
                                     multiple
-                                     />
+                                />
                             </Form.Item>
 
                             <Form.Item label="BCC" name={['email', 'bcc']} rules={[{ validator: emailValidator }]}>
                                 <Input placeholder="Enter Bcc addresses separated by commas" name="email"
-                                    onChange={(e) => setState({ ...state, email: { ...state.email, bcc: e.target.value } })}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, bcc: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    maxLength={1000}
                                     value={state.email.bcc}
                                     type="email"
-                                     />
+                                />
                             </Form.Item>
 
                             <Form.Item label="Reply To" name={['email', 'replyTo']}>
-                                <Input placeholder="Enter Reply To address" 
-                            onChange={(e) => setState({ ...state, email: { ...state.email, replyTo: e.target.value } })}
-                            value={state.email.replyTo}
-                            multiple
-                                type="email" />
+                                <Input placeholder="Enter Reply To address"
+                                    maxLength={1000}
+                                    onChange={(e) => {
+                                        setState({ ...state, email: { ...state.email, replyTo: e.target.value } })
+                                        setIsChange(true)
+                                    }
+                                    }
+                                    value={state.email.replyTo}
+                                    multiple
+                                    type="email" />
                             </Form.Item>
 
 

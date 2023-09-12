@@ -44,10 +44,39 @@ const InnerComponent = ({ children, document, onLoad }) => {
 
         res = await ThemeServices.getFonts();
 
-        for await (let font of res.fonts) {
-          let newfont = new FontFace(font.fontFamily, `url(${font.path})`);
-          await document.fonts.add(newfont);
-        }
+        res.fonts?.forEach(async (font) => {
+          const { _uid, fontFamily, fontSrc, src, isGoogleFont } = font;
+
+          if (isGoogleFont && src) {
+            const linkElement = document.createElement('div');
+            linkElement.id = 'google-font-' + _uid;
+            linkElement.innerHTML = src;
+            document.head.appendChild(linkElement);
+          }
+          else
+            if (Array.isArray(fontSrc)) {
+              try {
+
+                const styleElement = document.createElement('style');
+                styleElement.textContent = '';
+
+                for (const src of fontSrc) {
+                  styleElement.textContent += `
+                    @font-face {
+                      font-family: "${fontFamily}";
+                      src: url("${src.src}");
+                    }
+                  `;
+                }
+
+                document.head.appendChild(styleElement);
+              } catch (error) {
+                message.error(`Failed to load ${fontFamily} font: ${error}`);
+              }
+            }
+        });
+
+
 
 
 

@@ -6,10 +6,11 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { Spin, theme, Card, Typography, Layout } from 'antd';
 import Link from "next/link";
+import ProjectServices from "@/lib/services/projects";
 
 const { Title } = Typography;
 
-export default function Editor({ info, cookies }) {
+export default function Editor({ info }) {
 
 
   const iframeRef = useRef(null);
@@ -24,25 +25,34 @@ export default function Editor({ info, cookies }) {
 
   useEffect(() => {
 
-    try {
-      if (info) {
-        setLoading(true)
-        const iframe = iframeRef.current;
 
-        const customProtocol = 'autocode-editor://open';
-        const encodedInfo = encodeURIComponent(JSON.stringify(info));
-        const encodedCookies = encodeURIComponent(JSON.stringify(cookies));
 
-        const url = `${customProtocol}?info=${encodedInfo}&cookies=${encodedCookies}`;
-        iframe.src = url;
+    const load = async () => {
+      try {
+        if (info) {
+          setLoading(true);
+          const iframe = iframeRef.current;
+          const customProtocol = 'autocode-editor://open';
+          const res = await ProjectServices.getCookie(info.projectId);
+          console.log(res.cookies)
+          const encodedInfo = encodeURIComponent(JSON.stringify(info));
+          const encodedCookies = encodeURIComponent(JSON.stringify(res?.cookies));
 
-        setTimeout(() => {
-          setLoading(false);
-        }, 800)
-      }
-    } catch (e) {
+          const url = `${customProtocol}?info=${encodedInfo}&cookies=${encodedCookies}`;
+          //iframe.src = url;
+          window.open(url);
 
+
+        }
+      } catch (e) {
+        console.log(e?.message)
+
+      } finally { }
+      setTimeout(() => {
+        setLoading(false);
+      }, 800)
     }
+    load();
 
 
   }, [isOpen]);
@@ -104,18 +114,17 @@ export async function getServerSideProps(context) {
       notFound: true,
     }
 
-    const protocol = req.connection.encrypted ? 'https' : 'http';
-    const host = req.headers.host;
+  const protocol = req.connection.encrypted ? 'https' : 'http';
+  const host = req.headers.host;
 
-    info.url = host ? `${protocol}://${host}` : 'http://localhost:3000';
+  info.url = host ? `${protocol}://${host}` : 'http://localhost:3000';
 
   info.userName = session.user.name;
-  const cookies = req.cookies;
+
 
   return {
     props: {
-      info,
-      cookies,
+      info
     },
   };
 

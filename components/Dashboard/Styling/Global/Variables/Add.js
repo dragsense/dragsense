@@ -57,7 +57,11 @@ export default function AddVariable({ onSubmit, variable = {} }) {
                                 required: true,
                                 message: "Please enter the variable name (alphanumeric).",
                                 pattern: /^[a-zA-Z0-9\s]+$/,
-                            },
+                            }, {
+                            max: 30,
+                            message: 'Text be at most 30 characters long',
+                        }
+                            
                         ]}
                     >
                         <Input type="text" />
@@ -68,6 +72,12 @@ export default function AddVariable({ onSubmit, variable = {} }) {
                                 required: true,
                                 message: "Please enter the value.",
                             },
+                        
+                        {
+                            max: 200,
+                            message: 'Text be at most 200 characters long',
+                        }
+                  
                         ]}>
                         <Input type="text" />
                     </Form.Item>
@@ -76,7 +86,10 @@ export default function AddVariable({ onSubmit, variable = {} }) {
                             {
                                 required: true,
                                 message: "Please select the type.",
-                            },
+                            }, {
+                            max: 200,
+                            message: 'Text be at most 200 characters long',
+                        }
                         ]}>
                         <Radio.Group>
                             <Radio.Button value="font">Font</Radio.Button>

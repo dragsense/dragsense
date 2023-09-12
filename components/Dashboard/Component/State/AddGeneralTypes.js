@@ -1,5 +1,7 @@
-import { Form, Space, Button, Select, Input, Checkbox, Image } from "antd";
+import { Form, Space, Button, Select, Input, Checkbox, Modal, Image } from "antd";
 const { Option } = Select;
+const { TextArea } = Input;
+
 import { useState } from "react";
 
 import MediaModal from "@/components/Dashboard/Media/MediaModal";
@@ -7,10 +9,19 @@ import MediaModal from "@/components/Dashboard/Media/MediaModal";
 import { TYPES } from '../Add';
 import Video from "@/components/Dashboard/Media/Video";
 import Audio from "@/components/Dashboard/Media/Audio";
-import { UploadOutlined } from "@ant-design/icons";
+import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
+
+const initialState = {
+    key: '',
+    defaultValue: null,
+    values: [],
+    type: 'text',
+    new: true,
+    states: {}
+};
 
 
-export default function AddGeneralTypes({ setState, state }) {
+export default function AddGeneralTypes({ isChange, setState, state }) {
 
     const [mediaModal, setMediaModal] = useState(false);
     const [type, setType] = useState("images");
@@ -52,7 +63,22 @@ export default function AddGeneralTypes({ setState, state }) {
     }
 
     const onChangeType = (value) => {
-        setState({ ...state, type: value });
+
+        if(isChange)
+                Modal.confirm({
+                    title: 'Switching Type',
+                    content: 'Are you sure you want to switch to the type? Any unsaved changes may be lost.',
+                    onOk: () => {
+                     
+                        setState({ ...initialState,states: {}, key: state.key, new: state.new, type: value });
+                    },
+                    onCancel: () => {
+                        // Do nothing when the user cancels the confirmation
+                    },
+                });
+                else
+                setState({ ...state, type: value });
+
     }
 
 
@@ -84,10 +110,11 @@ export default function AddGeneralTypes({ setState, state }) {
 
                             setMediaModal(true)
                         }}
-                        preview={true}
+                        preview={false}
                         style={{
                             width: '120px',
                             height: '120px',
+                            objectFit: 'cover',
                             cursor: 'pointer'
                         }}
                         alt={state.src?.alt}
@@ -107,7 +134,15 @@ export default function AddGeneralTypes({ setState, state }) {
                             <br />
                             <div style={{ display: 'flex', gap: 10 }}>
                                 {Array.isArray(state.srcs) && state.srcs.map((src, index) => (
-                                    <div style={{ width: 320 }}><Video src={src.src} alt={src.alt} mimetype={src.mimetype} /></div>
+                                    <div key={index} style={{ width: 320, position: 'relative' }}>
+                                        <DeleteOutlined style={{ position: 'absolute', top: -20, right: 0 }} onClick={() => {
+                                            state.srcs.splice(index, 1);
+                                            setState({
+                                                ...state
+                                            });
+                                        }} />
+                                        <Video src={src.src} alt={src.alt} mimetype={src.mimetype} />
+                                    </div>
                                 ))}
                             </div>
                         </Form.Item>
@@ -141,27 +176,47 @@ export default function AddGeneralTypes({ setState, state }) {
                             }} icon={<UploadOutlined />}>Upload</Button>
                             <br />
                             <br />
-                            <div style={{ display: 'flex', gap: 10 }}>
+                            <div  style={{ display: 'flex', gap: 10 }}>
                                 {Array.isArray(state.srcs) && state.srcs.map((src, index) => (
-                                    <div style={{ width: 360 }}><Audio src={src.src} alt={src.alt} mimetype={src.mimetype} /></div>
+                                    <div key={index} style={{ width: 360, position: 'relative' }}>
+                                        <DeleteOutlined style={{ position: 'absolute', top: -20, right: 0 }} onClick={() => {
+                                            state.srcs.splice(index, 1);
+                                            setState({
+                                                ...state
+                                            });
+                                        }} />
+
+                                        <Audio src={src.src} alt={src.alt} mimetype={src.mimetype} /></div>
                                 ))}
                             </div>
                         </Form.Item>
                         :
                         <><Form.Item label="Default Value" className="font-500">
-                            <Input placeholder="Default Value" name="defaultValue"
-                                onChange={onChange}
-                                style={{ width: 300 }}
-                                value={state.defaultValue}
-                                type={state.type}
-                            />
-                        </Form.Item>
+                            {state.type === 'text' ?
+                               
+                                <TextArea placeholder="Default Value" name="defaultValue"
+                                    onChange={onChange}
+                                    maxLength={1000}
+                                    style={{ width: '100%' }}
+                                    value={state.defaultValue}
+                                    type={state.type}
+                                />
+                                :   <Input placeholder="Default Value" name="defaultValue"
+                                    onChange={onChange}
+                                    style={{ width: 420 }}
+                                    maxLength={100}
+                                    value={state.defaultValue}
+                                    type={state.type}
+                                />
+                            }</Form.Item>
 
                             {state.type === 'number' && <Space direction="horizontal" size={10}><Form.Item label="Min" className="font-500">
                                 <Input placeholder="Min" name="min"
                                     onChange={onChange}
                                     style={{ width: 200 }}
                                     value={state.min}
+                                    maxLength={100}
+
                                     type="Number"
                                 />
                             </Form.Item> <Form.Item label="Max" className="font-500">
@@ -169,6 +224,8 @@ export default function AddGeneralTypes({ setState, state }) {
                                         onChange={onChange}
                                         style={{ width: 200 }}
                                         value={state.max}
+                                        maxLength={100}
+
                                         type="Number"
                                     />
                                 </Form.Item></Space>}

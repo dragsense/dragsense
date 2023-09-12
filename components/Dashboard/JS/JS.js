@@ -5,13 +5,16 @@ import { CodeEditor } from "./CodeEditor";
 import SyntaxHighlighter from "./SyntaxHighlighter";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs"
 import ThemeServices from "@/lib/services/theme";
+import { Controlled as CodeMirror } from 'react-codemirror2'
+import 'codemirror/mode/javascript/javascript';
+
 
 
 export default function JS() {
 
     const [jsCode, setJsCode] = useState({ code: '', status: false });
     const [isLoading, setIsLoading] = useState(false);
-    const [textRef, setTextRef] = useState(null);
+    //const [textRef, setTextRef] = useState(null);
     const [isChange, setIsChange] = useState(false);
 
 
@@ -30,7 +33,7 @@ export default function JS() {
                 status = false;
             }
             setJsCode({ code, status });
-            textRef.value = res.code; 
+            //textRef.value = res.code;
 
         } catch (e) {
             message.error(e?.message || 'Something went wrong');
@@ -41,13 +44,8 @@ export default function JS() {
 
     useEffect(() => {
 
-        if (!textRef)
-            return;
-
-            load();
-     
-
-    }, [textRef]);
+        load();
+    }, []);
 
     const onSave = async (e) => {
         try {
@@ -65,11 +63,30 @@ export default function JS() {
     }
 
     return (
-        <Card  title={`JS Code Editor:`}
+        <Card title={`JS Code Editor:`}
             extra={<Button type="primary" loading={isLoading} disabled={!isChange} onClick={onSave}>Save</Button>}
             headStyle={{ padding: 10 }}>
 
-            <div className="wrapper" style={{ position: 'relative' }}>
+
+            <CodeMirror
+                style={{ height: 'auto' }}
+                value={jsCode.code}
+                options={{
+                    mode: 'javascript',
+                    theme: 'material',
+                    lineNumbers: true,
+                }} onBeforeChange={(editor, data, value) => {
+                    setJsCode({ code: value, status: true });
+                    setIsChange(true);
+
+                }}
+                onChange={(editor, data, value) => {
+
+                }}
+            />
+
+
+            {/*    <div className="wrapper" style={{ position: 'relative' }}>
 
                 <CodeEditor
                     placeHolder="Type your code here..."
@@ -91,7 +108,7 @@ export default function JS() {
                 <SyntaxHighlighter language={"javascript"} theme={dark} className="syntax-highlighter">
                     {jsCode.code}
                 </SyntaxHighlighter>
-            </div>
+            </div> */}
         </Card>
     );
 };

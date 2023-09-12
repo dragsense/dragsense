@@ -149,9 +149,11 @@ export default function Projects({ shared }) {
 
             dispatch({ type: project?._id !== -1 ? 'update' : 'add', project: res.project });
 
-        } catch (e) {
+            message.success('Data submitted!');
 
-            dispatch({ type: 'error', error: e?.error?.message || 'Something went wrong.' });
+        } catch (e) {
+            dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
         } finally {
             dispatch({ type: 'finish' });
         }
@@ -175,6 +177,7 @@ export default function Projects({ shared }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+
         } finally {
             dispatch({ type: 'finish' });
         }
@@ -192,6 +195,7 @@ export default function Projects({ shared }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 
@@ -210,6 +214,7 @@ export default function Projects({ shared }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

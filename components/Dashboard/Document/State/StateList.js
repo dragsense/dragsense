@@ -14,9 +14,9 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
 
     const handleElementSelect = (event) => {
 
-        if(!states[event.key]){
+        if (!states[event.key]) {
             setState(null)
-        return;
+            return;
         }
 
         setElementSelectedKey([event.key]);
@@ -30,8 +30,8 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
         else if (type == 'object_array')
             selectedStates = { key: event.key, states: Object.values(states[event.key]), type: 'object' };
         else
-            selectedStates = states[event.key]; 
- 
+            selectedStates = states[event.key];
+
         setState(selectedStates)
 
     };
@@ -40,10 +40,10 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
     };
 
 
-    const onChangeSlelectedState = () => {
-       
-        if (type == 'array' || type == 'object_array')
-        states[state.key].defaultValue = state.defaultValue;
+    const onChangeSlelectedState = (updatedState) => {
+
+        if (states[state.key])
+            states[state.key] = {...updatedState};
         onChangeState();
     }
 
@@ -69,7 +69,7 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
                         {Object.entries(states).map(([key, value]) => <Menu.Item key={key} icon={onRemove && <MinusCircleOutlined onClick={() => onRemove(key)} />}>
 
                             {key && `[${key}]`}
-                            {onRemove && `[${key}]`} 
+                            {onRemove && `[${key}]`}
 
 
 
@@ -82,10 +82,9 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
 
                 {state && <><Divider orientation="left" orientationMargin="0">{`[${state?.key}]`} </Divider>
                     <AddState
-
-                        onChangeState={onChangeSlelectedState}
+                        onChangeSlelectedState={onChangeSlelectedState}
                         key={state.key}
-                        state={state} />
+                        newState={state} />
                 </>}
 
             </div>

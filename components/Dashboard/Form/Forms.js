@@ -1,6 +1,6 @@
 import FormList from "./FormList";
 import AddForm from './Add';
-import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input } from 'antd';
+import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import FormServices from "@/lib/services/forms";
 import { useEffect, useReducer, useState } from "react";
@@ -192,9 +192,11 @@ export default function Forms() {
             const res = await FormServices.createOrUpdate(form?._id, states)
 
             dispatch({ type: form?._id !== -1 ? 'update' : 'add', form: res.form });
+            message.success('Data submitted!');
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -217,6 +219,7 @@ export default function Forms() {
         } catch (e) {
 
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -237,6 +240,7 @@ export default function Forms() {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 
@@ -265,7 +269,7 @@ export default function Forms() {
 
     return <div>
 
-        <Card  title={state.form ? state.label : <>Forms: <Input onChange={onChange} style={{ maxWidth: 300, width: '100%', marginLeft: 10 }} type="search" placeholder="search..." /></>}
+        <Card title={state.form ? state.label : <>Forms: <Input onChange={onChange} style={{ maxWidth: 300, width: '100%', marginLeft: 10 }} type="search" placeholder="search..." /></>}
             extra={state.form ? <Button
                 type="dashed"
                 onClick={onClose}> Back </Button> : state.total > 0 && <Tooltip title="Add New Form"><Button

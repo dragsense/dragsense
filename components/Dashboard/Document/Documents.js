@@ -1,6 +1,6 @@
 import DocumnetList from "./DocumnetList";
 import AddDocumnet from './Add';
-import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input } from 'antd';
+import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import DocumnetServices from "@/lib/services/documents";
 import CollectionServices from "@/lib/services/collections";
@@ -192,9 +192,11 @@ export default function Documents({ collection, form }) {
 
             dispatch({ type: document?._id !== -1 ? 'update' : 'add', document: res.document });
 
-        } catch (e) {
+            message.success('Data submitted!');
 
+        } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -217,7 +219,7 @@ export default function Documents({ collection, form }) {
         } catch (e) {
 
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
-
+            message.error(e?.message || 'Something went wrong.');
         } finally {
             dispatch({ type: 'finish' });
         }
@@ -237,7 +239,7 @@ export default function Documents({ collection, form }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
-
+            message.error(e?.message || 'Something went wrong.');
         } finally {
 
             dispatch({ type: 'finish' });

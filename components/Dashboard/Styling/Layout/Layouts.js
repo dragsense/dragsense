@@ -1,6 +1,6 @@
 import LayoutList from "./LayoutList";
 import AddLayout from './Add';
-import { Card, Typography, Alert, Button, Tooltip, Space, Input } from 'antd';
+import { Card, Typography, Alert, Button, Tooltip, Space, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import LayoutServices from "@/lib/services/layouts";
 import { useEffect, useReducer, useState } from "react";
@@ -180,10 +180,11 @@ export default function Layouts({ layout, setLayout }) {
 
 
             dispatch({ type: layout?._id !== -1 ? 'update' : 'add', layout: res.layout });
+            message.success('Data submitted!');
 
         } catch (e) {
-
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -204,6 +205,7 @@ export default function Layouts({ layout, setLayout }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.success('Data submitted!');
 
         } finally {
 

@@ -13,7 +13,7 @@ const DownloadProject = ({ id, name, apikey }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [isKeyValid, setIsKeyValid] = useState(false);
-    const [error, setErrpr] = useState(false);
+    const [error, setError] = useState(false);
 
     const onChangeApiKey = (event) => {
         event.preventDefault();
@@ -50,7 +50,9 @@ const DownloadProject = ({ id, name, apikey }) => {
             setIsKeyValid(false);
 
         } catch (e) {
-            setErrpr(e?.message || 'Something went wrong')
+            setError(e?.message || 'Something went wrong')
+            message.error(e?.message || 'Something went wrong.');
+
         } finally {
             setIsLoading(false);
         }
@@ -79,7 +81,7 @@ const DownloadProject = ({ id, name, apikey }) => {
                 tooltip={{ title: isKeyValid ? 'Key is valid' : 'Key is not valid', icon: isKeyValid ? <CheckOutlined type="success" /> : <InfoCircleOutlined type="info" /> }}
 
             >
-                <TextArea rows={4} onChange={onChangeApiKey} />
+                <TextArea rows={4} maxLength={500} onChange={onChangeApiKey} />
             </Form.Item>
 
             <Form.Item className="text-right">

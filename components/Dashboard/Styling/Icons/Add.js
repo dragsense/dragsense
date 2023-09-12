@@ -67,6 +67,10 @@ export default function AddIcon({ icon, onSubmit }) {
                         {
                             min: 2,
                             message: 'Name must be at least 2 characters long',
+                        },
+                        {
+                            max: 30,
+                            message: 'Text be at most 30 characters long',
                         }
                     ]}
 
@@ -75,15 +79,35 @@ export default function AddIcon({ icon, onSubmit }) {
                         required />
                 </Form.Item>
 
-                <Form.Item label="Icon Classes" name="classes" className="font-500">
+                <Form.Item label="Icon Classes" name="classes"
+                
+                rules={[
+                        {
+                            max: 200,
+                            message: 'Text be at most 200 characters long',
+                        }
+                    ]}
+                
+                 className="font-500">
                     <Input placeholder="classes" name="classes"
                         required />
                 </Form.Item>
-                <Form.Item label="Icon Svg" name="svg" className="font-500">
+                <Form.Item label="Icon Svg" name="svg"
+
+
+                    rules={[
+                        {
+                            max: 2000,
+                            message: 'Text be at most 2000 characters long',
+                        }
+                    ]}
+                    className="font-500">
                     <TextArea placeholder="svg" name="svg"
-                         />
+
+
+                    />
                 </Form.Item>
-              
+
             </Form>
         </Modal>
     </>

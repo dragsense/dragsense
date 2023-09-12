@@ -180,7 +180,12 @@ export default function AddLayout({ layout, onSelect, onSubmit }) {
                         {
                             min: 3,
                             message: 'Layout name must be at least 3 characters long',
-                        }]}
+                        },
+                        {
+                            max: 40,
+                            message: 'Text be at most 40 characters long',
+                        }
+                        ]}
 
                     className="font-500">
                     <Input placeholder="Name" name="name"

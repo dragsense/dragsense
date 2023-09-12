@@ -82,8 +82,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                         }
                     });
                 }
-
-
                 setState(document);
 
                 const data = collection.relationships.reduce((result, rel) => {
@@ -174,6 +172,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
     }
 
     const onChangeState = () => {
+        console.log(state);
         setState({ ...state });
 
     }
@@ -184,8 +183,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
             state.relationships = {}
 
         state.relationships[idx] = value;
-
-        console.log(state.relationships)
 
         setState({ ...state });
 
@@ -255,7 +252,12 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                 {
                                     min: 3,
                                     message: 'Document name must be at least 3 characters long',
-                                }]}
+                                }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
+                        }
+                                
+                                ]}
 
                             className="font-500">
                             <Input placeholder="Name" name="name"
@@ -275,7 +277,10 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                 {
                                     min: 2,
                                     message: 'Document slug must be at least 1 characters long',
-                                }
+                                }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
+                        }
                             ]}
 
                         >
@@ -300,11 +305,18 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                     {
                                         min: 3,
                                         message: 'Collection title must be at least 3 characters long',
-                                    }
+                                    }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
+                        }
                                 ]}
 
                             >
-                                <Input placeholder="Title" name="title"
+                                <Input 
+                                
+                                maxLength={60}
+
+                                placeholder="Title" name="title"
                                     onChange={onChangeSetting}
                                     value={state.setting?.title}
 
@@ -313,7 +325,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                             </Form.Item>
 
                             <Form.Item label="Document Description" >
-                                <TextArea rows={4} value={state.setting?.desc} name="desc" onChange={onChangeSetting} />
+                                <TextArea maxLength={500} rows={4} value={state.setting?.desc} name="desc" onChange={onChangeSetting} />
                             </Form.Item>
                         </>
                         }
@@ -339,6 +351,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
                         <Form.Item label="Document Excerpt" >
                             <TextArea
+                            maxLength={1000}
                                 rows={4}
                                 value={state.setting?.excerpt}
                                 name="excerpt"

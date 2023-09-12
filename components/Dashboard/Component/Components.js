@@ -1,6 +1,6 @@
 import ComponentList from "./ComponentList";
 import AddComponent from './Add';
-import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input } from 'antd';
+import { Card, Spin, Button, Tooltip, Space, Typography, Alert, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import ComponentServices from "@/lib/services/components";
 import { useEffect, useReducer, useState } from "react";
@@ -178,8 +178,11 @@ export default function Components() {
 
             dispatch({ type: component?._id !== -1 ? 'update' : 'add', component: res.component });
 
+            message.success('Data submitted!');
+
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -202,6 +205,7 @@ export default function Components() {
         } catch (e) {
 
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -222,6 +226,7 @@ export default function Components() {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

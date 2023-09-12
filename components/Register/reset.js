@@ -138,6 +138,7 @@ const ResetComponent = ({  }) => {
                 >
                     <Input.Password
                         required
+                        maxLength={48} 
                         placeholder="Password"
                         onChange={(e) => validatePasswordStrength(e.target.value)}
                     />
@@ -170,6 +171,7 @@ const ResetComponent = ({  }) => {
                 >
                     <Input.Password
                         required
+                        maxLength={48} 
                         placeholder="Confirm Password"
                     />
                 </Form.Item>

@@ -1,7 +1,11 @@
 
 import { DashboardLayout } from "../../Layout";
 
-import JS from './JS';
+import dynamic from 'next/dynamic'
+
+const JS = dynamic(() => import('./JS'), {
+  ssr: false,
+})
 
 export function JSComponent({ user }) {
 

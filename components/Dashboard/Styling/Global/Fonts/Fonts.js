@@ -179,9 +179,11 @@ export default function Fonts({ font, setFont, fonts, setFonts }) {
             status = true;
             dispatch({ type: 'close' });
 
+            message.success('Data submitted!');
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -236,6 +238,7 @@ export default function Fonts({ font, setFont, fonts, setFonts }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

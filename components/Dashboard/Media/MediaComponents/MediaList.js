@@ -46,7 +46,13 @@ const MediaList = ({ media, type, onEdit, onDelete, onSelect, srcs }) => {
                     <Badge.Ribbon text={isSelected ? 'Selected' : ''} color={isSelected ? 'green' : 'none'}>
                         <Card
                             className="actions-item-card"
-                            style={{  height: 300 }}
+                            style={{
+                                height: 300,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flexDirection: 'column'
+                            }}
                             cover={
                                 item.type === 'images' ?
                                     <Image
@@ -132,8 +138,10 @@ const MediaList = ({ media, type, onEdit, onDelete, onSelect, srcs }) => {
 
                                 description={
                                     <>
+                                 
                                         {item.dimensions && (
                                             <p>
+                                           
                                                 Dimensions: {item.dimensions.width} x {item.dimensions.height}
                                             </p>
                                         )}

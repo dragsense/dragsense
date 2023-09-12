@@ -95,7 +95,7 @@ export default function Downlaod({ project, onDownload }) {
                     ]}
 
                     className="font-500">
-                    <Input placeholder="Name" name="name"
+                    <Input maxLength={100} placeholder="Name" name="name"
                         required />
                 </Form.Item>
 

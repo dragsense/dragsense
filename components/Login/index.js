@@ -66,7 +66,7 @@ const LoginComponent = ({
                         type: 'email'
                     },
                 ]} className="font-500">
-                    <Input placeholder="Email" name="name" />
+                    <Input maxLength={500} placeholder="Email" name="name" />
                 </Form.Item>
 
                 <Form.Item label="Password" name="password" rules={[
@@ -78,6 +78,7 @@ const LoginComponent = ({
                 ]} style={{ marginBottom: 0 }}>
                     <Input.Password
                         required
+                        maxLength={48}
                         name="password"
                         placeholder="Password"
                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}

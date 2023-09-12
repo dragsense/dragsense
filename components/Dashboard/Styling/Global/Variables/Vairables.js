@@ -193,9 +193,11 @@ export default function Variables({ variable, setVariable }) {
             status = true;
             dispatch({ type: 'close' });
 
+            message.success('Data submitted!');
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -219,6 +221,7 @@ export default function Variables({ variable, setVariable }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.success('Data submitted!');
 
         } finally {
 

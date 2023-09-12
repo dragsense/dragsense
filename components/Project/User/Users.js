@@ -140,10 +140,11 @@ export default function Users({ projectId, setUser }) {
 
             status = true;
             dispatch({ type: 'close' });
-
+            message.success('Data submitted!');
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -166,6 +167,7 @@ export default function Users({ projectId, setUser }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

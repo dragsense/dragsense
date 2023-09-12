@@ -1,7 +1,12 @@
 
+'use client';
+
+
 import { getSession } from "next-auth/react"
 import { CSSComponent } from "@/components/index"
 import { fetcher } from "@/lib/fetch";
+
+
 
 export default function CSSCode({ user }) {
 

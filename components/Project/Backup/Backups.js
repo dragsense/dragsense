@@ -136,9 +136,11 @@ export default function Backups({ projectId }) {
             status = true;
             dispatch({ type: 'close' });
 
-        } catch (e) {
+            message.success('Data submitted!');
 
+        } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -167,6 +169,7 @@ export default function Backups({ projectId }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 
@@ -184,6 +187,7 @@ export default function Backups({ projectId }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 
@@ -203,6 +207,7 @@ export default function Backups({ projectId }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

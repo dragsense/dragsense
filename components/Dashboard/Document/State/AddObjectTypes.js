@@ -17,7 +17,7 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
             return;
         }
         setState(newState);
-
+        form.setFieldsValue(newState);
         setObjectTypesModalOpen(true);
 
     }, [newState]);
@@ -44,12 +44,13 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
             onCancel={onCancel}
             onOk={() => {
                 setObjectTypesModalOpen(false);
+                const key = state.key.toLowerCase().replace(/\s+/g, "-");
 
                 form
                     .validateFields()
                     .then(async (values) => {
 
-                        onAddNew(state);
+                        onAddNew({key, defaultValue: state.defaultValue, type: state.type});
                         setNewState(null);
 
 
@@ -66,15 +67,26 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
             layout="vertical"
                 initialValues={{}} >
                 <Form.Item label="Key"
-                    name="key"
-                    disabled
+                   name="key"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please enter the key.',
+                        },
+                        {
+                            min: 2,
+                            message: 'Key must be at least 2 characters long',
+                        }
+                    ]}
 
                     className="font-500">
                     <Input placeholder="Key"
+                           maxLength={60}
+
                         name="key"
                         onChange={onChange}
                         value={state.key}
-                        required />
+                        disabled={!state.new}/>
                 </Form.Item>
 
 

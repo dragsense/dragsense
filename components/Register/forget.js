@@ -98,7 +98,7 @@ const ForgetComponent = ({ signIn }) => {
                     ]}
                     hasFeedback
                 >
-                    <Input placeholder="Email" required />
+                    <Input maxLength={500}  placeholder="Email" required />
                 </Form.Item>
 
 

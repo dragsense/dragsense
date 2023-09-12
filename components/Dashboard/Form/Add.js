@@ -143,8 +143,8 @@ export default function AddForm({ _form, onSubmit }) {
 
     const emailValidator = (_, value) => {
 
-        if(!value && 'setting.to' !== _.field)
-        return true;
+        if(!value)
+        return Promise.resolve();
 
         if (!value) {
             return Promise.reject('Please enter at least one email address');
@@ -190,6 +190,9 @@ export default function AddForm({ _form, onSubmit }) {
                         {
                             min: 4,
                             message: 'Form name must be at least 4 characters long',
+                        }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
                         }
                     ]}
 
@@ -210,6 +213,9 @@ export default function AddForm({ _form, onSubmit }) {
                         {
                             min: 1,
                             message: 'Form slug must be at least 1 characters long',
+                        }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
                         }
                     ]}
 
@@ -236,35 +242,34 @@ export default function AddForm({ _form, onSubmit }) {
 
 
                             <Form.Item label="To" name={['setting', 'to']} rules={[{
-                                required: true,
                             }, { validator: emailValidator }]}>
-                                <Input placeholder="Enter To addresses separated by commas" />
+                                <Input maxLength={500} placeholder="Enter To addresses separated by commas" />
                             </Form.Item>
 
                             <Form.Item label="Cc" name={['setting', 'cc']} 
                             rules={[{ validator: emailValidator }]}>
-                                <Input placeholder="Enter Cc addresses separated by commas" />
+                                <Input maxLength={500} placeholder="Enter Cc addresses separated by commas" />
                             </Form.Item>
 
                             <Form.Item label="Bcc" name={['setting', 'bcc']} 
                             rules={[{ validator: emailValidator }]}>
-                                <Input placeholder="Enter Bcc addresses separated by commas" />
+                                <Input maxLength={500} placeholder="Enter Bcc addresses separated by commas" />
                             </Form.Item>
 
                             <Form.Item label="From" name={['setting', 'from']}>
-                                <Input placeholder="Enter From address" type="email" />
+                                <Input maxLength={500} placeholder="Enter From address" type="email" />
                             </Form.Item>
 
                             <Form.Item label="Subject" name={['setting', 'subject']}>
-                                <Input placeholder="Enter Subject" />
+                                <Input maxLength={500} placeholder="Enter Subject" />
                             </Form.Item>
 
                             <Form.Item label="Reply To" name={['setting', 'replyTo']}>
-                                <Input placeholder="Enter Reply To address" type="email" />
+                                <Input maxLength={500} placeholder="Enter Reply To address" type="email" />
                             </Form.Item>
 
                             <Form.Item label="Redirect" name={['setting', 'redirect']}>
-                                <Input placeholder="Enter Redirect URL" type="url" />
+                                <Input maxLength={500} placeholder="Enter Redirect URL" type="url" />
                             </Form.Item>
 
                             <Form.Item name={['setting', 'sendCopy']} valuePropName="checked">
@@ -272,11 +277,11 @@ export default function AddForm({ _form, onSubmit }) {
                             </Form.Item>
 
                             <Form.Item label="Success Message" name={['setting', 'successMessage']}>
-                                <TextArea placeholder="Enter Success Message" rows={4} />
+                                <TextArea maxLength={500} placeholder="Enter Success Message" rows={4} />
                             </Form.Item>
 
                             <Form.Item label="Error Message" name={['setting', 'errorMessage']}>
-                                <TextArea placeholder="Enter Error Message" rows={4} />
+                                <TextArea maxLength={500} placeholder="Enter Error Message" rows={4} />
                             </Form.Item>
 
 
@@ -353,6 +358,7 @@ export default function AddForm({ _form, onSubmit }) {
                                     rules={[{ required: true, message: 'Please enter the message body.' }]}
                                 >
                                     <TextArea
+                                    maxLength={2000}
                                         placeholder="Message Body"
                                         rows={10}
                                         onChange={(e) => handleEmailBodyChange('plain', e.target.value)}

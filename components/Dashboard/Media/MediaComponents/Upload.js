@@ -10,7 +10,7 @@ const types = {
         'image/avif',
         'image/gif',
         'image/jpeg',
-        'image/jpeg',
+     
         'image/png',
         'image/svg+xml',
         'image/webp',
@@ -34,7 +34,7 @@ const types = {
         'text/javascript'
     ],
     'audios': ['audio/mpeg', 'audio/3gpp', 'audio/ogg', 'audio/3gpp2', 'audio/wav', 'audio/webm'],
-    'fonts': ['font/otf', 'font/ttf', 'font/woff', 'font/woff2', ""]
+    'fonts': ['font/otf', 'font/ttf', 'font/woff', 'application/font-woff', 'font/woff2', ""]
 
 }
 
@@ -85,6 +85,7 @@ export default function UplaodMedia({ type, onAdd }) {
     };
 
     const handleBeforeUpload = (file, fileList) => {
+        console.log(file.type)
         const isValid = types[type].includes(file.type);
         if (!isValid) {
 

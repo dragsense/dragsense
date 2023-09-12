@@ -172,7 +172,9 @@ export default function Icons({ editor, onSelect }) {
             status = true;
             dispatch({ type: 'close' });
 
+            message.success('Data submitted!');
 
+  
         } catch (e) {
 
             message.error(e?.message || 'Something went wrong.');

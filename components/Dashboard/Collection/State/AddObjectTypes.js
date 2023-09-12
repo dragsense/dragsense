@@ -81,6 +81,8 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
 
                     className="font-500">
                     <Input placeholder="Key"
+                           maxLength={60}
+
                         name="key"
                         onChange={onChange}
                         value={state.key}

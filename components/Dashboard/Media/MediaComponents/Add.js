@@ -77,6 +77,10 @@ export default function AddMedia({ media, onSubmit }) {
                         {
                             min: 2,
                             message: 'Name must be at least 2 characters long',
+                        },
+                        {
+                            max: 70,
+                            message: 'Name must be at most 70 characters long',
                         }
                     ]}
 
@@ -85,7 +89,22 @@ export default function AddMedia({ media, onSubmit }) {
                         required />
                 </Form.Item>
 
-                <Form.Item label="Media Alt" name="alt" className="font-500">
+                <Form.Item label="Media Alt" name="alt" 
+                className="font-500"
+                
+                rules={[
+                       
+                        {
+                            min: 2,
+                            message: 'Alt Text must be at least 2 characters long',
+                        },
+                        {
+                            max: 40,
+                            message: 'Alt Text be at most 40 characters long',
+                        }
+                    ]}
+                
+                >
                     <Input placeholder="alt text" name="alt"
                         required />
                 </Form.Item>

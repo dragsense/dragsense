@@ -1,7 +1,13 @@
+'use client';
 
 import { DashboardLayout } from "../../Layout";
 
-import CSS from './CSS';
+import dynamic from 'next/dynamic'
+
+const CSS = dynamic(() => import('./CSS'), {
+  ssr: false,
+})
+
 
 export function CSSComponent({ user }) {
 

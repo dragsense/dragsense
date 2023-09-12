@@ -6,7 +6,6 @@ import { AiFillFile, AiOutlineEdit, AiOutlineCopy, AiOutlineSetting, AiOutlineDe
 import moment from "moment";
 import Router from "next/router";
 import { signIn, signOut, useSession } from 'next-auth/react';
-import ProjectServices from "@/lib/services/projects";
 
 const { confirm } = Modal;
 

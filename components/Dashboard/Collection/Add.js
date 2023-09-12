@@ -28,11 +28,16 @@ export const TYPES = [
     { value: 'text', label: 'TEXT' },
     { value: 'number', label: 'NUMBER' },
     { value: 'image', label: 'IMAGE' },
+    { value: 'video', label: 'VIDEO' },
+    { value: 'audio', label: 'AUDIO' },
+    { value: 'doc', label: 'Document' },
     { value: 'content', label: 'CONTENT' },
     { value: 'date', label: 'DATE' },
     { value: 'time', label: 'TIME' },
     { value: 'month', label: 'MONTH' },
     { value: 'boolean', label: 'BOOLEAN' },
+    { value: 'classes', label: 'CLASSES' },
+
 ];
 
 const initialState = {
@@ -352,6 +357,9 @@ export default function AddCollection({ collection, onSubmit }) {
                                 {
                                     min: 2,
                                     message: 'Collection name must be at least 4 characters long',
+                                }, {
+                                    max: 60,
+                                    message: 'Text be at most 60 characters long',
                                 }
                             ]}
 
@@ -371,7 +379,11 @@ export default function AddCollection({ collection, onSubmit }) {
                                 {
                                     min: 2,
                                     message: 'Collection slug must be at least 1 characters long',
+                                }, {
+                                    max: 60,
+                                    message: 'Text be at most 60 characters long',
                                 }
+
                             ]}
 
                         >
@@ -396,11 +408,14 @@ export default function AddCollection({ collection, onSubmit }) {
                                 {
                                     min: 3,
                                     message: 'Collection title must be at least 3 characters long',
+                                }, {
+                                    max: 60,
+                                    message: 'Text be at most 60 characters long',
                                 }
                             ]}
 
                         >
-                            <Input placeholder="Title" name="title"
+                            <Input maxLength={60} placeholder="Title" name="title"
                                 onChange={onChangeSetting}
                                 defaultValue={state.setting?.title}
                                 value={state.setting?.title}
@@ -409,7 +424,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         </Form.Item>
 
                         <Form.Item label="Collection Description" >
-                            <TextArea rows={4} value={state.setting?.desc} name="desc" onChange={onChangeSetting} />
+                            <TextArea maxLength={500} rows={4} value={state.setting?.desc} name="desc" onChange={onChangeSetting} />
                         </Form.Item>
 
                         <Form.Item label="Status" >
@@ -475,6 +490,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         </Form.Item>
                         <Form.Item label="Collection Excerpt" >
                             <TextArea
+                                maxLength={1000}
                                 rows={4}
                                 value={state.setting?.excerpt}
                                 name="excerpt"

@@ -64,8 +64,9 @@ const RegisterComponent = (props) => {
                     router.pathname = '/auth/verify';
                     router.push(router);
                     setErrors([]);
-                } catch (error) {
-                    setErrors([error?.message || 'Failed to register user.']);
+                } catch (e) {
+                        console.log(e?.error)
+                    setErrors([e?.error?.message || 'Failed to register user.']);
                 }
             })
             .catch((info) => {
@@ -132,7 +133,7 @@ const RegisterComponent = (props) => {
                     ]}
                     hasFeedback
                 >
-                    <Input placeholder="Email" required />
+                    <Input maxLength={500} placeholder="Email" required />
                 </Form.Item>
 
                 <Form.Item
@@ -168,6 +169,7 @@ const RegisterComponent = (props) => {
                 >
                     <Input.Password
                         required
+                        maxLength={48}
                         placeholder="Password"
                         onChange={(e) => validatePasswordStrength(e.target.value)}
                     />
@@ -181,6 +183,7 @@ const RegisterComponent = (props) => {
                 <Form.Item
                     label="Confirm Password"
                     name="confirmPassword"
+                    
                     dependencies={['password']}
                     rules={[
                         {
@@ -200,6 +203,7 @@ const RegisterComponent = (props) => {
                 >
                     <Input.Password
                         required
+                        maxLength={48}
                         placeholder="Confirm Password"
                     />
                 </Form.Item>

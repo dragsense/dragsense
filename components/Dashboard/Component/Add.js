@@ -18,6 +18,8 @@ export const TYPES = [
     { value: 'time', label: 'TIME' },
     { value: 'month', label: 'MONTH' },
     { value: 'boolean', label: 'BOOLEAN' },
+    { value: 'classes', label: 'CLASSES' },
+
 ];
 
 const initialState = {
@@ -249,7 +251,12 @@ export default function AddComponent({ component, onSubmit }) {
                         {
                             min: 3,
                             message: 'Component name must be at least 3 characters long',
-                        }]}
+                        }, {
+                            max: 60,
+                            message: 'Text be at most 60 characters long',
+                        }
+                        
+                        ]}
 
                     className="font-500">
                     <Input placeholder="Name" name="name"

@@ -1,6 +1,6 @@
 import PageList from "./PageList";
 import AddPage from './Add';
-import { Card, Spin, Typography, Alert, Button, Tooltip, Space, Input } from 'antd';
+import { Card, Spin, Typography, Alert, Button, Tooltip, Space, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import PageServices from "@/lib/services/pages";
 import { useEffect, useReducer, useState } from "react";
@@ -193,10 +193,11 @@ export default function Pages() {
 
 
             dispatch({ type: page?._id !== -1 ? 'update' : 'add', page: res.page });
+            message.success('Data submitted!');
 
         } catch (e) {
-
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -220,6 +221,7 @@ export default function Pages() {
         } catch (e) {
 
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -240,6 +242,7 @@ export default function Pages() {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

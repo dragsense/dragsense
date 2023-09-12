@@ -104,7 +104,7 @@ export default function AddBackup({ onSubmit, backup = {} }) {
                         },
                     ]}
                 >
-                    <Input type="text" />
+                    <Input maxLength={100} type="text" />
 
                 </Form.Item>
 
@@ -137,7 +137,7 @@ export default function AddBackup({ onSubmit, backup = {} }) {
                     tooltip={{ title: 'Theme Description', icon: <InfoCircleOutlined /> }}
 
                 >
-                    <TextArea placeholder="Description" rows={4} />
+                    <TextArea maxLength={1000} placeholder="Description" rows={4} />
                 </Form.Item>
 
                     <Form.Item name="preview" className="font-500" label="Preview"

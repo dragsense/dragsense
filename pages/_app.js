@@ -2,7 +2,16 @@
 import 'antd/dist/reset.css';
 
 import '@/assets/styles/globals.css'
+
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+
+
 import Script from 'next/script'
+
+
+
+
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from 'next-themes';
 import { Layout, theme, ConfigProvider, Button } from 'antd';

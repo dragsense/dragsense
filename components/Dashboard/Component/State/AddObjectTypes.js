@@ -18,6 +18,7 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
         }
        
         setState(newState);
+        form.setFieldsValue(newState);
 
         setObjectTypesModalOpen(true);
 
@@ -81,8 +82,9 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
                         }
                     ]}
 
-                    className="font-500">
+                    className="font-500"  name="key">
                     <Input placeholder="Key"
+                        maxLength={60}
                         name="key"
                         disabled={!state.new}
                         onChange={onChange}

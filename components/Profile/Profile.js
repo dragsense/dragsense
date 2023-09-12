@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Input, Button, Radio, Switch, Alert, Card } from "antd";
+import { Form, Input, Button, Radio, Switch, message, Alert, Card } from "antd";
 import { fetcher } from '@/lib/fetch';
 
 
@@ -30,6 +30,7 @@ const Profile = ({ user }) => {
           });
           setErrors([]);
           setFormChanged(false);
+          message.success('Data submitted!');
 
         } catch (error) {
           setErrors([error?.message || 'Failed to update user.']);
@@ -89,7 +90,7 @@ const Profile = ({ user }) => {
           name="name"
           rules={[{ required: true, message: "Please enter your name." }]}
         >
-          <Input placeholder="Enter your name" />
+          <Input  maxLength={500} placeholder="Enter your name" />
         </Form.Item>
 
 

@@ -1,6 +1,6 @@
 import CollectionList from "./CollectionList";
 import AddCollection from './Add';
-import { Card, Spin, Typography, Button, Tooltip, Space, Alert, Input } from 'antd';
+import { Card, Spin, Typography, Button, Tooltip, Space, Alert, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import CollectionServices from "@/lib/services/collections";
 import { useEffect, useReducer, useState } from "react";
@@ -195,10 +195,11 @@ export default function Collections() {
             const res = await CollectionServices.createOrUpdate(collection?._id, states)
 
             dispatch({ type: collection?._id !== -1 ? 'update' : 'add', collection: res.collection });
+            message.success('Data submitted!');
 
         } catch (e) {
-
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -221,6 +222,7 @@ export default function Collections() {
         } catch (e) {
 
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
             dispatch({ type: 'finish' });
@@ -240,6 +242,7 @@ export default function Collections() {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 

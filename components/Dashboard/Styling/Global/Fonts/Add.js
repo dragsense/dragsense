@@ -38,7 +38,7 @@ export default function AddFont({ onSubmit, font = {} }) {
 
 
     const onChangeMedia = (media) => {
-        const fonts = media.map(f => { return { _id: f._id, name: f.name, src: f.src, format: f.format } });
+        const fonts = media.map(f => { return { _id: f._id, name: f.name, src: f.src, size: f.size } });
         form.setFieldsValue({ src: null });
         setFontSrc(fonts);
     }
@@ -113,6 +113,11 @@ export default function AddFont({ onSubmit, font = {} }) {
                                 message: 'Please enter the font name (alphanumeric).',
                                 pattern: /^[a-zA-Z0-9\s]+$/
                             },
+                            
+                            {
+                                max: 70,
+                                message: 'Text be at most 70 characters long',
+                            }
                         ]}
                     >
                         <Input type="text" />
@@ -124,7 +129,12 @@ export default function AddFont({ onSubmit, font = {} }) {
                             {
                                 required: true,
                                 message: 'Please enter the font family.',
-                            },
+                            }
+                            ,
+                            {
+                                max: 70,
+                                message: 'Text be at most 70 characters long',
+                            }
                         ]}
                         name="fontFamily" className="font-500">
                         <Input placeholder="Font Family" name="fontFamily" />
@@ -148,7 +158,7 @@ export default function AddFont({ onSubmit, font = {} }) {
 
                         <Form.Item label="Selected Fonts:" style={{marginTop: 10}}>
                             <ol style={{fontSize: 14}}>
-                                {fontSrc.map(f => <><li>{`${f.name}`} <strong>{`(${f.format})`}</strong></li></>)}
+                                {fontSrc.map(f => <><li>{`${f.name}`} <strong>{`(${f.size ? f.size : ''})`}</strong></li></>)}
                             </ol>
                         </Form.Item>
 

@@ -18,7 +18,7 @@ export default function AddColor({ onSubmit, color = {} }) {
         setColorModalOpen(true);
     }, [color]);
 
-    
+
 
     useEffect(() => {
         if (!selectedColor) {
@@ -29,36 +29,36 @@ export default function AddColor({ onSubmit, color = {} }) {
             const generatedPalette = generatePalette(selectedColor);
             setPalette([...generatedPalette]);
         })
-   
+
     }, [selectedColor]);
 
     const onCancel = () => setColorModalOpen(false);
 
     const handleColorChange = (colorValue) => {
 
-        if(colorValue !== selectedColor) {
-        setSelectedColor(colorValue);
-        form.setFieldsValue({ color: colorValue });
+        if (colorValue !== selectedColor) {
+            setSelectedColor(colorValue);
+            form.setFieldsValue({ color: colorValue });
 
-    
-        setPalette([]);
+
+            setPalette([]);
         }
 
 
-      };
+    };
 
     const handleColorSelection = (color) => {
         form.setFieldsValue({ color });
         setSelectedColor(color);
 
-       
+
     };
 
     const handleAfterOpenChange = (visible) => {
-      if(visible)
-      setSelectedColor(color?.color);
-      else
-      setPalette([]);
+        if (visible)
+            setSelectedColor(color?.color);
+        else
+            setPalette([]);
     };
 
 
@@ -108,23 +108,27 @@ export default function AddColor({ onSubmit, color = {} }) {
                                 message: "Please enter the color name (alphanumeric).",
                                 pattern: /^[a-zA-Z0-9\s]+$/,
                             },
+                            {
+                                max: 70,
+                                message: 'Text be at most 70 characters long',
+                            }
                         ]}
                     >
                         <Input type="text" />
                     </Form.Item>
 
-                    <Form.Item style={{marginBottom: 0, minHeight: 0}} label="Color" name="color" className="color-500">
+                    <Form.Item style={{ marginBottom: 0, minHeight: 0 }} label="Color" name="color" className="color-500">
                         <Input type="hidden" />
                     </Form.Item>
                     <ColorPicker value={selectedColor}
-                    allowClear={true}
-                    format={"hex"}
-                    onChangeComplete={(color, hex) => {
-                        const metaColor = color.metaColor;
-                        const rgbColor = `rgba(${metaColor.r}, ${metaColor.g}, ${metaColor.b}, ${metaColor.a})`;
-                        handleColorChange(rgbColor)
+                        allowClear={true}
+                        format={"hex"}
+                        onChangeComplete={(color, hex) => {
+                            const metaColor = color.metaColor;
+                            const rgbColor = `rgba(${metaColor.r}, ${metaColor.g}, ${metaColor.b}, ${metaColor.a})`;
+                            handleColorChange(rgbColor)
 
-                    }} />
+                        }} />
                 </Form>
                 <div style={{ display: "flex", flexWrap: "wrap", height: 40 }}>
                     {palette.map((color) => (

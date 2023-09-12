@@ -87,7 +87,7 @@ export default function AddUser({ onSubmit, role = {} }) {
             },
           ]}
         >
-          <Input type="email" disabled={role?.id !== -1} />
+          <Input maxLength={500} type="email" disabled={role?.id !== -1} />
         </Form.Item>
         <Form.Item
           name="roleName"
@@ -101,7 +101,7 @@ export default function AddUser({ onSubmit, role = {} }) {
             },
           ]}
         >
-          <Input type="text" />
+          <Input maxLength={100} type="text" />
         </Form.Item>
         <Form.Item
           name="permissions"

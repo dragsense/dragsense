@@ -121,7 +121,8 @@ export function VariablesPreview({ variable, font }) {
                         </div>
 
                         {selectedSize === 'width' ?
-                            <div style={{ background: '#d67822', width: variable.value, height: '100%' }}>
+                            <div style={{ background: '#d67822',
+                             width: variable.value, height: '100px' }}>
                             </div>
                             :
                             selectedSize === 'height' ?

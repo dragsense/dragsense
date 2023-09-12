@@ -22,6 +22,8 @@ const Setting = ({ project, onSubmit, loading }) => {
             .then(async (values) => {
                 await onSubmit(values);
                 setFormChanged(false);
+                message.success('Data submitted!');
+
             })
             .catch((info) => {
                 setFormChanged(false);
@@ -64,10 +66,10 @@ const Setting = ({ project, onSubmit, loading }) => {
                                 },
                             ]}
                         >
-                            <Input placeholder="Name" name="name" />
+                            <Input maxLength={100} placeholder="Name" name="name" />
                         </Form.Item>
                         <Form.Item label="Description" name="desc">
-                            <TextArea rows={4} />
+                            <TextArea maxLength={500} rows={4} />
                         </Form.Item>
                         <Form.Item
                             label="API Url"
@@ -79,7 +81,7 @@ const Setting = ({ project, onSubmit, loading }) => {
                                 },
                             ]}
                         >
-                            <Input placeholder="Url" name="url" type="url" />
+                            <Input maxLength={500} placeholder="Url" name="url" type="url" />
                         </Form.Item>
                         <Form.Item className="text-right">
                             <Space>
