@@ -52,7 +52,7 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
                 </Form.Item>
             </Col>
             <Col flex="auto">
-                {Object.values(states).map((value, idx) => (
+                {Object.values(states || {}).map((value, idx) => (
                     <Form.Item key={idx}>
                         <Input
                             maxLength={500}

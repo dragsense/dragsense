@@ -8,7 +8,6 @@ const ADVANCE_TYPES = [
     { value: 'array', label: 'ARRAY' },
     { value: 'images', label: 'IMAGES' },
     { value: 'object', label: 'OBJECT' },
-    { value: 'object_array', label: 'OBJECT ARRAY' }
 ];
 
 
