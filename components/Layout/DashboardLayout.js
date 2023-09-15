@@ -1,4 +1,4 @@
-import { Layout, theme  } from 'antd';
+import { Alert, Layout, theme } from 'antd';
 
 const { Header, Content } = Layout;
 
@@ -10,25 +10,30 @@ const DashboardLayout = ({
     user
 }) => {
 
-  
+
 
     const {
         token: { colorBgContainer },
-      } = theme.useToken();
+    } = theme.useToken();
 
     return (
         <Layout>
-            <Header style={{background: colorBgContainer,  height: 36, zIndex: 100}}><Nav user={user} /></Header>
-            <Layout style={{marginTop: 25}}>
-                    <SideBar user={user} />
-                
+            <Header style={{ background: colorBgContainer, height: 36, zIndex: 100 }}><Nav user={user} /></Header>
+            <Layout style={{ marginTop: 25 }}>
+                <SideBar user={user} />
+
                 <Layout>
                     <Content
                         style={{
                             padding: '0 24px 24px',
                             margin: 0,
                             minHeight: 'calc(100vh - 24px)'
-                        }}>{children}</Content>
+                        }}>
+                        <Alert type="warning"
+                            closable
+                            style={{ marginBottom: 10 }} message={<><strong>Note:</strong> Our app is currently in testing mode to ensure a top-notch experience.</>} />
+
+                        {children}</Content>
                 </Layout>
             </Layout>
 
