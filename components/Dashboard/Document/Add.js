@@ -94,7 +94,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
             } catch (e) {
-                console.log(e?.message)
 
                 dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
             } finally {

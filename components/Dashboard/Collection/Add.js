@@ -113,6 +113,7 @@ export default function AddCollection({ collection, onSubmit }) {
 
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
+                console.log(collection.populatedRelationships)
                 dispatch({ type: 'loadCollections', data: collection.populatedRelationships || [] });
                 setPreview(collection.populatedImage[0] || {})
 
