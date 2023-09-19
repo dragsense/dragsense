@@ -1,5 +1,5 @@
 import { Form, Alert, Divider, Input, Button, Typography, message } from "antd";
-import { InfoCircleOutlined, CheckOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, CheckOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState, } from "react";
 
 
@@ -73,7 +73,10 @@ const DownloadProject = ({ id, name, apikey }) => {
         <Form layout="vertical" onFinish={onDownload}>
 
             <Form.Item label="API Key" >
-                <Paragraph style={{ margin: 0 }} copyable>{apikey ? apikey : 'No Key Found'}</Paragraph>
+                <Input.Password 
+                    value={apikey ? apikey : 'No Key Found'}
+                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                />
             </Form.Item>
             <Form.Item
                 label="Copy and Paste the Key"

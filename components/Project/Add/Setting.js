@@ -108,14 +108,20 @@ const Setting = ({ project, onSubmit, loading }) => {
                 <Divider orientation="left" orientationMargin="0">
                     Help
                 </Divider>
+                {/* Steps for setting up the project */}
                 <Steps direction="vertical" current={8} size="small">
+                    {/* Step 1: Check hosting requirements */}
                     <Step title="Hosting Requirements" description="Ensure you have the following hosting requirements:" />
+                    {/* Step 2: Download the project */}
                     <Step title="Download Project" description="Download the project files (your-project-name.rar)." />
+                    {/* Step 3: Upload and extract files */}
                     <Step title="Upload and Extract Files" description="Upload the project files and extract them into the root folder of your hosting environment." />
-                    <Step title="Run Commands" description="Run the following commands in the project's root folder: 1. npm install 2. npm run build 3. npm run start" />
-                    <Step title="Check Readiness" description="Check if the Coming Soon Page is displayed, indicating that your environment is ready for creating pages and content." />
-                    <Step title="Finally" description="Back to AutoCode to create pages and content." />
-
+                    {/* Step 4: Run necessary commands */}
+                    <Step title="Run Commands" description="Run the following commands in the project's root folder: 1. `npm install` 2. `npm run build` 3. `npm run start`" />
+                    {/* Step 5: Check readiness */}
+                    <Step title="Check Readiness" description="Check if the Page not found is displayed, indicating that your environment is ready for creating pages and content." />
+                    {/* Step 6: Return to DragSense */}
+                    <Step title="Finally" description="Back to DragSense to create pages and content." />
                 </Steps>
             </div>
         </>

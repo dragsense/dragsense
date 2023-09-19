@@ -31,7 +31,7 @@ const DashboardLayout = ({
                         }}>
                         <Alert type="warning"
                             closable
-                            style={{ marginBottom: 10 }} message={<><strong>Note:</strong> Our app is currently in testing mode to ensure a top-notch experience.</>} />
+                            style={{ marginBottom: 10 }} message={<><strong>Note:</strong> Our app is currently undergoing testing to ensure an optimal user experience.</>} />
 
                         {children}</Content>
                 </Layout>

@@ -14,10 +14,8 @@ export default function ProjectComponent({ user }) {
         token: { colorPrimary },
       } = theme.useToken();
 
-
     return (
         <ProjectLayout user={user}>
-
             <Title> Wellcome, {" "}
                 <span style={{color: colorPrimary}}>{user.name.split(" ")[0]}</span>
             </Title>

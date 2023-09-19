@@ -34,7 +34,6 @@ export default function Editor({ info }) {
           const iframe = iframeRef.current;
           const customProtocol = 'autocode-editor://open';
           const res = await ProjectServices.getCookie(info.projectId);
-          console.log(res.cookies)
           const encodedInfo = encodeURIComponent(JSON.stringify(info));
           const encodedCookies = encodeURIComponent(JSON.stringify(res?.cookies));
 

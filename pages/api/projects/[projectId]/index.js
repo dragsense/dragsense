@@ -6,70 +6,86 @@ import nc from 'next-connect';
 import { fetcher } from '@/lib/fetch';
 const handler = nc(ncOpts);
 
+// Middleware for database and authorization
 handler.use(database, authorize);
 
-handler.get(async (req, res) => {
-
+// Function to fetch project details
+async function fetchProjectDetails(req, res) {
   const project = await _findProjectById(req.db, req.query.projectId);
+  if (!project) {
+    return res.status(403).json({ error: { message: 'Project Not Found.' } });
+  }
+  return project;
+}
 
-  if (!project)
-    return res.status(403).status(403)
-      .json({ error: { message: 'Project Not Found.' } });
-
+// Function to fetch project status
+async function fetchProjectStatus(project) {
   try {
     const connection = await fetcher(`${project.url}`, {
       method: 'GET',
       headers: { 'x-api-key': project.apikey }
-
     });
     project.status = connection?.status;
   } catch (e) {
-    
+    console.error(e);
   }
+}
 
-
-
+// Function to send project details
+function sendProjectDetails(res, project) {
   try {
     const creator = project.creator;
-
     res.json({ project: { ...project, creator: { name: creator.name, image: creator.image } } });
-
   } catch (e) {
-
-
-    res
-      .status(403)
-      .json({ error: { message: 'Something went wrong.' } });
-    return;
+    console.error(e);
+    res.status(403).json({ error: { message: 'Something went wrong.' } });
   }
+}
 
+// GET handler
+handler.get(async (req, res) => {
+
+  const project = await fetchProjectDetails(req, res);
+  if (!project) return;
+  await fetchProjectStatus(project);
+  sendProjectDetails(res, project);
 });
 
-handler.delete(async (req, res) => {
-
-  const project = await _findProjectById(req.db, req.query.projectId);
-
-  if (!project)
-    return res.status(403).status(403)
-      .json({ error: { message: 'Project Not Found.' } });
-
+// Function to delete project
+async function deleteProject(req, res) {
+  const project = await fetchProjectDetails(req, res);
+  if (!project) return;
   try {
-
-
-    // await deleteRolesByProjectRoles(req.db, Array.isArray(project.roles) ? project.roles : []);
     await deleteProjectById(req.db, project._id)
-
     return res.json({ status: true });
-
   } catch (e) {
-    res
-      .status(403)
-      .json({ error: { message: 'Something went wrong.' } });
-    return;
+    console.error(e);
+    res.status(403).json({ error: { message: 'Something went wrong.' } });
   }
+}
+
+// DELETE handler
+handler.delete(async (req, res) => {
+  await deleteProject(req, res);
 });
 
+// Function to update project
+async function updateProject(req, res) {
+  const { name, desc, url } = req.body;
+  try {
+    const project = await updateProjectById(req.db, req.query.projectId, {
+      name,
+      desc,
+      url,
+    });
+    return res.json({ project: project.value });
+  } catch (e) {
+    console.error(e);
+    res.status(403).json({ error: { message: e?.message } });
+  }
+}
 
+// POST handler
 handler.post(
   validateBody({
     type: 'object',
@@ -77,37 +93,13 @@ handler.post(
       name: ValidateProps.project.name,
       url: ValidateProps.project.url,
       port: ValidateProps.project.desc,
-
     },
     required: ['name', 'url'],
     additionalProperties: true,
   }),
   async (req, res) => {
-
-    const { name, desc, url } = req.body;
-
-    try {
-
-      const project = await updateProjectById(req.db, req.query.projectId, {
-        name,
-        desc,
-        url,
-      });
-
-      return res.json({ project: project.value });
-    }
-
-
-    catch (e) {
-
-
-      res
-        .status(403)
-        .json({ error: { message: e?.message } });
-      return;
-    }
+    await updateProject(req, res);
   }
 );
-
 
 export default handler;

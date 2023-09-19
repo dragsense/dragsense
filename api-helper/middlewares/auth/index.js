@@ -71,10 +71,12 @@ const authOptions = {
 
 export default async function authorize(req, res, next) {
   const session = await getServerSession(req, res, authOptions)
+
   if (!session || !session?.user)
     return res.status(401).end();
 
   req.user = session.user;
+
   return next();
 
 }

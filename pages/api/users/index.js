@@ -14,20 +14,26 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 import { createTransport } from "nodemailer"
 import jwt from 'jsonwebtoken'
 
+// Initialize next-connect with options
 const handler = nc(ncOpts);
+
+// Use database middleware
 handler.use(database);
 
+// Function to handle GET requests
 handler.get(async (req, res) => {
-
+  // Fetch users from the database
   const users = await findUsers(
     req.db,
     req.query.page ? parseInt(req.query.page, 10) : 0,
     req.query.limit ? parseInt(req.query.limit, 10) : 10
   );
 
+  // Send the fetched users as a response
   res.json(users);
 });
 
+// Function to handle POST requests
 handler.post(
   validateBody({
     type: 'object',
@@ -44,12 +50,14 @@ handler.post(
 
     email = normalizeEmail(req.body.email);
 
+    // Check if the email is valid
     if (!isEmail(email)) {
       res
         .status(400)
         .json({ error: { message: 'The email you entered is invalid.' } });
       return;
     }
+    // Check if the email is already in use
     if (await findUserByEmail(req.db, email)) {
       res
         .status(403)
@@ -57,6 +65,7 @@ handler.post(
       return;
     }
 
+    // Insert the new user into the database
     const createdUser = await insertUser(req.db, {
       email,
       originalPassword: password,
@@ -64,6 +73,7 @@ handler.post(
       emailVerified: null
     });
 
+    // Generate a JWT token for the user
     const token = jwt.sign({ _id: createdUser._id }, process.env.JWT_SECRET,
       {
         expiresIn: '30m'
@@ -72,6 +82,7 @@ handler.post(
     const { host } = new URL(url)
 
 
+    // Create a transport for sending email
     const transport = createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_HOST_PORT,
@@ -80,6 +91,7 @@ handler.post(
         pass: process.env.EMAIL_HOST_PASSWORD,
       }
     })
+    // Send the verification email
     const result = await transport.sendMail({
       to: email,
       from: process.env.EMAIL,
@@ -94,6 +106,7 @@ handler.post(
       <p>If you did not sign up for an account on our website, you can safely ignore this email.</p>
       `,
     })
+    // Check if the email was sent successfully
     const failed = result.rejected.concat(result.pending).filter(Boolean)
 
     if (failed.length) {
@@ -110,6 +123,7 @@ handler.post(
 );
 
 
+// Function to handle PATCH requests
 handler.patch(authorize,
   validateBody({
     type: 'object',
@@ -122,11 +136,10 @@ handler.patch(authorize,
   async (req, res) => {
     let { name, theme = "dark", enable2FA = false } = req.body;
 
+    // Find the user by email
     const user = await findUserByEmail(req.db, req.user.email);
 
-    if (!user)
-      return res.status(401).end();
-
+    // Check if the user exists
     if (!user) {
       res
         .status(403)
@@ -134,8 +147,7 @@ handler.patch(authorize,
       return;
     }
 
-    console.log(name)
-
+    // Update the user in the database
     await updateUserById(req.db, user._id, {
       name,
       enable2FA,
