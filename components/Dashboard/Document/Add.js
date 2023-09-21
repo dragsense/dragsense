@@ -48,6 +48,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
     const [mediaModal, setMediaModal] = useState(false);
     const [preview, setPreview] = useState({});
+    const [host, setHost] = useState('');
 
     const [states, dispatch] = useReducer(reducer, {
         laoding: false,
@@ -70,6 +71,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                     if (res.document) {
                         document = res.document;
                     }
+
+                    setHost(res.host || '');
                 }
 
                 form.setFieldsValue({ name: document?.name, slug: document?.slug });
@@ -88,7 +91,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                     result[rel] = document.populatedRelationships[rel];
                     return result;
                 }, {});
-                
+
                 dispatch({ type: 'documents', data });
                 setPreview(document.populatedImage[0] || {})
 
@@ -162,8 +165,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
         form.validateFields()
             .then(async (values) => {
-                
-                onSubmit({name: state.name, relationships: state.relationships, slug: state.slug,  setting: state.setting, states: state.states});
+
+                onSubmit({ name: state.name, relationships: state.relationships, slug: state.slug, setting: state.setting, states: state.states });
             })
             .catch((info) => {
                 message.error('Validate Failed.');
@@ -252,11 +255,11 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                     min: 3,
                                     message: 'Document name must be at least 3 characters long',
                                 }, {
-                            max: 60,
-                            message: 'Text be at most 60 characters long',
-                        }
-                                
-                                ]}
+                                    max: 60,
+                                    message: 'Text be at most 60 characters long',
+                                }
+
+                            ]}
 
                             className="font-500">
                             <Input placeholder="Name" name="name"
@@ -277,9 +280,9 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                     min: 2,
                                     message: 'Document slug must be at least 1 characters long',
                                 }, {
-                            max: 60,
-                            message: 'Text be at most 60 characters long',
-                        }
+                                    max: 60,
+                                    message: 'Text be at most 60 characters long',
+                                }
                             ]}
 
                         >
@@ -305,17 +308,17 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                         min: 3,
                                         message: 'Collection title must be at least 3 characters long',
                                     }, {
-                            max: 60,
-                            message: 'Text be at most 60 characters long',
-                        }
+                                        max: 60,
+                                        message: 'Text be at most 60 characters long',
+                                    }
                                 ]}
 
                             >
-                                <Input 
-                                
-                                maxLength={60}
+                                <Input
 
-                                placeholder="Title" name="title"
+                                    maxLength={60}
+
+                                    placeholder="Title" name="title"
                                     onChange={onChangeSetting}
                                     value={state.setting?.title}
 
@@ -350,7 +353,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
                         <Form.Item label="Document Excerpt" >
                             <TextArea
-                            maxLength={1000}
+                                maxLength={1000}
                                 rows={4}
                                 value={state.setting?.excerpt}
                                 name="excerpt"
@@ -361,7 +364,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                         <Form.Item label="Cover Image" >
 
 
-                            
+
                             <img
                                 width="100%"
                                 onClick={() => setMediaModal(true)}
@@ -375,7 +378,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                 }}
                                 alt={preview?.alt}
                                 src={preview?.src || state.populatedImage?.[0]?.src || "/images/default/default-img.png"}
-                                />
+                            />
                         </Form.Item>
 
                     </Col>}
@@ -436,6 +439,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                 <Form.Item>
                     <Card title={<>States <Tooltip title="Dynamic Variables"> <QuestionCircleFilled /></Tooltip></>}>
                         <StateComponent
+                            host={host}
                             states={state.states ? state.states : {}}
                             onChangeState={onChangeState} />
                     </Card>

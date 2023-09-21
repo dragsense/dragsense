@@ -91,7 +91,7 @@ class ButtonImage extends React.Component {
         const editor = this.props.editor.get('nativeEditor');
 
         const el = window.CKEDITOR.dom.element.createFromHtml(
-          `<img src="${res.media.src}" alt="${res.media.alt}" width="400">`
+          `<img src="${res.host+res.media.src}" alt="${res.media.alt}" width="400">`
         );
 
 
@@ -171,7 +171,7 @@ function createContentEditor() {
 
     toolbars: {
       add: {
-        buttons: ['acimage', 'camera', 'hline', 'table', 'ul', 'ol'],
+        buttons: ['acimage', 'hline', 'table', 'ul', 'ol'],
         tabIndex: 2
       },
       styles: {

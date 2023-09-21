@@ -81,6 +81,7 @@ export default function Setting() {
     const [form] = Form.useForm();
     const [pageSearch, setPageSearch] = useState('');
     const [isChange, setIsChange] = useState(false);
+    const [host, setHost] = useState('');
 
     const [mediaModal, setMediaModal] = useState({ open: false, type: '', src: '' });
 
@@ -92,6 +93,7 @@ export default function Setting() {
             setIsLoading(true);
             const res = await SettingServices.get();
             const data = { ...initial, ...res.setting };
+            setHost(res.host || '');
             form.setFieldsValue({ webTitle: res.setting?.webTitle, email: res.setting?.email })
 
             setState(data);
@@ -561,7 +563,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.favicon?.alt}
-                                        src={state.images?.favicon?.src}
+                                        src={host+state.images?.favicon?.src}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -583,7 +585,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.logo?.alt}
-                                        src={state.images?.logo?.src}
+                                        src={host+state.images?.logo?.src}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -605,7 +607,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.mobileLogo?.alt}
-                                        src={state.images?.mobileLogo?.src}
+                                        src={host+state.images?.mobileLogo?.src}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -627,7 +629,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.placeholder?.alt}
-                                        src={state.images?.placeholder?.src}
+                                        src={host+state.images?.placeholder?.src}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>

@@ -10,8 +10,8 @@ export const TYPES = [
     { value: 'boolean', label: 'BOOLEAN' },
 ];
 
-export function StateComponent({ states, onChangeState }) {
+export function StateComponent({ states, host, onChangeState }) {
     return (
-        <StateList states={states}  onChangeState={onChangeState} />
+        <StateList states={states} host={host} onChangeState={onChangeState} />
     );
 };

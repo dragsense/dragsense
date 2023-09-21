@@ -43,7 +43,8 @@ export default function AddPage({ page, onSubmit }) {
     const [form] = Form.useForm();
     const [state, setState] = useState(page);
     const [layoutSearch, setLayoutSeacrh] = useState('');
-    const [preview, setPreview] = useState({});
+    const [preview, setPreview] = useState(null);
+    const [host, setHost] = useState('');
 
     const [mediaModal, setMediaModal] = useState(false);
 
@@ -58,13 +59,17 @@ export default function AddPage({ page, onSubmit }) {
                     if (res.page) {
                         page = res.page;
                     }
+
+                    setHost(res.host || '')
+
                 }
                 form.setFieldsValue({ name: page?.name, slug: page?.slug, layout: page?.layout })
                 setState(page);
                 dispatch({ type: 'loadLayouts', data: page.populatedLayout || [] });
-                console.log(page)
-                setPreview(page.populatedImage[0] || {})
-
+             
+                if (page.populatedImage)
+                setPreview(page.populatedImage[0] || null)
+          
 
             } catch (e) {
                 dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
@@ -191,6 +196,8 @@ export default function AddPage({ page, onSubmit }) {
     }
 
 
+    const imageSrc = preview ? host + preview.src :
+    "/images/default/default-img.png"
 
 
     return (
@@ -361,7 +368,7 @@ export default function AddPage({ page, onSubmit }) {
                                     cursor: 'pointer'
                                 }}
                                 alt={preview?.alt}
-                                src={preview?.src || state.populatedImage?.[0]?.src || "/images/default/default-img.png"}
+                                src={imageSrc}
                                 />
                         </Form.Item>
 

@@ -59,6 +59,7 @@ export default function AddComponent({ component, onSubmit }) {
 
     const [collectionSearch, setCollectionSearch] = useState('');
     const [componentSearch, setComponentSearch] = useState('');
+    const [host, setHost] = useState('');
 
     const [newState, setNewState] = useState(null);
     const [state, setState] = useState(component);
@@ -139,6 +140,8 @@ export default function AddComponent({ component, onSubmit }) {
                     if (res.component) {
                         component = res.component;
                     }
+
+                    setHost(res.host || '')
                 }
                 form.setFieldsValue({ name: component?.name})
                 setState(component);
@@ -366,7 +369,7 @@ export default function AddComponent({ component, onSubmit }) {
 
                     headStyle={{ padding: 10 }}
                 >
-                    {newState ? <AddStateComponent newState={newState} onAdd={onAddState} setNewState={setNewState} />
+                    {newState ? <AddStateComponent host={host} newState={newState} onAdd={onAddState} setNewState={setNewState} />
 
                         :
                         <StateComponent states={state.states || {}} setNewState={setNewState} onRemove={onRemoveState} />}

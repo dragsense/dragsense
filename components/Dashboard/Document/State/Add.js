@@ -29,7 +29,7 @@ import AddArrayTypes from './AddArrayTypes'
 
 import MediaModal from "@/components/Dashboard/Media/MediaModal";
 
-export default function AddState({ newState, onChangeSlelectedState, setNewState }) {
+export default function AddState({ newState, host, onChangeSlelectedState, setNewState }) {
 
     const [types, setTypes] = useState(() => ADVANCE_TYPES.some(t => t.value == newState.type) ? 1 : 0);
     const [state, setState] = useState({});
@@ -172,7 +172,7 @@ export default function AddState({ newState, onChangeSlelectedState, setNewState
 
                 {types == 0 ? <>
 
-                    <AddGeneralTypes isChange={isChange} setState={setState} state={state} />  </>
+                    <AddGeneralTypes host={host} isChange={isChange} setState={setState} state={state} />  </>
                     : <>
 
                         <Form.Item label="Select Type" className="font-500">
@@ -217,7 +217,7 @@ export default function AddState({ newState, onChangeSlelectedState, setNewState
                                                         cursor: 'pointer'
                                                     }}
                                                     alt={src?.alt}
-                                                    src={src?.src}
+                                                    src={host + src?.src}
                                                     fallback="/images/default/default-img.png" />
                                             </div>
                                         </>

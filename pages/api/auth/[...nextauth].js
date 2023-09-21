@@ -122,11 +122,24 @@ const authOptions = {
         port: process.env.EMAIL_HOST_PORT,
         auth: {
           user: process.env.EMAIL_HOST_USER,
-          pass: process.env.EMAIL_HOST_PASSWORD,
+          pass: process.env.EMAIL_HOST_PASS,
         },
       },
-      from: 'noreply@autocode.com',
-      sendPasswordResetRequest
+      from: process.env.EMAIL_HOST_USER,
+      sendVerificationRequest({
+        theme,
+        identifier: email,
+        url,
+        provider: { server, from },
+      }) {
+        sendPasswordResetRequest({
+          theme,
+          identifier: email,
+          url,
+          provider: { server, from },
+        })
+      },
+      
     }),
     CredentialsProvider({
       id: 'credentials',

@@ -5,7 +5,7 @@ import { useState } from "react";
 const { Sider } = Layout;
 
 
-const StateList = ({ states, type, onChangeState, onRemove }) => {
+const StateList = ({ states, type, onChangeState, onRemove, host }) => {
 
     const [selectedElementKey, setElementSelectedKey] = useState([0]);
     const [openKeys, setOpenKeys] = useState([0]);
@@ -43,7 +43,7 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
     const onChangeSlelectedState = (updatedState) => {
 
         if (states[state.key])
-            states[state.key] = {...updatedState};
+            states[state.key] = { ...updatedState };
         onChangeState();
     }
 
@@ -82,6 +82,7 @@ const StateList = ({ states, type, onChangeState, onRemove }) => {
 
                 {state && <><Divider orientation="left" orientationMargin="0">{`[${state?.key}]`} </Divider>
                     <AddState
+                        host={host}
                         onChangeSlelectedState={onChangeSlelectedState}
                         key={state.key}
                         newState={state} />

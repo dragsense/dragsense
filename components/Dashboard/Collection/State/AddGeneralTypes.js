@@ -23,7 +23,7 @@ const initialState = {
     new: true,
     states: {}
 };
-export default function AddGeneralTypes({ isChange, setState, state }) {
+export default function AddGeneralTypes({ host, isChange, setState, state }) {
 
     const [mediaModal, setMediaModal] = useState(false);
     const [type, setType] = useState("images");
@@ -124,7 +124,7 @@ export default function AddGeneralTypes({ isChange, setState, state }) {
                             objectFit: 'cover',
                         }}
                         alt={state.src?.alt}
-                        src={state.src?.src}
+                        src={host+state.src?.src}
                         fallback="/images/default/default-img.png" />
                 </Form.Item>
                 : state.type == 'content' ?
@@ -151,7 +151,7 @@ export default function AddGeneralTypes({ isChange, setState, state }) {
                                                     ...state
                                                 });
                                             }} />
-                                            <Video src={src.src} alt={src.alt} mimetype={src.mimetype} />
+                                            <Video src={host+src.src} alt={src.alt} mimetype={src.mimetype} />
                                         </div>
                                     ))}
                                 </div>
@@ -173,7 +173,7 @@ export default function AddGeneralTypes({ isChange, setState, state }) {
                                         cursor: 'pointer'
                                     }}
                                     alt="video poster"
-                                    src={state.src?.src}
+                                    src={host+state.src?.src}
                                     fallback="/images/default/default-poster.png" />
                             </Form.Item>
                         </>
@@ -196,7 +196,7 @@ export default function AddGeneralTypes({ isChange, setState, state }) {
                                                 });
                                             }} />
 
-                                            <Audio src={src.src} alt={src.alt} mimetype={src.mimetype} /></div>
+                                            <Audio src={host+src.src} alt={src.alt} mimetype={src.mimetype} /></div>
                                     ))}
                                 </div>
                             </Form.Item>
@@ -209,7 +209,7 @@ export default function AddGeneralTypes({ isChange, setState, state }) {
                                     }} icon={<UploadOutlined />}>Upload</Button>
                                     <br />
                                     <br />
-                                    <a href={state.defaultValue} target="_blank" rel="noopener noreferrer">
+                                    <a href={host+state.defaultValue} target="_blank" rel="noopener noreferrer">
                                         <FileOutlined style={{ fontSize: 48 }} />
                                     </a>
                                 </Form.Item>

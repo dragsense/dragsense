@@ -84,7 +84,8 @@ export default function AddCollection({ collection, onSubmit }) {
     const [form] = Form.useForm();
     const [newState, setNewState] = useState(null);
     const [state, setState] = useState(collection);
-    const [preview, setPreview] = useState({});
+    const [preview, setPreview] = useState(null);
+    const [host, setHost] = useState('');
 
     const [mediaModal, setMediaModal] = useState(false);
 
@@ -104,6 +105,8 @@ export default function AddCollection({ collection, onSubmit }) {
                     if (res.collection) {
                         collection = res.collection;
                     }
+
+                    setHost(res.host || '')
                 }
                 form.setFieldsValue({
                     name: collection?.name,
@@ -113,9 +116,11 @@ export default function AddCollection({ collection, onSubmit }) {
 
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
-                console.log(collection.populatedRelationships)
+
                 dispatch({ type: 'loadCollections', data: collection.populatedRelationships || [] });
-                setPreview(collection.populatedImage[0] || {})
+
+                if (collection.populatedImage)
+                    setPreview(collection.populatedImage[0] || null)
 
 
             } catch (e) {
@@ -334,6 +339,9 @@ export default function AddCollection({ collection, onSubmit }) {
         </>
     }
 
+    const imageSrc = preview ? host + preview.src :
+        "/images/default/default-img.png"
+
 
     return (
         <>
@@ -500,7 +508,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         </Form.Item>
 
                         <Form.Item label="Cover Image" >
-
+                          
                             <img
                                 width="100%"
                                 onClick={() => setMediaModal(true)}
@@ -513,7 +521,7 @@ export default function AddCollection({ collection, onSubmit }) {
                                     cursor: 'pointer'
                                 }}
                                 alt={preview?.alt}
-                                src={preview?.src || state.populatedImage?.[0]?.src || "/images/default/default-img.png"}
+                                src={imageSrc}
                             />
                         </Form.Item>
 

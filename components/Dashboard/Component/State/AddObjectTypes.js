@@ -4,7 +4,7 @@ import { Form, Modal, Input, message } from "antd";
 
 import AddGeneralTypes from './AddGeneralTypes';
 
-export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
+export default function AddObjectTypes({ host, newState, onAddNew, setNewState }) {
 
     const [objectTypesModal, setObjectTypesModalOpen] = useState(false);
     const [form] = Form.useForm();
@@ -95,7 +95,7 @@ export default function AddObjectTypes({ newState, onAddNew, setNewState }) {
 
 
 
-                <AddGeneralTypes setState={setState} state={state} />
+                <AddGeneralTypes host={host} setState={setState} state={state} />
             </Form>
         </Modal>
     </>

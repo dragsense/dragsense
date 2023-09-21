@@ -208,7 +208,7 @@ export default function AddState({ newState, onAddNew, setNewState }) {
 
                 {types == 0 ? <>
 
-                    <AddGeneralTypes isChange={isChange} setState={setState} state={state} />  </>
+                    <AddGeneralTypes host={host} isChange={isChange} setState={setState} state={state} />  </>
                     : <>
 
                         <Form.Item label="Select Type" className="font-500">
@@ -253,7 +253,7 @@ export default function AddState({ newState, onAddNew, setNewState }) {
                                                         cursor: 'pointer'
                                                     }}
                                                     alt={src?.alt}
-                                                    src={src?.src}
+                                                    src={host+src?.src}
                                                     fallback="/images/default/default-img.png" />
                                             </div>
                                         </>
@@ -294,7 +294,7 @@ export default function AddState({ newState, onAddNew, setNewState }) {
                 </Form.Item>
             </Form>
 
-            <AddObjectTypes newState={innerNewState} setNewState={setInnerNewState} onAddNew={onAddState} />
+            <AddObjectTypes host={host} newState={innerNewState} setNewState={setInnerNewState} onAddNew={onAddState} />
 
             <MediaModal open={mediaModal} type="images" multiple={true} onClose={() => setMediaModal(false)} srcs={Array.isArray(state.defaultValue) ? state.defaultValue : []} onSelect={onChangeImage} />
 

@@ -3,12 +3,12 @@ import AddState from './Add';
 
 export function StateComponent({ states, setNewState, onRemove}) {
     return (
-        <StateList states={states} setNewState={setNewState} onRemove={onRemove} />
+        <StateList states={states}  setNewState={setNewState} onRemove={onRemove} />
     );
 };
 
-export function AddStateComponent({ newState, setNewState, onAdd }) {
+export function AddStateComponent({ newState, host, setNewState, onAdd }) {
     return (
-        <AddState newState={newState} setNewState={setNewState} onAddNew={onAdd} />
+        <AddState newState={newState} host={host} setNewState={setNewState} onAddNew={onAdd} />
     );
 };

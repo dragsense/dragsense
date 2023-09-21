@@ -89,7 +89,6 @@ export default function Backups({ projectId }) {
             dispatch({ type: 'start' });
             const res = await BackupServices.getAll(projectId, page);
 
-
             const data = Array.isArray(res.backups) ? res.backups : [];
 
             dispatch({ type: 'load', data, total: res.total });
