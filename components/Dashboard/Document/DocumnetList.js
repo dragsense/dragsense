@@ -13,7 +13,7 @@ const DocumentList = ({ documents, page, onClone, total, setPage, onEdit, onDele
 
     const handleTableChange = (pagination, filters, sorter) => {
 
-        setPage(pagination.current);
+       // setPage(pagination.current);
     };
 
     const {

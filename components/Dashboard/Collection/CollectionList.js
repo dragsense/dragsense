@@ -18,7 +18,7 @@ const CollectionList = ({ collections, onClone, page, total, setPage, onEdit, on
 
     const handleTableChange = (pagination, filters, sorter) => {
 
-        setPage(pagination.current);
+        //setPage(pagination.current);
     };
 
     const {

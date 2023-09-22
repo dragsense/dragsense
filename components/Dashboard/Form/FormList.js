@@ -17,7 +17,7 @@ const FormList = ({ forms, page, onClone, total, setPage, onEdit, onDelete, onEd
 
     const handleTableChange = (pagination, filters, sorter) => {
 
-        setPage(pagination.current);
+        //setPage(pagination.current);
     };
 
     const {
