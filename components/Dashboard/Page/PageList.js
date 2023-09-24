@@ -15,8 +15,7 @@ const PageList = ({ pages, page, onClone, total, setPage, onEdit, onDelete }) =>
 
 
     const handleTableChange = (pagination, filters, sorter) => {
-
-        //setPage(pagination.current);
+        setPage(pagination.current);
     };
 
 
@@ -74,7 +73,8 @@ const PageList = ({ pages, page, onClone, total, setPage, onEdit, onDelete }) =>
             key: 'setting',
             align: 'center',
             render: setting => <Badge status={setting?.status === 'DRAFT' ? 'default' : 'success'} text={setting?.status} />,
-            sorter: (a, b) => a.status.localeCompare(b.status),
+            sorter: (a, b) =>  a.setting?.status.localeCompare(b.setting?.status)
+            
 
         },
         {

@@ -14,7 +14,6 @@ const ComponentList = ({ components, onClone, page, total, setPage, onEdit, onDe
     const { data: session } = useSession();
 
     const handleTableChange = (pagination, filters, sorter) => {
-
         setPage(pagination.current);
     };
 

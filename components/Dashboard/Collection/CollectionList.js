@@ -18,7 +18,7 @@ const CollectionList = ({ collections, onClone, page, total, setPage, onEdit, on
 
     const handleTableChange = (pagination, filters, sorter) => {
 
-        //setPage(pagination.current);
+        setPage(pagination.current);
     };
 
     const {
@@ -77,21 +77,8 @@ const CollectionList = ({ collections, onClone, page, total, setPage, onEdit, on
             key: 'setting',
             align: 'center',
             render: setting => <Badge status={setting?.status === 'DRAFT' ? 'default' : 'success'} text={setting?.status} />,
-            sorter: (a, b) => {
-                // If the status is the same, no sorting is needed
-                if (a.setting?.status === b.setting?.status) {
-                    return 0;
-                }
+            sorter: (a, b) =>  a.setting?.status.localeCompare(b.setting?.status)
 
-                // Sort by status in alphabetical order (DRAFT -> PENDING -> APPROVED)
-                const statusOrder = {
-                    DRAFT: 1,
-                    PENDING: 2,
-                    APPROVED: 3,
-                };
-
-                return statusOrder[a.setting?.status] - statusOrder[b.setting?.status];
-            },
         },
         {
             title: 'Action',

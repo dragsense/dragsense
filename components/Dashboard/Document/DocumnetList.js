@@ -12,8 +12,7 @@ const { confirm } = Modal;
 const DocumentList = ({ documents, page, onClone, total, setPage, onEdit, onDelete }) => {
 
     const handleTableChange = (pagination, filters, sorter) => {
-
-       // setPage(pagination.current);
+       setPage(pagination.current);
     };
 
     const {
