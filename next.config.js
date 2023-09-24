@@ -7,7 +7,19 @@ module.exports = withPlugins([
   [withImages()], // Use the `next-images` plugin
   {
     async headers() {
-      return []
+      return [
+        {
+          // Matching all API routes:
+          source: '/:path*',
+          headers: [
+            {
+              key: 'Content-Security-Policy',
+              value: "default-src 'self'; img-src *; connect-src *; font-src https://fonts.gstatic.com;  script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'  https://fonts.googleapis.com;", 
+            },
+          ],
+        },
+      ]
     },
   },
-]);
+]); 
+
