@@ -43,7 +43,6 @@ const mediaReducer = (state, action) => {
             return { ...state, single: null };
         case "update":
             // Update a media item in the state
-            console.log(state.media)
             const updatedMedia = state.media.map(item => item._id === action.single._id ? action.single : item);
             return { ...state, media: updatedMedia };
         case "delete":
