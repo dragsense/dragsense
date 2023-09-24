@@ -2,15 +2,12 @@
 import React from "react";
 
 
-const ComplexLogics = ({ children, states, props, updateStates }) => {
+const ComplexLogics = ({ children, getStateValue, getPropValue, updateProp, updateState }) => {
 
 
     return (
         <div>
-            <h1>Hello Custom Component</h1>
             {children}
-          
-
         </div>
     );
 
