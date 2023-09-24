@@ -38,6 +38,7 @@ const MediaList = ({ media, host, onEdit, onDelete, onSelect, srcs }) => {
                         const isSelected = srcs.some(s => (s?._id == item._id || s?.src == item.src));
                         return (
                             <MediaItem 
+                            key={item._id}
                                 host={host}
                                 item={item} 
                                 isSelected={isSelected} 

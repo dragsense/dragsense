@@ -28,7 +28,7 @@ const VariableList = ({ selectedVariable, onSelect, variables,
         dataSource={variables}
         renderItem={(variable, index) => (
             <List.Item
-
+                key={variable._uid}
                 onClick={() => onSelect(variable)}
                 style={{
                     color: colorText,

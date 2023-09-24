@@ -18,7 +18,7 @@ const FontList = ({ selectedFont, onSelect, fonts, onDelete, onEdit }) => {
         dataSource={fonts}
         renderItem={(font, index) => (
             <List.Item
-
+            key={font._uid}
             onClick={() => onSelect(font)}
             style={{
                 color: colorText,

@@ -62,7 +62,7 @@ export default function AddState({ newState, onAddNew, setNewState }) {
 
 
                 onAddNew({
-                    ...state, key, new: undefined
+                    ...state, key, new: undefined, error: 0,
                 });
                 setNewState(null);
 

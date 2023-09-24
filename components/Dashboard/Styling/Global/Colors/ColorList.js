@@ -27,7 +27,7 @@ const ColorList = ({ selectedColor, onSelect, total,
         }}
         renderItem={(color, index) => (
             <List.Item
-
+            key={font._uid}
             onClick={() => onSelect(color)}
             style={{
                 color: colorText,

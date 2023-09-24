@@ -204,7 +204,9 @@ const CollectionList = ({ collections, onClone, page, total, setPage, onEdit, on
         },
     ]
 
-    return <Table columns={columns} dataSource={collections} pagination={{
+    return <Table columns={columns}
+    rowKey="_id"
+     dataSource={collections} pagination={{
         total: total,
         current: page,
         pageSize: 10,

@@ -63,7 +63,7 @@ const Nav = ({ user }) => {
   return (
     <nav className="nav-container">
       <div className="logo">
-        <img src="/images/logo/nav-logo.png" alt="logo" />
+        <img src="/images/logo/nav-logo.png" alt="logo" style={{width: 54}} />
       </div>
 
       <Dropdown menu={{ items, onClick }} style={{ textAlign: 'left' }}>

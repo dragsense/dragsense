@@ -563,7 +563,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.favicon?.alt}
-                                        src={host+state.images?.favicon?.src}
+                                        src={host+(state.images?.favicon?.src || '')}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -585,7 +585,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.logo?.alt}
-                                        src={host+state.images?.logo?.src}
+                                        src={host+(state.images?.logo?.src || '')}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -607,7 +607,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.mobileLogo?.alt}
-                                        src={host+state.images?.mobileLogo?.src}
+                                        src={host+(state.images?.mobileLogo?.src || '')}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>
@@ -629,7 +629,7 @@ export default function Setting() {
                                             cursor: 'pointer'
                                         }}
                                         alt={state.images?.placeholder?.alt}
-                                        src={host+state.images?.placeholder?.src}
+                                        src={host+(state.images?.placeholder?.src || '')}
                                         fallback="/images/default/default-img.png" />
 
                                 </Form.Item>

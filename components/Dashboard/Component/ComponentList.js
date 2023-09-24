@@ -150,7 +150,9 @@ const ComponentList = ({ components, onClone, page, total, setPage, onEdit, onDe
         },
     ]
 
-    return <Table columns={columns} dataSource={components} pagination={{
+    return <Table columns={columns} 
+    rowKey="_id"
+    dataSource={components} pagination={{
         total: total,
         current: page,
         pageSize: 10,

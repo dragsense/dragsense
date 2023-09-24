@@ -17,7 +17,7 @@ const FormList = ({ forms, page, onClone, total, setPage, onEdit, onDelete, onEd
 
     const handleTableChange = (pagination, filters, sorter) => {
 
-        //setPage(pagination.current);
+        setPage(pagination.current);
     };
 
     const {
@@ -172,7 +172,10 @@ const FormList = ({ forms, page, onClone, total, setPage, onEdit, onDelete, onEd
         },
     ]
 
-    return <Table columns={columns} dataSource={forms} pagination={{
+
+    return <Table columns={columns} dataSource={forms} 
+    rowKey="_id"
+    pagination={{
         total: total,
         current: page,
         pageSize: 10,

@@ -170,7 +170,9 @@ const PageList = ({ pages, page, onClone, total, setPage, onEdit, onDelete }) =>
         },
     ]
 
-    return <Table columns={columns} dataSource={pages} pagination={{
+    return <Table columns={columns} dataSource={pages} 
+    rowKey="_id"
+    pagination={{
         total: total,
         current: page,
         pageSize: 10,

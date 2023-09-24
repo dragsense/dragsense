@@ -35,6 +35,7 @@ const LayoutList = ({
         }}
         renderItem={(layout, index) => (
             <List.Item
+                key={layout._id}
                 onClick={() => onSelect(layout)}
 
                 style={{
@@ -77,14 +78,14 @@ const LayoutList = ({
                     <List.Item.Meta
                         title={layout.name}
                         description={<>Usage: {layout.usage}
-                        <br/>
-                        Created by: {layout.creator?.name || 'Unknown'}
-                        <br/> 
-                        CeatedAt: {moment(layout.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
-                        <br/> 
-                        Updated by: {layout.updater?.name || 'Unknown'}
-                        <br/> 
-                        updatedAt: {moment(layout.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}
+                            <br />
+                            Created by: {layout.creator?.name || 'Unknown'}
+                            <br />
+                            CeatedAt: {moment(layout.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                            <br />
+                            Updated by: {layout.updater?.name || 'Unknown'}
+                            <br />
+                            updatedAt: {moment(layout.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}
 
                         </>}
                     />
