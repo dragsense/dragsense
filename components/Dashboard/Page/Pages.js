@@ -123,7 +123,6 @@ export default function Pages() {
             }
 
         } catch (e) {
-            console.log(e?.message)
             dispatch({ type: 'error', error: e?.error?.message || 'Something went wrong.' });
         } finally {
             dispatch({ type: 'finish' });

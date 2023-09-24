@@ -7,7 +7,6 @@ const { confirm } = Modal;
 
 const StateList = ({ states, setNewState, onRemove }) => {
   const handleEditState = (record) => {
-    console.log(record)
     setNewState({ ...record, edit: true });
   };
 

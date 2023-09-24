@@ -188,7 +188,6 @@ export default function AddCollection({ collection, onSubmit }) {
             dispatch({ type: 'start' });
 
             const res = await FormServices.search(formSearch);
-            console.log(res.forms)
             const data = Array.isArray(res.forms) ? res.forms : [];
 
             dispatch({ type: 'loadForms', data })

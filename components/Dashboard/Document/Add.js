@@ -174,7 +174,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
     }
 
     const onChangeState = () => {
-        console.log(state);
         setState({ ...state });
 
     }

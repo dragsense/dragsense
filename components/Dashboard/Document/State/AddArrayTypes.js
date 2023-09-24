@@ -10,7 +10,6 @@ export default function AddArrayTypes({ state, states, onAdd, onRemove, onChange
     };
 
     const handleAddValue = () => {
-        console.log(inputValue)
         const values = inputValue.split(",").filter((value) => value !== "");
         onAdd(values);
         setInputValue("");

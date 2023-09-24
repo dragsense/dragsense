@@ -85,7 +85,6 @@ export default function UplaodMedia({ type, onAdd }) {
     };
 
     const handleBeforeUpload = (file, fileList) => {
-        console.log(file.type)
         const isValid = types[type].includes(file.type);
         if (!isValid) {
 
