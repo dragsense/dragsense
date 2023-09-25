@@ -10,7 +10,7 @@ const types = {
         'image/avif',
         'image/gif',
         'image/jpeg',
-     
+
         'image/png',
         'image/svg+xml',
         'image/webp',
@@ -53,7 +53,7 @@ export default function UplaodMedia({ type, onAdd }) {
             const formData = new FormData();
             formData.append('file', file);
             const res = await MediaServices.upload(type, formData, onProgress);
-            onAdd(res.media);
+            onAdd({ media: res.media, host: res.host });
             onSuccess({ status: 'done' });
 
 
