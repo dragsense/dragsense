@@ -22,7 +22,7 @@ const getCurrentDate = () => {
 };
 
 // Function to add files to zip
-const addFilesToZip = (folderPath, folderName, zip) => {
+const addFilesToZip = (folderPath, folderName, zip ,project) => {
     const files = fs.readdirSync(folderPath);
 
     files.forEach((file) => {
@@ -40,7 +40,7 @@ const addFilesToZip = (folderPath, folderName, zip) => {
         } else if (stats.isDirectory() && folderName !== 'node_modules') {
             const subFolderPath = path.join(folderPath, file);
             const subFolderName = path.join(folderName, file);
-            addFilesToZip(subFolderPath, subFolderName, zip);
+            addFilesToZip(subFolderPath, subFolderName, zip, project);
         }
     });
 };

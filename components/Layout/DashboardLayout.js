@@ -31,7 +31,7 @@ const DashboardLayout = ({
                         }}>
                         <Alert type="warning"
                             closable
-                            style={{ marginBottom: 10 }} message={<><strong>Note:</strong> Our app is currently undergoing testing to ensure an optimal user experience.</>} />
+                            style={{ marginBottom: 10 }} message={<><strong>Note:</strong> Our app is currently undergoing testing to ensure an optimal user experience. If you encounter any bugs, please email us at support@dragsense.com.</>} />
 
                         {children}</Content>
                 </Layout>

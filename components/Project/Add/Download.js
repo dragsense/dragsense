@@ -39,7 +39,7 @@ const DownloadProject = ({ id, name, apikey }) => {
 
         try {
             setIsLoading(true);
-            setErrpr('');
+            setError('');
         
 
             const downloadLink = document.createElement('a');

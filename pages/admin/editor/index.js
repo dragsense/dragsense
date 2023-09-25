@@ -113,10 +113,7 @@ export async function getServerSideProps(context) {
       notFound: true,
     }
 
-  const protocol = req.connection.encrypted ? 'https' : 'http';
-  const host = req.headers.host;
-
-  info.url = host ? `${protocol}://${host}` : 'http://localhost:3000';
+  info.url = process.env.URL;
 
   info.userName = session.user.name;
 

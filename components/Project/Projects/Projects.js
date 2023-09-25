@@ -153,7 +153,6 @@ export default function Projects({ shared }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
-            message.error(e?.message || 'Something went wrong.');
         } finally {
             dispatch({ type: 'finish' });
         }

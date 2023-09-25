@@ -22,7 +22,6 @@ const Setting = ({ project, onSubmit, loading }) => {
             .then(async (values) => {
                 await onSubmit(values);
                 setFormChanged(false);
-                message.success('Data submitted!');
 
             })
             .catch((info) => {
