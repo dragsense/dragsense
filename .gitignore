@@ -4,7 +4,7 @@
 # dependencies
 /node_modules
 
-public
+/public
 
 /public/alloyeditor/node_modules
 

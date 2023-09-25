@@ -6,9 +6,9 @@ const env = require('./configs/env')
 const bannerLogger = require('./libs/banner')
 
 const expressLoader = require('./loaders/expressLoader')
-const { autocodeRoutes, autocodeClient } = require('../autocode/app');
+const { autocodeRoutes, autocodeClient } = require('../dist/autocode');
 import AppClient from './client/components';
-import AutocodePage  from '../autocodeClient/server';
+import AutocodePage  from '../dist/autocode-server';
 
 const mongooseLoader = require('./loaders/mongooseLoader')
 const monitorLoader = require('./loaders/monitorLoader')
