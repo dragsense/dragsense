@@ -22,7 +22,7 @@ const getCurrentDate = () => {
 };
 
 // Function to add files to zip
-const addFilesToZip = (folderPath, folderName, zip ,project) => {
+const addFilesToZip = (folderPath, folderName, zip, project) => {
     const files = fs.readdirSync(folderPath);
 
     files.forEach((file) => {
@@ -56,7 +56,7 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./dragsense-website', '', zip);
+        addFilesToZip('./dragsense-website', '', zip, project);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=${project.name}-${getCurrentDate()}.zip`);
