@@ -16,7 +16,7 @@ const password = (value, helpers) => {
         return helpers.message('Password must contain at least one special character');
     }
 
-    return value; // Return the value if it passes all checks
+    return value; 
 };
 
 module.exports = {
