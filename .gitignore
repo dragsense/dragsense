@@ -4,11 +4,10 @@
 # dependencies
 /node_modules
 
-/public
 
-/public/alloyeditor/node_modules
+/public/Autocode Editor Setup 1.0.0.zip
 
-
+ 
 # testing
 /coverage
 
