@@ -111,8 +111,8 @@ const authOptions = {
       name: "Forgot password?",
       server: {
         host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_HOST_PORT,
-        secure: process.env.EMAIL_HOST_SECURE,
+        port: parseInt(process.env.EMAIL_HOST_PORT), // Ensure port is parsed as integer
+        secure: process.env.EMAIL_HOST_SECURE === 'true' ? true : false,
         auth: {
           user: process.env.EMAIL_HOST_USER,
           pass: process.env.EMAIL_HOST_PASS,
