@@ -89,7 +89,7 @@ handler.post(
       secure: process.env.EMAIL_HOST_SECURE === 'true' ? true : false,
       auth: {
         user: process.env.EMAIL_HOST_USER,
-        pass: process.env.EMAIL_HOST_PASSWORD,
+        pass: process.env.EMAIL_HOST_PASS,
       }
     })
     // Send the verification email
