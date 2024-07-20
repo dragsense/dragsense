@@ -27,6 +27,7 @@ const ColorList = ({ selectedColor, onSelect, total,
         }}
         renderItem={(color, index) => (
             <List.Item
+            
             key={color._uid}
             onClick={() => onSelect(color)}
             style={{
