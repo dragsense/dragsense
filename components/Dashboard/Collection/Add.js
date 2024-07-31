@@ -83,7 +83,7 @@ export default function AddCollection({ collection, onSubmit }) {
 
     const [form] = Form.useForm();
     const [newState, setNewState] = useState(null);
-    const [state, setState] = useState(collection);
+    const [state, setState] = useState({});
     const [preview, setPreview] = useState(null);
     const [host, setHost] = useState('');
 

@@ -54,7 +54,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
         laoding: false,
         documents: {},
     });
-    const [state, setState] = useState(document);
+    const [state, setState] = useState({});
     const [form] = Form.useForm();
 
     const [documentSearch, setDocumentSearch] = useState(null);

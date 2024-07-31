@@ -62,7 +62,7 @@ export default function AddComponent({ component, onSubmit }) {
     const [host, setHost] = useState('');
 
     const [newState, setNewState] = useState(null);
-    const [state, setState] = useState(component);
+    const [state, setState] = useState({});
     const [form] = Form.useForm();
 
     const collectionLoad = async () => {
@@ -144,7 +144,7 @@ export default function AddComponent({ component, onSubmit }) {
                     setHost(res.host || '')
                 }
                 form.setFieldsValue({ name: component?.name})
-                setState(component);
+                setState({component});
                 dispatch({ type: 'loadComponents', data: component.component || [] });
                 dispatch({ type: 'loadCollections', data: component.collection || [] });
 
