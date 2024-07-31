@@ -144,7 +144,7 @@ export default function AddComponent({ component, onSubmit }) {
                     setHost(res.host || '')
                 }
                 form.setFieldsValue({ name: component?.name})
-                setState({component});
+                setState(component);
                 dispatch({ type: 'loadComponents', data: component.component || [] });
                 dispatch({ type: 'loadCollections', data: component.collection || [] });
 
