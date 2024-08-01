@@ -3,6 +3,8 @@ import AddPage from './Add';
 import { Card, Spin, Typography, Alert, Button, Tooltip, Space, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import PageServices from "@/lib/services/pages";
+import SettingServices from '@/lib/services/setting';
+
 import { useEffect, useReducer, useState } from "react";
 const { Title } = Typography;
 
@@ -106,6 +108,8 @@ export default function Pages() {
 
     const [state, dispatch] = useReducer(reducer, initial);
     const [page, setPage] = useState(1);
+    const [setting, setSetting] = useState({});
+
     const [searchQuery, setSearchQuery] = useState('');
 
 
@@ -118,8 +122,16 @@ export default function Pages() {
             const res = await PageServices.getAll(page, 10);
 
             if (res.pages) {
+
+               
+
                 const data = Array.isArray(res.pages.results) ? res.pages.results : [];
+
                 dispatch({ type: 'load', data, total: res.pages.totalResults });
+
+                const result = await SettingServices.get();
+                const setting = result.setting;
+                setSetting({host: result.host, homePage: setting.homePage})
             }
 
         } catch (e) {
@@ -285,6 +297,7 @@ export default function Pages() {
                             icon={<PlusOutlined />}> </Button></Tooltip>
                     </Space> :
                         <PageList
+                            setting={setting}
                             setPage={setPage}
                             total={state.total}
                             pages={state.pages}
