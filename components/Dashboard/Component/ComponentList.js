@@ -32,12 +32,27 @@ const ComponentList = ({ components, onClone, page, total, setPage, onEdit, onDe
 
         },
         {
+            title: 'Has Parent',
+            dataIndex: 'parent',
+            key: 'parent',
+            align: 'center',
+            render: parent => parent ? "Yes" : "No",
+        }, 
+        {
+            title: 'Attached to Collection',
+            dataIndex: 'attached',
+            key: 'attached',
+            align: 'center',
+            render: attached => attached ? "Yes" : "No",
+        }, 
+        {
             title: 'Created At',
             dataIndex: 'createdAt',
             key: 'createdAt',
             align: 'center',
             render: date => moment(date).format('MMMM Do YYYY, h:mm:ss a'),
-        }, {
+        }, 
+        {
             title: 'Created By',
             dataIndex: 'creator',
             key: 'creator',
