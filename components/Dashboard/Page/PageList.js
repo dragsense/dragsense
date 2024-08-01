@@ -1,11 +1,11 @@
 import { Modal, Table, Space, theme, Button, Badge, message } from "antd";
-import { AiFillFile, AiOutlineEdit, AiOutlineCopy, AiOutlineSetting, AiOutlineDelete } from 'react-icons/ai';
+import { AiFillFile, AiOutlineEdit, AiOutlineCopy, AiOutlineSetting, AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import moment from "moment";
 import Router from "next/router";
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-import ProjectServices from "@/lib/services/projects";
+import SettingServices from '@/lib/services/setting';
 
 const { confirm } = Modal;
 
@@ -83,6 +83,32 @@ const PageList = ({ pages, page, onClone, total, setPage, onEdit, onDelete }) =>
             align: 'right',
             render: (text, record) => (
                 <Space size="middle">
+                       <Button icon={<AiOutlineEye
+                        size="1.5em" />}
+                        onClick={async (e) => {
+
+                            e.preventDefault();
+
+                            try {
+                                const res = await SettingServices.get();
+                                const setting = res.setting;
+                                let isHomePage = false;
+
+                                if(setting.homePage)
+                                    isHomePage = setting.homePage._id === record._id;
+
+                                const url = `${res.host}/${!isHomePage ? record.slug : ''}`;
+                                window.open(url, '_blank');
+                    
+                            } catch (e) {
+                                message.error(e?.message || 'Something went wrong.');
+                    
+                            } finally {
+                
+                            }
+                            
+
+                        }} />
                     <Button icon={<AiOutlineEdit size="1.5em" />}
                         onClick={async () => {
                             localStorage.setItem("activePage", record._id);
