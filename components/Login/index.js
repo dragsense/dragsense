@@ -97,7 +97,7 @@ const LoginComponent = ({
                 </Form.Item>
             </Form>
 
-            {Object.values(providers).map((provider) => <div key={provider.name}>
+            {Object.values(providers || {}).map((provider) => <div key={provider.name}>
                     {(provider.id !== 'credentials' && provider.id !== 'forgot-password') && (
                         <Button
                             loading={isLoading}

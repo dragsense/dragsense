@@ -141,7 +141,7 @@ export default function AddState({ newState, host, onAddNew, setNewState }) {
     };
 
     const onAddState = (value) => {
-        if (state.states) {
+        if (!state.states) {
             state.states = {};
         }
         state.states[value.key] = value;
