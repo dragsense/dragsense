@@ -99,7 +99,7 @@ const PageList = ({ pages, page, onClone, total, setPage, onEdit, onDelete }) =>
 
                                 const url = `${res.host}/${!isHomePage ? record.slug : ''}`;
                                 window.open(url, '_blank');
-                    
+                     
                             } catch (e) {
                                 message.error(e?.message || 'Something went wrong.');
                     
