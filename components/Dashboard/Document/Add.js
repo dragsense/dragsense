@@ -6,6 +6,8 @@ import MediaModal from "../Media/MediaModal";
 
 import { StateComponent } from "./State";
 import DocumentServices from "@/lib/services/documents";
+import SettingServices from "@/lib/services/setting";
+
 import RichTextEditor from "../Collection/Content";
 const STATUS = ['DRAFT', 'PRIVATE', 'PUBLIC'];
 
@@ -72,7 +74,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                         document = res.document;
                     }
 
-                    setHost(res.host || '');
+                
                 }
 
                 form.setFieldsValue({ name: document?.name, slug: document?.slug });
@@ -85,6 +87,9 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                         }
                     });
                 }
+
+                const result = await SettingServices.get();
+                setHost(result.host || '')
                 setState(document);
 
                 const data = collection.relationships.reduce((result, rel) => {
