@@ -11,5 +11,4 @@ export function ComponentComponent({ user }) {
             <Components />
         </div>
     </DashboardLayout>
-
 };
