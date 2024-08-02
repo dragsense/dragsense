@@ -16,6 +16,7 @@ import MediaModal from "../Media/MediaModal";
 
 import RichTextEditor from "./Content";
 import PageServices from "../../../lib/services/pages";
+import SettingServices from "@/lib/services/setting";
 
 import HTMLEditor from '../Setting/HTMLEditor';
 
@@ -60,10 +61,11 @@ export default function AddPage({ page, onSubmit }) {
                         page = res.page;
                     }
 
-                    setHost(res.host || '')
-
                 }
                 form.setFieldsValue({ name: page?.name, slug: page?.slug, layout: page?.layout })
+                
+                const result = await SettingServices.get();
+                setHost(result.host || '')
                 setState(page);
                 dispatch({ type: 'loadLayouts', data: page.populatedLayout || [] });
              

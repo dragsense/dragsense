@@ -3,6 +3,7 @@ import { QuestionCircleFilled, PlusOutlined } from '@ant-design/icons';
 import { useState, useEffect, useReducer } from "react";
 import CollectionServices from "@/lib/services/collections";
 import ComponentServices from "@/lib/services/components";
+import SettingServices from "@/lib/services/setting";
 
 const { Option } = Select;
 
@@ -141,9 +142,13 @@ export default function AddComponent({ component, onSubmit }) {
                         component = res.component;
                     }
 
-                    setHost(res.host || '')
+                   
                 }
                 form.setFieldsValue({ name: component?.name})
+
+                
+                const result = await SettingServices.get();
+                setHost(result.host || '')
                 setState(component);
                 dispatch({ type: 'loadComponents', data: component.component || [] });
                 dispatch({ type: 'loadCollections', data: component.collection || [] });

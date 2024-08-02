@@ -17,6 +17,8 @@ import MediaModal from "../Media/MediaModal";
 
 
 import CollectionServices from "@/lib/services/collections";
+import SettingServices from "@/lib/services/setting";
+
 import FormServices from "@/lib/services/forms";
 
 import RichTextEditor from "./Content";
@@ -106,7 +108,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         collection = res.collection;
                     }
 
-                    setHost(res.host || '')
+                   
                 }
                 form.setFieldsValue({
                     name: collection?.name,
@@ -114,6 +116,8 @@ export default function AddCollection({ collection, onSubmit }) {
                     layout: collection?.layout
                 })
 
+                const result = await SettingServices.get();
+                setHost(result.host || '')
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
 
@@ -656,7 +660,7 @@ export default function AddCollection({ collection, onSubmit }) {
                                 icon={<PlusOutlined />}> </Button></Tooltip></>}
                     >
 
-                        {newState ? <AddStateComponent newState={newState} onAdd={onAddState} setNewState={setNewState} />
+                        {newState ? <AddStateComponent host={host} newState={newState} onAdd={onAddState} setNewState={setNewState} />
 
                             :
                             <StateComponent states={state.states} setNewState={setNewState} onRemove={onRemoveState} />}

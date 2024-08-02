@@ -28,7 +28,7 @@ import AddArrayTypes from './AddArrayTypes'
 
 import MediaModal from "@/components/Dashboard/Media/MediaModal";
 
-export default function AddState({ newState, onAddNew, setNewState }) {
+export default function AddState({ newState, host, onAddNew, setNewState }) {
 
     const [types, setTypes] = useState(() => ADVANCE_TYPES.some(t => t.value == newState.type) ? 1 : 0);
     const [state, setState] = useState({});
