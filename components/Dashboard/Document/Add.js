@@ -89,7 +89,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                 }
 
                 const result = await SettingServices.get();
-                setHost(result.host || '')
+                setHost(result.host || '');
+
                 setState(document);
 
                 const data = collection.relationships.reduce((result, rel) => {
@@ -234,7 +235,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
     }
 
-
+ const imageSrc = preview ? host + preview.src :
+        "/images/default/default-img.png"
 
     return (
         <>
@@ -381,7 +383,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                     cursor: 'pointer'
                                 }}
                                 alt={preview?.alt}
-                                src={preview?.src || state.populatedImage?.[0]?.src || "/images/default/default-img.png"}
+                                src={imageSrc}
                             />
                         </Form.Item>
 
