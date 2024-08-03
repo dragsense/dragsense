@@ -49,7 +49,7 @@ function isEmptyObject(obj) {
 export default function AddDocument({ collection, _form, document, onSubmit }) {
 
     const [mediaModal, setMediaModal] = useState(false);
-    const [preview, setPreview] = useState({});
+    const [preview, setPreview] = useState(null);
     const [host, setHost] = useState('');
 
     const [states, dispatch] = useReducer(reducer, {
@@ -99,7 +99,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                 }, {});
 
                 dispatch({ type: 'documents', data });
-                setPreview(document.populatedImage[0] || {})
+                if (document.populatedImage)
+                    setPreview(document.populatedImage[0] || null)
 
 
             } catch (e) {
