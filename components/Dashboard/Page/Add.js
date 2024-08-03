@@ -408,7 +408,7 @@ export default function AddPage({ page, onSubmit }) {
             position: 'fixed',
             width: '100%',
             height: '100%',
-            backgroundColor: '#fff',
+            backgroundColor: '#2fc1ff',
             left: 0,
             top: 0,
             right: 0,
