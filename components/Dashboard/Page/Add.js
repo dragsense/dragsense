@@ -40,7 +40,7 @@ const reducer = (state, action) => {
 
 export default function AddPage({ page, onSubmit }) {
 
-    const [states, dispatch] = useReducer(reducer, { laoding: false, layouts: [] });
+    const [states, dispatch] = useReducer(reducer, { loading: false, layouts: [] });
     const [form] = Form.useForm();
     const [state, setState] = useState(page);
     const [layoutSearch, setLayoutSeacrh] = useState('');
@@ -404,7 +404,7 @@ export default function AddPage({ page, onSubmit }) {
 
             <MediaModal open={mediaModal} type="images" onClose={() => setMediaModal(false)} srcs={preview} onSelect={onChangeImage} />
 
-            {state.loading && <><div style={{
+            {states.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -421,7 +421,7 @@ export default function AddPage({ page, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+        </div> <Spin tip="Loading" size="small" spinning={states.loading}
             style={{
                 position: 'fixed',
                 top: '50%',

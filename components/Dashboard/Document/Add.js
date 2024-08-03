@@ -53,7 +53,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
     const [host, setHost] = useState('');
 
     const [states, dispatch] = useReducer(reducer, {
-        laoding: false,
+        loading: false,
         documents: {},
     });
     const [state, setState] = useState({});
@@ -454,13 +454,13 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
                 <Form.Item className="text-right">
-                    <Button type="primary" htmlType="submit" loading={state.loading}> Save </Button>
+                    <Button type="primary" htmlType="submit" loading={states.loading}> Save </Button>
                 </Form.Item>
             </Form>
             <MediaModal open={mediaModal} type="images"
                 onClose={() => setMediaModal(false)}
                 srcs={state.setting?.image} onSelect={onChangeImage} />
-{state.loading && <><div style={{
+{states.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -477,7 +477,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+        </div> <Spin tip="Loading" size="small" spinning={states.loading}
             style={{
                 position: 'fixed',
                 top: '50%',

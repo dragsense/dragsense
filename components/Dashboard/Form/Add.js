@@ -54,7 +54,7 @@ const reducer = (state, action) => {
 export default function AddForm({ _form, onSubmit }) {
 
     const [state, dispatch] = useReducer(reducer, {
-        laoding: false,
+        loading: false,
     });
 
     const [newState, setNewState] = useState(null);
@@ -394,7 +394,7 @@ export default function AddForm({ _form, onSubmit }) {
                 </Form.Item>
             </Form>
 
-            {state.loading && <><div style={{
+            {states.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -411,7 +411,7 @@ export default function AddForm({ _form, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+        </div> <Spin tip="Loading" size="small" spinning={states.loading}
             style={{
                 position: 'fixed',
                 top: '50%',

@@ -53,7 +53,7 @@ const reducer = (state, action) => {
 export default function AddComponent({ component, onSubmit }) {
 
     const [states, dispatch] = useReducer(reducer, {
-        laoding: false,
+        loading: false,
         collections: [],
         components: []
     });
@@ -382,10 +382,10 @@ export default function AddComponent({ component, onSubmit }) {
 
 
                 <Form.Item className="text-right" style={{marginTop: 10}}>
-                    <Button type="primary" htmlType="submit" loading={state.loading}> Save </Button>
+                    <Button type="primary" htmlType="submit" loading={states.loading}> Save </Button>
                 </Form.Item>
             </Form>
-            {state.loading && <><div style={{
+            {states.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -402,7 +402,7 @@ export default function AddComponent({ component, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+        </div> <Spin tip="Loading" size="small" spinning={states.loading}
             style={{
                 position: 'fixed',
                 top: '50%',

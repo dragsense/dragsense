@@ -77,7 +77,7 @@ const reducer = (state, action) => {
 export default function AddCollection({ collection, onSubmit }) {
 
     const [states, dispatch] = useReducer(reducer, {
-        laoding: false,
+        loading: false,
         layouts: [],
         forms: [],
         collections: []
@@ -676,7 +676,7 @@ export default function AddCollection({ collection, onSubmit }) {
 
             <MediaModal open={mediaModal} type="images" onClose={() => setMediaModal(false)} srcs={preview} onSelect={onChangeImage} />
 
-            {state.loading && <><div style={{
+            {states.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -693,7 +693,7 @@ export default function AddCollection({ collection, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+        </div> <Spin tip="Loading" size="small" spinning={states.loading}
             style={{
                 position: 'fixed',
                 top: '50%',
