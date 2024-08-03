@@ -1,4 +1,4 @@
-import { Form, Tooltip, Divider, Select, Input, Button, Card } from "antd";
+import { Form, Tooltip, Divider, Select, Input, Button, Card, Spin } from "antd";
 import { QuestionCircleFilled, PlusOutlined } from '@ant-design/icons';
 import { useState, useEffect, useReducer } from "react";
 import CollectionServices from "@/lib/services/collections";
@@ -385,7 +385,33 @@ export default function AddComponent({ component, onSubmit }) {
                     <Button type="primary" htmlType="submit" loading={state.loading}> Save </Button>
                 </Form.Item>
             </Form>
+            {state.loading && <><div style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#fff',
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1
+        }}
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }}
+        >
 
+        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+            style={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+
+                transform: 'translate(-50%, -50%)'
+            }}
+        >
+        </Spin> </>}
         </>
 
     );

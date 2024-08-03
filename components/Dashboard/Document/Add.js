@@ -1,4 +1,4 @@
-import { Form, Tooltip, Input, Button, Card, Divider, Image, Row, Col, message, Select } from "antd";
+import { Form, Tooltip, Input, Button, Card, Divider, Image, Row, Col, message, Select, Spin } from "antd";
 import { QuestionCircleFilled } from '@ant-design/icons';
 import { useState, useEffect, useReducer } from "react";
 const { TextArea } = Input;
@@ -460,7 +460,33 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
             <MediaModal open={mediaModal} type="images"
                 onClose={() => setMediaModal(false)}
                 srcs={state.setting?.image} onSelect={onChangeImage} />
+{state.loading && <><div style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#fff',
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1
+        }}
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }}
+        >
 
+        </div> <Spin tip="Loading" size="small" spinning={state.loading}
+            style={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+
+                transform: 'translate(-50%, -50%)'
+            }}
+        >
+        </Spin> </>}
         </>
 
     );
