@@ -3,6 +3,8 @@ import AddCollection from './Add';
 import { Card, Spin, Typography, Button, Tooltip, Space, Alert, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import CollectionServices from "@/lib/services/collections";
+import SettingServices from '@/lib/services/setting';
+
 import { useEffect, useReducer, useState } from "react";
 import { DocumentComponent } from "../Document";
 const { Title } = Typography;
@@ -104,6 +106,7 @@ export default function Collections() {
     const [page, setPage] = useState(1);
     const [collection, setCollection] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [setting, setSetting] = useState({});
 
 
     const load = async () => {
@@ -118,9 +121,13 @@ export default function Collections() {
             if (res.collections) {
                 const data = Array.isArray(res.collections.results) ? res.collections.results : [];
                 dispatch({ type: 'load', data, total: res.collections.totalResults });
+
+                const result = await SettingServices.get();
+                const setting = result.setting;
+                setSetting({host: result.host, homePage: setting.homePage})
             }
 
-
+       
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
@@ -294,6 +301,7 @@ export default function Collections() {
                         <CollectionList
                             setCollection={setPage}
                             total={state.total}
+                            setting={setting}
                             collections={state.collections}
                             onEditDocuments={onEditDocuments}
                             page={page}
