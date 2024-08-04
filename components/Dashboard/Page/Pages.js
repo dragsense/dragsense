@@ -113,6 +113,15 @@ export default function Pages() {
     const [searchQuery, setSearchQuery] = useState('');
 
 
+    useEffect(() => {
+        const fetchHost = async () => {
+          const result = await SettingServices.get();
+          const setting = result.setting;
+          setSetting({ host: result.host, homePage: setting.homePage });
+        };
+        fetchHost();
+      }, []);
+
     const load = async () => {
         try {
 
@@ -129,9 +138,6 @@ export default function Pages() {
 
                 dispatch({ type: 'load', data, total: res.pages.totalResults });
 
-                const result = await SettingServices.get();
-                const setting = result.setting;
-                setSetting({host: result.host, homePage: setting.homePage})
             }
 
         } catch (e) {

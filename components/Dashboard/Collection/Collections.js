@@ -109,6 +109,15 @@ export default function Collections() {
     const [setting, setSetting] = useState({});
 
 
+    useEffect(() => {
+        const fetchHost = async () => {
+          const result = await SettingServices.get();
+          const setting = result.setting;
+          setSetting({ host: result.host, homePage: setting.homePage });
+        };
+        fetchHost();
+      }, []);
+
     const load = async () => {
 
         try {
@@ -122,9 +131,6 @@ export default function Collections() {
                 const data = Array.isArray(res.collections.results) ? res.collections.results : [];
                 dispatch({ type: 'load', data, total: res.collections.totalResults });
 
-                const result = await SettingServices.get();
-                const setting = result.setting;
-                setSetting({host: result.host, homePage: setting.homePage})
             }
 
        
