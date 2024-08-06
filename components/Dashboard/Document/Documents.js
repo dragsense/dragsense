@@ -148,6 +148,7 @@ export default function Documents({ collection, form }) {
         dispatch({ type: "load", data, total: res.documents.totalResults });
       }
 
+
       form
         ? setCollection(collectionRes.form)
         : setCollection(collectionRes.collection);
@@ -349,7 +350,7 @@ export default function Documents({ collection, form }) {
         ) : (
           <DocumnetList
             setting={setting}
-            collection={collection}
+            collection={collectionDoc}
             setPage={setPage}
             total={state.total}
             documents={state.documents}

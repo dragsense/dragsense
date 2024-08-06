@@ -19,6 +19,7 @@ export const TYPES = [
     { value: 'date', label: 'DATE' },
     { value: 'time', label: 'TIME' },
     { value: 'month', label: 'MONTH' },
+    { value: 'color', label: 'COLOR' },
     { value: 'boolean', label: 'BOOLEAN' },
 ];
 

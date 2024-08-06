@@ -18,6 +18,7 @@ export const TYPES = [
     { value: 'date', label: 'DATE' },
     { value: 'time', label: 'TIME' },
     { value: 'month', label: 'MONTH' },
+    { value: 'color', label: 'COLOR' },
     { value: 'boolean', label: 'BOOLEAN' },
 ];
 
@@ -73,8 +74,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                     if (res.document) {
                         document = res.document;
                     }
-
-                
                 }
 
                 form.setFieldsValue({ name: document?.name, slug: document?.slug });
@@ -97,6 +96,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                     result[rel] = document.populatedRelationships[rel];
                     return result;
                 }, {});
+
 
                 dispatch({ type: 'documents', data });
                 if (document.populatedImage)
@@ -403,7 +403,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                         ]}
 
                     >
-                        {(Array.isArray(collection.relationships) ? collection.relationships : []).map((rel, idx) =>
+                        {(Array.isArray(collection.populatedRelationships) ? collection.populatedRelationships : []).map((rel, idx) =>
                             <>
                                 <label>{rel.name}</label>
 
@@ -412,23 +412,23 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                                     placeholder="Select Documents"
                                     showSearch
                                     clearIcon
-                                    onChange={(value, options) => handleChangeDocument(value, options, rel)}
+                                    onChange={(value, options) => handleChangeDocument(value, options, rel._id)}
                                     onSearch={(v) => {
 
                                         if (!state.loading)
-                                            setDocumentSearch({ value: v, idx: rel })
+                                            setDocumentSearch({ value: v, idx: rel._id })
                                     }
                                     }
                                     mode="multiple"
                                     dropdownRender={dropdownRender}
                                     optionFilterProp="label"
 
-                                    defaultValue={state.relationships ? state.relationships[rel] : []}
-                                    value={state.relationships ? state.relationships[rel] : []}
+                                    defaultValue={state.relationships ? state.relationships[rel._id] : []}
+                                    value={state.relationships ? state.relationships[rel._id] : []}
 
                                 >
                                     <Option value=''> None </Option>
-                                    {states.documents[rel]?.map(doc => <Option
+                                    {states.documents[rel._id]?.map(doc => <Option
                                         key={doc._id}
                                         value={doc._id}
                                         label={doc.name}
