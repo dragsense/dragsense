@@ -15,7 +15,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import DocumnetServices from "@/lib/services/documents";
 import CollectionServices from "@/lib/services/collections";
 import FormServices from "@/lib/services/forms";
-import SettingServices from '@/lib/services/setting';
+import SettingServices from "@/lib/services/setting";
 
 import { useEffect, useReducer, useState } from "react";
 const { Title } = Typography;
@@ -68,6 +68,7 @@ const reducer = (state, action) => {
         ...state,
         documents: action.data,
         total: action.total,
+        document: null,
         error: "",
       };
     case "add":
@@ -146,8 +147,7 @@ export default function Documents({ collection, form }) {
           ? res.documents.results
           : [];
         dispatch({ type: "load", data, total: res.documents.totalResults });
-      }
-
+      } else dispatch({ type: "load", data: [], total: 0 });
 
       form
         ? setCollection(collectionRes.form)

@@ -108,9 +108,10 @@ export default function AddCollection({ collection, onSubmit }) {
                     if (res.collection) {
                         collection = res.collection;
                     }
-
-                   
-                }
+                }  else {
+                    collection.states = {};
+                  }
+                  
                 form.setFieldsValue({
                     name: collection?.name,
                     slug: collection?.slug,
@@ -118,7 +119,8 @@ export default function AddCollection({ collection, onSubmit }) {
                 })
 
                 const result = await SettingServices.get();
-                setHost(result.host || '')
+                setHost(result.host || '');
+                
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
 
@@ -665,7 +667,7 @@ export default function AddCollection({ collection, onSubmit }) {
                         {newState ? <AddStateComponent host={host} newState={newState} onAdd={onAddState} setNewState={setNewState} />
 
                             :
-                            <StateComponent states={state.states} setNewState={setNewState} onRemove={onRemoveState} />}
+                            <StateComponent states={state.states || {}} setNewState={setNewState} onRemove={onRemoveState} />}
                     </Card>
                 </Form.Item>
 

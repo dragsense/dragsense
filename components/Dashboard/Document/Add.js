@@ -74,6 +74,8 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                     if (res.document) {
                         document = res.document;
                     }
+                } else {
+                    document.states = {};
                 }
 
                 form.setFieldsValue({ name: document?.name, slug: document?.slug });
