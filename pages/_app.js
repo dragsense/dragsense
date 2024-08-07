@@ -22,6 +22,7 @@ import { Loading } from '../components';
 import { Merriweather } from 'next/font/google'
 
 import { FaSun, FaMoon } from 'react-icons/fa';
+import Head from 'next/head';
 
 const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = theme;
 
@@ -63,7 +64,23 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setIsDarkMode((previousValue) => !previousValue);
   };
 
-  return (
+  return ( <><Head>
+    <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="description" content="DragSense - Complete drag-and-drop builder for creating websites and Node.js apps. Manage CMS collections, media, forms, custom components, and more." />
+          <meta name="keywords" content="DragSense, drag-and-drop builder, website builder, Node.js apps, CMS, web development" />
+          <meta name="author" content="DragSense Team" />
+
+          <meta property="og:title" content="DragSense - Drag-and-Drop Builder" />
+          <meta property="og:description" content="Create websites and Node.js apps with DragSense's complete drag-and-drop builder." />
+          <meta property="og:url" content="https://app.dragsense.com" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="/dragsense-logo.jpg" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="DragSense - Drag-and-Drop Builder" />
+          <meta name="twitter:description" content="Create websites and Node.js apps with DragSense's complete drag-and-drop builder." />
+          <meta name="twitter:image" content="/dragsense-logo.jpg" />
+  </Head>
     <ThemeProvider>
       <SessionProvider session={session}>
         <ConfigProvider
@@ -97,7 +114,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       </SessionProvider>
 
 
-    </ThemeProvider>
+    </ThemeProvider></>
   )
 }
 
