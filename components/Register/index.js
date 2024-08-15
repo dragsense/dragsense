@@ -65,7 +65,6 @@ const RegisterComponent = (props) => {
                     router.push(router);
                     setErrors([]);
                 } catch (e) {
-                        console.log(e?.error)
                     setErrors([e?.error?.message || 'Failed to register user.']);
                 }
             })

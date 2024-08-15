@@ -35,6 +35,7 @@ const LoginComponent = ({
             if (result.error !== null) {
                 if (result.status === 401) {
                     setAuthError("The email or password you entered is incorrect. Please try again.");
+
                 } else {
                     setAuthError(result.error);
                 }
@@ -52,7 +53,7 @@ const LoginComponent = ({
                 <Title level={4}>Login</Title>
             </Divider>
             <br />
-            {error && <Alert message={error || authError} type="error" showIcon style={{ marginBottom: 10 }} />}
+            {(error || authError) && <Alert message={error || authError} type="error" showIcon style={{ marginBottom: 10 }} />}
 
             {status == 1 && <Alert message="Your account has been created successfully! Please login." type="success" showIcon style={{ marginBottom: 10 }} />}
 

@@ -112,25 +112,34 @@ const authOptions = {
       server: {
         host: process.env.EMAIL_HOST,
         port: parseInt(process.env.EMAIL_HOST_PORT), // Ensure port is parsed as integer
-        secure: process.env.EMAIL_HOST_SECURE === 'true' ? true : false,
+        secure: process.env.EMAIL_HOST_SECURE === "true" ? true : false,
         auth: {
           user: process.env.EMAIL_HOST_USER,
           pass: process.env.EMAIL_HOST_PASS,
         },
+        tls: {
+          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH,
+        },
       },
       from: process.env.EMAIL_HOST_USER,
-      sendVerificationRequest({
+      redirect: false,
+      async sendVerificationRequest({
         theme,
         identifier: email,
         url,
         provider: { server, from },
       }) {
-        sendPasswordResetRequest({
-          theme,
-          identifier: email,
-          url,
-          provider: { server, from },
-        });
+        try {
+          await sendPasswordResetRequest({
+            theme,
+            identifier: email,
+            url,
+            provider: { server, from },
+          });
+        } catch (error) {
+          console.log(error)
+          throw new Error("Error sending verification email");
+        }
       },
     }),
     CredentialsProvider({
