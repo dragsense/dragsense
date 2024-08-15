@@ -4,7 +4,7 @@ import { useEffect } from "react"; // Import useEffect to perform side effects
 
 export default function Home({ isLoggedin, user }) {
   const router = useRouter();
-
+ 
   // Use the useEffect hook to perform redirection on the client side
   useEffect(() => {
     // Check if the user is logged in
