@@ -137,7 +137,6 @@ const authOptions = {
             provider: { server, from },
           });
         } catch (error) {
-          console.log(error)
           throw new Error("Error sending verification email");
         }
       },
