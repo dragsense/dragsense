@@ -1,101 +1,130 @@
 import { Form, Alert, Divider, Input, Button, Typography, message } from "antd";
-import { InfoCircleOutlined, CheckOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useState, } from "react";
-
+import {
+  InfoCircleOutlined,
+  CheckOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  DownloadOutlined,
+} from "@ant-design/icons";
+import { useState } from "react";
 
 const { Paragraph } = Typography;
 const { TextArea } = Input;
 
-
-
 const DownloadProject = ({ id, name, apikey }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isKeyValid, setIsKeyValid] = useState(false);
+  const [error, setError] = useState(false);
 
+  const onChangeApiKey = (event) => {
+    event.preventDefault();
+    if (!apikey) return;
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [isKeyValid, setIsKeyValid] = useState(false);
-    const [error, setError] = useState(false);
+    const value = event.target.value;
+    setIsKeyValid(apikey.trim() === value.trim());
+  };
 
-    const onChangeApiKey = (event) => {
-        event.preventDefault();
+  const onDownload = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
 
-        if (!apikey)
-            return;
+      const downloadLink = document.createElement("a");
+      downloadLink.href = `/api/projects/download/${id}`;
+      downloadLink.download = true;
+      downloadLink.click();
 
-        const value = event.target.value;
-
-
-        if (apikey.trim() === value.trim())
-            setIsKeyValid(true);
-        else
-            setIsKeyValid(false);
+      setIsKeyValid(false);
+    } catch (e) {
+      setError(e?.message || "Something went wrong");
+      message.error(e?.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false);
     }
+  };
 
+  const onDownloadLibraries = async () => {
+    try {
+      setIsLoading(true);
 
+      const downloadLink = document.createElement("a");
+      downloadLink.href = `/api/projects/download/${id}/libraries`;
+      downloadLink.download = true;
+      downloadLink.click();
+    } catch (e) {
+      message.error("Failed to download the AutoCode libraries.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const b64toBlob = async (base64, type = 'application/octet-stream') =>
-        fetch(`data:${type};base64,${base64}`).then(res => res.blob())
+  return (
+    <>
+      <Divider orientation="left" orientationMargin="0">
+        Download Files
+      </Divider>
 
-    const onDownload = async (values) => {
+      {error && (
+        <Alert
+          message={error}
+          type="error"
+          showIcon
+          style={{ marginBottom: 10 }}
+        />
+      )}
 
-        try {
-            setIsLoading(true);
-            setError('');
+      <Form layout="vertical" onFinish={onDownload}>
+        <Form.Item label="API Key">
+          <Input.Password
+            value={apikey ? apikey : "No Key Found"}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+          />
+        </Form.Item>
+        <Form.Item
+          label="Copy and Paste the Key"
+          tooltip={{
+            title: isKeyValid ? "Key is valid" : "Key is not valid",
+            icon: isKeyValid ? <CheckOutlined /> : <InfoCircleOutlined />,
+          }}
+        >
+          <TextArea rows={4} maxLength={500} onChange={onChangeApiKey} />
+        </Form.Item>
+
+        <Form.Item className="text-right">
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={!isKeyValid}
+            loading={isLoading}
+          >
+            Download
+          </Button>
+        </Form.Item>
+
         
-
-            const downloadLink = document.createElement('a');
-            downloadLink.href = `/api/projects/download/${id}`;
-            downloadLink.download = true;
-            downloadLink.click();
-            
-            setIsKeyValid(false);
-
-        } catch (e) {
-            setError(e?.message || 'Something went wrong')
-            message.error(e?.message || 'Something went wrong.');
-
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
-
-
-
-    return <>
-
-        <Divider orientation="left" orientationMargin="0">
-            Downlaod Files
-        </Divider>
-
-        {error && <Alert message={error} type="error" showIcon style={{ marginBottom: 10 }} />}
-
-
-        <Form layout="vertical" onFinish={onDownload}>
-
-            <Form.Item label="API Key" >
-                <Input.Password 
-                    value={apikey ? apikey : 'No Key Found'}
-                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                />
-            </Form.Item>
-            <Form.Item
-                label="Copy and Paste the Key"
-
-                tooltip={{ title: isKeyValid ? 'Key is valid' : 'Key is not valid', icon: isKeyValid ? <CheckOutlined type="success" /> : <InfoCircleOutlined type="info" /> }}
-
+        {id != -1 && <Form.Item className="text-left">
+          <Paragraph style={{ marginTop: 10 }}>
+            If you only want to update the AutoCode libraries, please{" "}
+            <Button
+              type="link"
+              onClick={onDownloadLibraries}
+              icon={<DownloadOutlined />}
+              style={{ padding: 0 }}
             >
-                <TextArea rows={4} maxLength={500} onChange={onChangeApiKey} />
-            </Form.Item>
-
-            <Form.Item className="text-right">
-
-                <Button type="primary" htmlType="submit" disabled={!isKeyValid} loading={isLoading}> Download </Button>
-            </Form.Item>
-        </Form>
+              download here
+            </Button>
+            .
+          </Paragraph>
+          <Paragraph style={{ marginTop: 10 }}>
+            After downloading, simply copy and paste the files into your
+            project's <code>dist</code> directory, replacing the existing ones.
+          </Paragraph>
+        </Form.Item>}
+      </Form>
     </>
-
-
-
+  );
 };
 
 export default DownloadProject;
