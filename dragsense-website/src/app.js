@@ -16,9 +16,6 @@ const passportLoader = require('./loaders/passportLoader')
 const publicLoader = require('./loaders/publicLoader')
 const winstonLoader = require('./loaders/winstonLoader')
 
-
-
-
 const log = new Logger(__filename)
 
 // Init loaders
