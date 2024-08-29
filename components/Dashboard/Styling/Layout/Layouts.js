@@ -111,6 +111,7 @@ export default function Layouts({ layout, setLayout }) {
             dispatch({ type: 'start' });
 
             const res = await LayoutServices.getAll(10,page);
+            console.log(res)
 
             if (res.layouts) {
                 const data = Array.isArray(res.layouts.results) ? res.layouts.results : [];

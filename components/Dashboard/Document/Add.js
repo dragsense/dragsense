@@ -101,6 +101,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
                 dispatch({ type: 'documents', data });
+
                 if (document.populatedImage)
                     setPreview(document.populatedImage[0] || null)
 
@@ -189,10 +190,12 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
     const handleChangeDocument = (value, options, idx) => {
 
-        if (!state.relationships)
-            state.relationships = {}
+        if (!state.relationships || Array.isArray(state.relationships)) {
+            state.relationships = {}; // Convert array or null to empty object
+        }
 
         state.relationships[idx] = value;
+
 
         setState({ ...state });
 

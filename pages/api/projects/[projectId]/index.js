@@ -8,14 +8,20 @@ const handler = nc(ncOpts);
 
 // Middleware for database and authorization
 handler.use(database, authorize);
-
 // Function to fetch project details
 async function fetchProjectDetails(req, res) {
-  const project = await _findProjectById(req.db, req.query.projectId);
-  if (!project) {
-    return res.status(403).json({ error: { message: 'Project Not Found.' } });
+  try {
+    const project = await _findProjectById(req.db, req.query.projectId);
+    if (!project) {
+      res.status(404).json({ error: { message: 'Project Not Found.' } });
+      return null;
+    }
+    return project;
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: { message: 'Failed to fetch project details.' } });
+    return null;
   }
-  return project;
 }
 
 // Function to fetch project status
@@ -24,10 +30,11 @@ async function fetchProjectStatus(project) {
     const connection = await fetcher(`${project.url}`, {
       method: 'GET',
       headers: { 'x-api-key': project.apikey }
-    });
-    project.status = connection?.status;
+    }); 
+    project.status = connection?.status || false; // Default status if connection fails
   } catch (e) {
     console.error(e);
+    project.status = false; // Set a fallback status
   }
 }
 
@@ -35,21 +42,24 @@ async function fetchProjectStatus(project) {
 function sendProjectDetails(res, project) {
   try {
     const creator = project.creator;
-    res.json({ project: { ...project, creator: { name: creator.name, image: creator.image } } });
+
+    res.json({ project: { ...project, creator: { name: creator?.name || 'Unknown', image: creator?.image || null } } });
+
   } catch (e) {
     console.error(e);
-    res.status(403).json({ error: { message: 'Something went wrong.' } });
+    res.status(500).json({ error: { message: 'Failed to send project details.' } });
   }
 }
 
 // GET handler
 handler.get(async (req, res) => {
-
   const project = await fetchProjectDetails(req, res);
-  if (!project) return;
+  if (!project) return; // Exit early if project is not found or an error occurred
   await fetchProjectStatus(project);
+
   sendProjectDetails(res, project);
 });
+
 
 // Function to delete project
 async function deleteProject(req, res) {

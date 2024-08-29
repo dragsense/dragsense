@@ -1,4 +1,4 @@
-import { Form, Alert, Divider, Input, Button, Typography, message } from "antd";
+import { Form, Alert, Divider, Input, Button, Typography, message, Radio } from "antd";
 import {
   InfoCircleOutlined,
   CheckOutlined,
@@ -15,6 +15,7 @@ const DownloadProject = ({ id, name, apikey }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isKeyValid, setIsKeyValid] = useState(false);
   const [error, setError] = useState(false);
+  const [platform, setPlatform] = useState("node"); // Default to Node.js
 
   const onChangeApiKey = (event) => {
     event.preventDefault();
@@ -30,7 +31,9 @@ const DownloadProject = ({ id, name, apikey }) => {
       setError("");
 
       const downloadLink = document.createElement("a");
-      downloadLink.href = `/api/projects/download/${id}`;
+      downloadLink.href = platform === "laravel"
+        ? `/api/projects/download/${id}/laravel`
+        : `/api/projects/download/${id}`;
       downloadLink.download = true;
       downloadLink.click();
 
@@ -48,7 +51,9 @@ const DownloadProject = ({ id, name, apikey }) => {
       setIsLoading(true);
 
       const downloadLink = document.createElement("a");
-      downloadLink.href = `/api/projects/download/${id}/libraries`;
+      downloadLink.href = platform === "laravel"
+      ? `/api/projects/download/${id}/laravel/libraries`
+      : `/api/projects/download/${id}/libraries`;
       downloadLink.download = true;
       downloadLink.click();
     } catch (e) {
@@ -56,6 +61,10 @@ const DownloadProject = ({ id, name, apikey }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const onPlatformChange = (e) => {
+    setPlatform(e.target.value);
   };
 
   return (
@@ -82,6 +91,7 @@ const DownloadProject = ({ id, name, apikey }) => {
             }
           />
         </Form.Item>
+
         <Form.Item
           label="Copy and Paste the Key"
           tooltip={{
@@ -92,6 +102,13 @@ const DownloadProject = ({ id, name, apikey }) => {
           <TextArea rows={4} maxLength={500} onChange={onChangeApiKey} />
         </Form.Item>
 
+        <Form.Item label="Select Platform" style={{ marginTop: 20 }}>
+          <Radio.Group onChange={onPlatformChange} value={platform}>
+            <Radio value="node">Node.js</Radio>
+            <Radio value="laravel">Laravel</Radio>
+          </Radio.Group>
+        </Form.Item>
+
         <Form.Item className="text-right">
           <Button
             type="primary"
@@ -99,29 +116,38 @@ const DownloadProject = ({ id, name, apikey }) => {
             disabled={!isKeyValid}
             loading={isLoading}
           >
-            Download
+            Download {platform === "laravel" ? "Laravel" : "Node.js"} Files
           </Button>
         </Form.Item>
 
-        
-        {id != -1 && <Form.Item className="text-left">
-          <Paragraph style={{ marginTop: 10 }}>
-            If you only want to update the AutoCode libraries, please{" "}
-            <Button
-              type="link"
-              onClick={onDownloadLibraries}
-              icon={<DownloadOutlined />}
-              style={{ padding: 0 }}
-            >
-              download here
-            </Button>
-            .
-          </Paragraph>
-          <Paragraph style={{ marginTop: 10 }}>
-            After downloading, simply copy and paste the files into your
-            project's <code>dist</code> directory, replacing the existing ones.
-          </Paragraph>
-        </Form.Item>}
+        {id !== -1 && (
+          <Form.Item className="text-left">
+            <Paragraph style={{ marginTop: 10 }}>
+              If you only want to update the AutoCode libraries, please{" "}
+              <Button
+                type="link"
+                onClick={onDownloadLibraries}
+                icon={<DownloadOutlined />}
+                style={{ padding: 0 }}
+              >
+                download here
+              </Button>
+              .
+            </Paragraph>
+            {platform === "laravel" && (
+              <Paragraph style={{ marginTop: 10 }}>
+                After downloading, copy <code>autocode-client.js</code> into the <code>dist</code> directory and the <code>packages</code> folder into the root directory.
+             
+              </Paragraph>
+            )}
+            {platform === "node" && (
+              <Paragraph style={{ marginTop: 10 }}>
+                After downloading, simply copy and paste the files into your
+                project's <code>dist</code> directory, replacing the existing ones.
+              </Paragraph>
+            )}
+          </Form.Item>
+        )}
       </Form>
     </>
   );

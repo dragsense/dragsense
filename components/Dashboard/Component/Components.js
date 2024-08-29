@@ -173,7 +173,7 @@ export default function Components() {
 
             states.component = undefined;
             states.collection = undefined;
-
+         
             const res = await ComponentServices.createOrUpdate(component?._id, states)
 
             dispatch({ type: component?._id !== -1 ? 'update' : 'add', component: res.component });

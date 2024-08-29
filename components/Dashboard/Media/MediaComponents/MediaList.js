@@ -16,6 +16,7 @@ const MediaList = ({ media, host, onEdit, onDelete, onSelect, srcs }) => {
     // Extract colorPrimary from theme
     const { token: { colorPrimary } } = theme.useToken();
 
+
     // List component for rendering media items
     const List = ({ index, style }) => {
         // Calculate column index
@@ -29,6 +30,7 @@ const MediaList = ({ media, host, onEdit, onDelete, onSelect, srcs }) => {
                 items.push(media[colIndex + i]);
             }
         }
+
         // Render media items
         return (
             <div style={{ ...style, width: '99.5%' }}>
@@ -69,9 +71,10 @@ const MediaList = ({ media, host, onEdit, onDelete, onSelect, srcs }) => {
 };
 
 // MediaItem sub-component
-const MediaItem = ({ item, host, isSelected, colorPrimary, onEdit, onDelete, onSelect }) => {
+const MediaItem = ({ item, host, isSelected, colorPrimary, onEdit, onDelete, onSelect = () => {} }) => {
     // Render different types of media
     const renderMedia = () => {
+        
         switch(item.type) {
             case 'images':
                 return <Image onClick={() => onSelect(item)} style={{ width: '100%', height: '200px', objectFit: 'cover', objectPosition: 'center' }} preview={true} src={host + item.src} fallback="/images/default/default-img.png" />;

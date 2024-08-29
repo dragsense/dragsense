@@ -49,7 +49,7 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./dragsense-website/dist', '', zip);
+        addFilesToZip('./node-website/dist', '', zip);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=autocode-library-${getCurrentDate()}.zip`);

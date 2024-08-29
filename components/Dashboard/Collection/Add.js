@@ -123,7 +123,6 @@ export default function AddCollection({ collection, onSubmit }) {
                 
                 setState(collection);
                 dispatch({ type: 'loadLayouts', data: collection.populatedLayout || [] });
-
                 dispatch({ type: 'loadCollections', data: collection.populatedRelationships || [] });
 
                 if (collection.populatedImage)

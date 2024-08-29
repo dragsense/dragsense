@@ -62,6 +62,7 @@ export default function AddPage({ page, onSubmit }) {
                     }
 
                 }
+
                 form.setFieldsValue({ name: page?.name, slug: page?.slug, layout: page?.layout })
                  
                 const result = await SettingServices.get();

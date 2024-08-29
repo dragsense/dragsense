@@ -136,7 +136,6 @@ export default function AddComponent({ component, onSubmit }) {
           component.states = {};
         }
         form.setFieldsValue({ name: component?.name });
-
         const result = await SettingServices.get();
         setHost(result.host || "");
         setState(component);
@@ -178,6 +177,7 @@ export default function AddComponent({ component, onSubmit }) {
       .then(async (values) => {
         // state.states.push({ key: '__loading__', defaultValue: false, type: 'BOOLEAN' },
         //     '__loading__');
+
         onSubmit(state);
       })
       .catch((info) => {
@@ -186,7 +186,8 @@ export default function AddComponent({ component, onSubmit }) {
   };
 
   const onAddState = (value) => {
-    if (!state.states) state.states = {};
+    if (!state.states || 
+      (Array.isArray(state.states) && state.states?.length)) state.states = {};
 
     state.states[value.key] = value;
     setState({ ...state });
@@ -269,7 +270,7 @@ export default function AddComponent({ component, onSubmit }) {
             <Option value=""> None </Option>
 
             {states.components.map((c) => (
-              <Option key={c._id} value={c._id} label={c.name}>
+              <Option disabled={c._id === state._id} key={c._id} value={c._id} label={c.name}>
                 {c.name}
               </Option>
             ))}

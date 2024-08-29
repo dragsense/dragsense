@@ -126,14 +126,15 @@ handler.patch(
         headers: { 'Content-Type': 'application/json', 'x-api-key': apikey }
       });
 
+
       return res.json({ status: true });
 
     } catch (e) {
       console.error(e);
       res.status(500).json({ error: { message: 'Something went wrong.' } });
-    }
+    }  
   });
-
+ 
 // Function to handle DELETE request
 handler.delete(async (req, res) => {
   try {

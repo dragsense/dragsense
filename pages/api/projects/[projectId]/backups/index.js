@@ -61,6 +61,7 @@ handler.post(validateBody({
     // Fetch project by ID
     const project = await _findProjectById(req.db, req.query.projectId);
 
+
     // If project not found, return error
     if (!project)
       return res.status(403).json({ error: { message: 'Project Not Found.' } });

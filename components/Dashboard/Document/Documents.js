@@ -295,8 +295,8 @@ export default function Documents({ collection, form }) {
                   onClick={() =>
                     onEdit({
                       ...initialDocumnet,
-                      name: "Doc " + (state.total + 1),
-                      slug: "doc-" + (state.total + 1),
+                      name: form ? form.name : collection.name + " Doc " + (state.total + 1),
+                      slug: form ? form.slug : collection.slug + "-doc- " + + (state.total + 1),
                       states: collection.states,
                     })
                   }
@@ -336,8 +336,8 @@ export default function Documents({ collection, form }) {
                 onClick={() =>
                   onEdit({
                     ...initialDocumnet,
-                    name: "Doc " + (state.total + 1),
-                    slug: "doc-" + (state.total + 1),
+                    name: form ? form.name : collection.name + " Doc " + (state.total + 1),
+                    slug: form ? form.slug : collection.slug + "-doc- " + + (state.total + 1),
                     states: collection.states,
                   })
                 }
