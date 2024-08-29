@@ -9,7 +9,7 @@ MONGODB_URI="mongodb://127.0.0.1:27017/autocodedb?directConnection=true&serverSe
 NEXTAUTH_URL="https://app.dragsense.com"
 NEXTAUTH_URL_INTERNAL="http://localhost:3000"
 NODE_ENV="production"
-NX_DAEMON=""
+NX_DAEMON="" 
 SECRET="enJ"HgM>9TdlextpM)O]"
 
 URL="https://app.dragsense.com/"
