@@ -1,12 +1,11 @@
 import LayoutList from "./LayoutList";
 import AddLayout from './Add';
-import { Card, Typography, Alert, Button, Tooltip, Space, Input, message } from 'antd';
+import { Card, Spin, Typography, Alert, Button, Tooltip, Space, Input, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import LayoutServices from "@/lib/services/layouts";
+
 import { useEffect, useReducer, useState } from "react";
 const { Title } = Typography;
-
-
 
 
 const initial = {
@@ -21,10 +20,6 @@ const initial = {
 const initialLayout = {
     _id: -1,
     name: '',
-    topComponent: false,
-    bottomComponent: false,
-
-    components: { top: null, bottom: null },
 }
 
 
@@ -58,15 +53,14 @@ const reducer = (state, action) => {
             }
         case "add":
             return {
-                ...state,
-                layouts: [...state.layouts, action.layout],
-                layout: null,
-                total: state.total + 1,
+                ...state, layouts: [...state.layouts, action.layout], total: state.total + 1,
+               layout: null,
                 error: ''
             }
         case "edit":
             return {
-                ...state, layout: action.data,
+                ...state,
+                layout: action.data,
                 label: `${action.data._id !== -1 ? 'Edit' : 'New'} Layout:`,
                 error: ''
 
@@ -77,17 +71,14 @@ const reducer = (state, action) => {
 
             updateLayout();
             return {
-                ...state,
-                layouts: [...state.layouts],
+                ...state, layouts: [...state.layouts], total: state.total + 1,
                 layout: action.layout,
                 error: ''
             }
         case "delete":
             deleteLayout();
             return {
-                ...state,
-                layouts: [...state.layouts],
-                total: state.total - 1,
+                ...state, layouts: [...state.layouts], total: state.total - 1,
                 error: ''
             }
         case "error":
@@ -99,33 +90,38 @@ const reducer = (state, action) => {
     }
 };
 
-export default function Layouts({ layout, setLayout }) {
+export default function Layouts() {
 
     const [state, dispatch] = useReducer(reducer, initial);
-    const [page, setPage] = useState(1);
+    const [layout, setLayout] = useState(1);
+
     const [searchQuery, setSearchQuery] = useState('');
+
+
+
 
     const load = async () => {
         try {
 
             dispatch({ type: 'start' });
 
-            const res = await LayoutServices.getAll(10,page);
-            console.log(res)
+
+            const res = await LayoutServices.getAll(layout, 10);
 
             if (res.layouts) {
+
                 const data = Array.isArray(res.layouts.results) ? res.layouts.results : [];
+
                 dispatch({ type: 'load', data, total: res.layouts.totalResults });
+
             }
 
-
         } catch (e) {
-            dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            dispatch({ type: 'error', error: e?.error?.message || 'Something went wrong.' });
         } finally {
-
             dispatch({ type: 'finish' });
-
         }
+
     }
 
     const search = async () => {
@@ -135,6 +131,7 @@ export default function Layouts({ layout, setLayout }) {
 
             const res = await LayoutServices.search(searchQuery);
 
+       
             if (res.layouts) {
                 const data = Array.isArray(res.layouts.results) ? res.layouts.results : [];
                 dispatch({ type: 'load', data, total: res.layouts.totalResults });
@@ -158,14 +155,15 @@ export default function Layouts({ layout, setLayout }) {
         else
         search();
 
-    }, [page, searchQuery]);
+    }, [layout, searchQuery]);
+
+
 
     const onEdit = (layout) => {
         dispatch({ type: 'edit', data: layout });
-
     };
 
-    const onSubmit = async (states) => {
+    const onSubmit = async (states, withTemplate = 'noSides') => {
 
         dispatch({ type: 'start' });
 
@@ -173,17 +171,33 @@ export default function Layouts({ layout, setLayout }) {
 
         try {
 
-
-            states.populatedComponents = undefined;
-            delete states._id;
-
-            const res = await LayoutServices.createOrUpdate(layout?._id, states)
-
-
+            const res = await LayoutServices.createOrUpdate(layout?._id, states, withTemplate);
             dispatch({ type: layout?._id !== -1 ? 'update' : 'add', layout: res.layout });
             message.success('Data submitted!');
 
         } catch (e) {
+            dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
+            message.error(e?.message || 'Something went wrong.');
+
+        } finally {
+            dispatch({ type: 'finish' });
+        }
+
+
+    };
+
+
+    const onClone = async (_id) => {
+
+        dispatch({ type: 'start' });
+
+        try {
+            const res = await LayoutServices.clone(_id)
+
+            dispatch({ type: 'add', layout: res.layout });
+
+        } catch (e) {
+
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
             message.error(e?.message || 'Something went wrong.');
 
@@ -206,7 +220,7 @@ export default function Layouts({ layout, setLayout }) {
 
         } catch (e) {
             dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
-            message.success('Data submitted!');
+            message.error(e?.message || 'Something went wrong.');
 
         } finally {
 
@@ -220,23 +234,17 @@ export default function Layouts({ layout, setLayout }) {
         dispatch({ type: 'close' });
     }
 
-
-    const onSelect = (layout) => {
-
-        setLayout(layout);
-    }
-
     const onChange = (e) => {
         if (!state.loading)
             setSearchQuery(e.target.value)
     }
 
-
     return <>
-        <Card loading={state.loading} title={<>{state.layout ? state.label : `Layouts:`} <Input onChange={onChange} style={{maxWidth: 300, width: '100%', marginLeft: 10}} type="search" placeholder="search..."/></>}
+        <Card  title={<>{state.layout ? state.label : <>Layouts: <Input onChange={onChange} style={{maxWidth: 300, width: '100%', marginLeft: 10}} type="search" placeholder="search..."/></>} </>}
             extra={state.layout ? <Button
                 type="dashed"
-                onClick={onClose}> Back </Button> : state.total > 0 && <Tooltip title="Add New Layout"><Button
+                onClick={onClose}> Back </Button> :
+                state.total > 0 && <Tooltip title="Add New Layout"><Button
                     type="text"
                     onClick={() => onEdit({ ...initialLayout })}
                     icon={<PlusOutlined />}> </Button></Tooltip>}
@@ -244,32 +252,56 @@ export default function Layouts({ layout, setLayout }) {
 
             {state.error && <Alert message={state.error} style={{ margin: '10px 0' }} type="error" showIcon closable />}
 
-
-
             {
                 state.layout ?
-                    <AddLayout layout={state.layout} onClose={onClose} onSelect={onSelect} onSubmit={onSubmit} /> :
+                    <AddLayout layout={state.layout} onSubmit={onSubmit} /> :
 
                     state.total == 0 ? <Space size={20}>
-                        <Title level={4}>  Get started with your first layout: </Title>
+                        <Title level={3}> Get started with your first layout: </Title>
                         <Tooltip title="Add New"><Button
                             type="primary"
                             onClick={() => onEdit({ ...initialLayout })}
                             icon={<PlusOutlined />}> </Button></Tooltip>
                     </Space> :
                         <LayoutList
-                            setPage={setPage}
-                            page={page}
-                            selectedLayout={layout}
+                            setLayout={setLayout}
                             total={state.total}
                             layouts={state.layouts}
-                            onSelect={onSelect}
+                            layout={layout}
+                            onClone={onClone}
                             onDelete={onDelete}
                             onEdit={onEdit}
                         />}
         </Card>
 
+        {state.loading && <div style={{
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#2fc1ff',
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.1
+        }}
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }}
+        >
 
+        </div>}
+        <Spin tip="Loading" size="small" spinning={state.loading}
+            style={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+
+                transform: 'translate(-50%, -50%)'
+            }}
+        >
+        </Spin>
     </>
 
 };

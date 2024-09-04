@@ -395,7 +395,7 @@ export default function AddForm({ _form, onSubmit }) {
                 </Form.Item>
             </Form>
 
-            {states.loading && <><div style={{
+            {state.loading && <><div style={{
             position: 'fixed',
             width: '100%',
             height: '100%',
@@ -412,7 +412,7 @@ export default function AddForm({ _form, onSubmit }) {
             }}
         >
 
-        </div> <Spin tip="Loading" size="small" spinning={states.loading}
+        </div> <Spin tip="Loading" size="small" spinning={state.loading}
             style={{
                 position: 'fixed',
                 top: '50%',
