@@ -5,7 +5,7 @@
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps, isHomepage, isPrivacy };
  }
-
+ 
 const { isHomepage, isPrivacy } = this.props;
 
 {(isHomepage || isPrivacy) && (<>
