@@ -46,22 +46,22 @@ class Form extends Model
         '_states'
     ];
 
-    // Cast attributes to the desired data types
     protected $casts = [
-        'emailbody' => 'json',
-        'elements' => 'json',
-        'styles' => 'json',
-        'states' => 'array',
-        '_states' => 'array',
+        'emailbody' => 'array',
+        'elements' => 'array',
         'components' => 'array',
         '_components' => 'array',
-        '_elements' => 'json',
-        '_styles' => 'json',
+        '_elements' => 'array',
+        '_styles' => 'array',
+        'styles' => 'array',
+        'states' => 'array',
+        '_states' => 'array',
         'setting' => 'array',
         'updater' => 'array',
         'creator' => 'array',
     ];
 
+  
     public $timestamps = true; // Enable timestamps for created_at and updated_at
 
     // Boot method to handle model events
@@ -72,6 +72,23 @@ class Form extends Model
         static::saving(function ($form) {
             // Generate a unique ID and identifiers for new forms if not duplicated
             if (!$form->exists && !$form->duplicated) {
+
+
+            $form->_elements =  $form->elements;
+    
+            // Set default empty arrays for other attributes if not provided
+            $defaultArrayFields = [
+                'styles', 'components',
+                '_components', 'updater',
+                '_styles', '_states', 'states', 'setting', 'emailbody', 
+            ];
+    
+            foreach ($defaultArrayFields as $field) {
+                if (!isset($form->$field) || !is_array($form->$field)) {
+                    $form->$field = []; // Set to empty array if not provided or invalid
+                }
+            }
+
                 $form->generateUniqueIdentifiersAndStyles();
                 $form->_id = Str::uuid()->toString();
             }
@@ -95,7 +112,7 @@ class Form extends Model
         if (isset($elements['0'])) {
             // Generate unique identifiers
             $id = Str::random(7);
-            $className = 'ac-elem-' . $id;
+            $className = 'ac-elem-form-root-' . $id;
             $styleUid = Str::random(7);
 
             // Assign unique identifiers to the first element

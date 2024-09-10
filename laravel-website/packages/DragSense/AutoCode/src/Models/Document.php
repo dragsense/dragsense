@@ -43,7 +43,7 @@ class Document extends Model
         'states' => 'array',
         'coll' => 'array',
         '_states' => 'array',
-        'relationships' => 'json',
+        'relationships' => 'array',
         'setting' => 'array',
         'updater' => 'array',
         'creator' => 'array',

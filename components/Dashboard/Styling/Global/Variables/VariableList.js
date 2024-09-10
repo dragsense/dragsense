@@ -72,6 +72,7 @@ const VariableList = ({ selectedVariable, onSelect, variables,
                         title={variable.name}
                         description={<><span>{variable.variable}</span> : <em>{variable.value}</em></>}
                     />
+                    <span>Type: {variable.type}</span>
                 </Skeleton>
             </List.Item>
         )}

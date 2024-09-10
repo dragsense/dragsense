@@ -112,8 +112,8 @@ export default function Collections() {
     useEffect(() => {
         const fetchHost = async () => {
           const result = await SettingServices.get();
-          const setting = result.setting;
-          setSetting({ host: result.host, homePage: setting.homePage });
+          const settings = result.settings;
+          setSetting({ host: result.host, homePage: settings.homePage });
         };
         fetchHost();
       }, []);

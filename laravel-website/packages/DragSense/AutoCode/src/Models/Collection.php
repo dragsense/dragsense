@@ -33,9 +33,7 @@ class Collection extends Model
         'url',
         'elements',
         'components',
-        'collections',
         '_components',
-        '_collections',
         'relationships',
         '_elements',
         '_styles',
@@ -52,21 +50,23 @@ class Collection extends Model
     // Cast attributes to the desired data types
     protected $casts = [
         'scripts' => 'array',
-        'elements' => 'json',
-        'relationships' => 'json',
-        'styles' => 'json',
+        'elements' => 'array',
+        'components' => 'array',
+        'forms' => 'array',
+        '_components' => 'array',
+        '_forms' => 'array',
+        '_elements' => 'array',
+        '_styles' => 'array',
         'states' => 'array',
         '_states' => 'array',
-        'components' => 'array',
-        'collections' => 'array',
-        '_components' => 'array',
-        '_collections' => 'array',
-        '_elements' => 'json',
-        '_styles' => 'json',
+        'styles' => 'array',
         'setting' => 'array',
         'updater' => 'array',
         'creator' => 'array',
+        'relationships' => 'array'
     ];
+
+
 
     public $timestamps = true; // Enable timestamps for created_at and updated_at
 
@@ -78,6 +78,25 @@ class Collection extends Model
         static::saving(function ($collection) {
             // Generate a unique ID and setup new page for new collections if not duplicated
             if (!$collection->exists && !$collection->duplicated) {
+
+        
+            $collection->_elements =  $collection->elements;
+    
+            // Set default empty arrays for other attributes if not provided
+            $defaultArrayFields = [
+                'styles', 'components', 'forms',
+                '_components', '_forms', 'updater', 'scripts',
+                '_styles', '_states', 'states', 'relationships', 'setting'
+            ];
+    
+            foreach ($defaultArrayFields as $field) {
+                if (!isset($collection->$field) || !is_array($collection->$field)) {
+                    $collection->$field = []; // Set to empty array if not provided or invalid
+                }
+            }
+
+
+
                 $collection->setupNewPage();
                 $collection->_id = Str::uuid()->toString();
             }
@@ -113,7 +132,7 @@ class Collection extends Model
         $elements = $this->elements;
 
         $id = Str::random(7);
-        $className = 'ac-elem-' . $id;
+        $className = 'ac-elem-collection-root-' . $id;
         $styleUid = Str::random(7);
 
         // Ensure the key '0' exists before modifying it

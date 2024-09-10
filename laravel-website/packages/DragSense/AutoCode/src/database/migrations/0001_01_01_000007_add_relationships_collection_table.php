@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('ac_collections', function (Blueprint $table) {
-            $table->json('relationships')->default(json_encode([]));
+            $table->json('relationships');
         });
     }
 

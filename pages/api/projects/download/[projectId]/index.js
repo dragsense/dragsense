@@ -31,10 +31,11 @@ const addFilesToZip = (folderPath, folderName, zip, project) => {
 
         if (stats.isFile()) {
             let fileContent = fs.readFileSync(filePath, 'utf-8');
-
             if (file === '.env.example') {
-                fileContent = fileContent.replace('AUTCODE_API_KEY=', `AUTCODE_API_KEY=${project.apikey}`);
+                fileContent = fileContent.replace('AUTOCODE_API_KEY=', `AUTOCODE_API_KEY=${project.apikey}`);
+               
             }
+           
 
             zip.file(path.join(folderName, file), fileContent);
         } else if (stats.isDirectory() && folderName !== 'node_modules') {

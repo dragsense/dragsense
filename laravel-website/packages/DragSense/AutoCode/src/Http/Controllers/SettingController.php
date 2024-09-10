@@ -41,14 +41,14 @@ class SettingController extends Controller {
      */
     public function getSettings()
     {
-        $setting = $this->settingServices->getSettings();
+        $settings = $this->settingServices->getSettings();
        
         // Get the current protocol and host to construct the full host URL
         $protocol = request()->getScheme() ?? 'http';
         $host = request()->header('Host');
         $fullhost = "{$protocol}://{$host}";
 
-        return response()->json(['setting' => $setting, 'host' => $fullhost], Response::HTTP_OK);
+        return response()->json(['settings' => $settings, 'host' => $fullhost], Response::HTTP_OK);
     }
 
     /**

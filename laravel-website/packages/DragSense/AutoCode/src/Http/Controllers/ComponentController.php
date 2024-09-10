@@ -4,7 +4,6 @@ namespace DragSense\AutoCode\Http\Controllers;
 
 use DragSense\AutoCode\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use DragSense\AutoCode\Services\ComponentServices;
 use DragSense\AutoCode\Services\SettingServices;
 use Illuminate\Http\JsonResponse;
@@ -43,7 +42,6 @@ class ComponentController extends Controller
     public function getPaths(): JsonResponse
     {
         $paths = $this->componentServices->getPaths();
-        \Log::info($paths);
 
         return response()->json(['paths' => $paths]);
     }
@@ -153,58 +151,28 @@ class ComponentController extends Controller
      * Stream the elements of a component.
      *
      * @param string $id The ID of the component.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getElements($id): StreamedResponse
+    public function getElements($id)
     {
         $protocol = request()->getScheme() ?? 'http';
         $host = request()->header('Host');
         $fullhost = "{$protocol}://{$host}";
 
-        return new StreamedResponse(function() use ($id, $fullhost) {
-            $this->settingServices->getElements($id, 'component', $fullhost, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getElements($id, 'component', $fullhost);
+        return response()->streamJson($docs);
     }
 
     /**
      * Stream the style information of a component.
      *
      * @param string $id The ID of the component.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getStyle($id): StreamedResponse
+    public function getStyle($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->componentServices->getStyle($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getStyles($id, 'component');
+        return response()->streamJson($docs);
     }
 
     /**

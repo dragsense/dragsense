@@ -25,6 +25,7 @@ class ComponentServices
                     "_uid" => "0",
                     "tagName" => "div",
                     "type" => "layout",
+                    "name" => 'Compnonent Root Element',
                     "layout" => "root",
                     "nodeValue" => "",
                     "childNodes" => []
@@ -232,38 +233,7 @@ class ComponentServices
         return $component;
     }
 
-    /**
-     * Get component style
-     *
-     * @param string $id
-     * @param $stream
-     * @return void
-     * @throws ApiError
-     */
-    public function getStyle(string $id, callable $streamCallback): void
-    {
-
-        $projection = ['_styles', 'styles', '_id', 'published'];
-
-        $component = Component::find($id, $projection);
-        if (!$component) {
-            throw new ApiError('Component not found', 404);
-        }
-
-        $doc = ['_id' => $component->_id];
-        $doc['styles'] = $component->published ? $component->styles : $component->_styles;
-
-        if (count($doc['styles']) > 0) {
-            $chunkSize = 1024;
-
-            $jsonData = json_encode(['elements' => $doc['styles'], '_id' => $doc['_id']]);
-            
-            $chunkStr = $jsonData . "\n";
-            $streamCallback($chunkStr);
-        }
-        $streamCallback(null);
-    }
-
+    
 
 
     /**

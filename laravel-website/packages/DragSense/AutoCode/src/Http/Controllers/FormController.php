@@ -3,7 +3,6 @@
 namespace DragSense\AutoCode\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use DragSense\AutoCode\Services\FormServices;
 use DragSense\AutoCode\Services\SettingServices;
 use Illuminate\Http\JsonResponse;
@@ -51,58 +50,28 @@ class FormController extends Controller
      * Stream the elements of a specific form as a chunked response.
      *
      * @param string $id The ID of the form.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getElements($id): StreamedResponse
+    public function getElements($id)
     {
         $protocol = request()->getScheme() ?? 'http';
         $host = request()->header('Host');
         $fullhost = "{$protocol}://{$host}";
 
-        return new StreamedResponse(function () use ($id, $fullhost) {
-            $this->settingServices->getElements($id, 'form', $fullhost, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getElements($id, 'form', $fullhost);
+        return response()->streamJson($docs);
     }
 
     /**
      * Stream the style data of a specific form as a chunked response.
      *
      * @param string $id The ID of the form.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getStyle($id): StreamedResponse
+    public function getStyle($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->formServices->getStyle($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getStyles($id, 'form');
+        return response()->streamJson($docs);
     }
 
     /**
@@ -252,9 +221,9 @@ class FormController extends Controller
         $fullhost = "{$protocol}://{$host}";
 
         // Process the form submission using the form service
-        $this->formServices->submitForm($id, $files, $states, $fullhost);
+        $setting = $this->formServices->submitForm($id, $files, $states, $fullhost);
 
         // Send a response with a status of true
-        return response()->json(['status' => true], 201);
+        return response()->json(['status' => true, 'setting' => $setting], 201);
     }
 }

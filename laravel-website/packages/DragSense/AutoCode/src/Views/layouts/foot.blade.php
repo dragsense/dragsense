@@ -7,7 +7,7 @@
     $_id = isset($_id) ? $_id : '';
     $globalSetting = isset($globalSetting) ? $globalSetting : [];
     $remainingSlug = isset($remainingSlug) ? $remainingSlug : '';
-    $footerScripts = isset($setting['scripts']['footer']) ? $setting['scripts']['footer'] : '';
+    $footerScripts = isset($settings['scripts']['footer']) ? $settings['scripts']['footer'] : '';
     $pageFooterScripts = isset($page['setting']['scripts']['footer']) ? $page['setting']['scripts']['footer'] : '';
 @endphp
 
@@ -19,11 +19,16 @@
         'remainingSlug' => $remainingSlug,
     ]) !!};
 </script>
-
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="/autocode/autocode-custom-index.js"></script>
 {!! $footerScripts !!}
 {!! $pageFooterScripts !!}
-<script src="/autocode/autocode-app-client.js"></script> 
+@yield('other-scripts')
+<script>
+    window.react = window.React;
+    window.AUTOCODE_API_PREFIX = "<?php echo $autocodeApiPrefix; ?>";
+</script>
 <script src="/autocode/autocode-client.js"></script> 
 
 @endsection

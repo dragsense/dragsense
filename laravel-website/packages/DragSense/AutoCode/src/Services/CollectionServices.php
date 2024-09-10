@@ -35,6 +35,7 @@ class CollectionServices
                     "_uid" => "0",
                     "tagName" => "div",
                     "type" => "layout",
+                    "name" => 'Collection Root Element',
                     "layout" => "root",
                     "nodeValue" => "",
                     "childNodes" => []
@@ -243,41 +244,7 @@ class CollectionServices
         return $collection;
     }
 
-    /**
-     * Get a collection style
-     *
-     * @param string $id
-     * @param $stream
-     * @return  mixed
-     * @throws ApiError
-     */
-    public function getStyle(string $id, callable $streamCallback)
-    {
-        $projection = ['_styles', 'styles', '_id', 'published'];
-
-        $collection = Collection::find($id, $projection);
-
-        if (!$collection) {
-            throw new ApiError('Collection not found', 404);
-        }
-
-        $doc = ['_id' => $collection->_id];
-        $doc['styles'] = $collection->published ? $collection->styles : $collection->_styles;
-
-        // $styles = array_map(function($style) {
-        //     return is_string($style) ? json_decode($style, true) : $style;
-        // }, $doc['styles']);
-
-        if (count($doc['styles']) > 0) {
-            $chunkSize = 1024;
-
-            $jsonData = json_encode(['elements' => $doc['styles'], '_id' => $doc['_id']]);
-            $chunkStr = $jsonData . "\n";
-            $streamCallback($chunkStr);
-        }
-        $streamCallback(null);
-
-    }
+    
 
     /**
      * Duplicate a collection
@@ -313,7 +280,6 @@ class CollectionServices
 
             $tableName = 'ac_' . $pluralSlug;
 
-            Log::info($tableName);
             // Delete the table associated with the collection
             $deleted = DB::statement("DROP TABLE IF EXISTS `{$tableName}`");
 

@@ -12,16 +12,24 @@ use Exception;
 use File;
 use Illuminate\Http\Request;
 use Log;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\SyntaxError;
 
 class AutoCodeController extends Controller
 {
     protected $settingServices;
     protected $themeServices;
+    private $expressionLanguage;
+
+    private  $pattern;
 
     public function __construct(SettingServices $settingServices, ThemeServices $themeServices)
     {
         $this->settingServices = $settingServices;
         $this->themeServices = $themeServices;
+
+        $this->expressionLanguage = new ExpressionLanguage();
+        $this->pattern = '/\{\{[^}]*\}\}/';
     }
 
     /**
@@ -44,20 +52,20 @@ class AutoCodeController extends Controller
             $projection = ['_id', 'setting', 'slug', 'type'];
 
             // Fetch settings
-            $setting = $this->settingServices->getSettings();
+            $settings = $this->settingServices->getSettings();
             $page = null;
             $remainingSlug = '';
 
             // Check if the maintenance page is set and fetch it if applicable
-            if (!empty($setting['maintenancePage'])) {
+            if (!empty($settings['maintenancePage'])) {
                 $page = Page::select($projection)
-                    ->where('_id', $setting['maintenancePage']['_id'])
+                    ->where('_id', $settings['maintenancePage']['_id'])
                     ->where('setting->status', 'PUBLIC')
                     ->first();
-            } elseif (empty($dynamicSlugs) && !empty($setting['homePage'])) {
+            } elseif (empty($dynamicSlugs) && !empty($settings['homePage'])) {
                 // Check if home page is set and fetch it if no slug provided
                 $page = Page::select($projection)
-                    ->where('_id', $setting['homePage']['_id'])
+                    ->where('_id', $settings['homePage']['_id'])
                     ->where('setting->status', 'PUBLIC')
                     ->first();
             } else {
@@ -85,10 +93,10 @@ class AutoCodeController extends Controller
                 }
             }
 
-            // If page not found, check for the error page setting
-            if (!$page && !empty($setting['errorPage'])) {
+            // If page not found, check for the error page settings
+            if (!$page && !empty($settings['errorPage'])) {
                 $page = Page::select($projection)
-                    ->where('_id', $setting['errorPage']['_id'])
+                    ->where('_id', $settings['errorPage']['_id'])
                     ->where('setting->status', 'PUBLIC')
                     ->first();
             }
@@ -99,8 +107,10 @@ class AutoCodeController extends Controller
             }
 
             // Prepare URLs
-            $protocol = $request->getScheme() ?? 'http';
-            $fullhost = "{$protocol}://{$request->getHost()}";
+
+            $protocol = request()->getScheme() ?? 'http';
+            $host = request()->header('Host');
+            $fullhost = "{$protocol}://{$host}";
 
             // Fetch page data and generate HTML
             $pageResults = $this->fetchPageData($page, $fullhost, $remainingSlug);
@@ -109,11 +119,11 @@ class AutoCodeController extends Controller
             // Prepare global settings for the view
             $globalSetting = [
                 'global' => [
-                    'webTitle' => $setting['webTitle'] ?? 'Default Title',
-                    'tagLine' => $setting['tagLine'] ?? 'Default Tag Line',
-                    'desc' => $setting['desc'] ?? 'Default Description',
-                    'author' => $setting['author'] ?? 'Default Author',
-                    'images' => $setting['images'] ?? [],
+                    'webTitle' => $settings['webTitle'] ?? 'Default Title',
+                    'tagLine' => $settings['tagLine'] ?? 'Default Tag Line',
+                    'desc' => $settings['desc'] ?? 'Default Description',
+                    'author' => $settings['author'] ?? 'Default Author',
+                    'images' => $settings['images'] ?? [],
                 ],
                 'host' => $fullhost
             ];
@@ -122,6 +132,7 @@ class AutoCodeController extends Controller
             if (isset($pageResults['pages'][$page->_id])) {
                 $elements = $pageResults['pages'][$page->_id]['elements'];
                 $pageSetting = $pageResults['pages'][$page->_id]['pageSetting'];
+
                 $html = $this->generateHTML(
                     $elements,
                     "0",
@@ -148,8 +159,8 @@ class AutoCodeController extends Controller
                 " }";
 
             $fontCssString = implode('', array_map(function ($font) {
-                if ($font['isGoogleFont'] && !empty($font['fontSrc'])) {
-                    return $font['fontSrc'];
+                if ($font['isGoogleFont']) {
+                    return $font['src'];
                 } elseif (is_array($font['fontSrc']) && count($font['fontSrc']) > 0) {
                     $fontSrcString = implode(',', array_map(fn($src) => "url(\"{$src}\")", $font['fontSrc']));
                     return "<style>
@@ -180,10 +191,11 @@ class AutoCodeController extends Controller
                 'type' => $page->type ?? 'page',
                 '_id' => $page->_id,
                 'globalSetting' => $globalSetting,
-                'setting' => $setting,
+                'settings' => $settings,
                 'remainingSlug' => $remainingSlug,
                 'fontCssString' => $fontCssString,
-                'html' => $html
+                'html' => $html,
+                'autocodeApiPrefix' => "/" . env("AUTOCODE_API_PREFIX", 'autocode-api')
             ]);
         } catch (Exception $e) {
             // Log error and return 404 page
@@ -264,7 +276,7 @@ class AutoCodeController extends Controller
                 $html .= $this->renderElement($element, $elements, $pageResults, $pageSetting, $globalSetting, $states, $props, $mapValue, $mapIndex);
             }
         } else {
-            $html .= $this->renderElement($element, $elements, $pageResults, $pageSetting, $globalSetting, $states, $props);
+            $html .= $this->renderElement($element, $elements, $pageResults, $pageSetting, $globalSetting, $states, $props, $host);
         }
 
         return $html;
@@ -293,6 +305,7 @@ class AutoCodeController extends Controller
         &$globalSetting,
         &$states,
         &$props,
+        $host,
         &$mapValue = [],
         &$mapIndex = 0
     ) {
@@ -304,8 +317,15 @@ class AutoCodeController extends Controller
         }
 
         $state = $element['state'] ?? ['type' => '', 'key' => ''];
-        $value = $this->getValue($state, $states, $props, $pageSetting, $globalSetting, $mapValue, $mapIndex, $element['nodeValue'] ?? '');
 
+        $nodeValue = $this->withFallBackNodeValue($element, $element['nodeValue'] ?? '', $globalSetting['global'], $host);
+
+        $nodeValue = isset($element['isStateActive']) && $element['isStateActive']
+        ? $this->replacePlaceholders($nodeValue, $states, $props, $pageSetting, $globalSetting, $mapValue, $mapIndex)
+        : $nodeValue;
+
+        $value = $this->getValue($state, $states, $props, $pageSetting, $globalSetting, $mapValue, $mapIndex, $nodeValue);
+        
         $html = "<{$tagName}";
 
         // Generate attributes
@@ -319,14 +339,10 @@ class AutoCodeController extends Controller
             $mapIndex
         );
 
-        foreach ($attributes as $key => $attributeValue) {
-            if ($attributeValue !== null) {
-                $html .= " {$key}=\"" . htmlspecialchars($attributeValue) . "\"";
-            }
-        }
+
 
         // Handle dynamic and static classes
-        $dynamicClasses = $element['classes'] ? $this->reduceClassNames($element['classes'], $states, $props, $pageSetting, $globalSetting, $mapValue, $mapIndex) : '';
+        $dynamicClasses = isset($element['classes']) ? $this->reduceClassNames($element['classes'], $states, $props, $pageSetting, $globalSetting, $mapValue, $mapIndex) : '';
         $allClasses = trim(($element['className'] ?? '') . ' ' . $dynamicClasses);
 
         if (!empty($allClasses)) {
@@ -335,14 +351,44 @@ class AutoCodeController extends Controller
 
         // Handle special cases for img and input tags
         if (in_array($tagName, ['img', 'input']) && $value) {
-            $html .= ($tagName === 'img') ? " src=\"" . htmlspecialchars($value['value'] ?? $value) . "\"" : " value=\"" . htmlspecialchars($value['value'] ?? $value) . "\"";
+            $html .= ($tagName === 'img') ? " src=\"" . html_entity_decode($value['value'] ?? $value) . "\"" : " value=\"" . html_entity_decode($value['value'] ?? $value) . "\"";
+        }
+
+        if (in_array($tagName, ['video']) && $value) {
+            $poster = $this->createPoster($value, $tagName, $host);
+            // Adding poster for video
+            if ($tagName === 'video') {
+                $html .= " poster=\"" . html_entity_decode($poster['src']) . "\"";
+            }
+        }
+
+        $html .= " controls";
+
+        foreach ($attributes as $key => $attributeValue) {
+            if ($attributeValue !== null) {
+                $html .= " {$key}=\"" . html_entity_decode($attributeValue) . "\"";
+            }
         }
 
         $html .= '>';
 
         // Add content inside the tag if it's not an img or input
-        if (!in_array($tagName, ['img', 'input']) && $value) {
-            $html .= '<span>' . htmlspecialchars($value['value'] ?? $value) . '</span>';
+        if (!in_array($tagName, haystack: ['img', 'input', 'video', 'audio']) && $value) {
+            $html .= '<span>' . html_entity_decode($value['value'] ?? $value) . '</span>';
+        }
+
+        if (in_array($tagName, ['video', 'audio']) && $value) {
+            $poster = $this->createPoster($value, $tagName, $host);
+            $srcs = is_array($value['srcs']) ? $value['srcs'] : [];
+            $sources = $this->createSources($srcs, $poster, $tagName, $host);
+
+            // Adding sources for video/audio
+            foreach ($sources as $source) {
+
+                $html .= "<source src=\"" . html_entity_decode($source['src']) . "\" type=\"" . html_entity_decode($source['type']) . "\" />";
+            }
+
+            $html .= $tagName === 'video' ? 'Your browser does not support the video tag.' : 'Your browser does not support the audio tag.';
         }
 
         // Recursively process child nodes
@@ -436,7 +482,7 @@ class AutoCodeController extends Controller
      * @param array $elem The element containing the type and key to retrieve.
      * @param array $states The current states for the page.
      * @param array $props The current states for the page.
-     * @param array $setting The settings for the current page.
+     * @param array $settings The settings for the current page.
      * @param array $globalSetting The global settings for the page.
      * @param array $mapValue The current map value for iterated elements.
      * @param int $mapIndex The index for the current map iteration.
@@ -447,7 +493,7 @@ class AutoCodeController extends Controller
         $elem,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex,
@@ -458,9 +504,9 @@ class AutoCodeController extends Controller
 
         return match ($type) {
             'GLOBAL' => Utils::getGlobalValue($key, $globalSetting),
-            'STATES' => Utils::getStateValue($key, $states, $setting['host'] ?? null),
-            'PROPS' => Utils::getStateValue($key, $props, $setting['host'] ?? null),
-            'PAGE' => Utils::getPageValue($key, $setting, $setting['host'] ?? null),
+            'STATES' => Utils::getStateValue($key, $states, $settings['host'] ?? null),
+            'PROPS' => Utils::getStateValue($key, $props, $settings['host'] ?? null),
+            'PAGE' => Utils::getPageValue($key, $settings, $settings['host'] ?? null),
             'FORMSTATES' => $states[$key[0]][$key[1]] ?? "''",
             'MAPVALUE' => $mapValue,
             'MAPINDEX' => $mapIndex,
@@ -478,86 +524,24 @@ class AutoCodeController extends Controller
      */
     private function evaluateCondition(string $expression, string $v, string $keyValue): bool
     {
-        // Replace [state] and [key] with actual values
+        // Replace placeholders in the expression
         $expression = str_replace(['[state]', '[key]'], [$v, $keyValue], $expression);
 
-        // Handle boolean literals and convert them to actual boolean values
-        $expression = str_replace(['true', 'false', "'true'", "'false'"], [true, false, true, false], $expression);
-
-        // Handle cases where the expression is a direct boolean value or string that represents a boolean
-        if ($expression === 'true' || $expression === "'true'") {
-            return true;
-        }
-        if ($expression === 'false' || $expression === "'false'") {
-            return false;
-        }
-
-        // Supported operators
-        $operators = ['===', '==', '!=', '>', '<', '>=', '<=', '&&', '||'];
-
-        foreach ($operators as $operator) {
-            if (strpos($expression, $operator) !== false) {
-                // Handle logical AND and OR
-                if ($operator === '&&' || $operator === '||') {
-                    list($left, $right) = explode($operator, $expression);
-                    $left = trim($left);
-                    $right = trim($right);
-
-                    $leftResult = $this->evaluateCondition($left, $v, $keyValue);
-                    $rightResult = $this->evaluateCondition($right, $v, $keyValue);
-
-                    return $operator === '&&' ? ($leftResult && $rightResult) : ($leftResult || $rightResult);
-                }
-
-                // Handle comparison operators
-                list($left, $right) = explode($operator, $expression);
-                $left = trim($left);
-                $right = trim($right);
-                $result = false;
-
-                switch ($operator) {
-                    case '===':
-                        $result = $left === $right;
-                        break;
-                    case '==':
-                        $result = $left == $right;
-                        break;
-                    case '!=':
-                        $result = $left != $right;
-                        break;
-                    case '>':
-                        $result = $left > $right;
-                        break;
-                    case '<':
-                        $result = $left < $right;
-                        break;
-                    case '>=':
-                        $result = $left >= $right;
-                        break;
-                    case '<=':
-                        $result = $left <= $right;
-                        break;
-                }
-
-                return $result;
-            }
+        try {
+            // Evaluate the modified expression
+            return (bool) $this->expressionLanguage->evaluate($expression);
+        } catch (SyntaxError $e) {
+            // Handle syntax errors in the expression
+            // You can log the error or show an error message
+            throw new \InvalidArgumentException("Invalid expression: " . $e->getMessage());
+        } catch (Exception $e) {
+            // Handle any other exceptions
+            throw new \RuntimeException("Error evaluating expression: " . $e->getMessage());
         }
 
-        // If the expression does not contain recognized operators, handle it as a simple boolean or value
-        // For single values, return true if the value is non-empty and non-zero, otherwise false
-        if (is_numeric($expression)) {
-            return (float) $expression != 0;
-        }
-
-        // Handle simple non-empty strings as true
-        if (is_string($expression)) {
-            return !empty($expression);
-        }
-
-        // Default to true for unrecognized expressions
-        Log::error("Invalid expression: " . $expression);
-        return true;
     }
+
+
 
     /**
      * This function is used to calculate the conditions for rendering the component.
@@ -569,19 +553,19 @@ class AutoCodeController extends Controller
         array $conditions,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex
     ): bool {
         if (empty($conditions))
             return true;
-        return array_reduce($conditions, function ($prev, $condition) {
+        return array_reduce($conditions, function ($prev, $condition) use ($states, $props, $settings, $globalSetting, $mapValue, $mapIndex) {
             $value = $this->getValue(
                 $condition,
                 $states,
                 $props,
-                $setting,
+                $settings,
                 $globalSetting,
                 $mapValue,
                 $mapIndex
@@ -593,7 +577,7 @@ class AutoCodeController extends Controller
                     $condition['valueState'],
                     $states,
                     $props,
-                    $setting,
+                    $settings,
                     $globalSetting,
                     $mapValue,
                     $mapIndex,
@@ -621,7 +605,7 @@ class AutoCodeController extends Controller
         array $attribute,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex
@@ -633,7 +617,7 @@ class AutoCodeController extends Controller
                 $attribute['attributes'],
                 $states,
                 $props,
-                $setting,
+                $settings,
                 $globalSetting,
                 $mapValue,
                 $mapIndex
@@ -645,7 +629,7 @@ class AutoCodeController extends Controller
                     $attribute['valueState'],
                     $states,
                     $props,
-                    $setting,
+                    $settings,
                     $globalSetting,
                     $mapValue,
                     $mapIndex,
@@ -673,7 +657,7 @@ class AutoCodeController extends Controller
             $conditions,
             $states,
             $props,
-            $setting,
+            $settings,
             $globalSetting,
             $mapValue,
             $mapIndex
@@ -692,7 +676,7 @@ class AutoCodeController extends Controller
         array $attributes,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex
@@ -700,13 +684,13 @@ class AutoCodeController extends Controller
         if (empty($attributes))
             return [];
 
-        return array_reduce($attributes, function ($a, $attribute) {
+        return array_reduce($attributes, function ($a, $attribute) use ($states, $props, $settings, $globalSetting, $mapValue, $mapIndex) {
 
             $attributeValue = $this->calculateAttributeValue(
                 $attribute,
                 $states,
                 $props,
-                $setting,
+                $settings,
                 $globalSetting,
                 $mapValue,
                 $mapIndex
@@ -725,7 +709,7 @@ class AutoCodeController extends Controller
         $cls,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex
@@ -738,7 +722,7 @@ class AutoCodeController extends Controller
             $conditions,
             $states,
             $props,
-            $setting,
+            $settings,
             $globalSetting,
             $mapValue,
             $mapIndex
@@ -747,7 +731,7 @@ class AutoCodeController extends Controller
             $cls['stateValue'],
             $states,
             $props,
-            $setting,
+            $settings,
             $globalSetting,
             $mapValue,
             $mapIndex,
@@ -771,17 +755,17 @@ class AutoCodeController extends Controller
         $classes,
         &$states,
         &$props,
-        &$setting,
+        &$settings,
         &$globalSetting,
         &$mapValue,
         &$mapIndex
     ) {
-        return array_reduce($classes, function ($carry, $cls) {
+        return array_reduce($classes, function ($carry, $cls) use ($states, $props, $settings, $globalSetting, $mapValue, $mapIndex) {
             $classValue = $this->calculateClassNames(
                 $cls,
                 $states,
                 $props,
-                $setting,
+                $settings,
                 $globalSetting,
                 $mapValue,
                 $mapIndex
@@ -789,6 +773,126 @@ class AutoCodeController extends Controller
             return $carry . " " . $classValue;
         }, "");
     }
+
+    function createPoster($value, $tag, $host)
+    {
+        if (!empty($value['value'])) {
+            return [
+                'src' => $host . $value['value'],
+                'alt' => !empty($value['label']) ? $value['label'] : $tag
+            ];
+        } else {
+            return [
+                'src' => $value['value'],
+                'alt' => $tag
+            ];
+        }
+    }
+
+    function createSources($srcs, $poster, $tag, $host)
+    {
+        $sources = [];
+
+        foreach ($srcs as $index => $media) {
+            $sources[] = [
+                'key' => $index,
+                'src' => $host . $media['src'],
+                'type' => $media['mimetype']
+            ];
+        }
+
+        if (count($srcs) <= 0 && $tag === 'audio') {
+            $sources = [
+                [
+                    'key' => 'default',
+                    'src' => $poster['src'],
+                    'type' => 'audio/mp3'
+                ]
+            ];
+        }
+
+        return $sources;
+    }
+
+
+    public function getFallbackPoster(&$settings)
+    {
+        $defaultImage = './images/default/default-poster.png';
+        if (isset($settings['images']['placeholder']['src'])) {
+            return $settings['images']['placeholder']['src'];
+        }
+        return $defaultImage;
+    }
+
+    // Method to process node values with fallback
+    public function withFallBackNodeValue($node, $nodeValue, &$settings, $host)
+    {
+        switch ($node['tagName']) {
+            case 'img':
+                return [
+                    'value' => !empty($node['src']) ? $host . $node['src']['src'] : $this->getFallbackPoster($settings),
+                    'label' => $node['src']['alt'] ?? ''
+                ];
+
+            case 'video':
+                return [
+                    'value' => !empty($node['src']) ? $node['src']['src'] : $this->getFallbackPoster($settings),
+                    'label' => $node['src']['alt'] ?? '',
+                    'srcs' => $node['srcs'] ?? []
+                ];
+
+            case 'audio':
+                return [
+                    'value' => '',
+                    'srcs' => $node['srcs'] ?? []
+                ];
+
+            case 'input':
+            case 'textarea':
+            case 'option':
+                return $nodeValue ?? '';
+
+            default:
+                return $nodeValue;
+        }
+    }
+
+
+
+
+    // Function to replace placeholders in the string with their corresponding values
+    function replacePlaceholders(&$inputString, &$states, &$props, &$setting, &$globalSetting, &$mapValue, &$mapIndex)
+    {
+       
+
+        $resultString = $inputString;
+        try {
+            while (preg_match($this->pattern, $resultString, $match)) {
+                $matchedText = $match[0];
+                $keysString = substr($matchedText, 2, -2); // Remove the '{{' and '}}'
+                $keys = explode("/", $keysString);
+                $modifiedKey = $keys;
+                array_shift($modifiedKey); // Shift the first element
+
+                // Create element array with type and key
+                $elem = [
+                    'type' => $keys[0],
+                    'key' => $modifiedKey
+                ];
+
+                // Get value (you need to define how this function works)
+                $value = $this->getValue($elem, $states, $props, $setting, $globalSetting, $mapValue, $mapIndex);
+                $value = isset($value['value']) ? $value['value'] : ($value ?: "");
+
+                $replacementValue = $value;
+                $resultString = str_replace($matchedText, $replacementValue, $resultString);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+        return $resultString;
+    }
+
 
     /**
      * Fetches the data needed to render the specified page or collection.

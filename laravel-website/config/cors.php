@@ -15,8 +15,12 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
-
+    'paths' => [
+        'api/*',
+        env('AUTOCODE_API_PREFIX', 'autocode-api') . '/*',
+        'sanctum/csrf-cookie',
+    ],
+    
     'allowed_methods' => ['*'],
 
     'allowed_origins' => ['*'],

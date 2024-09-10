@@ -71,7 +71,7 @@ export function ColorPreview({ color, font }) {
 
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {palette.map((color) => (
-                <div style={{ background: color, width: '100px', height: '100px' }}>{color}</div>
+                <div>{color}<div style={{ background: color, width: '100px', height: '100px' }}></div> </div>
             ))}
         </div>
 

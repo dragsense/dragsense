@@ -4,7 +4,6 @@ namespace DragSense\AutoCode\Http\Controllers;
 
 use DragSense\AutoCode\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use DragSense\AutoCode\Services\ThemeServices;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Arr;
@@ -253,32 +252,16 @@ class ThemeController extends Controller
         return response()->json($result, Response::HTTP_CREATED);
     }
 
-    /**
+     /**
      * Get style information by its ID.
      *
      * @param int $id The unique ID of the style.
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return \Illuminate\Http\JsonResponse 
      */
     public function getStyle($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->themeServices->getStyle($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+          $styles = $this->themeServices->getStyle();
+          return response()->streamJson(['_id' => $id, 'elements' => $styles]);
     }
 
     // Animation-related methods
@@ -287,28 +270,14 @@ class ThemeController extends Controller
      * Get animation data by its ID.
      *
      * @param int $id The unique ID of the animation.
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+    * @return \Illuminate\Http\JsonResponse
      */
     public function getAnimations($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->themeServices->getAnimations($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
 
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $styles = $this->themeServices->getAnimations();
+          return response()->streamJson(['_id' => $id, 'elements' => $styles]);
+    
     }
 
     /**

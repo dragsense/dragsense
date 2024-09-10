@@ -1,78 +1,60 @@
-const compression = require('compression')
-const cors = require('cors')
-const express = require('express')
-const helmet = require('helmet')
-const mongoSanitize = require('express-mongo-sanitize')
-const morgan = require('morgan')
-const xss = require('xss-clean')
-const bodyParser = require('body-parser');
+const cors = require("cors");
+const express = require("express");
+const helmet = require("helmet");
+const morgan = require("morgan");
 
-const env = require('../configs/env')
-const { errorConverter, errorHandler } = require('../middlewares/error')
-const { customizeLimiter } = require('../middlewares/rate-limit')
-//const routeConfig = require('../apis/routes')
+const apiRoutes = require("../routes/index");
 
+const { AppConfig, AutoCodeConfig } = require("../config/index");
+const { errorConverter, errorHandler } = require("../middlewares/error");
 
 module.exports = (autocodeRoutes) => {
-  const app = express()
+  const app = express();
 
   // set log request
-  app.use(morgan('dev'))
+  app.use(morgan("dev"));
 
   // set security HTTP headers
   app.use(helmet());
 
   const cspConfig = {
     directives: {
-      defaultSrc: ["'self'"],
-      fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
-      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"], // Allow styles from the same origin, unsafe-inline, and the specified CDN
-      // Add other directives as needed
+      defaultSrc: ["'self'", "*"], // Allow everything for default sources
+      scriptSrc: ["'self'",  "'unsafe-inline'", "'unsafe-eval'", "*"], // Allow scripts from self, and all
+      styleSrc: ["'self'", "'unsafe-inline'", "*"], // Allow styles from self and all
+      imgSrc: ["'self'", "*", "data:"], // Allow images from all sources and inline data URIs
+      connectSrc: ["'self'", "*"], // Allow connections to all domains
+      fontSrc: ["'self'", "*"], // Allow fonts from all sources
+      objectSrc: ["'none'"], // Disable objects (Flash, etc.), as this is rarely needed
+      upgradeInsecureRequests: [], // Automatically upgrade HTTP to HTTPS
     },
+  
   };
 
   // Override CSP directive settings if needed
   app.use(helmet.contentSecurityPolicy(cspConfig));
 
-
   // parse json request body
-  app.use(express.json())
+  app.use(express.json());
 
   // parse urlencoded request body
-  app.use(express.urlencoded({ extended: true }))
-
-  // sanitize request data
-  //app.use(xss())
-  //app.use(mongoSanitize())
-
-  // gzip compression
-  //app.use(compression())
+  app.use(express.urlencoded({ extended: true }));
 
   // set cors blocked resources
-  app.use(cors())
-  app.options('*', cors())
+  app.use(cors());
+  app.options("*", cors());
 
-  // setup limits
-  if (env.isProduction) {
-    // app.use('/v1/auth', customizeLimiter)
-  }
-
-
+  app.use("/api", apiRoutes);
   // api routes
-  app.use(env.app.routePrefix, autocodeRoutes)
-
-
+  app.use(AutoCodeConfig.AUTOCODE_API_PREFIX, autocodeRoutes);
 
   // convert error to ApiError, if needed
-  app.use(errorConverter)
+  app.use(errorConverter);
 
   // handle error
-  app.use(errorHandler)
+  app.use(errorHandler);
 
+  app.listen(AppConfig.PORT);
 
-
-  app.listen(env.app.port)
-
-  return app
-}
+  return { app, port: AppConfig.PORT };
+};

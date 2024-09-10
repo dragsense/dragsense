@@ -20,7 +20,7 @@ class AutoCodeServiceProvider extends ServiceProvider
         ], 'config');
 
         // Load the API prefix from the .env file
-        $prefix = config('autocode.prefix', 'api');
+        $prefix = config('autocode.prefix', 'autocode-api');
 
         // Load the AutoCode routes with the specified prefix
         Route::prefix($prefix)

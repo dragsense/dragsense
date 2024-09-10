@@ -70,8 +70,9 @@ const ColorList = ({ selectedColor, onSelect, total,
                 <Skeleton avatar title={false} loading={false} active>
                     <List.Item.Meta
                         title={ <div style={{backgroundColor: '#fff', padding: 3, display: 'inline-block', borderRadius: 5,}}> <div style={{ background: color.color, borderRadius: 5, width: '20px', height: '20px' }}></div></div>}
-                        description={color.name}
+                        description={<><span>{color.name}</span><br/><em>{color.variable}</em></>}
                     />
+                    <span>Type: color</span>
                 </Skeleton>
             </List.Item>
         )}

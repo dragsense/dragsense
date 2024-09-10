@@ -4,7 +4,6 @@ namespace DragSense\AutoCode\Http\Controllers;
 
 use DragSense\AutoCode\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use DragSense\AutoCode\Services\CollectionServices;
 use DragSense\AutoCode\Services\SettingServices;
 use Illuminate\Http\JsonResponse;
@@ -37,74 +36,33 @@ class CollectionController extends Controller
         return response()->json(['collection' => $collection, 'host' => $fullhost]);
     }
 
-    /**
-     * Retrieve the data of a collection by its ID.
-     *
-     * @param string $id The ID of the collection.
-     * @return JsonResponse
-     */
-    public function getCollectionData($id): JsonResponse
-    {
-        $result = $this->collectionServices->getCollectionData($id);
-        return response()->json($result);
-    }
-
+  
     /**
      * Stream the elements of a collection.
      *
      * @param string $id The ID of the collection.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getElements($id): StreamedResponse
+    public function getElements($id)
     {
         $protocol = request()->getScheme() ?? 'http';
         $host = request()->header('Host');
         $fullhost = "{$protocol}://{$host}";
 
-        return new StreamedResponse(function () use ($id, $fullhost) {
-            $this->settingServices->getElements($id, 'collection', $fullhost, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getElements($id, 'collection', $fullhost);
+        return response()->streamJson($docs);
     }
 
     /**
      * Stream the style information of a collection.
      *
      * @param string $id The ID of the collection.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getStyle($id): StreamedResponse
+    public function getStyle($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->collectionServices->getStyle($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getStyles($id, 'collection');
+        return response()->streamJson($docs);
     }
 
     /**

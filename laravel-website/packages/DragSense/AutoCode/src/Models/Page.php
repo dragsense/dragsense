@@ -44,14 +44,14 @@ class Page extends Model
 
     protected $casts = [
         'scripts' => 'array',
-        'elements' => 'json',
-        'styles' => 'json',
+        'elements' => 'array',
         'components' => 'array',
         'forms' => 'array',
         '_components' => 'array',
         '_forms' => 'array',
-        '_elements' => 'json',
-        '_styles' => 'json',
+        '_elements' => 'array',
+        '_styles' => 'array',
+        'styles' => 'array',
         'setting' => 'array',
         'updater' => 'array',
         'creator' => 'array',
@@ -65,6 +65,25 @@ class Page extends Model
 
         static::saving(function ($page) {
             if (!$page->exists && !$page->duplicated) {
+
+                
+                $page->_elements =  $page->elements;
+        
+                // Set default empty arrays for other attributes if not provided
+                $defaultArrayFields = [
+                    'styles', 'components', 'forms',
+                    '_components', '_forms', 'updater', 'scripts',
+                    '_styles', 'setting'
+                ];
+        
+                foreach ($defaultArrayFields as $field) {
+                    if (!isset($page->$field) || !is_array($page->$field)) {
+                        $page->$field = []; // Set to empty array if not provided or invalid
+                    }
+                }
+    
+    
+
                 $page->setupNewPage();
                 $page->_id = Str::uuid()->toString();
             }
@@ -89,7 +108,7 @@ class Page extends Model
 
         if (isset($elements[0])) {
             $id = Str::random(7);
-            $className = 'ac-elem-' . $id;
+            $className = 'ac-elem-page-root-' . $id;
             $styleUid = Str::random(7);
 
             $elements[0]['className'] = $className;

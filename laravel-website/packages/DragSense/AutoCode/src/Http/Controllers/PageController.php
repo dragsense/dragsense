@@ -4,7 +4,6 @@ namespace DragSense\AutoCode\Http\Controllers;
 
 use DragSense\AutoCode\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use DragSense\AutoCode\Services\PageServices;
 use DragSense\AutoCode\Services\SettingServices;
 use Illuminate\Http\JsonResponse;
@@ -36,74 +35,35 @@ class PageController extends Controller
         return response()->json(['page' => $page, 'host' => $fullhost]);
     }
 
-    /**
-     * Retrieve page data for a specific page by its ID.
-     *
-     * @param int $id The ID of the page.
-     * @return JsonResponse
-     */
-    public function getPageData($id): JsonResponse
-    {
-        $result = $this->pageServices->getPageData($id);
-        return response()->json($result);
-    }
+
 
     /**
      * Stream the elements associated with a specific page by its ID.
      *
      * @param int $id The ID of the page.
-     * @return StreamedResponse
+     * @return \Illuminate\Http\JsonResponse 
      */
-    public function getElements($id): StreamedResponse
+    public function getElements($id)
     {
         $protocol = request()->getScheme() ?? 'http';
         $host = request()->header('Host');
         $fullhost = "{$protocol}://{$host}";
 
-        return new StreamedResponse(function () use ($id, $fullhost) {
-            $this->settingServices->getElements($id, 'page', $fullhost, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
+        $docs = $this->settingServices->getElements($id, 'page', $fullhost);
+        return response()->streamJson($docs);
 
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
     }
 
     /**
      * Stream the style data associated with a specific page by its ID.
      *
      * @param int $id The ID of the page.
-     * @return StreamedResponse
+     * @return JsonResponse
      */
-    public function getStyle($id): StreamedResponse
+    public function getStyle($id)
     {
-        return new StreamedResponse(function () use ($id) {
-            $this->pageServices->getStyle($id, function ($data) {
-                if ($data !== null && $data !== '') {
-                    $chunkSize = dechex(strlen($data));
-                    echo "{$chunkSize}\r\n{$data}\r\n";
-                    flush();
-                }
-            });
-
-            // Properly terminate the chunked response
-            echo "0\r\n\r\n";
-            flush();
-        }, 200, [
-            'Content-Type' => 'application/json',
-            'Transfer-Encoding' => 'chunked',
-            'Connection' => 'keep-alive',
-        ]);
+        $docs = $this->settingServices->getStyles($id, 'page');
+        return response()->streamJson($docs);
     }
 
     /**
@@ -229,6 +189,7 @@ class PageController extends Controller
     {
         $filter = $request->only(['name']);
         $options = $request->only(['sortBy', 'limit', 'page']);
+        \Log::info('', $filter);
         $pages = $this->pageServices->getPages($filter, $options);
         return response()->json(['pages' => $pages]);
     }

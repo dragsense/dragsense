@@ -88,11 +88,11 @@ export default function Setting() {
     try {
       setIsLoading(true);
       const res = await SettingServices.get();
-      const data = { ...initial, ...res.setting };
+      const data = { ...initial, ...res.settings };
       setHost(res.host || "");
       form.setFieldsValue({
-        webTitle: res.setting?.webTitle,
-        email: res.setting?.email,
+        webTitle: res.settings?.webTitle,
+        email: res.settings?.email,
       });
 
       setState(data);

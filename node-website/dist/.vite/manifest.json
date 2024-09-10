@@ -1,0 +1,8 @@
+{
+  "src/client/components/index.jsx": {
+    "file": "app-client.js",
+    "name": "index",
+    "src": "src/client/components/index.jsx",
+    "isEntry": true
+  }
+}

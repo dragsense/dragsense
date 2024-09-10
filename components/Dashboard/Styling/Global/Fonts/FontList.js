@@ -61,8 +61,9 @@ const FontList = ({ selectedFont, onSelect, fonts, onDelete, onEdit }) => {
                 <Skeleton avatar title={false} loading={false} active>
                     <List.Item.Meta
                         title={font.name}
-                        description={font.fontFamily}
+                        description={<><span>{font.fontFamily}</span><br/><em>{font.variable}</em></>}
                     />
+                      <span>Type: font family</span>
                 </Skeleton>
             </List.Item>
         )}

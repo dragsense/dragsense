@@ -11,13 +11,20 @@ return new class extends Migration {
         Schema::create('ac_layouts', function (Blueprint $table) {
             $table->string('_id')->primary();
             $table->string('name');
-            $table->boolean('topComponent')->default(false);
-            $table->boolean('bottomComponent')->default(false);
-            $table->json('components')->default(json_encode([]));
-            $table->json('updater')->default(json_encode([]));
-            $table->json('creator')->default(json_encode([]));
+            $table->string('main');
+            $table->json('elements');
+            $table->json('components');
+            $table->json('forms');
+            $table->json('_components');
+            $table->json('_forms');
+            $table->json('_elements');
+            $table->json('_styles');
+            $table->boolean('published')->default(true);
+            $table->json('styles');
+            $table->json('updater');
+            $table->boolean('duplicated')->default(false);
+            $table->json('creator');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

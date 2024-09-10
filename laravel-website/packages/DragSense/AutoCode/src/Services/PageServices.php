@@ -31,6 +31,7 @@ class PageServices
                 "0" => [
                     "_uid" => "0",
                     "tagName" => "div",
+                    "name" => 'Page Root Element',
                     "type" => "layout",
                     "layout" => "root",
                     "nodeValue" => "",
@@ -234,41 +235,6 @@ class PageServices
         return $page;
     }
 
-    /**
-     * Get a page style
-     *
-     * @param string $id
-     * @param $stream
-     * @return  mixed
-     * @throws ApiError
-     */
-    public function getStyle(string $id, callable $streamCallback)
-    {
-        $projection = ['_styles', 'styles', '_id', 'published'];
-
-        $page = Page::find($id, $projection);
-
-        if (!$page) {
-            throw new ApiError('Page not found', 404);
-        }
-
-        $doc = ['_id' => $page->_id];
-        $doc['styles'] = $page->published ? $page->styles : $page->_styles;
-
-        // $styles = array_map(function($style) {
-        //     return is_string($style) ? json_decode($style, true) : $style;
-        // }, $doc['styles']);
-
-        if (count($doc['styles']) > 0) {
-            $chunkSize = 1024;
- 
-            $jsonData = json_encode(['elements' =>  $doc['styles'], '_id' => $doc['_id']]);
-            $chunkStr = $jsonData . "\n";
-            $streamCallback($chunkStr);
-        }
-        $streamCallback(null);
-
-    }
 
     /**
      * Duplicate a page

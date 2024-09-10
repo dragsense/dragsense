@@ -45,25 +45,25 @@ class Component extends Model
         'creator',
     ];
 
-    // Cast attributes to the desired data types
     protected $casts = [
-        'elements' => 'json',
+        'elements' => 'array',
         'components' => 'array',
         'forms' => 'array',
         '_collStates' => 'array',
         'collStates' => 'array',
-        'styles' => 'json',
+        'styles' => 'array',
         'states' => 'array',
         'events' => 'array',
         '_events' => 'array',
         '_states' => 'array',
         '_components' => 'array',
         '_forms' => 'array',
-        '_elements' => 'json',
-        '_styles' => 'json',
+        '_elements' => 'array',
+        '_styles' => 'array',
         'updater' => 'array',
         'creator' => 'array',
     ];
+
 
     public $timestamps = true; // Enable timestamps for created_at and updated_at
 
@@ -74,6 +74,27 @@ class Component extends Model
         static::saving(function ($component) {
             // Generate a unique ID for new components if not duplicated
             if (!$component->exists && !$component->duplicated) {
+
+                
+    
+                $component->_elements =  $component->elements;
+        
+                // Set default empty arrays for other attributes if not provided
+                $defaultArrayFields = [
+                    'styles', 'components', 'forms',
+                    '_components', '_forms', 'updater',
+                    '_styles', '_states', 'states', '_events', 'events', '_collStates', 
+                    'collStates'
+                ];
+        
+                foreach ($defaultArrayFields as $field) {
+                    if (!isset($component->$field) || !is_array($component->$field)) {
+                        $component->$field = []; // Set to empty array if not provided or invalid
+                    }
+                }
+    
+    
+
                 $component->setupNewComponent();
                 $component->_id = Str::uuid()->toString();
             }
@@ -88,7 +109,7 @@ class Component extends Model
         $elements = $this->elements;
 
         $id = Str::random(7);
-        $className = 'ac-elem-' . $id;
+        $className = 'ac-elem-component-root-' . $id;
 
         // Ensure the key '0' exists before modifying it
         if (isset($elements[0])) {

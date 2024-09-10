@@ -223,7 +223,11 @@ const HelpSection = () => {
                   <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm run build</code> to compile React components.</strong>
                 </li>
                 <li>
+                <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>php artisan key:generate</code></strong>
+                </li>
+                <li>
                   <strong>Add the following configuration to <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>config/autocode.php</code>:</strong>
+                 
                   <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
 {`<?php
 return [
@@ -246,7 +250,7 @@ return [
                 <li>
                   <strong>Register the AutoCode service provider in either <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>config/app.php</code> or a new Laravel path like <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>bootstrap/provider.php</code>:</strong>
                   <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`DragSense\\AutoCode\\Providers\\AutoCodeServiceProvider::class,`}
+{`DragSense\\\\AutoCode\\\\Providers\\\\AutoCodeServiceProvider::class,`}
                   </pre>
                 </li>
                 <li>
@@ -255,7 +259,7 @@ return [
 {`"autoload": {
     "psr-4": {
         // other namespaces...
-        "DragSense\\\\AutoCode\\": "packages/DragSense/AutoCode/src"
+        "DragSense\\\\AutoCode\\\\": "packages/DragSense/AutoCode/src"
     }
 }`}
                   </pre>

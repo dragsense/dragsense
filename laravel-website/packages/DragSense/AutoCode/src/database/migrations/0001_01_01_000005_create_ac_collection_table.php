@@ -19,37 +19,21 @@ return new class extends Migration {
                 ->on('ac_layouts');
             $table->json('scripts')->nullable();
             $table->string('url')->nullable();
-            $table->json('elements')->default(json_encode([
-                "0" => [
-                    "_uid" => "0",
-                    "tagName" => "div",
-                    "type" => "layout",
-                    "layout" => "root",
-                    "nodeValue" => "",
-                    "childNodes" => []
-                ]
-            ]));
-            $table->json('components')->default(json_encode([]));
-            $table->json('forms')->default(json_encode([]));
-            $table->json('_components')->default(json_encode([]));
-            $table->json('_forms')->default(json_encode([]));
-            $table->json('_elements')->default(json_encode([]));
-            $table->json('_styles')->default(json_encode([]));
-            $table->json('states')->default(json_encode([]));
-            $table->json('_states')->default(json_encode([]));
+            $table->json('elements');
+            $table->json('components');
+            $table->json('forms');
+            $table->json('_components');
+            $table->json('_forms');
+            $table->json('_elements');
+            $table->json('_styles');
+            $table->json('states');
+            $table->json('_states');
             $table->boolean('published')->default(true);
-            $table->json('styles')->default(json_encode([]));
-            $table->json('setting')->default(json_encode([
-                'title' => '',
-                'desc' => '',
-                'image' => null,
-                'content' => '',
-                'excerpt' => '',
-                'status' => 'DRAFT',
-            ]));
-            $table->json('updater')->default(json_encode([]));
+            $table->json('styles');
+            $table->json('setting');
+            $table->json('updater');
             $table->boolean('duplicated')->default(false);
-            $table->json('creator')->default(json_encode([]));
+            $table->json('creator');
             $table->timestamps();
         });
     }
