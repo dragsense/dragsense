@@ -1,7 +1,5 @@
 import React from 'react'
-
 import ComplexLogics from './ComplexLogics';
-
 
 export default function AutocodeClient({ children, name, getStateValue, getPropValue, updateProp, updateState }) {
 
