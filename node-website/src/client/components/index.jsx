@@ -5,7 +5,6 @@ import ComplexLogics from './ComplexLogics';
 
 export default function AutocodeClient({ children, name, getStateValue, getPropValue, updateProp, updateState }) {
 
-
     switch (name) {
         case 'ComplexLogics':
             return <ComplexLogics
