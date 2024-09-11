@@ -22,12 +22,16 @@ const getCurrentDate = () => {
 };
 
 // Function to add files to zip
-const addFilesToZip = (folderPath, folderName, zip) => {
+const addFilesToZip = (folderPath, folderName, zip, excluded = []) => {
     const items = fs.readdirSync(folderPath);
 
     items.forEach((item) => {
         const itemPath = path.join(folderPath, item);
         const stats = fs.statSync(itemPath);
+
+        if (excluded.includes(item)) {
+            return;
+        }
 
         if (stats.isFile()) {
             const fileContent = fs.readFileSync(itemPath);
@@ -50,7 +54,7 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('../laravel-demo/dist', '', zip);
+        addFilesToZip('../laravel-demo/dist', '', zip, ['autocode-custom-style.css', 'autocode-custom-index.js']);
         addFilesToZip('../laravel-demo/packages', 'packages', zip);
 
         res.setHeader('Content-Type', 'application/zip');
