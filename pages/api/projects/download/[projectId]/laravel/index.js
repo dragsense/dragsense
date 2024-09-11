@@ -6,7 +6,6 @@ import fs from 'fs';
 import path from 'path';
 import nc from 'next-connect';
 
-// Create a handler with next-connect
 const handler = nc(ncOpts);
 
 // Use database and authorize middlewares
@@ -22,25 +21,32 @@ const getCurrentDate = () => {
 };
 
 // Function to add files to zip
-const addFilesToZip = (folderPath, folderName, zip, project) => {
+const addFilesToZip = (folderPath, folderName, zip, project, excluded = []) => {
     const files = fs.readdirSync(folderPath);
 
     files.forEach((file) => {
         const filePath = path.join(folderPath, file);
         const stats = fs.statSync(filePath);
 
+        // Skip excluded files
+        if (excluded.includes(file) || excluded.includes(filePath)) {
+            return;
+        }
+
         if (stats.isFile()) {
             let fileContent = fs.readFileSync(filePath, 'utf-8');
-
             if (file === '.env.example') {
                 fileContent = fileContent.replace('AUTOCODE_API_KEY=', `AUTOCODE_API_KEY=${project.apikey}`);
             }
 
             zip.file(path.join(folderName, file), fileContent);
-        } else if (stats.isDirectory() && folderName !== 'node_modules') {
-            const subFolderPath = path.join(folderPath, file);
-            const subFolderName = path.join(folderName, file);
-            addFilesToZip(subFolderPath, subFolderName, zip, project);
+        } else if (stats.isDirectory()) {
+            // Skip excluded directories
+            if (!excluded.includes(file)) {
+                const subFolderPath = path.join(folderPath, file);
+                const subFolderName = path.join(folderName, file);
+                addFilesToZip(subFolderPath, subFolderName, zip, project, excluded);
+            }
         }
     });
 };
@@ -57,10 +63,10 @@ handler.get(async (req, res) => {
         const zip = new JSZip();
 
         addFilesToZip('./laravel-website', '', zip, project, []);
-        addFilesToZip('../laravel-demo', '', zip, project, ['node_modules', 'package-lock.json', '.env', 'vendor', 'storage', 'public', 'composer.lock']);
+        addFilesToZip('../laravel-demo', '', zip, project,  ['node_modules', 'package-lock.json', '.env', 'vendor', 'storage', 'public', 'composer.lock']);
 
         res.setHeader('Content-Type', 'application/zip');
-        res.setHeader('Content-Disposition', `attachment; filename=${project.name}-laravel-${getCurrentDate()}.zip`);
+        res.setHeader('Content-Disposition', `attachment; filename=${project.name}-${getCurrentDate()}.zip`);
 
         zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true }).pipe(res);
     } catch (error) {

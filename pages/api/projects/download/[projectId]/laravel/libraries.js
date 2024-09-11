@@ -50,8 +50,8 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./laravel-website/dist', '', zip);
-        addFilesToZip('./laravel-website/packages', 'packages', zip);
+        addFilesToZip('../laravel-demo/dist', '', zip);
+        addFilesToZip('../laravel-demo/packages', 'packages', zip);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=autocode-library-laravel-${getCurrentDate()}.zip`);
