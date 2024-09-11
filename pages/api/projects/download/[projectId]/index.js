@@ -62,7 +62,7 @@ handler.get(async (req, res) => {
         const zip = new JSZip();
 
         addFilesToZip('./node-website', '', zip, project, []);
-        addFilesToZip('../node-project', '', zip, project, ['node_modules', 'private', 'public', 'package-lock.json', '.env']);
+        addFilesToZip('../nodejs-demo', '', zip, project, ['node_modules', 'private', 'public', 'package-lock.json', '.env']);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=${project.name}-${getCurrentDate()}.zip`);
