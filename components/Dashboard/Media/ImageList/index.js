@@ -29,6 +29,7 @@ const ImageList = ({ images, onEdit, onDelete, srcs, onSelect }) => {
                                 style={{ width: 200, height: 200, objectFit: 'cover', objectPosition: 'center' }}
                                 preview={true}
                                 src={image.src}
+                                crossOrigin ="anonymous" 
                                 fallback="/images/default/default-img.png" />
 
                         }

@@ -99,6 +99,7 @@ export default function ImageComponent({ type = "", image, setImage, onSelect, o
                             }}>
                                 <DeleteOutlined style={{ color: "red" }} /></div>
                             <Image
+                            crossOrigin ="anonymous" 
                                 width={100}
                                 height={100}
                                 preview={false}
@@ -113,6 +114,7 @@ export default function ImageComponent({ type = "", image, setImage, onSelect, o
                                 onRemoveImage(image);
                             }}><DeleteOutlined style={{ color: "red" }} /></div>
                             <Image
+                            crossOrigin ="anonymous" 
                                 width={100}
                                 height={100}
                                 preview={false}
@@ -153,6 +155,7 @@ export default function ImageComponent({ type = "", image, setImage, onSelect, o
                                 width={100}
                                 height={100}
                                 preview={false}
+                                crossOrigin ="anonymous" 
                                 src={img.path || "/images/default/default-img.png"}
                                 fallback="/images/default/default-img.png" />
                         </div>

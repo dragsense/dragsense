@@ -56,7 +56,8 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./laravel-website', '', zip, project);
+        addFilesToZip('./laravel-website', '', zip, project, []);
+        addFilesToZip('../laravel-project', '', zip, project, ['node_modules', 'package-lock.json', '.env', 'vendor', 'storage', 'public', 'composer.lock']);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=${project.name}-laravel-${getCurrentDate()}.zip`);

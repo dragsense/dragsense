@@ -22,7 +22,7 @@ const getCurrentDate = () => {
 };
 
 // Function to add files to zip
-const addFilesToZip = (folderPath, folderName, zip, project) => {
+const addFilesToZip = (folderPath, folderName, zip, project, exluded = []) => {
     const files = fs.readdirSync(folderPath);
 
     files.forEach((file) => {
@@ -38,7 +38,11 @@ const addFilesToZip = (folderPath, folderName, zip, project) => {
            
 
             zip.file(path.join(folderName, file), fileContent);
-        } else if (stats.isDirectory() && folderName !== 'node_modules') {
+        } else if (
+            stats.isDirectory()
+             && 
+             !exluded.includes(folderName)
+        ) {
             const subFolderPath = path.join(folderPath, file);
             const subFolderName = path.join(folderName, file);
             addFilesToZip(subFolderPath, subFolderName, zip, project);
@@ -57,7 +61,8 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./node-website', '', zip, project);
+        addFilesToZip('./node-website', '', zip, project, []);
+        addFilesToZip('../node-project', '', zip, project, ['node_modules', 'private', 'public', 'package-lock.json', '.env']);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=${project.name}-${getCurrentDate()}.zip`);

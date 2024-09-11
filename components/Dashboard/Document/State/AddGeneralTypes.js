@@ -123,6 +123,7 @@ export default function AddGeneralTypes({ host, isChange, setState, state }) {
                         }}
                         alt={state.src?.alt}
                         src={host+state.src?.src}
+                        crossOrigin ="anonymous" 
                         fallback="/images/default/default-img.png" />
                 </Form.Item>
                 : state.type == 'content' ?
@@ -215,7 +216,7 @@ export default function AddGeneralTypes({ host, isChange, setState, state }) {
                                 :
 
                                 <><Form.Item label="Default Value" className="font-500">
-                                    {state.type === 'text' ?
+                                    {state.type === 'text' || state.type === 'textarea' ?
 
                                         <TextArea placeholder="Default Value" name="defaultValue"
                                             onChange={onChange}

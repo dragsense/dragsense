@@ -360,6 +360,7 @@ export default function AddPage({ page, onSubmit }) {
                         <Form.Item label="Cover Image" >
 
                             <img
+                            crossOrigin ="anonymous" 
                                 width="100%"
                                 onClick={() => setMediaModal(true)}
                                 preview={false}

@@ -525,6 +525,7 @@ export default function AddCollection({ collection, onSubmit }) {
                                     height: '120px',
                                     cursor: 'pointer'
                                 }}
+                                crossOrigin ="anonymous" 
                                 alt={preview?.alt}
                                 src={imageSrc}
                             />

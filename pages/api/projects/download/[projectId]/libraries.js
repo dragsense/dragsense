@@ -49,7 +49,7 @@ handler.get(async (req, res) => {
 
         const zip = new JSZip();
 
-        addFilesToZip('./node-website/dist', '', zip);
+        addFilesToZip('../node-project/dist', '', zip, project, []);
 
         res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename=autocode-library-${getCurrentDate()}.zip`);

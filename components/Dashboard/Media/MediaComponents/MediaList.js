@@ -77,7 +77,7 @@ const MediaItem = ({ item, host, isSelected, colorPrimary, onEdit, onDelete, onS
         
         switch(item.type) {
             case 'images':
-                return <Image onClick={() => onSelect(item)} style={{ width: '100%', height: '200px', objectFit: 'cover', objectPosition: 'center' }} preview={true} src={host + item.src} fallback="/images/default/default-img.png" />;
+                return <Image onClick={() => onSelect(item)} style={{ width: '100%', height: '200px', objectFit: 'cover', objectPosition: 'center' }} preview={true} src={host + item.src} crossOrigin ="anonymous"  fallback="/images/default/default-img.png" />;
             case 'videos':
                 return <Video src={host + item.src} alt={item.alt} mimetype={item.mimetype} />;
             case 'audios':
