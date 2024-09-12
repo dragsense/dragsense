@@ -125,7 +125,7 @@ export default function AddGeneralTypes({ host, isChange, setState, state }) {
                         }}
                         alt={state.src?.alt}
                         src={host+state.src?.src}
-                        crossOrigin ="anonymous" 
+                        
                         fallback="/images/default/default-img.png" />
                 </Form.Item>
                 : state.type == 'content' ?
@@ -174,7 +174,7 @@ export default function AddGeneralTypes({ host, isChange, setState, state }) {
                                         cursor: 'pointer'
                                     }}
                                     alt="video poster"
-                                    crossOrigin ="anonymous" 
+                                    
                                     src={host+state.src?.src}
                                     fallback="/images/default/default-poster.png" />
                             </Form.Item>

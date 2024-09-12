@@ -262,7 +262,7 @@ export default function AddState({ newState, host, onAddNew, setNewState }) {
                                                     }}
                                                     alt={src?.alt}
                                                     src={host+src?.src}
-                                                    crossOrigin ="anonymous" 
+                                                    
                                                     fallback="/images/default/default-img.png" />
                                             </div>
                                         </>

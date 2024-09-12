@@ -91,7 +91,7 @@ class ButtonImage extends React.Component {
         const editor = this.props.editor.get('nativeEditor');
 
         const el = window.CKEDITOR.dom.element.createFromHtml(
-          `<img src="${res.host+res.media.src}" alt="${res.media.alt}" width="400" crossOrigin ="anonymous">`
+          `<img src="${res.host+res.media.src}" alt="${res.media.alt}" width="400">`
         );
 
 

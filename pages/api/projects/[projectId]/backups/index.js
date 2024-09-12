@@ -70,6 +70,7 @@ handler.post(validateBody({
 
     // Check if backup already exists
     const backup = await findBackupByName(req.db, name);
+    console.log(backup);
 
     // If backup exists, return error
     if (backup) {
@@ -78,7 +79,6 @@ handler.post(validateBody({
 
     // Fetch user by email
     const user = await findUserByEmail(req.db, req.user.email);
-
     // Insert new backup
     const newbackup = await insertBackup(req.db, {
       createdBy: user._id,

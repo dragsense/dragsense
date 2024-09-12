@@ -378,7 +378,7 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
                             <img
-                            crossOrigin ="anonymous" 
+                            
                                 width="100%"
                                 onClick={() => setMediaModal(true)}
                                 preview={false}

@@ -549,7 +549,7 @@ export default function Setting() {
               >
                 <Form.Item label="Favicon" className="font-500">
                   <Image
-                  crossOrigin ="anonymous" 
+                  
                     width="100%"
                     onClick={() =>
                       setMediaModal({
@@ -574,7 +574,7 @@ export default function Setting() {
 
                 <Form.Item label="Logo" className="font-500">
                   <Image
-                  crossOrigin ="anonymous" 
+                  
                     width="100%"
                     onClick={() =>
                       setMediaModal({
@@ -599,7 +599,7 @@ export default function Setting() {
 
                 <Form.Item label="Mobile Logo" className="font-500">
                   <Image
-                  crossOrigin ="anonymous" 
+                  
                     width="100%"
                     onClick={() =>
                       setMediaModal({
@@ -624,7 +624,7 @@ export default function Setting() {
 
                 <Form.Item label="Placeholder" className="font-500">
                   <Image
-                  crossOrigin ="anonymous" 
+                  
                     width="100%"
                     onClick={() =>
                       setMediaModal({

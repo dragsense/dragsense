@@ -197,7 +197,7 @@ export default function Themes({ projectId, activeTheme = 0 }) {
 
 
     return <>
-        <Card loading={state.loading} title={`Themes: Comming Soon`}
+        <Card loading={state.loading} title={`Themes:`}
             extra={state.total > 0 && <Tooltip title="Add New Theme"><Button
                 type="text"
                 onClick={(e) => {
