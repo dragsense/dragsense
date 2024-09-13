@@ -1,4 +1,4 @@
-import { Card, Alert, Button, Tooltip, Space, Typography, message } from "antd";
+import { Card, Alert, Button, Tooltip, Space, Typography, message, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { useEffect, useReducer, useState } from "react";
@@ -87,6 +87,7 @@ export default function Backups({ projectId }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [page, setPage] = useState(1);
   const [host, setHost] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const load = async () => {
     try {
@@ -108,11 +109,29 @@ export default function Backups({ projectId }) {
     }
   };
 
+
+  const search = async () => {
+    try {
+      dispatch({ type: "start" });
+
+      const res = await BackupServices.search(projectId, searchQuery, page);
+
+      const data = Array.isArray(res.backups) ? res.backups : [];
+
+      dispatch({ type: "load", data, total: res.total });
+    } catch (e) {
+      dispatch({ type: "error", error: e?.message || "Something went wrong." });
+    } finally {
+      dispatch({ type: "finish" });
+    }
+  };
+
   useEffect(() => {
     if (!projectId) return;
-
-    load();
-  }, [page]);
+    if (!searchQuery) {
+      load();
+    } else search();
+  }, [page, searchQuery]);
 
   const onSubmit = async (states) => {
     dispatch({ type: "start" });
@@ -193,11 +212,27 @@ export default function Backups({ projectId }) {
     }
   };
 
+  const onChange = (e) => {
+    if (!state.loading)
+        setSearchQuery(e.target.value)
+}
+
+
   return (
     <>
       <Card
         loading={state.loading}
-        title={`Backups:`}
+        title = {
+          <div>
+            Backups:
+            <Input
+              onChange={onChange}
+              style={{ maxWidth: 300, width: '100%', marginLeft: 10 }}
+              type="search"
+              placeholder="search..."
+            />
+          </div>
+        }   
         extra={
           state.total > 0 && (
             <Tooltip title="Add New Backup">

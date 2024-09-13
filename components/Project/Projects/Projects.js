@@ -21,9 +21,10 @@ const initial = {
 const initialProject = {
     _id: -1,
     name: '',
-    url: '',
-    port: '',
-    mongouri: ''
+    apiUrl: '',
+    apiVersion:'v1',
+    apiPrefix: 'autocode-api',
+    platform: 'nodejs',
 }
 
 const LIMIT = 6;

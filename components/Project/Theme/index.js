@@ -3,9 +3,9 @@ import React, { } from "react";
 
 import Themes from './Themes';
 
-export function ThemeComponent({ projectId, activeTheme }) {
+export function ThemeComponent({ projectId, platform, activeTheme }) {
 
-    return  <Themes projectId={projectId} activeTheme={activeTheme} />
+    return  <Themes projectId={projectId} platform={platform} activeTheme={activeTheme} />
 
 
 

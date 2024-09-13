@@ -29,10 +29,13 @@ handler.get(async (req, res) => {
   if (!project)
     return res.status(403).json({ error: { message: 'Project Not Found.' } });
 
+
+
   try {
     // Fetch backups by project ID
     const results = await findBackupsByProjectId(
       req.db,
+      null,
       req.query.page ? parseInt(req.query.page, 10) : 1,
       project._id,
       req.query.limit ? parseInt(req.query.limit, 10) : 10
@@ -70,7 +73,6 @@ handler.post(validateBody({
 
     // Check if backup already exists
     const backup = await findBackupByName(req.db, name);
-    console.log(backup);
 
     // If backup exists, return error
     if (backup) {
@@ -86,6 +88,7 @@ handler.post(validateBody({
       desc,
       published,
       name,
+      paltforn: project.paltforn,
       projectId: project._id
     });
 

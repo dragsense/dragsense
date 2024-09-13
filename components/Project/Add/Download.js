@@ -11,11 +11,10 @@ import { useState } from "react";
 const { Paragraph } = Typography;
 const { TextArea } = Input;
 
-const DownloadProject = ({ id, name, apikey }) => {
+const DownloadProject = ({ id, platform, apikey }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isKeyValid, setIsKeyValid] = useState(false);
   const [error, setError] = useState(false);
-  const [platform, setPlatform] = useState("node"); // Default to Node.js
 
   const onChangeApiKey = (event) => {
     event.preventDefault();
@@ -63,9 +62,7 @@ const DownloadProject = ({ id, name, apikey }) => {
     }
   };
 
-  const onPlatformChange = (e) => {
-    setPlatform(e.target.value);
-  };
+
 
   return (
     <>
@@ -102,9 +99,9 @@ const DownloadProject = ({ id, name, apikey }) => {
           <TextArea rows={4} maxLength={500} onChange={onChangeApiKey} />
         </Form.Item>
 
-        <Form.Item label="Select Platform" style={{ marginTop: 20 }}>
-          <Radio.Group onChange={onPlatformChange} value={platform}>
-            <Radio value="node">Node.js</Radio>
+        <Form.Item label="Selected Platform" style={{ marginTop: 20 }}>
+          <Radio.Group  value={platform} disabled>
+            <Radio value="nodejs">Node.js</Radio>
             <Radio value="laravel">Laravel</Radio>
           </Radio.Group>
         </Form.Item>
@@ -140,7 +137,7 @@ const DownloadProject = ({ id, name, apikey }) => {
              
               </Paragraph>
             )}
-            {platform === "node" && (
+            {platform === "nodejs" && (
               <Paragraph style={{ marginTop: 10 }}>
                 After downloading, simply copy and paste the files into your
                 project's <code>dist</code> directory, replacing the existing ones.

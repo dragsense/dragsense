@@ -23,6 +23,7 @@ const handleGet = async (req, res) => {
   try {
     const results = await findRolesByProjectRoles(
       req.db,
+      null,
       Array.isArray(project.roles) ? project.roles : [],
       req.query.page ? parseInt(req.query.page, 10) : 0,
       req.query.limit ? parseInt(req.query.limit, 10) : 10

@@ -45,7 +45,7 @@ const AddProject = ({ project, onClose, onSubmit, loading }) => {
                     <FontSizeOutlined size="1rem" style={{ marginRight: 3 }} />
                     Themes
                 </span>} key="4">
-                    <ThemeComponent projectId={project._id} activeTheme={project.activeTheme || 0} />
+                    <ThemeComponent projectId={project._id} platform={project.platform} activeTheme={project.activeTheme || 0} />
                 </TabPane>
             </Tabs>
 

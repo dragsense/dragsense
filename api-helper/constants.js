@@ -14,8 +14,11 @@ export const ValidateProps = {
   },
   project: {
     name: { type: 'string', minLength: 1, maxLength: 280 },
-    desc : { type: 'string', minLength: 1, maxLength: 280 },
-    url : { type: 'string', minLength: 1, maxLength: 280 },
+    desc : { type: 'string', minLength: 1, maxLength: 500 },
+    apiUrl: { type: 'string', minLength: 1, maxLength: 280 },
+    apiVersion: { type: 'string', minLength: 1, maxLength: 280 },
+    apiPrefix:{ type: 'string', minLength: 1, maxLength: 280 },
+    platform: { type: 'string', minLength: 1, maxLength: 280 },
   },
   backup: {
     name: { type: 'string', minLength: 1, maxLength: 280 },

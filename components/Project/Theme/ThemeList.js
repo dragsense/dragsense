@@ -68,7 +68,7 @@ const ThemeList = ({ total, setPage, themes, onDelete, onInstall, onDownload, ac
               onClick={(e) => {
                 e.preventDefault();
 
-                onDownload(theme._id);
+                onDownload(theme._id, theme.name);
 
 
               }}

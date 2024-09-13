@@ -31,7 +31,7 @@ export async function findRoles(db, page = 0, limit = 10) {
         .toArray();
 }
 
-export async function findRolesByProjectRoles(db, roleIds, page = 0, limit = 10) {
+export async function findRolesByProjectRoles(db, search, roleIds, page = 0, limit = 10) {
     
     const pageSize = parseInt(limit);
     const pageNumber = parseInt(page);
@@ -43,7 +43,10 @@ export async function findRolesByProjectRoles(db, roleIds, page = 0, limit = 10)
                 $facet: {
                     roles: [
                         {
-                            $match: { _id: { $in: roleIds } },
+                            $match: { _id: { $in: roleIds },
+                            ...(search && { name: { $regex: search, $options: 'i' } })
+                        },
+
                         },
                         { $sort: { _id: -1 } },
                         { $skip: (pageNumber - 1) * pageSize },
@@ -61,7 +64,9 @@ export async function findRolesByProjectRoles(db, roleIds, page = 0, limit = 10)
                     ],
                     total: [
                         {
-                            $match: { _id: { $in: roleIds } }
+                            $match: { _id: { $in: roleIds },
+                            ...(search && { name: { $regex: search, $options: 'i' } })
+                        }
                         },
                         { $count: 'total' }
                     ]

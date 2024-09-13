@@ -6,6 +6,7 @@ import {
   Divider,
   Input,
   Button,
+  Select,
   Steps,
   message,
 } from "antd";
@@ -14,6 +15,7 @@ import DownloadProject from "./Download";
 
 const { Step } = Steps;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const Setting = ({ project, onSubmit, loading }) => {
   const [form] = Form.useForm();
@@ -76,21 +78,76 @@ const Setting = ({ project, onSubmit, loading }) => {
             >
               <Input maxLength={100} placeholder="Name" name="name" />
             </Form.Item>
+
             <Form.Item label="Description" name="desc">
               <TextArea maxLength={500} rows={4} />
             </Form.Item>
+
             <Form.Item
               label="API Url"
-              name="url"
+              name="apiUrl"
               rules={[
                 {
                   required: true,
-                  message: "Please input a valid URL!",
+                  message: "Please input a valid API URL!",
+                  type: "url",
                 },
               ]}
             >
-              <Input maxLength={500} placeholder="Url" name="url" type="url" />
+              <Input maxLength={500} placeholder="API Url" />
             </Form.Item>
+
+            <Form.Item
+              label="API Url Prefix"
+              name="apiPrefix"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input a valid API URL Prefix!",
+                },
+              ]}
+            >
+              <Input
+                maxLength={500}
+                defaultValue="autocode-api"
+                placeholder="API Url Prefix"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="API Version"
+              name="apiVersion"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select an API version!",
+                },
+              ]}
+            >
+              <Select placeholder="Select API version">
+                <Option value="v1">v1</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Project Platform"
+              name="platform"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select a project platform!",
+                },
+              ]}
+            >
+              <Select
+                disabled={project._id !== -1}
+                placeholder="Select Project Platform"
+              >
+                <Option value="nodejs">Node.js</Option>
+                <Option value="laravel">Laravel</Option>
+              </Select>
+            </Form.Item>
+
             <Form.Item className="text-right">
               <Space>
                 <Button onClick={handleResetForm}>Reset</Button>
@@ -110,6 +167,7 @@ const Setting = ({ project, onSubmit, loading }) => {
         <Col span={12}>
           {
             <DownloadProject
+              platform={project.platform}
               id={project._id}
               name={project.name}
               apikey={project.apikey}
@@ -139,7 +197,11 @@ const HelpSection = () => {
           title="Hosting Requirements"
           description={
             <>
-              <p><strong>Ensure you have the following hosting requirements:</strong></p>
+              <p>
+                <strong>
+                  Ensure you have the following hosting requirements:
+                </strong>
+              </p>
               <ul>
                 <li>
                   <strong>Node.js:</strong> Node.js 18.x or higher
@@ -148,7 +210,8 @@ const HelpSection = () => {
                   <strong>Laravel:</strong> PHP 8.x or higher
                 </li>
                 <li>
-                  <strong>Database:</strong> For Laravel: MySQL, PostgreSQL, or any other supported database. For Node.js: MongoDB
+                  <strong>Database:</strong> For Laravel: MySQL, PostgreSQL, or
+                  any other supported database. For Node.js: MongoDB
                 </li>
                 <li>
                   <strong>Web Server:</strong> Apache or Nginx
@@ -175,10 +238,14 @@ const HelpSection = () => {
           title="Environment Setup"
           description={
             <>
-              <p><strong>Prepare your environment configuration:</strong></p>
+              <p>
+                <strong>Prepare your environment configuration:</strong>
+              </p>
               <ul>
                 <li>
-                  <strong>Rename <code>.env.example</code> to <code>.env</code></strong>
+                  <strong>
+                    Rename <code>.env.example</code> to <code>.env</code>
+                  </strong>
                 </li>
               </ul>
             </>
@@ -190,16 +257,32 @@ const HelpSection = () => {
           title="NodeJS Setup"
           description={
             <>
-              <p><strong>Run the following commands in the project's root folder:</strong></p>
+              <p>
+                <strong>
+                  Run the following commands in the project's root folder:
+                </strong>
+              </p>
               <ol>
                 <li>
-                  <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm install</code>
+                  <code
+                    style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                  >
+                    npm install
+                  </code>
                 </li>
                 <li>
-                  <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm run build</code>
+                  <code
+                    style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                  >
+                    npm run build
+                  </code>
                 </li>
                 <li>
-                  <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm run start</code>
+                  <code
+                    style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                  >
+                    npm run start
+                  </code>
                 </li>
               </ol>
             </>
@@ -211,25 +294,68 @@ const HelpSection = () => {
           title="Laravel Setup"
           description={
             <>
-              <p><strong>After extracting the project files, follow these steps:</strong></p>
+              <p>
+                <strong>
+                  After extracting the project files, follow these steps:
+                </strong>
+              </p>
               <ol>
                 <li>
-                  <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>composer install</code> to install PHP dependencies.</strong>
+                  <strong>
+                    Run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      composer install
+                    </code>{" "}
+                    to install PHP dependencies.
+                  </strong>
                 </li>
                 <li>
-                  <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm install</code> to install Node.js dependencies.</strong>
+                  <strong>
+                    Run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      npm install
+                    </code>{" "}
+                    to install Node.js dependencies.
+                  </strong>
                 </li>
                 <li>
-                  <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>npm run build</code> to compile React components.</strong>
+                  <strong>
+                    Run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      npm run build
+                    </code>{" "}
+                    to compile React components.
+                  </strong>
                 </li>
                 <li>
-                <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>php artisan key:generate</code></strong>
+                  <strong>
+                    Run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      php artisan key:generate
+                    </code>
+                  </strong>
                 </li>
                 <li>
-                  <strong>Add the following configuration to <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>config/autocode.php</code>:</strong>
-                 
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`<?php
+                  <strong>
+                    Add the following configuration to{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      config/autocode.php
+                    </code>
+                    :
+                  </strong>
+
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`<?php
 return [
     'api_key' => env('AUTOCODE_API_KEY'),
     'prefix' => env('AUTOCODE_API_PREFIX', 'api'),
@@ -237,26 +363,63 @@ return [
                   </pre>
                 </li>
                 <li>
-                  <strong>In the <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>filesystems.php</code> configuration file, add:</strong>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`'links' => [
+                  <strong>
+                    In the{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      filesystems.php
+                    </code>{" "}
+                    configuration file, add:
+                  </strong>
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`'links' => [
     public_path('storage') => storage_path('app/public'),
     public_path('autocode') => base_path('dist'),
     // Additional symbolic links can be defined here as needed for your application
 ],`}
                   </pre>
-                  <strong>Then, run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>php artisan storage:link</code></strong>
+                  <strong>
+                    Then, run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      php artisan storage:link
+                    </code>
+                  </strong>
                 </li>
                 <li>
-                  <strong>Register the AutoCode service provider in either <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>config/app.php</code> or a new Laravel path like <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>bootstrap/provider.php</code>:</strong>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`DragSense\\\\AutoCode\\\\Providers\\\\AutoCodeServiceProvider::class,`}
+                  <strong>
+                    Register the AutoCode service provider in either{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      config/app.php
+                    </code>{" "}
+                    or a new Laravel path like{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      bootstrap/provider.php
+                    </code>
+                    :
+                  </strong>
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`DragSense\\\\AutoCode\\\\Providers\\\\AutoCodeServiceProvider::class,`}
                   </pre>
                 </li>
                 <li>
-                  <strong>Update the autoload in <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>composer.json</code>:</strong>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`"autoload": {
+                  <strong>
+                    Update the autoload in{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      composer.json
+                    </code>
+                    :
+                  </strong>
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`"autoload": {
     "psr-4": {
         // other namespaces...
         "DragSense\\\\AutoCode\\\\": "packages/DragSense/AutoCode/src"
@@ -265,21 +428,29 @@ return [
                   </pre>
                 </li>
                 <li>
-                  <strong>Run <code style={{ backgroundColor: '#f0f0f0', padding: '2px 4px' }}>composer dump-autoload</code> to update the autoload files.</strong>
+                  <strong>
+                    Run{" "}
+                    <code
+                      style={{ backgroundColor: "#f0f0f0", padding: "2px 4px" }}
+                    >
+                      composer dump-autoload
+                    </code>{" "}
+                    to update the autoload files.
+                  </strong>
                 </li>
                 <li>
                   <strong>Run the migration commands:</strong>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`php artisan migrate`}
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`php artisan migrate`}
                   </pre>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`php artisan migrate --path=packages/DragSense/AutoCode/src/database/migrations`}
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`php artisan migrate --path=packages/DragSense/AutoCode/src/database/migrations`}
                   </pre>
                 </li>
                 <li>
                   <strong>Start the Laravel development server:</strong>
-                  <pre style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
-{`php artisan serve`}
+                  <pre style={{ backgroundColor: "#f0f0f0", padding: "10px" }}>
+                    {`php artisan serve`}
                   </pre>
                 </li>
               </ol>

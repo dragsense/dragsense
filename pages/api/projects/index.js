@@ -48,15 +48,18 @@ handler.post(
     type: 'object',
     properties: {
       name: ValidateProps.project.name,
-      url: ValidateProps.project.url,
-      port: ValidateProps.project.desc,
+      apiUrl: ValidateProps.project.apiUrl,
+      desc: ValidateProps.project.desc,
+      apiVersion: ValidateProps.project.apiVersion,
+      apiPrefix: ValidateProps.project.apiPrefix,
+      platform: ValidateProps.project.platform,
     },
-    required: ['name', 'url'],
+    required: ['name', 'apiUrl', 'apiVersion', 'apiPrefix', 'platform'],
     additionalProperties: true,
   }),
   async (req, res) => {
     // Destructure request body
-    const { name, desc, url } = req.body;
+    const { name, desc, apiUrl, apiVersion, apiPrefix, platform } = req.body;
 
     // Check if project with same name exists
     if (await findProjectByName(req.db, name)) {
@@ -81,10 +84,10 @@ handler.post(
       // Insert new project into database
       const project = await insertProject(req.db, {
         name,
-        url,
         desc,
         apikey,
-        activeTheme: 0,
+        apiUrl, apiVersion, apiPrefix, platform,
+        activeTheme: null,
         creatorId: user._id,
       });
 

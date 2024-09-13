@@ -1,5 +1,5 @@
 
-import { findUsersBySearch } from '@/api-helper/database';
+import { findUsers } from '@/api-helper/database';
 import {  database } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
@@ -10,9 +10,12 @@ handler.use(database);
 
 handler.get(async (req, res) => {
   try {
-    const results = await findUsersBySearch(
+ 
+    const results = await findUsers(
       req.db,
-      req.query.search,
+      req.query.search || '',
+      req.query.page ? parseInt(req.query.page, 10) : 0,
+      req.query.limit ? parseInt(req.query.limit, 10) : 10
     );
 
     res.json(results);

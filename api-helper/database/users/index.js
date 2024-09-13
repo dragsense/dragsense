@@ -14,21 +14,6 @@ export async function findUserWithEmailAndPassword(db, email, password) {
   return null;
 }
 
-export async function findUsersBySearch(db, search, limit = 25) {
-  const pageSize = parseInt(limit);
-
-  const res = await db
-    .collection("users")
-    .aggregate([
-      { $match: { ...(search && { name: search }) } },
-      { $sort: { _id: -1 } },
-      { $limit: pageSize },
-      { $project: { _id: 1, name: 1 } },
-    ])
-    .toArray();
-
-  return { users: res[0] };
-}
 
 export async function findUserById(db, userId) {
   return db
@@ -37,11 +22,39 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
-export async function findUsers(db, page = 0, limit = 10) {
-  return db
+export async function findUsers(db, search, page = 0, limit = 10) {
+  const pageSize = parseInt(limit);
+  const pageNumber = parseInt(page);
+
+  const res = await db
     .collection("users")
-    .aggregate([{ $sort: { _id: -1 } }, { $skip: page }, { $limit: limit }])
+    .aggregate([
+      {
+        $facet: {
+          users: [
+            {
+              $match: {
+                ...(search && { name: { $regex: search, $options: 'i' } }) // Optional search filter
+              },
+            },
+            { $sort: { _id: -1 } }, // Sorting by descending order of _id
+            { $skip: pageNumber * pageSize }, // Skipping documents for pagination
+            { $limit: pageSize } // Limiting the number of documents returned
+          ],
+          total: [
+            {
+              $match: {
+                ...(search && { name: { $regex: search, $options: 'i' } }) // Matching the same search filter
+              },
+            },
+            { $count: 'total' } // Counting the total number of documents
+          ]
+        }
+      }
+    ])
     .toArray();
+
+  return { users: res[0].users, total: res[0].total[0]?.total ?? 0 };
 }
 
 export async function findUserByEmail(db, email) {

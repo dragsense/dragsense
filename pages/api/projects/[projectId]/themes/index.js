@@ -7,6 +7,7 @@ import { authorize, database, validateBody } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
 import request from 'request';
+import { findBackupById } from '../../../../../api-helper/database/backups';
 const stream = require('stream');
 
 const handler = nc(ncOpts);
@@ -26,9 +27,9 @@ handler.get(async (req, res) => {
 
   try {
 
-
     const results = await findThemesByProjectThemes(
       req.db,
+      null,
       Array.isArray(project.themes) ? project.themes : [],
       req.query.page ? parseInt(req.query.page, 10) : 0,
       req.query.limit ? parseInt(req.query.limit, 10) : 10
@@ -65,10 +66,20 @@ handler.post(validateBody({
   const { id
   } = req.body;
 
+  const themes = project.themes || [];
 
-  const theme = await findBackupByIdWithUser(req.db, id);
+  if (themes.some((t) => t.equals(new ObjectId(id)))) {
+    return res.status(404).json({
+      error: {
+        message: "The requested theme was already in this project.",
+      },
+    });
+  }
 
-  if (!theme) {
+
+  const theme = await findBackupById(req.db, id);
+
+  if (!theme || theme.platform !== project.platform) {
     res
       .status(403)
       .json({ error: { message: 'Theme Not Found.' } });
@@ -76,43 +87,10 @@ handler.post(validateBody({
   }
 
 
-  const themeProject = await _findProjectById(req.db, theme.projectId);
-
-
-  if (!themeProject)
-    return res.status(403).status(403)
-      .json({ error: { message: 'Theme Not Found.' } });
-
   try {
-
-
-
-    const readable = request.get({
-      url: `${project.url}/api/backups/${theme._id}`,
-      headers: { 'x-api-key': project.apikey }
-    });
-
-    const writeable = request.post({
-      url: `${themeProject.url}/api/themes/${theme._id}`,
-      headers: {
-        'x-api-key': themeProject.apikey
-      }
-    })
-
-    readable.pipe(writeable).on('error', (err) => {
-      res.status(500).send('Error occurred while sending files');
-    }).on('end', () => {
       updateThemeInProjectById(req.db, project._id, theme._id)
       return res.json({ theme });
-    });
-
-  
-
-
-
   } catch (e) {
-
-
     res
       .status(403)
       .json({ error: { message: 'Something went wrong.' } });
