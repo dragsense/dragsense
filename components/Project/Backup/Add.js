@@ -5,7 +5,7 @@ import MediaModal from "@/components/Dashboard/Media/MediaModal";
 
 const { TextArea } = Input;
 
-export default function AddBackup({ onSubmit, backup = {}, host = '' }) {
+export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
   const [form] = Form.useForm();
   const [backupModal, setBackupModalOpen] = useState(false);
   const [preview, setPreview] = useState(null);
@@ -31,8 +31,14 @@ export default function AddBackup({ onSubmit, backup = {}, host = '' }) {
   const onCancel = () => setBackupModalOpen(false);
 
   const onChangeImage = (image) => {
-    setPreview(image[0]);
-    form.setFieldsValue({ preview: image });
+    if (image[0]) {
+      setPreview(image[0]);
+      const imageSrc = image[0]
+        ? host + image[0].src
+        : "/images/default/default-img.png";
+
+      form.setFieldsValue({ preview: imageSrc });
+    }
   };
 
   const imageSrc = preview
@@ -170,8 +176,6 @@ export default function AddBackup({ onSubmit, backup = {}, host = '' }) {
         srcs={preview}
         onSelect={onChangeImage}
       />
-
-      
     </>
   );
 }
