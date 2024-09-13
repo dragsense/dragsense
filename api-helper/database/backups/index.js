@@ -214,7 +214,7 @@ export async function findThemesByProjectThemes(
   return { themes: res[0].themes, total: res[0].total[0]?.total ?? 0 };
 }
 
-export async function findPublicThemes(db, search, paltform,  page = 1, limit = 10) {
+export async function findPublicThemes(db, search, platform,  page = 1, limit = 10) {
   const pageSize = parseInt(limit);
   const pageNumber = parseInt(page);
 
@@ -227,7 +227,7 @@ export async function findPublicThemes(db, search, paltform,  page = 1, limit = 
             {
               $match: {
                 published: true,
-                paltform,
+                platform,
                 ...(search && { name: { $regex: search, $options: "i" } }),
               },
             },
