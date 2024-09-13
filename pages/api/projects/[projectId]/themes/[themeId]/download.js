@@ -1,6 +1,6 @@
 import {
     _findProjectById,
-    findPublicThemeById,
+    findPublicThemeByIdWithProject,
   } from "@/api-helper/database";
   import { authorize, database } from "@/api-helper/middlewares";
   import { ncOpts } from "@/api-helper/nc";
@@ -50,17 +50,16 @@ import {
     const theme = await findPublicThemeByIdWithProject(req.db, themeId);
   
     if (!theme || !theme.published) {
-      res.status(403).json({ error: { message: "Theme Not Found." } });
+      res.status(403).json({ error: { message: "Theme Not Was Found." } });
       return;
     }
 
     if (!theme.themeProject) {
-      res.status(403).json({ error: { message: "Theme Project Not Found." } });
+      res.status(403).json({ error: { message: "Theme Project Was Not Found." } });
       return;
     }
   
     try {
-
       const { apiUrl, apiPrefix, apiVersion, apikey } = theme.themeProject;
       const themeProjectApiUrl = `${apiUrl}/${apiPrefix}/${apiVersion}`;
 

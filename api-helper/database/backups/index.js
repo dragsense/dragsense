@@ -68,12 +68,7 @@ export async function findPublicThemeByIdWithProject(db, backupId) {
         },
       },
       { $unwind: "$themeProject" },
-      { $project: {
-        [`_id`]: 0,
-        [`creatorId`]: 0,
-        [`name`]: 0,
-        [`desc`]: 0,
-      } },
+    
     ])
     .toArray();
   if (!backups[0]) return null;

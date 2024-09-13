@@ -77,7 +77,7 @@ handler.post(validateBody({
   }
 
 
-  const theme = await findBackupById(req.db, id);
+  const theme = await findBackupByIdWithUser(req.db, id);
 
   if (!theme || theme.platform !== project.platform) {
     res
