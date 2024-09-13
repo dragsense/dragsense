@@ -12,7 +12,7 @@ handler.get(async (req, res) => {
     const results = await findPublicThemes(
       req.db,
       null,
-      req.query.paltform || "",
+      req.query.platform || "",
       req.query.page ? parseInt(req.query.page, 10) : 1,
       req.query.limit ? parseInt(req.query.limit, 10) : 10
     );
