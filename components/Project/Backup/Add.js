@@ -31,14 +31,13 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
   const onCancel = () => setBackupModalOpen(false);
 
   const onChangeImage = (image) => {
+    let imageSrc = "/images/default/default-img.png";
     if (image[0]) {
       setPreview(image[0]);
-      const imageSrc = image[0]
-        ? host + image[0].src
-        : "/images/default/default-img.png";
-
-      form.setFieldsValue({ preview: imageSrc });
+      imageSrc = host + image[0].src;
     }
+
+    form.setFieldsValue({ preview: imageSrc });
   };
 
   const imageSrc = preview
