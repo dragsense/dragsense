@@ -60,7 +60,7 @@ handler.get(async (req, res) => {
     // Get readable stream and pipe it to response
     const readable = getReadableStream(sanitizedUrl, project.apikey);
     readable.pipe(res);
-    res.status(200).json({ message: "working" } );
+   
 
   } catch (e) {
     res.status(403).json({ error: { message: "Something went wrong." } });
