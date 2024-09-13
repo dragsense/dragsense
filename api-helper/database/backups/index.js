@@ -87,7 +87,7 @@ export async function updateBackupById(db, id, data) {
 
 export async function insertBackup(
   db,
-  { name, projectId, preview, desc, published = false, createdBy }
+  { name, projectId, preview, platform, desc, published = false, createdBy }
 ) {
   const backup = {
     name,
@@ -96,6 +96,7 @@ export async function insertBackup(
     published,
     projectId,
     createdBy,
+    platform,
     createdAt: new Date(),
   };
 

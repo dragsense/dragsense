@@ -88,7 +88,7 @@ handler.post(validateBody({
       desc,
       published,
       name,
-      paltforn: project.paltforn,
+      platform: project.platform,
       projectId: project._id
     });
 

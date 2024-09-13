@@ -63,7 +63,7 @@ const authOptions = {
     },
     async session(session, token) {
       session.id = token.id;
-      console.log(session)
+      
       return Promise.resolve(session);
     },
   }
