@@ -44,15 +44,6 @@ handler.get(async (req, res) => {
     return res.status(404).json({ error: { message: "Project Not Found." } });
   }
 
-  const themes = project.themes || [];
-
-  if (!themes.some((t) => t.equals(new ObjectId(themeId)))) {
-    return res.status(404).json({
-      error: {
-        message: "The requested theme was not found in this project.",
-      },
-    });
-  }
 
   const theme = await findPublicThemeById(req.db, themeId);
 

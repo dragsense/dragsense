@@ -53,6 +53,34 @@ export async function findBackupByIdWithUser(db, backupId) {
   return backups[0];
 }
 
+export async function findPublicThemeByIdWithProject(db, backupId) {
+  const backups = await db
+    .collection("backups")
+    .aggregate([
+      { $match: { _id: new ObjectId(backupId) } },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: "projects",
+          localField: "projectId",
+          foreignField: "_id",
+          as: "themeProject",
+        },
+      },
+      { $unwind: "$themeProject" },
+      { $project: {
+        [`_id`]: 0,
+        [`creatorId`]: 0,
+        [`name`]: 0,
+        [`desc`]: 0,
+      } },
+    ])
+    .toArray();
+  if (!backups[0]) return null;
+  return backups[0];
+}
+
+
 export async function findBackupByUuid(db, uuid) {
   return db
     .collection("backups")

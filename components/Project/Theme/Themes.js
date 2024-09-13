@@ -179,7 +179,7 @@ export default function Themes({ projectId, platform,  activeTheme = 0 }) {
     dispatch({ type: "start" });
     try {
       const downloadLink = document.createElement("a");
-      downloadLink.href = `/api/projects/${projectId}/themes/${id}`;
+      downloadLink.href = `/api/projects/${projectId}/themes/${id}/download`;
       downloadLink.download = `theme-${name}-${new Date().getDate()}.zip`;
       downloadLink.click();
     } catch (e) {
