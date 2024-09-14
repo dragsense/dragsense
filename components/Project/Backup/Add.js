@@ -37,8 +37,9 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
   const onChangeImage = (image) => {
     let imageSrc = "/images/default/default-img.png";
     if (image[0]) {
-      setPreview(image[0]);
       imageSrc = host + image[0].src;
+      setPreview(imageSrc);
+
     }
 
     form.setFieldsValue({ preview: imageSrc });
