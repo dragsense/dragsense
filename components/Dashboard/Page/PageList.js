@@ -198,7 +198,12 @@ const PageList = ({
   return (
     <Table
       columns={columns}
-      dataSource={pages}
+      dataSource={pages.map(data => {
+        data.updatedAt = data.updatedAt || data.updated_at;
+        data.createdAt = data.createdAt || data.created_at;
+
+        return data;
+      })}
       rowKey="_id"
       pagination={{
         total: total,

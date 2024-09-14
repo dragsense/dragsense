@@ -173,7 +173,12 @@ const FormList = ({ forms, page, onClone, total, setPage, onEdit, onDelete, onEd
     ]
 
 
-    return <Table columns={columns} dataSource={forms} 
+    return <Table columns={columns} dataSource={forms.map(data => {
+        data.updatedAt = data.updatedAt || data.updated_at;
+        data.createdAt = data.createdAt || data.created_at;
+
+        return data;
+      })} 
     rowKey="_id"
     pagination={{
         total: total,

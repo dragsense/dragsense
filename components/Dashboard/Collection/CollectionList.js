@@ -234,7 +234,12 @@ const CollectionList = ({
     <Table
       columns={columns}
       rowKey="_id"
-      dataSource={collections}
+      dataSource={collections.map(data => {
+        data.updatedAt = data.updatedAt || data.updated_at;
+        data.createdAt = data.createdAt || data.created_at;
+
+        return data;
+      })}
       pagination={{
         total: total,
         current: page,

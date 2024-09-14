@@ -27,6 +27,7 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
     setShowField(backup.published);
 
     if (backup._id === -1) setUpdate(true);
+    else setUpdate(false);
 
     setBackupModalOpen(true);
   }, [backup]);
@@ -44,7 +45,7 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
   };
 
   const imageSrc = preview
-    ? host + preview.src
+    ? preview
     : "/images/default/default-img.png";
 
   return (
@@ -63,9 +64,9 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
                 form
                   .validateFields()
                   .then(async (values) => {
+                    setBackupModalOpen(false);
                     if (await onSubmit(values)) {
                       form.resetFields();
-                      setBackupModalOpen(false);
                     } else setBackupModalOpen(true);
                   })
                   .catch((info) => {

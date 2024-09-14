@@ -166,7 +166,14 @@ const ComponentList = ({ components, onClone, page, total, setPage, onEdit, onDe
 
     return <Table columns={columns} 
     rowKey="_id"
-    dataSource={components} pagination={{
+  
+    dataSource={components.map(data => {
+        data.updatedAt = data.updatedAt || data.updated_at;
+        data.createdAt = data.createdAt || data.created_at;
+
+        return data;
+      })}
+    pagination={{
         total: total,
         current: page,
         pageSize: 10,
