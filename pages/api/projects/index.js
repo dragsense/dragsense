@@ -61,13 +61,6 @@ handler.post(
     // Destructure request body
     const { name, desc, apiUrl, apiVersion, apiPrefix, platform } = req.body;
 
-    // Check if project with same name exists
-    if (await findProjectByName(req.db, name)) {
-      res
-        .status(403)
-        .json({ error: { message: 'The Project has already been used.' } });
-      return;
-    }
 
     // Fetch user by email
     const user = await findUserByEmail(req.db, req.user.email);

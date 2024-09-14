@@ -124,8 +124,8 @@ export default function Documents({ collection, form }) {
   useEffect(() => {
     const fetchHost = async () => {
       const result = await SettingServices.get();
-      const setting = result.setting;
-      setSetting({ host: result.host, homePage: setting.homePage });
+      const settings = result.settings;
+      setSetting({ host: result.host, homePage: settings.homePage });
     };
     fetchHost();
   }, []);
@@ -296,7 +296,7 @@ export default function Documents({ collection, form }) {
                     onEdit({
                       ...initialDocumnet,
                       name: form ? form.name : collection.name + " Doc " + (state.total + 1),
-                      slug: form ? form.slug : collection.slug + "-doc- " + + (state.total + 1),
+                      slug: form ? form.slug : collection.slug + "-doc-" + (state.total + 1),
                       states: collection.states,
                     })
                   }
@@ -337,7 +337,7 @@ export default function Documents({ collection, form }) {
                   onEdit({
                     ...initialDocumnet,
                     name: form ? form.name : collection.name + " Doc " + (state.total + 1),
-                    slug: form ? form.slug : collection.slug + "-doc- " + + (state.total + 1),
+                    slug: form ? form.slug : collection.slug + "-doc-" + (state.total + 1),
                     states: collection.states,
                   })
                 }

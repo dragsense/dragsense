@@ -141,7 +141,7 @@ export default function Pages() {
             }
 
         } catch (e) {
-            dispatch({ type: 'error', error: e?.error?.message || 'Something went wrong.' });
+            dispatch({ type: 'error', error: e?.message || 'Something went wrong.' });
         } finally {
             dispatch({ type: 'finish' });
         }

@@ -98,6 +98,7 @@ handler.delete(async (req, res) => {
 
 // Function to update project
 async function updateProject(req, res) {
+
   const { name, desc, apiUrl, apiVersion, apiPrefix } = req.body;
   try {
     const project = await updateProjectById(req.db, req.query.projectId, {
@@ -107,11 +108,10 @@ async function updateProject(req, res) {
       apiVersion,
       apiPrefix,
     });
-    console.log(project)
     return res.json({ project: project.value });
   } catch (e) {
     console.error(e);
-    res.status(403).json({ error: { message: e?.message } });
+    res.status(403).json({ error: { message: e?.message || "Something went wrong" } });
   }
 }
 

@@ -68,15 +68,8 @@ handler.post(validateBody({
     if (!project)
       return res.status(403).json({ error: { message: 'Project Not Found.' } });
 
-    const { name, preview, desc, published } = req.body;
+    const { name, preview, desc, published, isCollectionsEntries, isFormsEntries } = req.body;
 
-    // Check if backup already exists
-    const backup = await findBackupByName(req.db, name);
-
-    // If backup exists, return error
-    if (backup) {
-      return res.status(403).json({ error: { message: 'Backup Already Exist.' } });
-    }
 
     // Fetch user by email
     const user = await findUserByEmail(req.db, req.user.email);
@@ -106,7 +99,7 @@ handler.post(validateBody({
       await fetcher(`${sanitizedUrl}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': apikey },
-        body: JSON.stringify({ _id: newbackup._id }),
+        body: JSON.stringify({ _id: newbackup._id, isCollectionsEntries, isFormsEntries  }),
       });
 
       // Return new backup

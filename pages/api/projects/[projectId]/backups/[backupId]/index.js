@@ -76,14 +76,7 @@ handler.post(
       const project = await getProject(req, res);
       const backup = await getBackup(req, res, req.query.backupId);
 
-      const { name, preview, desc, published, update } = req.body;
-
-      const _bckp = await findBackupByName(req.db, name, backup._id);
-
-      if (_bckp && req.query.backupId !== _bckp._id.toString()) {
-        res.status(403).json({ error: { message: 'Backup Name Already Exist.' } });
-        return;
-      }
+      const { name, preview, desc, published, update, isCollectionsEntries, isFormsEntries } = req.body;
 
       const updated = await updateBackupById(req.db, backup._id, {
         preview,
@@ -99,7 +92,11 @@ handler.post(
 
         await fetcher(`${sanitizedUrl}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json', 'x-api-key': apikey }
+          headers: { 'Content-Type': 'application/json', 'x-api-key': apikey },
+          body: JSON.stringify({
+            isCollectionsEntries,
+            isFormsEntries,
+          })
         });
       }
       return res.json({ backup: updated });
@@ -123,15 +120,15 @@ handler.patch(
 
       await fetcher(`${sanitizedUrl}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'x-api-key': apikey }
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apikey },
+    
       });
 
 
       return res.json({ status: true });
 
     } catch (e) {
-      console.error(e);
-      res.status(500).json({ error: { message: 'Something went wrong.' } });
+      res.status(500).json({ error: { message: e?.message || 'Something went wrong.' } });
     }  
   });
  
@@ -155,7 +152,7 @@ handler.delete(async (req, res) => {
     return res.json({ status: true });
 
   } catch (e) {
-    console.error(e);
+  
     res.status(500).json({ error: { message: 'Something went wrong.' } });
   }
 });

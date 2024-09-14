@@ -11,6 +11,7 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
   const [preview, setPreview] = useState(null);
   const [showField, setShowField] = useState(false);
   const [mediaModal, setMediaModal] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const onChangePublicStatus = () => {
     setShowField(!showField);
@@ -24,6 +25,8 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
     form.setFieldsValue(backup);
     setPreview(backup.preview);
     setShowField(backup.published);
+
+    if (backup._id === -1) setUpdate(true);
 
     setBackupModalOpen(true);
   }, [backup]);
@@ -102,9 +105,21 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
           {backup?._id !== -1 && (
             <>
               <Form.Item name="update" valuePropName="checked">
-                <Checkbox>
+                <Checkbox onChange={() => setUpdate(!update)}>
                   Update (Update this backup with current files)
                 </Checkbox>
+              </Form.Item>
+            </>
+          )}
+
+          {update && (
+            <>
+              <Form.Item name="isCollectionsEntries" valuePropName="checked">
+                <Checkbox>Include Collections Entries</Checkbox>
+              </Form.Item>
+
+              <Form.Item name="isFormsEntries" valuePropName="checked">
+                <Checkbox>Include Forms Entries</Checkbox>
               </Form.Item>
             </>
           )}

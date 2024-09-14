@@ -64,11 +64,9 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
     useEffect(() => {
-
         const laod = async () => {
             try {
                 dispatch({ type: 'start' });
-
                 if (document._id !== -1) {
                     const res = await DocumentServices.get(collection._id, document._id, _form);
                     if (res.document) {
@@ -80,9 +78,9 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
                 form.setFieldsValue({ name: document?.name, slug: document?.slug });
                 if (!document.states) {
-                    document.states = collection.states;
+                    document.states = collection.states || {};
                 } else {
-                    Object.keys(collection.states).forEach((key) => {
+                    Object.keys(collection.states || {}).forEach((key) => {
                         if (!document.states.hasOwnProperty(key)) {
                             document.states[key] = collection.states[key];
                         }
@@ -92,9 +90,9 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
                 const result = await SettingServices.get();
                 setHost(result.host || '');
 
-                setState(document);
-
-                const data = collection.relationships.reduce((result, rel) => {
+                setState({...document});
+                const relationships = Array.isArray(collection.relationships) ? collection.relationships : [];
+                const data = relationships.reduce((result, rel) => {
                     result[rel] = document.populatedRelationships[rel];
                     return result;
                 }, {});
