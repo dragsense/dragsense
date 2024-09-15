@@ -187,10 +187,12 @@ export default function Projects({ shared }) {
     }
   };
 
-  const onDownlaod = async (id, states) => {
+  const onDownlaod = async (id, name, states) => {
     dispatch({ type: "start" });
     try {
-      await ProjectServices.download(id, states);
+      await ProjectServices.download(id, name, states);
+      message.success("Your download will begin shortly.");
+
       return true;
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });

@@ -4,6 +4,7 @@ import { Card, Spin, Typography, Button, Tooltip, Space, Alert, Input, message }
 import { PlusOutlined } from '@ant-design/icons';
 import CollectionServices from "@/lib/services/collections";
 import SettingServices from '@/lib/services/setting';
+import DownlaodCollection from '../Document/Downloads';
 
 import { useEffect, useReducer, useState } from "react";
 import { DocumentComponent } from "../Document";
@@ -105,6 +106,8 @@ export default function Collections() {
     const [state, dispatch] = useReducer(reducer, initial);
     const [page, setPage] = useState(1);
     const [collection, setCollection] = useState(null);
+    const [downlaodCollection, setDownloadColletion] = useState(null);
+
     const [searchQuery, setSearchQuery] = useState('');
     const [setting, setSetting] = useState({});
 
@@ -268,6 +271,11 @@ export default function Collections() {
     }
 
 
+    const onDownloadCollection = (values) => {
+
+        setDownloadColletion({...values});
+    }
+
     const onClose = (e) => {
         e.preventDefault();
 
@@ -310,6 +318,7 @@ export default function Collections() {
                             setting={setting}
                             collections={state.collections}
                             onEditDocuments={onEditDocuments}
+                            onDownloadCollection={onDownloadCollection}
                             page={page}
                             onClone={onClone}
                             onDelete={onDelete}
@@ -318,7 +327,8 @@ export default function Collections() {
         </Card>
 
         <DocumentComponent collection={collection} form={collection?.isForm} />
-
+        <DownlaodCollection downlaodCollection={downlaodCollection} />
+        
         {state.loading && <div style={{
             position: 'fixed',
             width: '100%',

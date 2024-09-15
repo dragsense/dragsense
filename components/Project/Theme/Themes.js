@@ -181,7 +181,11 @@ export default function Themes({ projectId, platform,  activeTheme = 0 }) {
       const downloadLink = document.createElement("a");
       downloadLink.href = `/api/projects/${projectId}/themes/${id}/download`;
       downloadLink.download = `theme-${name}-${new Date().getDate()}.zip`;
+      document.body.appendChild(downloadLink);
       downloadLink.click();
+      document.body.removeChild(downloadLink);
+      message.success("Your download will begin shortly.");
+
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });
     } finally {

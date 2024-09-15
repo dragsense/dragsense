@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Form, Modal, Input, message, Checkbox } from "antd";
-
-
 
 export default function Downlaod({ project, onDownload }) {
 
@@ -14,7 +12,6 @@ export default function Downlaod({ project, onDownload }) {
         isCollection: false,
         isForm: false,
         isPublic: false
-
     });
 
     const handleCheckboxChange = (name, value) => {
@@ -22,16 +19,12 @@ export default function Downlaod({ project, onDownload }) {
     };
 
     useEffect(() => {
-
         if (!project)
             return;
-
         setModalOpen(true);
-    }, [project])
-
+    }, [project]);
 
     const handleAfterOpenChange = (visible) => {
-
         setValues({
             isPage: true,
             isComponent: false,
@@ -39,11 +32,8 @@ export default function Downlaod({ project, onDownload }) {
             isForm: false,
             isPublic: false
         });
-
         form.setFieldsValue({ name: project.name });
-
     };
-
 
     const onCancel = () => setModalOpen(false);
 
@@ -57,32 +47,23 @@ export default function Downlaod({ project, onDownload }) {
             afterOpenChange={handleAfterOpenChange}
             onOk={() => {
                 setModalOpen(false);
-
                 form
                     .validateFields()
                     .then(async (values) => {
-
-
-                        if (!await onDownload(project._id, { ...values, ...checkValues }))
+                        if (!await onDownload(project._id, project.name, { ...values, ...checkValues }))
                             setModalOpen(true);
-
                     })
                     .catch((info) => {
-
                         setModalOpen(true);
-
                         message.error('Validate Failed.');
-
                     });
             }}
         >
             <Form form={form}
                 layout="vertical"
-                initialValues={{}} >
-
+                initialValues={{}}>
                 <Form.Item label=" Name"
                     name="name"
-
                     rules={[
                         {
                             required: true,
@@ -93,14 +74,10 @@ export default function Downlaod({ project, onDownload }) {
                             message: 'Name must be at least 2 characters long',
                         }
                     ]}
-
                     className="font-500">
                     <Input maxLength={100} placeholder="Name" name="name"
                         required />
                 </Form.Item>
-
-          
-
                 <Form.Item label="isPage?" name="isPage" className="font-500">
                     <Checkbox
                         checked={checkValues.isPage}
@@ -109,7 +86,6 @@ export default function Downlaod({ project, onDownload }) {
                         Yes
                     </Checkbox>
                 </Form.Item>
-
                 <Form.Item label="isComponent?" name="isComponent" className="font-500">
                     <Checkbox
                         checked={checkValues.isComponent}
@@ -130,8 +106,6 @@ export default function Downlaod({ project, onDownload }) {
                     </Checkbox>
                 </Form.Item>
 
-
-
                 <Form.Item
                     label="isForm?"
                     name="isForm"
@@ -145,12 +119,9 @@ export default function Downlaod({ project, onDownload }) {
                     >
                         Yes
                     </Checkbox>
-                </Form.Item>
-
-           
+                </Form.Item>    
             </Form>
         </Modal>
     </>
-
 };
 

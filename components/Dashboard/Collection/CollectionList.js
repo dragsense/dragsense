@@ -10,6 +10,7 @@ import {
   AiOutlineDelete,
   AiOutlineForm,
   AiOutlineEye,
+  AiOutlineDownload,
 } from "react-icons/ai";
 import moment from "moment";
 import Router from "next/router";
@@ -29,6 +30,7 @@ const CollectionList = ({
   onEdit,
   onDelete,
   onEditDocuments,
+  onDownloadCollection,
 }) => {
   const { data: session } = useSession();
 
@@ -203,6 +205,17 @@ const CollectionList = ({
               }}
             />
           </Tooltip>
+
+          <Tooltip title="Download Collection Entries">
+            <Button
+              icon={<AiOutlineDownload style={{}} size="1.5em" />}
+              onClick={(e) => {
+                e.preventDefault();
+                onDownloadCollection({ _id: record._id, name: record.name });
+              }}
+            />
+          </Tooltip>
+
           <Tooltip title="Delete Collection">
             <Button
               icon={
@@ -234,7 +247,7 @@ const CollectionList = ({
     <Table
       columns={columns}
       rowKey="_id"
-      dataSource={collections.map(data => {
+      dataSource={collections.map((data) => {
         data.updatedAt = data.updatedAt || data.updated_at;
         data.createdAt = data.createdAt || data.created_at;
 

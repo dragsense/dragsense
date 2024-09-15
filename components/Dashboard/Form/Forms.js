@@ -7,6 +7,7 @@ import { useEffect, useReducer, useState } from "react";
 const { Title } = Typography;
 import { DocumentComponent } from "../Document";
 import ContentEditor from "./Content/ContentEditor";
+import DownlaodCollection from '../Document/Downloads';
 
 
 const initial = {
@@ -112,6 +113,7 @@ export default function Forms() {
     const [page, setPage] = useState(1);
     const [form, setForm] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [downlaodCollection, setDownloadColletion] = useState(null);
 
     const load = async () => {
         try {
@@ -252,6 +254,9 @@ export default function Forms() {
         setForm({ ...form });
     }
 
+    const onDownloadCollection = (values) => {
+        setDownloadColletion({...values});
+    }
 
     const onClose = (e) => {
         e.preventDefault();
@@ -295,6 +300,7 @@ export default function Forms() {
                             total={state.total}
                             forms={state.forms}
                             onEditDocuments={onEditDocuments}
+                            onDownloadCollection={onDownloadCollection}
                             page={page}
                             onClone={onClone}
                             onDelete={onDelete}
@@ -303,6 +309,7 @@ export default function Forms() {
         </Card>
 
         <DocumentComponent collection={form} form={true} />
+        <DownlaodCollection downlaodCollection={downlaodCollection} form={true}/>
 
 
         {state.loading && <div style={{
