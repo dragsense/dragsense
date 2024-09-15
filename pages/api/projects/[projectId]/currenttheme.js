@@ -35,13 +35,15 @@ async function fetchThemeDetails(db, themeId) {
     if (!theme) {
       return { theme: null };
     }
+    console.log(theme);
     return {
       theme: {
         name: theme.name,
         desc: theme.desc,
         preview: theme.preview,
+        platform: theme.platform,
         creator: theme.creator?.name,
-        creatorProfile: creator?.image || null,
+        creatorProfile: theme.creator?.image || null,
       },
     };
   } catch (e) {

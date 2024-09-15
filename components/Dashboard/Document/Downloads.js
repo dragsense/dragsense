@@ -17,6 +17,9 @@ export default function DocumentDocuments({ downlaodCollection, form = false }) 
   const onCancel = () => setDownloadsModal(false);
 
   const onFinish = async (values) => {
+
+    setDownloadsModal(false);
+
     if (!collection) {
       message.error("Collection Not Found. Please try again.");
       return;
@@ -40,9 +43,10 @@ export default function DocumentDocuments({ downlaodCollection, form = false }) 
       await DocumentServices.download(collection._id, collection.name, downloadUrlParams);
 
       message.success("Your download will begin shortly.");
-      setDownloadsModal(false);
+     
       formInstance.resetFields();
     } catch (error) {
+      setDownloadsModal(true);
       message.error("Error initiating download. Please try again.");
     }
   };

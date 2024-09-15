@@ -99,7 +99,6 @@ export default function AddDocument({ collection, _form, document, onSubmit }) {
 
 
                 dispatch({ type: 'documents', data });
-
                 if (document.populatedImage)
                     setPreview(document.populatedImage[0] || null)
 

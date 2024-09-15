@@ -162,7 +162,12 @@ const LayoutList = ({
   return (
     <Table
       columns={columns}
-      dataSource={layouts}
+      dataSource={layouts.map(data => {
+        data.updatedAt = data.updatedAt || data.updated_at;
+        data.createdAt = data.createdAt || data.created_at;
+
+        return data;
+      })}
       rowKey="_id"
       pagination={{
         total: total,

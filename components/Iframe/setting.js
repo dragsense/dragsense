@@ -167,15 +167,18 @@ export default function IFrame({ children, onLoad }) {
   </ShadowRootComponent>
 }
 
-const FontsInnerComponent = ({ children, document, onLoad }) => {
+const FontsInnerComponent = ({ children, document, onLoad, onLoading }) => {
 
 
   useEffect(() => {
 
+    onLoading(true);
     loadallFonts(document).then((res) => {
       onLoad(res.fonts);
+      onLoading(false);
     }).catch((e) => {
       message.error(e?.message || 'Something went wrong!');
+      onLoading(false);
     });
 
 
@@ -251,7 +254,7 @@ const FontsInnerComponent = ({ children, document, onLoad }) => {
 
 
 
-export function FontsIFrame({ children, onLoad }) {
+export function FontsIFrame({ children, onLoad, onLoading }) {
 
 
   const iframeRef = useRef();
@@ -294,7 +297,7 @@ export function FontsIFrame({ children, onLoad }) {
     <iframe frameBorder={0} id="ac-editor-iframe-doc"
       width="100%"
       height="95%" ref={iframeRef}>
-      {container && ReactDOM.createPortal(<FontsInnerComponent onLoad={onLoad} document={container.document}>
+      {container && ReactDOM.createPortal(<FontsInnerComponent onLoad={onLoad} onLoading={onLoading} document={container.document}>
         {children}
       </FontsInnerComponent>, container.mountTarget)}
     </iframe>

@@ -131,11 +131,16 @@ export default function Dashboard() {
         </Descriptions.Item>
         <Descriptions.Item label="Author">
           <Avatar src={state.theme?.creatorProfile} style={{ marginRight: 8 }}>
-            {!state.theme?.creatorProfile && state.theme?.creator ? state.theme?.creator.charAt(0) :'A'}
+            {!state.theme?.creatorProfile && state.theme?.creator
+              ? state.theme?.creator.charAt(0)
+              : "A"}
           </Avatar>
           <b>
             <em>{state.theme?.creator || "@dragsense"}</em>
           </b>
+        </Descriptions.Item>
+        <Descriptions.Item label="Platform">
+          {state.theme?.platform || "N/A"}
         </Descriptions.Item>
       </Descriptions>
     </Card>
