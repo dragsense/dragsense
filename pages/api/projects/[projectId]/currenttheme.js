@@ -35,7 +35,6 @@ async function fetchThemeDetails(db, themeId) {
     if (!theme) {
       return { theme: null };
     }
-    console.log(theme);
     return {
       theme: {
         name: theme.name,
