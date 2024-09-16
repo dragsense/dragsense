@@ -14,6 +14,12 @@
 }
 
 
+
+
+.ant-typography .ant-typography-expand , .ant-typography .ant-typography-expand:active {
+  color: #f88a24;
+}
+
 .actions-item-card .ant-card-actions {
   opacity: 0;
   ;

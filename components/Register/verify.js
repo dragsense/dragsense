@@ -49,7 +49,7 @@ const VerifyUserComponent = (props) => {
 
     return (
         <AuthLayout>
-            <Card title="Email Verified" loading={isLoading} extra={<>
+            <Card title="Email Verification" loading={isLoading} extra={<>
                 <Link href={`/auth/login?status=${success}`} disabled={isLoading}>Login?</Link>
             </>}>
                 {error && <Alert message={error} type="error" showIcon style={{ marginBottom: 10 }} />}

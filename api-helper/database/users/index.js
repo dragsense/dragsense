@@ -7,8 +7,6 @@ export async function findUserWithEmailAndPassword(db, email, password) {
   email = normalizeEmail(email);
   const user = await db.collection("users").findOne({ email });
   if (user && (await argon2.verify(user.password, password))) {
-    console.log(user);
-
     return { ...user, password: undefined }; // filtered out password
   }
   return null;

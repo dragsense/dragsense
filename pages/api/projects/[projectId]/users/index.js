@@ -7,12 +7,14 @@ import {
 import { authorize, database, validateBody } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
+import { createTransport } from "nodemailer";
+import jwt from 'jsonwebtoken';
 
 // Initialize next-connect with options
 const handler = nc(ncOpts);
 handler.use(database, authorize);
 
-// Function to handle GET requests
+// Handle GET requests
 const handleGet = async (req, res) => {
   const project = await _findProjectById(req.db, req.query.projectId);
 
@@ -37,7 +39,7 @@ const handleGet = async (req, res) => {
 
 handler.get(handleGet);
 
-// Function to handle POST requests
+// Handle POST requests
 const handlePost = async (req, res) => {
   const project = await _findProjectById(req.db, req.query.projectId);
 
@@ -56,7 +58,7 @@ const handlePost = async (req, res) => {
   if (user._id.equals(project.creatorId)) {
     res.status(403).json({ error: { message: "You can't add yourself." } });
     return;
-  }
+  } 
 
   if (await findRoleByUserIdAndProejectId(req.db, project._id, user._id)) {
     res.status(403).json({ error: { message: 'User already added.' } });
@@ -64,12 +66,44 @@ const handlePost = async (req, res) => {
   }
 
   try {
-    const role = await insertRole(req.db, { userId: user._id, projectId: project._id, name: roleName, permissions });
-    await updateRoleInProjectById(req.db, project._id, role._id);
-    await updateRoleInUserById(req.db, user._id, role._id);
+    // Generate a JWT token for the user
+    const token = jwt.sign({ userId: user._id, projectId: project._id, roleName, permissions }, process.env.JWT_SECRET, {
+      expiresIn: '30m',
+    });
 
-    role['user'] = user;
-    return res.json({role});
+    const url = `${process.env.NEXTAUTH_URL}/projects/user-request?token=${token}`;
+
+    // Create a transport for sending email
+    const transport = createTransport({
+      host: process.env.EMAIL_HOST,
+      port: parseInt(process.env.EMAIL_HOST_PORT),
+      secure: process.env.EMAIL_HOST_SECURE === 'true',
+      auth: {
+        user: process.env.EMAIL_HOST_USER,
+        pass: process.env.EMAIL_HOST_PASS,
+      },
+    });
+
+    // Send the verification email
+    const result = await transport.sendMail({
+      to: email,
+      from: `"Project Admin" <${process.env.EMAIL}>`,
+      subject: `Project Role Request - ${project.name}`,
+      html: `
+        <p>Hi ${user.name || email},</p>
+        <p>You have been invited to join the project <strong>${project.name}</strong> as a <strong>${roleName}</strong>.</p>
+        <p>To confirm your role, please click the link below:</p>
+        <p><a href="${url}">Accept Invitation</a></p>
+        <p>If you did not expect this invitation, you can safely ignore this email.</p>
+      `,
+    });
+
+    const failed = result.rejected.concat(result.pending).filter(Boolean);
+    if (failed.length) {
+      return res.status(403).json({ error: { message: `Failed to send email to ${failed.join(", ")}` } });
+    }
+
+    res.status(201).json({ success: true, message: 'Role request sent.' });
   } catch (e) {
     res.status(500).json({ error: { message: 'Something went wrong.' } });
   }

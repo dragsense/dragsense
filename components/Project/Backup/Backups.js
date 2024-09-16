@@ -1,4 +1,13 @@
-import { Card, Alert, Button, Tooltip, Space, Typography, message, Input } from "antd";
+import {
+  Card,
+  Alert,
+  Button,
+  Tooltip,
+  Space,
+  Typography,
+  message,
+  Input,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { useEffect, useReducer, useState } from "react";
@@ -44,7 +53,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "start":
-      return { ...state, loading: true, error: '' };
+      return { ...state, loading: true, error: "" };
     case "load":
       return { ...state, backups: action.data, total: action.total, error: "" };
     case "add":
@@ -83,7 +92,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function Backups({ projectId }) {
+export default function Backups({ projectId, SetTotalBackups }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [page, setPage] = useState(1);
   const [host, setHost] = useState("");
@@ -94,21 +103,19 @@ export default function Backups({ projectId }) {
       dispatch({ type: "start" });
       const res = await BackupServices.getAll(projectId, page);
 
-
       const result = await SettingServices.get();
       setHost(result.host || "");
 
       const data = Array.isArray(res.backups) ? res.backups : [];
 
       dispatch({ type: "load", data, total: res.total });
-
+      SetTotalBackups(res.total);
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });
     } finally {
       dispatch({ type: "finish" });
     }
   };
-
 
   const search = async () => {
     try {
@@ -119,6 +126,8 @@ export default function Backups({ projectId }) {
       const data = Array.isArray(res.backups) ? res.backups : [];
 
       dispatch({ type: "load", data, total: res.total });
+
+      
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });
     } finally {
@@ -131,7 +140,7 @@ export default function Backups({ projectId }) {
     if (!searchQuery) {
       load();
     } else search();
-  }, [page, searchQuery]);
+  }, [projectId, page, searchQuery]);
 
   const onSubmit = async (states) => {
     dispatch({ type: "start" });
@@ -146,8 +155,6 @@ export default function Backups({ projectId }) {
         backup?._id,
         states
       );
-
-
 
       dispatch({
         type: backup?._id !== -1 ? "update" : "add",
@@ -207,7 +214,6 @@ export default function Backups({ projectId }) {
       downloadLink.click();
       document.body.removeChild(downloadLink);
       message.success("Your download will begin shortly.");
-
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });
       message.error(e?.message || "Something went wrong.");
@@ -217,26 +223,24 @@ export default function Backups({ projectId }) {
   };
 
   const onChange = (e) => {
-    if (!state.loading)
-        setSearchQuery(e.target.value)
-}
-
+    if (!state.loading) setSearchQuery(e.target.value);
+  };
 
   return (
     <>
       <Card
         loading={state.loading}
-        title = {
+        title={
           <div>
             Backups:
             <Input
               onChange={onChange}
-              style={{ maxWidth: 300, width: '100%', marginLeft: 10 }}
+              style={{ maxWidth: 300, width: "100%", marginLeft: 10 }}
               type="search"
               placeholder="search..."
             />
           </div>
-        }   
+        }
         extra={
           state.total > 0 && (
             <Tooltip title="Add New Backup">

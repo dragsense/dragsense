@@ -102,7 +102,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
             <Component {...pageProps} /></Content>
 
-          <div style={{ position: 'fixed', bottom: 0, right: 0, zIndex: 10000 }}>
+          <div style={{ position: 'fixed', top: 4, right: -2, zIndex: 10000 }}>
             <Button type='text' onClick={handleClick}>
             {isDarkMode ? <FaSun /> : <FaMoon />}            
             </Button>

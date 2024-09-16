@@ -9,24 +9,24 @@ export default function Login({ providers, csrfToken }) {
     )
 
 }
-
 export async function getServerSideProps(context) {
-
-    const { req, res } = context;
+    const { req } = context;
     const session = await getSession({ req });
-
+  
     if (session && session?.user) {
-        res.writeHead(302, {
-            Location: "/admin/projects",
-        });
-        return res.end();
-     
+      return {
+        redirect: {
+          destination: "/admin/projects",
+          permanent: false,
+        },
+      };
     }
-
+  
     const providers = await getProviders();
     const csrfToken = await getCsrfToken();
-
+  
     return {
-        props: { providers, csrfToken },
-    }
-}
+      props: { providers, csrfToken },
+    };
+  }
+  

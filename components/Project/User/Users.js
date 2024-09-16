@@ -1,4 +1,13 @@
-import { Card, Alert, Button, Tooltip, Space, Typography, Input, message } from "antd";
+import {
+  Card,
+  Alert,
+  Button,
+  Tooltip,
+  Space,
+  Typography,
+  Input,
+  message,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 
@@ -48,7 +57,7 @@ const reducer = (state, action) => {
     case "add":
       return {
         ...state,
-        roles: [...state.roles, action.role],
+        roles: [...state.roles, ...action.role],
         total: state.total + 1,
         error: "",
       };
@@ -123,7 +132,7 @@ export default function Users({ projectId, setUser }) {
     if (!searchQuery) {
       load();
     } else search();
-  }, [page, searchQuery]);
+  }, [projectId, page, searchQuery]);
 
   const onEdit = (role) => {
     dispatch({ type: "edit", data: role });
@@ -143,11 +152,12 @@ export default function Users({ projectId, setUser }) {
         states
       );
 
-      dispatch({ type: role?.id !== -1 ? "update" : "add", role: res.role });
+      dispatch({ type: role?.id !== -1 ? "update" : "add", role: res.role ? [] : [] });
 
       status = true;
       dispatch({ type: "close" });
-      message.success("Data submitted!");
+      if (role?.id === -1) message.success("Request submitted!");
+      else message.success("Data submitted!");
     } catch (e) {
       dispatch({ type: "error", error: e?.message || "Something went wrong." });
       message.error(e?.message || "Something went wrong.");
@@ -172,24 +182,23 @@ export default function Users({ projectId, setUser }) {
   };
 
   const onChange = (e) => {
-    if (!state.loading)
-        setSearchQuery(e.target.value)
-}
+    if (!state.loading) setSearchQuery(e.target.value);
+  };
   return (
     <>
       <Card
         loading={state.loading}
-        title = {
-            <div>
-              Users:
-              <Input
-                onChange={onChange}
-                style={{ maxWidth: 300, width: '100%', marginLeft: 10 }}
-                type="search"
-                placeholder="search..."
-              />
-            </div>
-          }   
+        title={
+          <div>
+            Users:
+            <Input
+              onChange={onChange}
+              style={{ maxWidth: 300, width: "100%", marginLeft: 10 }}
+              type="search"
+              placeholder="search..."
+            />
+          </div>
+        }
         extra={
           state.total > 0 && (
             <Tooltip title="Add New User">

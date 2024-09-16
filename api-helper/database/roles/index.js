@@ -167,6 +167,9 @@ export async function findRolesByUserProjects(db, roleIds, page = 0, limit = 10)
                             },
                         },
                         { $unwind: '$project' },
+                        {
+                            $replaceRoot: { newRoot: '$project' }
+                        }
                     ],
                     total: [
                         {
@@ -178,6 +181,7 @@ export async function findRolesByUserProjects(db, roleIds, page = 0, limit = 10)
             },
         ])
         .toArray();
+
 
 
 
