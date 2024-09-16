@@ -96,7 +96,7 @@ const authOptions = {
           rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH,
         },
       },
-      from: process.env.EMAIL_HOST_USER,
+      from: process.env.EMAIL,
       redirect: false,
       async sendVerificationRequest({
         theme,

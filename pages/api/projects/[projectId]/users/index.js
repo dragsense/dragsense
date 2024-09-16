@@ -87,7 +87,7 @@ const handlePost = async (req, res) => {
     // Send the verification email
     const result = await transport.sendMail({
       to: email,
-      from: `"Project Admin" <${process.env.EMAIL}>`,
+      from: `"DragSense" <${process.env.EMAIL}>`,
       subject: `Project Role Request - ${project.name}`,
       html: `
         <p>Hi ${user.name || email},</p>
