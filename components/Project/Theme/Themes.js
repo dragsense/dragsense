@@ -277,7 +277,7 @@ export default function Themes({ projectId, platform,  activeTheme = 0 }) {
         onAdd={onAdd}
         platform={platform}
         themes={state.themes}
-        theme={state.theme}
+        _theme={state.theme}
         loading={state.loading}
       />
     </>

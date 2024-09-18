@@ -8,6 +8,7 @@ import {
   Card,
   Avatar,
   Button,
+  theme,
   message,
   Input,
 } from "antd";
@@ -54,13 +55,18 @@ export default function AddTheme({
   platform,
   loading,
   themes,
-  theme = {},
+  _theme = {},
 }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [page, setPage] = useState(1);
   const [themeModal, setThemeModalOpen] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const {
+    token: { colorPrimary },
+  } = theme.useToken();
+
 
   const load = async () => {
     try {
@@ -97,14 +103,14 @@ export default function AddTheme({
   };
 
   useEffect(() => {
-    if (!theme || !platform) return;
+    if (!_theme || !platform) return;
 
     setThemeModalOpen(true);
 
     if (!searchQuery) {
       load();
     } else search();
-  }, [page, searchQuery, theme]);
+  }, [page, searchQuery, _theme]);
 
   const onChange = (e) => {
     if (!state.loading) setSearchQuery(e.target.value);
@@ -115,8 +121,8 @@ export default function AddTheme({
     setSelectedTheme(null);
   };
 
-  const handleThemeSelection = (theme) => {
-    setSelectedTheme(theme);
+  const handleThemeSelection = (_theme) => {
+    setSelectedTheme(_theme);
   };
 
   const handleAddTheme = () => {
@@ -185,9 +191,9 @@ export default function AddTheme({
               development.
             </Text>
           }
-          renderItem={(theme) => {
-            const index = themes.findIndex((t) => t._id === theme._id);
-            const isSelected = selectedTheme && selectedTheme._id === theme._id;
+          renderItem={(_theme) => {
+            const index = themes.findIndex((t) => t._id === _theme._id);
+            const isSelected = selectedTheme && selectedTheme._id === _theme._id;
             const ribbonText = index >= 0 ? "Added" : "";
             const ribbonColor = index >= 0 ? "green" : "";
 
@@ -200,14 +206,14 @@ export default function AddTheme({
 
             return (
               <div
-                onClick={() => handleThemeSelection(theme)}
-                key={theme._id}
+                onClick={() => handleThemeSelection(_theme)}
+                key={_theme._id}
                 style={{ width: "calc(100% - 30px)" }}
               >
                 <Badge.Ribbon text={ribbonText} color={ribbonColor}>
                   <Card bodyStyle={{ padding: 10 }} style={cardStyle} hoverable>
                     <List.Item
-                      key={theme.title}
+                      key={_theme.title}
                       actions={[
                         <IconText
                           icon={StarOutlined}
@@ -224,35 +230,35 @@ export default function AddTheme({
                         <img
                           width={272}
                           alt="logo"
-                          src={theme.preview || "/images/default/theme.png"}
+                          src={_theme.preview || "/images/default/_theme.png"}
                         />
                       }
                     >
                       <List.Item.Meta
-                        title={theme.name}
+                        title={_theme.name}
                         description={
                           <div>
                             <span style={{ paddingRight: 10 }}>Author: </span>
                             <b>
                               <Avatar
                                 src={
-                                  <img src={theme.creator.image} alt="avatar" />
+                                  <img src={_theme.creator.image} alt="avatar" />
                                 }
                               />{" "}
-                              <em>{theme.creator.name}</em>{" "}
+                              <em>{_theme.creator.name}</em>{" "}
                             </b>
                           </div>
                         }
                       />
-                      <p>{theme.desc}</p>
+                      <p>{_theme.desc}</p>
                       <Text type="secondary">
                         Theme Preview URL:{" "}
                         <a
                           style={{ color: colorPrimary }}
-                          href={theme.previewUrl}
+                          href={_theme.previewUrl}
                           target="_blank"
                         >
-                          {theme.previewUrl}
+                          {_theme.previewUrl}
                         </a>
                       </Text>
                       <br />
@@ -261,7 +267,7 @@ export default function AddTheme({
                         <b>
                           {" "}
                           <em>
-                            {new Date(theme.createdAt).toDateString()}
+                            {new Date(_theme.createdAt).toDateString()}
                           </em>{" "}
                         </b>
                       </Text>
