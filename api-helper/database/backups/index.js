@@ -110,13 +110,15 @@ export async function updateBackupById(db, id, data) {
 
 export async function insertBackup(
   db,
-  { name, projectId, preview, platform, desc, published = false, createdBy }
+  { name, projectId, preview, previewUrl, platform, desc, published = false, createdBy }
 ) {
   const backup = {
     name,
     preview,
     desc,
     published,
+    previewUrl,
+    updateStatus: false,
     projectId,
     createdBy,
     platform,

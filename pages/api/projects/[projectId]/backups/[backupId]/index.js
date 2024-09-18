@@ -76,15 +76,9 @@ handler.post(
       const project = await getProject(req, res);
       const backup = await getBackup(req, res, req.query.backupId);
 
-      const { name, preview, desc, published, update, isCollectionsEntries, isFormsEntries } = req.body;
+      const { name, preview, desc, previewUrl, published, update, isCollectionsEntries, isFormsEntries } = req.body;
 
-      const updated = await updateBackupById(req.db, backup._id, {
-        preview,
-        desc,
-        published,
-        name
-      })
-
+      
       if (update) {
         const url = project.url + '/backup' + `/${backup._id}`;
         const apikey = project.apikey;
@@ -99,6 +93,17 @@ handler.post(
           })
         });
       }
+
+
+      const updated = await updateBackupById(req.db, backup._id, {
+        preview,
+        desc,
+        published,
+        previewUrl,
+        name,
+        updateStatus: update
+      })
+
       return res.json({ backup: updated });
 
     } catch (e) {

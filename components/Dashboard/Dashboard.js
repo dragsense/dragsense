@@ -131,6 +131,9 @@ export default function Dashboard() {
                     {state.project?.desc || "N/A"}
                   </Paragraph>
                 </Descriptions.Item>
+                <Descriptions.Item label="Platform">
+                  {state.theme?.platform || "N/A"}
+                </Descriptions.Item>
                 <Descriptions.Item
                   label="Project Stats"
                   span={3}
@@ -143,11 +146,11 @@ export default function Dashboard() {
                       width: "100%",
                     }}
                   >
-                    <div style={{borderRight: '1px solid', paddingRight: 10}}>
+                    <div style={{ borderRight: "1px solid", paddingRight: 10 }}>
                       <Text>Users: </Text>
                       <strong>{state.project.roles?.length || 0}</strong>
                     </div>
-                    <div style={{borderRight: '1px solid', paddingRight: 10}}>
+                    <div style={{ borderRight: "1px solid", paddingRight: 10 }}>
                       <Text>Backups: </Text>
                       <strong>{totalBackups || 0}</strong>
                     </div>
@@ -171,6 +174,17 @@ export default function Dashboard() {
               <Descriptions column={1} layout="vertical" bordered>
                 <Descriptions.Item label="Current Theme">
                   <Text strong>{state.theme?.name || "Default"}</Text>
+                </Descriptions.Item>
+                <Descriptions.Item label="Update Status">
+                  {state.theme?.updateStatus ? (
+                    <Alert
+                      message="The updates for the theme are available."
+                      type="info"
+                      showIcon
+                    />
+                  ) : (
+                    "You are up to date."
+                  )}
                 </Descriptions.Item>
                 <Descriptions.Item label="Description">
                   <Paragraph

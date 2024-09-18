@@ -154,6 +154,19 @@ export default function AddBackup({ onSubmit, backup = {}, host = "" }) {
                 <TextArea maxLength={1000} placeholder="Description" rows={4} />
               </Form.Item>
               <Form.Item
+              label="Preview Url"
+              name="previewUrl"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input a valid URL!",
+                  type: "url",
+                },
+              ]}
+            >
+              <Input maxLength={500} placeholder="Url" />
+            </Form.Item>
+              <Form.Item
                 name="preview"
                 className="font-500"
                 label="Preview"

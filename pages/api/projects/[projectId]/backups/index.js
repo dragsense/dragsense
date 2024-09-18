@@ -68,7 +68,7 @@ handler.post(validateBody({
     if (!project)
       return res.status(403).json({ error: { message: 'Project Not Found.' } });
 
-    const { name, preview, desc, published, isCollectionsEntries, isFormsEntries } = req.body;
+    const { name, preview, desc, previewUrl, published, isCollectionsEntries, isFormsEntries } = req.body;
 
 
     // Fetch user by email
@@ -77,6 +77,7 @@ handler.post(validateBody({
     const newbackup = await insertBackup(req.db, {
       createdBy: user._id,
       preview,
+      previewUrl,
       desc,
       published,
       name,
