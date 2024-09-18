@@ -41,7 +41,7 @@ const ThemeList = ({
   activeTheme,
 }) => {
   const {
-    token: { colorError },
+    token: { colorError, colorPrimary },
   } = theme.useToken();
 
   return (
@@ -141,9 +141,7 @@ const ThemeList = ({
                         showIcon
                       />
                     )}
-
                     <span style={{ paddingRight: 10 }}>Author: </span>
-
                     <b>
                       {" "}
                       <Avatar
@@ -154,8 +152,19 @@ const ThemeList = ({
                   </div>
                 }
               />
-
               <p>{theme.desc}</p>
+
+              <Text type="secondary">
+                Theme Preview URL:{" "}
+                <a
+                  style={{ color: colorPrimary }}
+                  href={theme.previewUrl}
+                  target="_blank"
+                >
+                  {theme.previewUrl}
+                </a>
+              </Text>
+                <br/>
               <Text type="secondary">
                 Date:{" "}
                 <b>
