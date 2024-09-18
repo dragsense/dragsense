@@ -49,7 +49,13 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
-export default function AddTheme({ onAdd, platform, loading, themes, theme = {} }) {
+export default function AddTheme({
+  onAdd,
+  platform,
+  loading,
+  themes,
+  theme = {},
+}) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [page, setPage] = useState(1);
   const [themeModal, setThemeModalOpen] = useState(false);
@@ -75,7 +81,11 @@ export default function AddTheme({ onAdd, platform, loading, themes, theme = {} 
     try {
       dispatch({ type: "start" });
 
-      const res = await ThemesServices.searchThemes(platform, searchQuery, page);
+      const res = await ThemesServices.searchThemes(
+        platform,
+        searchQuery,
+        page
+      );
 
       const data = Array.isArray(res.themes) ? res.themes : [];
       dispatch({ type: "load", data, total: res.total });
@@ -97,15 +107,13 @@ export default function AddTheme({ onAdd, platform, loading, themes, theme = {} 
   }, [page, searchQuery, theme]);
 
   const onChange = (e) => {
-    if (!state.loading)
-        setSearchQuery(e.target.value)
-}
+    if (!state.loading) setSearchQuery(e.target.value);
+  };
 
   const onCancel = () => {
     setThemeModalOpen(false);
     setSelectedTheme(null);
-  }
-  
+  };
 
   const handleThemeSelection = (theme) => {
     setSelectedTheme(theme);
@@ -130,17 +138,17 @@ export default function AddTheme({ onAdd, platform, loading, themes, theme = {} 
       closable
       width="90%"
       open={themeModal}
-      title = {
+      title={
         <div>
           Add a new theme:
           <Input
             onChange={onChange}
-            style={{ maxWidth: 300, width: '100%', marginLeft: 10 }}
+            style={{ maxWidth: 300, width: "100%", marginLeft: 10 }}
             type="search"
             placeholder="search..."
           />
         </div>
-      }      
+      }
       onCancel={onCancel}
       footer={[
         <div style={{ padding: 5 }}>
@@ -237,6 +245,17 @@ export default function AddTheme({ onAdd, platform, loading, themes, theme = {} 
                         }
                       />
                       <p>{theme.desc}</p>
+                      <Text type="secondary">
+                        Theme Preview URL:{" "}
+                        <a
+                          style={{ color: colorPrimary }}
+                          href={theme.previewUrl}
+                          target="_blank"
+                        >
+                          {theme.previewUrl}
+                        </a>
+                      </Text>
+                      <br />
                       <Text type="secondary">
                         Date:{" "}
                         <b>
