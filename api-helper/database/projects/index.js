@@ -69,7 +69,19 @@ export async function _findProjectById(db, id) {
         },
       },
       { $unwind: "$creator" },
-      { $project: { ...dbProjectionUsers("creator.") } },
+      {
+        $project: {
+          "creator._id": 0,
+          ...dbProjectionUsers("creator."),
+          "creator.email": {
+            $cond: {
+              if: "$creator.isEmailPublic",
+              then: "$creator.email",
+              else: "$$REMOVE",
+            },
+          },
+        },
+      },
     ])
     .toArray();
   if (!projects[0]) return null;
