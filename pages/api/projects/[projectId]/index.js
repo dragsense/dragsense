@@ -58,6 +58,8 @@ function sendProjectDetails(res, project) {
         creator: {
           name: creator?.name || "Unknown",
           image: creator?.image || null,
+          bio: creator?.bio || null,
+          email: creator?.email || null,
         },
       },
     });
