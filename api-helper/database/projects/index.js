@@ -32,6 +32,7 @@ export async function findProjectById(db, id) {
       { $unwind: "$creator" },
       {
         $project: {
+          "creator._id": 0,
           ...dbProjectionUsers("creator."),
           "creator.email": {
             $cond: {
@@ -53,7 +54,6 @@ export async function findProjectById(db, id) {
   return projects[0];
 }
 
-
 export async function _findProjectById(db, id) {
   const projects = await db
     .collection("projects")
@@ -74,7 +74,6 @@ export async function _findProjectById(db, id) {
     .toArray();
   if (!projects[0]) return null;
 
-  
   const { apiUrl, apiPrefix, apiVersion } = projects[0];
   projects[0].url = `${apiUrl}/${apiPrefix}/${apiVersion}`;
 
