@@ -16,6 +16,7 @@ export default function Profile({ user }) {
 export async function getServerSideProps(context) {
 
   const { req, res } = context;
+
   const session = await getSession({ req });
 
   if (!session && !session?.user) {
@@ -25,7 +26,6 @@ export async function getServerSideProps(context) {
     return res.end();
 
   }
-
 
   return {
     props: { user: session.user },

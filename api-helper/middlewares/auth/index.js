@@ -54,16 +54,15 @@ const authOptions = {
   },
   callback: {
     async jwt(token, user, account, profile, isNewUser) {
+
       const isUserSignedIn = user ? true : false;
       if (isUserSignedIn) {
         token.id = user._id.toString();
       }
-
       return Promise.resolve(token);
     },
     async session(session, token) {
       session.id = token.id;
-      
       return Promise.resolve(session);
     },
   }
@@ -77,7 +76,6 @@ export default async function authorize(req, res, next) {
     return res.status(401).end();
 
   req.user = session.user;
-
   return next();
 
 }

@@ -175,6 +175,7 @@ const authOptions = {
     },
     async session(session, token) {
       session.id = token.id;
+
       return Promise.resolve(session);
     },
   },
