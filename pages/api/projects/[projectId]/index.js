@@ -22,6 +22,7 @@ async function fetchProjectDetails(req, res) {
       res.status(404).json({ error: { message: "Project Not Found." } });
       return null;
     }
+
     return project;
   } catch (e) {
     console.error(e);

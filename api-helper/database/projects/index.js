@@ -30,17 +30,26 @@ export async function findProjectById(db, id) {
         },
       },
       { $unwind: "$creator" },
+
       {
         $project: {
           "creator._id": 0,
-          ...dbProjectionUsers("creator."),
+          "creator.password": 0,
+          "creator.emailVerified": 0,
+          "creator.roles": 0,
+          "creator.enable2FA": 0,
+        },
+      },
+      {
+        $addFields: {
           "creator.email": {
             $cond: {
               if: "$creator.isEmailPublic",
               then: "$creator.email",
-              else: "$$REMOVE",
+              else: null,
             },
           },
+          "creator.isEmailPublic": null,
         },
       },
     ])
@@ -72,14 +81,22 @@ export async function _findProjectById(db, id) {
       {
         $project: {
           "creator._id": 0,
-          ...dbProjectionUsers("creator."),
+          "creator.password": 0,
+          "creator.emailVerified": 0,
+          "creator.roles": 0,
+          "creator.enable2FA": 0,
+        },
+      },
+      {
+        $addFields: {
           "creator.email": {
             $cond: {
               if: "$creator.isEmailPublic",
               then: "$creator.email",
-              else: "$$REMOVE",
+              else: null,
             },
           },
+          "creator.isEmailPublic": null,
         },
       },
     ])
