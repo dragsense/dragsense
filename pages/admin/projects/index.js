@@ -1,20 +1,15 @@
-import { getSession } from "next-auth/react"
-import { ProjectComponent } from "@/components/index"
-
+import { getSession } from "next-auth/react";
+import { ProjectComponent } from "@/components/index";
 
 export default function Projects({ user }) {
-
-
   return (
     <>
       <ProjectComponent user={user} />
     </>
-  )
-
+  );
 }
 
 export async function getServerSideProps(context) {
-
   const { req, res } = context;
   const session = await getSession({ req });
 
@@ -23,11 +18,12 @@ export async function getServerSideProps(context) {
       Location: "/auth/login",
     });
     return res.end();
-
   }
 
+  let admin = false;
+  if (session.user.email === process.env.ADMIN) admin = true;
 
   return {
-    props: { user: session.user },
-  }
+    props: { user: { ...session.user, admin } },
+  };
 }

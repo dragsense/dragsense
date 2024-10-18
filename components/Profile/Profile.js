@@ -13,7 +13,6 @@ import {
   Col,
 } from "antd";
 import { fetcher } from "@/lib/fetch";
-import { UploadOutlined, UserOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
 const { TextArea } = Input;

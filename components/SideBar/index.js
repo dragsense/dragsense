@@ -6,9 +6,11 @@ import { useRouter } from 'next/router';
 import {
     MdFileCopy, MdWidgets, MdPermMedia,
     MdSettings, MdStyle,
-    MdCode, MdEmail, MdDashboard, MdJavascript, MdCss
+    MdCode, MdEmail, MdDashboard, MdJavascript, MdCss,
+    MdCreate
 } from 'react-icons/md'
 import { FaCoins } from 'react-icons/fa'
+import { AiOutlineUser } from 'react-icons/ai';
 
 const { Sider } = Layout;
 
@@ -105,6 +107,8 @@ const SideBar = () => {
                     <Menu.Item key="9" icon={<MdSettings size="1.5em" />} onClick={() => router.push('/admin/dashboard/setting')}>
                         Setting
                     </Menu.Item>
+               
+
                 </Menu>
 
             </Sider>

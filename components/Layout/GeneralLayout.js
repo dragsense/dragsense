@@ -1,10 +1,10 @@
 import { Layout, theme  } from 'antd';
 
-const { Header, Content } = Layout;
+const { Header, Content, Sider } = Layout;
 
 import Nav from "../Nav";
 
-const ProfileLayout = ({
+const GeneralLayout = ({
     children,
     user
 }) => {
@@ -33,4 +33,4 @@ const ProfileLayout = ({
     );
 };
 
-export default ProfileLayout;
+export default GeneralLayout;

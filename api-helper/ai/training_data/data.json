@@ -1,0 +1,4002 @@
+[
+  {
+    "input": "define 49 Imgs",
+    "output": "{ quantity : 49 , tag : img }"
+  },
+  {
+    "input": "establish tag 8 buttons",
+    "output": "{ quantity : 8 , tag : button }"
+  },
+  {
+    "input": "establish elements div [div]",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "insert elements 1 Content Piece",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "create elements div (div)",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "build Content Piece",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "generate 69 Main Content",
+    "output": "{ quantity : 69 , tag : main }"
+  },
+  {
+    "input": "1 Articles",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "insert element 40 Sidebar",
+    "output": "{ quantity : 40 , tag : aside }"
+  },
+  {
+    "input": "compose 87 Bottom Section",
+    "output": "{ quantity : 87 , tag : footer }"
+  },
+  {
+    "input": "generate elements 1 Level 5 Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "3 lis",
+    "output": "{ quantity : 3 , tag : li }"
+  },
+  {
+    "input": "elements 5 Tertiary Title",
+    "output": "{ quantity : 5 , tag : h3 }"
+  },
+  {
+    "input": "compose 17 asides",
+    "output": "{ quantity : 17 , tag : aside }"
+  },
+  {
+    "input": "build structure Mains",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "add 1 Article",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "initialize tag 85 Bottom Section",
+    "output": "{ quantity : 85 , tag : footer }"
+  },
+  {
+    "input": "compose structure 3 Title 5",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "construct Inline Elements",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "construct element 14 Dropdown",
+    "output": "{ quantity : 14 , tag : select }"
+  },
+  {
+    "input": "add 16 Section",
+    "output": "{ quantity : 16 , tag : section }"
+  },
+  {
+    "input": "define 5 mains (main)",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "construct elements 3 Asides (aside)",
+    "output": "{ quantity : 3 , tag : aside }"
+  },
+  {
+    "input": "create tag 3 H4",
+    "output": "{ quantity : 3 , tag : h4 }"
+  },
+  {
+    "input": "construct element 5 P",
+    "output": "{ quantity : 5 , tag : p }"
+  },
+  {
+    "input": "3 Headers",
+    "output": "{ quantity : 3 , tag : header }"
+  },
+  {
+    "input": "create element 26 Header 3",
+    "output": "{ quantity : 26 , tag : h3 }"
+  },
+  {
+    "input": "2 Sidebar Elements (aside)",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "compose 77 Input Fields",
+    "output": "{ quantity : 77 , tag : input }"
+  },
+  {
+    "input": "14 Input Fields",
+    "output": "{ quantity : 14 , tag : input }"
+  },
+  {
+    "input": "create tag 8 aside",
+    "output": "{ quantity : 8 , tag : aside }"
+  },
+  {
+    "input": "Footer Section",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "6 Content Entries",
+    "output": "{ quantity : 6 , tag : article }"
+  },
+  {
+    "input": "establish elements 2 Ordered List",
+    "output": "{ quantity : 2 , tag : ol }"
+  },
+  {
+    "input": "add elements 13 Interactive Button [button]",
+    "output": "{ quantity : 13 , tag : button }"
+  },
+  {
+    "input": "develop Media",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "define elements Numbered Items",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "footers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "create 47 Video Player",
+    "output": "{ quantity : 47 , tag : video }"
+  },
+  {
+    "input": "7 Header [header]",
+    "output": "{ quantity : 7 , tag : header }"
+  },
+  {
+    "input": "construct elements 7 Photo",
+    "output": "{ quantity : 7 , tag : img }"
+  },
+  {
+    "input": "insert elements 3 Footer Section [footer]",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "define 72 Video Clip",
+    "output": "{ quantity : 72 , tag : video }"
+  },
+  {
+    "input": "set 2 Content Area",
+    "output": "{ quantity : 2 , tag : section }"
+  },
+  {
+    "input": "set element header (header)",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "append element 10 Photos",
+    "output": "{ quantity : 10 , tag : img }"
+  },
+  {
+    "input": "14 OL (ol)",
+    "output": "{ quantity : 14 , tag : ol }"
+  },
+  {
+    "input": "initialize 2 Main Sections",
+    "output": "{ quantity : 2 , tag : main }"
+  },
+  {
+    "input": "set tag Picture",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "1 Text Span",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "initialize element 3 Main Content (main)",
+    "output": "{ quantity : 3 , tag : main }"
+  },
+  {
+    "input": "assign 3 Header 4",
+    "output": "{ quantity : 3 , tag : h4 }"
+  },
+  {
+    "input": "insert element 3 h5",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "assign 36 Button",
+    "output": "{ quantity : 36 , tag : button }"
+  },
+  {
+    "input": "develop video",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "10 Multimedia",
+    "output": "{ quantity : 10 , tag : video }"
+  },
+  {
+    "input": "insert 43 Text Field [input]",
+    "output": "{ quantity : 43 , tag : input }"
+  },
+  {
+    "input": "render element 7 Lists (ul)",
+    "output": "{ quantity : 7 , tag : ul }"
+  },
+  {
+    "input": "elements 1 images",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "construct tag 4 Button",
+    "output": "{ quantity : 4 , tag : button }"
+  },
+  {
+    "input": "add tag 2 Video Player",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "set tag 9 OLs",
+    "output": "{ quantity : 9 , tag : ol }"
+  },
+  {
+    "input": "insert element 33 Photos (img)",
+    "output": "{ quantity : 33 , tag : img }"
+  },
+  {
+    "input": "5 Main (main)",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "render 41 Sections",
+    "output": "{ quantity : 41 , tag : section }"
+  },
+  {
+    "input": "construct 37 Entry",
+    "output": "{ quantity : 37 , tag : article }"
+  },
+  {
+    "input": "set UL (ul)",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "tag LI",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "add elements Videos",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "construct tag Text Content (p)",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "tags 1 blockquote [blockquote]",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "Top Heading",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "element 19 Citations",
+    "output": "{ quantity : 19 , tag : blockquote }"
+  },
+  {
+    "input": "establish tag 64 asides",
+    "output": "{ quantity : 64 , tag : aside }"
+  },
+  {
+    "input": "create tag 1 Interactive Button (button)",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "compose structure Options Menu",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "develop 3 H6",
+    "output": "{ quantity : 3 , tag : h6 }"
+  },
+  {
+    "input": "construct element 5 Main Sections [main]",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "insert elements 4 Level 3 Heading",
+    "output": "{ quantity : 4 , tag : h3 }"
+  },
+  {
+    "input": "compose element 84 Title 6",
+    "output": "{ quantity : 84 , tag : h6 }"
+  },
+  {
+    "input": "render elements 26 Sidebar Elements",
+    "output": "{ quantity : 26 , tag : aside }"
+  },
+  {
+    "input": "15 Media",
+    "output": "{ quantity : 15 , tag : video }"
+  },
+  {
+    "input": "establish element Article",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "create tags H3 [h3]",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "insert 39 span",
+    "output": "{ quantity : 39 , tag : span }"
+  },
+  {
+    "input": "generate element 35 Inline Elements",
+    "output": "{ quantity : 35 , tag : span }"
+  },
+  {
+    "input": "build 1 Subheadings (h2)",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "Content Area",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "insert element Citations",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "initialize List Block",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "create 10 Option Selector",
+    "output": "{ quantity : 10 , tag : select }"
+  },
+  {
+    "input": "tag 7 Sections (section)",
+    "output": "{ quantity : 7 , tag : section }"
+  },
+  {
+    "input": "compose tag 20 Numbered List",
+    "output": "{ quantity : 20 , tag : ol }"
+  },
+  {
+    "input": "define tag 6 Form Inputs",
+    "output": "{ quantity : 6 , tag : input }"
+  },
+  {
+    "input": "create 75 Lists (ul)",
+    "output": "{ quantity : 75 , tag : ul }"
+  },
+  {
+    "input": "establish tag headers",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "insert tag Heading 1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "Dropdown [select]",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "Sound Clip",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "compose structure 3 Fifth Level Headings",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "add element Div Blocks",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "build 85 Action Button",
+    "output": "{ quantity : 85 , tag : button }"
+  },
+  {
+    "input": "compose structure 15 Interactive Button",
+    "output": "{ quantity : 15 , tag : button }"
+  },
+  {
+    "input": "1 h5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "establish element 2 Inline Text",
+    "output": "{ quantity : 2 , tag : span }"
+  },
+  {
+    "input": "3 Graphics",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "compose element 20 Text Span",
+    "output": "{ quantity : 20 , tag : span }"
+  },
+  {
+    "input": "construct element 3 Footer Section",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "build Quote Block",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "append 58 Footer Section",
+    "output": "{ quantity : 58 , tag : footer }"
+  },
+  {
+    "input": "tags 1 section (section)",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "generate elements h6s [h6]",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "append 40 Division",
+    "output": "{ quantity : 40 , tag : div }"
+  },
+  {
+    "input": "initialize elements 5 Bullet Point",
+    "output": "{ quantity : 5 , tag : li }"
+  },
+  {
+    "input": "build structure 4 Form Inputs",
+    "output": "{ quantity : 4 , tag : input }"
+  },
+  {
+    "input": "define tag 4 H2",
+    "output": "{ quantity : 4 , tag : h2 }"
+  },
+  {
+    "input": "3 Video",
+    "output": "{ quantity : 3 , tag : video }"
+  },
+  {
+    "input": "set element 1 videos",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "add tag 92 ULs",
+    "output": "{ quantity : 92 , tag : ul }"
+  },
+  {
+    "input": "append tags 14 Top Heading [h1]",
+    "output": "{ quantity : 14 , tag : h1 }"
+  },
+  {
+    "input": "initialize Title 4",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "add 4 Segment [section]",
+    "output": "{ quantity : 4 , tag : section }"
+  },
+  {
+    "input": "build structure 6 Audios",
+    "output": "{ quantity : 6 , tag : audio }"
+  },
+  {
+    "input": "set tag 82 footers",
+    "output": "{ quantity : 82 , tag : footer }"
+  },
+  {
+    "input": "establish tag H2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "generate 53 videos",
+    "output": "{ quantity : 53 , tag : video }"
+  },
+  {
+    "input": "create elements 3 H5s",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "define Text Field",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "define elements 80 span",
+    "output": "{ quantity : 80 , tag : span }"
+  },
+  {
+    "input": "define tag 4 Buttons",
+    "output": "{ quantity : 4 , tag : button }"
+  },
+  {
+    "input": "define elements 3 Primary Content Area",
+    "output": "{ quantity : 3 , tag : main }"
+  },
+  {
+    "input": "render tag Numbered Items",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "compose 5 H6s (h6)",
+    "output": "{ quantity : 5 , tag : h6 }"
+  },
+  {
+    "input": "add tag 53 asides",
+    "output": "{ quantity : 53 , tag : aside }"
+  },
+  {
+    "input": "compose element Media [video]",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "initialize element 10 h4",
+    "output": "{ quantity : 10 , tag : h4 }"
+  },
+  {
+    "input": "append tag 10 Image Elements",
+    "output": "{ quantity : 10 , tag : img }"
+  },
+  {
+    "input": "define elements 2 H1",
+    "output": "{ quantity : 2 , tag : h1 }"
+  },
+  {
+    "input": "element Photos",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "generate Level 5 Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "tag 2 Segment",
+    "output": "{ quantity : 2 , tag : section }"
+  },
+  {
+    "input": "create sections",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "generate element 2 audio",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "establish element Section Headings [h3]",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "set elements Option Selector (select)",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "List Elements",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "tag 6 Button",
+    "output": "{ quantity : 6 , tag : button }"
+  },
+  {
+    "input": "build tag 50 Textbox",
+    "output": "{ quantity : 50 , tag : input }"
+  },
+  {
+    "input": "establish tag Options Menu",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "set tag 32 h4s",
+    "output": "{ quantity : 32 , tag : h4 }"
+  },
+  {
+    "input": "add element 85 Main",
+    "output": "{ quantity : 85 , tag : main }"
+  },
+  {
+    "input": "elements Quinary Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "create 19 Bottom Headers",
+    "output": "{ quantity : 19 , tag : footer }"
+  },
+  {
+    "input": "Phrases",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "create 7 Div Blocks",
+    "output": "{ quantity : 7 , tag : div }"
+  },
+  {
+    "input": "create Title 5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "10 article",
+    "output": "{ quantity : 10 , tag : article }"
+  },
+  {
+    "input": "34 Division",
+    "output": "{ quantity : 34 , tag : div }"
+  },
+  {
+    "input": "define elements Sidebar",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "compose structure 92 Sub Heading",
+    "output": "{ quantity : 92 , tag : h2 }"
+  },
+  {
+    "input": "establish tag 2 Blockquote",
+    "output": "{ quantity : 2 , tag : blockquote }"
+  },
+  {
+    "input": "initialize element 16 audio",
+    "output": "{ quantity : 16 , tag : audio }"
+  },
+  {
+    "input": "build element 64 sections",
+    "output": "{ quantity : 64 , tag : section }"
+  },
+  {
+    "input": "define elements 8 Div Blocks",
+    "output": "{ quantity : 8 , tag : div }"
+  },
+  {
+    "input": "render Bullet Points",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "Select Input",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "establish element 2 h1s",
+    "output": "{ quantity : 2 , tag : h1 }"
+  },
+  {
+    "input": "render elements Level 6 Heading",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "1 footers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "define elements 1 Dropdown",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "Media",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "3 headers",
+    "output": "{ quantity : 3 , tag : header }"
+  },
+  {
+    "input": "add 43 Headers",
+    "output": "{ quantity : 43 , tag : header }"
+  },
+  {
+    "input": "create element 3 Main",
+    "output": "{ quantity : 3 , tag : main }"
+  },
+  {
+    "input": "generate elements 2 Soundtrack",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "construct elements Clickable",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "construct 19 Quaternary Heading (h4)",
+    "output": "{ quantity : 19 , tag : h4 }"
+  },
+  {
+    "input": "initialize element 2 Content Entries [article]",
+    "output": "{ quantity : 2 , tag : article }"
+  },
+  {
+    "input": "create elements 4 Sidebar Elements",
+    "output": "{ quantity : 4 , tag : aside }"
+  },
+  {
+    "input": "construct main",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "initialize element footers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "construct tag lis",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "append tag 4 Level 6 Heading",
+    "output": "{ quantity : 4 , tag : h6 }"
+  },
+  {
+    "input": "construct elements H5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "2 Primary Title [h1]",
+    "output": "{ quantity : 2 , tag : h1 }"
+  },
+  {
+    "input": "create element 90 Main Title (h1)",
+    "output": "{ quantity : 90 , tag : h1 }"
+  },
+  {
+    "input": "initialize elements 12 Audio Player",
+    "output": "{ quantity : 12 , tag : audio }"
+  },
+  {
+    "input": "generate 15 h3s (h3)",
+    "output": "{ quantity : 15 , tag : h3 }"
+  },
+  {
+    "input": "3 Paragraphs",
+    "output": "{ quantity : 3 , tag : p }"
+  },
+  {
+    "input": "append element 7 Section Title [h3]",
+    "output": "{ quantity : 7 , tag : h3 }"
+  },
+  {
+    "input": "construct element Sixth Level Headings",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "establish 4 Footers",
+    "output": "{ quantity : 4 , tag : footer }"
+  },
+  {
+    "input": "tags aside",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "create tags 5 Header 6",
+    "output": "{ quantity : 5 , tag : h6 }"
+  },
+  {
+    "input": "4 h1",
+    "output": "{ quantity : 4 , tag : h1 }"
+  },
+  {
+    "input": "add tag Mains",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "Title 5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "append tags button (button)",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "initialize element Audio Player",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "establish elements Subheadings",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "initialize 8 Input",
+    "output": "{ quantity : 8 , tag : input }"
+  },
+  {
+    "input": "set element 2 Button",
+    "output": "{ quantity : 2 , tag : button }"
+  },
+  {
+    "input": "create 100 div",
+    "output": "{ quantity : 100 , tag : div }"
+  },
+  {
+    "input": "set elements H2 (h2)",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "element 4 Picture",
+    "output": "{ quantity : 4 , tag : img }"
+  },
+  {
+    "input": "insert element 58 headers",
+    "output": "{ quantity : 58 , tag : header }"
+  },
+  {
+    "input": "initialize element 15 Form Field",
+    "output": "{ quantity : 15 , tag : input }"
+  },
+  {
+    "input": "build element aside [aside]",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "6 Header 6 [h6]",
+    "output": "{ quantity : 6 , tag : h6 }"
+  },
+  {
+    "input": "assign 88 mains",
+    "output": "{ quantity : 88 , tag : main }"
+  },
+  {
+    "input": "elements 36 Title 2",
+    "output": "{ quantity : 36 , tag : h2 }"
+  },
+  {
+    "input": "establish element Soundtrack",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "add tag Sidebar [aside]",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "append element 19 Quote Block",
+    "output": "{ quantity : 19 , tag : blockquote }"
+  },
+  {
+    "input": "tag header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "assign 9 Phrases",
+    "output": "{ quantity : 9 , tag : p }"
+  },
+  {
+    "input": "define 38 p",
+    "output": "{ quantity : 38 , tag : p }"
+  },
+  {
+    "input": "tags 2 Sixth Level Headings",
+    "output": "{ quantity : 2 , tag : h6 }"
+  },
+  {
+    "input": "initialize elements 5 Subheadings",
+    "output": "{ quantity : 5 , tag : h2 }"
+  },
+  {
+    "input": "insert elements 40 Title 6",
+    "output": "{ quantity : 40 , tag : h6 }"
+  },
+  {
+    "input": "generate element Pics",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "compose element Secondary Title",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "compose structure 7 Articles [article]",
+    "output": "{ quantity : 7 , tag : article }"
+  },
+  {
+    "input": "append tags Select Input",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "construct Photos (img)",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "compose tag inputs",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "set element Items",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "initialize element 8 Complementary Section",
+    "output": "{ quantity : 8 , tag : aside }"
+  },
+  {
+    "input": "add elements List Item",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "define Paragraph",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "2 Select Input (select)",
+    "output": "{ quantity : 2 , tag : select }"
+  },
+  {
+    "input": "construct elements Articles",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "insert element Bottom Headers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "set element 12 Quinary Heading [h5]",
+    "output": "{ quantity : 12 , tag : h5 }"
+  },
+  {
+    "input": "render tag 14 Sixth Level Headings",
+    "output": "{ quantity : 14 , tag : h6 }"
+  },
+  {
+    "input": "ULs",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "add tag 4 Section",
+    "output": "{ quantity : 4 , tag : section }"
+  },
+  {
+    "input": "create element 4 Audios",
+    "output": "{ quantity : 4 , tag : audio }"
+  },
+  {
+    "input": "generate tag 16 p",
+    "output": "{ quantity : 16 , tag : p }"
+  },
+  {
+    "input": "add element 2 h3s",
+    "output": "{ quantity : 2 , tag : h3 }"
+  },
+  {
+    "input": "append element 20 Sub Heading",
+    "output": "{ quantity : 20 , tag : h2 }"
+  },
+  {
+    "input": "compose element 2 Sound",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "insert elements Divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "construct element Level 4 Heading",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "generate 15 articles",
+    "output": "{ quantity : 15 , tag : article }"
+  },
+  {
+    "input": "add elements Phrases",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "generate elements 2 article [article]",
+    "output": "{ quantity : 2 , tag : article }"
+  },
+  {
+    "input": "render elements article (article)",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "create tag Sound Clip",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "append tag Content Area",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "define tag 9 Header Section",
+    "output": "{ quantity : 9 , tag : header }"
+  },
+  {
+    "input": "build tag 16 mains",
+    "output": "{ quantity : 16 , tag : main }"
+  },
+  {
+    "input": "establish List Block",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "render 18 Fifth Level Title",
+    "output": "{ quantity : 18 , tag : h5 }"
+  },
+  {
+    "input": "generate 2 Header 6",
+    "output": "{ quantity : 2 , tag : h6 }"
+  },
+  {
+    "input": "compose tag Primary Title",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "render List Block",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "set element Container",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "append elements audio clips",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "append elements 78 Main Sections",
+    "output": "{ quantity : 78 , tag : main }"
+  },
+  {
+    "input": "compose tag 14 Lists (ul)",
+    "output": "{ quantity : 14 , tag : ul }"
+  },
+  {
+    "input": "element 33 footers [footer]",
+    "output": "{ quantity : 33 , tag : footer }"
+  },
+  {
+    "input": "construct element 5 buttons",
+    "output": "{ quantity : 5 , tag : button }"
+  },
+  {
+    "input": "create 6 Video [video]",
+    "output": "{ quantity : 6 , tag : video }"
+  },
+  {
+    "input": "compose structure 8 H5s",
+    "output": "{ quantity : 8 , tag : h5 }"
+  },
+  {
+    "input": "create 45 spans (span)",
+    "output": "{ quantity : 45 , tag : span }"
+  },
+  {
+    "input": "render elements Sidebar Elements",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "Form Inputs (input)",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "insert tag Containers",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "establish element 4 Blockquotes",
+    "output": "{ quantity : 4 , tag : blockquote }"
+  },
+  {
+    "input": "develop Sidebar",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "define element 2 h2s",
+    "output": "{ quantity : 2 , tag : h2 }"
+  },
+  {
+    "input": "append tag h3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "render 7 Media",
+    "output": "{ quantity : 7 , tag : video }"
+  },
+  {
+    "input": "1 P [p]",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "compose structure 9 Text Block",
+    "output": "{ quantity : 9 , tag : p }"
+  },
+  {
+    "input": "generate element 10 h4",
+    "output": "{ quantity : 10 , tag : h4 }"
+  },
+  {
+    "input": "establish element 39 Section Headings",
+    "output": "{ quantity : 39 , tag : h3 }"
+  },
+  {
+    "input": "create tags 1 Numbered List",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "91 headers",
+    "output": "{ quantity : 91 , tag : header }"
+  },
+  {
+    "input": "insert element 24 Bullet Point",
+    "output": "{ quantity : 24 , tag : li }"
+  },
+  {
+    "input": "construct elements 20 uls",
+    "output": "{ quantity : 20 , tag : ul }"
+  },
+  {
+    "input": "append tags 1 Header 2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "add 35 blockquotes",
+    "output": "{ quantity : 35 , tag : blockquote }"
+  },
+  {
+    "input": "56 Header 6",
+    "output": "{ quantity : 56 , tag : h6 }"
+  },
+  {
+    "input": "append elements 35 footer",
+    "output": "{ quantity : 35 , tag : footer }"
+  },
+  {
+    "input": "initialize tag 1 Bottom Headers (footer)",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "establish element 3 audio clips",
+    "output": "{ quantity : 3 , tag : audio }"
+  },
+  {
+    "input": "set 5 Header 6",
+    "output": "{ quantity : 5 , tag : h6 }"
+  },
+  {
+    "input": "define element 17 Sidebar",
+    "output": "{ quantity : 17 , tag : aside }"
+  },
+  {
+    "input": "41 Primary Content Area",
+    "output": "{ quantity : 41 , tag : main }"
+  },
+  {
+    "input": "create tag 5 Top Headers",
+    "output": "{ quantity : 5 , tag : header }"
+  },
+  {
+    "input": "add element 3 Buttons",
+    "output": "{ quantity : 3 , tag : button }"
+  },
+  {
+    "input": "initialize element 1 Graphics",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "construct 8 Items",
+    "output": "{ quantity : 8 , tag : li }"
+  },
+  {
+    "input": "compose tag 1 aside [aside]",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "add Videos [video]",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "element headers",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "2 P",
+    "output": "{ quantity : 2 , tag : p }"
+  },
+  {
+    "input": "create tags headers",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "append Media",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "render elements 5 Complementary Section [aside]",
+    "output": "{ quantity : 5 , tag : aside }"
+  },
+  {
+    "input": "set tag Blockquotes",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "append h1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "define 53 Numbered List",
+    "output": "{ quantity : 53 , tag : ol }"
+  },
+  {
+    "input": "add elements 1 Subsection Headings",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "create element 5 main (main)",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "initialize tag 96 Content Segments",
+    "output": "{ quantity : 96 , tag : section }"
+  },
+  {
+    "input": "5 li",
+    "output": "{ quantity : 5 , tag : li }"
+  },
+  {
+    "input": "create element 27 h4",
+    "output": "{ quantity : 27 , tag : h4 }"
+  },
+  {
+    "input": "39 Select Box [select]",
+    "output": "{ quantity : 39 , tag : select }"
+  },
+  {
+    "input": "render element 1 Quaternary Heading",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "append element 5 headers",
+    "output": "{ quantity : 5 , tag : header }"
+  },
+  {
+    "input": "initialize 10 Numbered Items",
+    "output": "{ quantity : 10 , tag : ol }"
+  },
+  {
+    "input": "render element Sixth Level Headings",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "compose Subsection Title",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "compose tag 9 Mains",
+    "output": "{ quantity : 9 , tag : main }"
+  },
+  {
+    "input": "2 Headers",
+    "output": "{ quantity : 2 , tag : header }"
+  },
+  {
+    "input": "append elements 3 articles",
+    "output": "{ quantity : 3 , tag : article }"
+  },
+  {
+    "input": "build element 6 Container",
+    "output": "{ quantity : 6 , tag : div }"
+  },
+  {
+    "input": "elements 21 input (input)",
+    "output": "{ quantity : 21 , tag : input }"
+  },
+  {
+    "input": "Bottom Headers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "append tags 1 Sidebar Elements",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "add elements 2 Form Element",
+    "output": "{ quantity : 2 , tag : input }"
+  },
+  {
+    "input": "insert 2 Top Section",
+    "output": "{ quantity : 2 , tag : header }"
+  },
+  {
+    "input": "create tags 23 mains",
+    "output": "{ quantity : 23 , tag : main }"
+  },
+  {
+    "input": "generate tag 8 Sections",
+    "output": "{ quantity : 8 , tag : section }"
+  },
+  {
+    "input": "19 Unordered List",
+    "output": "{ quantity : 19 , tag : ul }"
+  },
+  {
+    "input": "tag 1 Input",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "assign 1 Image Elements [img]",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "generate element 5 Footers",
+    "output": "{ quantity : 5 , tag : footer }"
+  },
+  {
+    "input": "construct elements 1 Tertiary Title (h3)",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "tag 23 Footer",
+    "output": "{ quantity : 23 , tag : footer }"
+  },
+  {
+    "input": "render tag 2 Lists",
+    "output": "{ quantity : 2 , tag : ul }"
+  },
+  {
+    "input": "define elements 3 H4 [h4]",
+    "output": "{ quantity : 3 , tag : h4 }"
+  },
+  {
+    "input": "compose element 79 Header Section",
+    "output": "{ quantity : 79 , tag : header }"
+  },
+  {
+    "input": "34 LI",
+    "output": "{ quantity : 34 , tag : li }"
+  },
+  {
+    "input": "build element 27 Footers",
+    "output": "{ quantity : 27 , tag : footer }"
+  },
+  {
+    "input": "insert elements Content Segments",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "append elements 9 Picture",
+    "output": "{ quantity : 9 , tag : img }"
+  },
+  {
+    "input": "tag 4 Level 6 Heading [h6]",
+    "output": "{ quantity : 4 , tag : h6 }"
+  },
+  {
+    "input": "construct elements Text Content [p]",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "build tag h4",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "establish elements 3 input",
+    "output": "{ quantity : 3 , tag : input }"
+  },
+  {
+    "input": "tags Content Piece",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "initialize tag Header Section",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "initialize tag 3 Complementary Section [aside]",
+    "output": "{ quantity : 3 , tag : aside }"
+  },
+  {
+    "input": "elements 45 h6s",
+    "output": "{ quantity : 45 , tag : h6 }"
+  },
+  {
+    "input": "2 Header 4",
+    "output": "{ quantity : 2 , tag : h4 }"
+  },
+  {
+    "input": "define elements List Item",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "define tag 2 Fifth Level Title",
+    "output": "{ quantity : 2 , tag : h5 }"
+  },
+  {
+    "input": "Spans [span]",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "68 Content Segments",
+    "output": "{ quantity : 68 , tag : section }"
+  },
+  {
+    "input": "add tag 1 Subheadings",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "define Imgs",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "initialize elements inputs",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "render Form Field",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "Title 6",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "create tag 3 h4 (h4)",
+    "output": "{ quantity : 3 , tag : h4 }"
+  },
+  {
+    "input": "generate element Text Span",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "construct elements Inline Elements",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "establish Text Content",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "establish tag 38 Header 2 (h2)",
+    "output": "{ quantity : 38 , tag : h2 }"
+  },
+  {
+    "input": "create tag Body Text",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "19 List Block",
+    "output": "{ quantity : 19 , tag : ul }"
+  },
+  {
+    "input": "establish element H5s",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "5 footers",
+    "output": "{ quantity : 5 , tag : footer }"
+  },
+  {
+    "input": "insert tag 16 Title 6 [h6]",
+    "output": "{ quantity : 16 , tag : h6 }"
+  },
+  {
+    "input": "tags h6s",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "construct tag 1 Quote Block [blockquote]",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "3 Photos",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "construct tag 5 Headers [header]",
+    "output": "{ quantity : 5 , tag : header }"
+  },
+  {
+    "input": "add tag Video Player",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "3 Entry",
+    "output": "{ quantity : 3 , tag : article }"
+  },
+  {
+    "input": "initialize element 18 Options Menu",
+    "output": "{ quantity : 18 , tag : select }"
+  },
+  {
+    "input": "construct 14 Paragraph",
+    "output": "{ quantity : 14 , tag : p }"
+  },
+  {
+    "input": "generate elements 21 ULs",
+    "output": "{ quantity : 21 , tag : ul }"
+  },
+  {
+    "input": "create elements 10 Quote Block",
+    "output": "{ quantity : 10 , tag : blockquote }"
+  },
+  {
+    "input": "construct tag 39 Text Span",
+    "output": "{ quantity : 39 , tag : span }"
+  },
+  {
+    "input": "set element Option Selector [select]",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "create element 9 Title 2",
+    "output": "{ quantity : 9 , tag : h2 }"
+  },
+  {
+    "input": "build tag 67 spans (span)",
+    "output": "{ quantity : 67 , tag : span }"
+  },
+  {
+    "input": "add elements lis",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "initialize tag 1 h3 [h3]",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "construct tag 42 Header 6",
+    "output": "{ quantity : 42 , tag : h6 }"
+  },
+  {
+    "input": "append elements 25 Numbered List",
+    "output": "{ quantity : 25 , tag : ol }"
+  },
+  {
+    "input": "render element Select Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "assign 14 Unordered List",
+    "output": "{ quantity : 14 , tag : ul }"
+  },
+  {
+    "input": "create element 37 Pics",
+    "output": "{ quantity : 37 , tag : img }"
+  },
+  {
+    "input": "define tag 7 Primary Title",
+    "output": "{ quantity : 7 , tag : h1 }"
+  },
+  {
+    "input": "append tag 57 Top Headers (header)",
+    "output": "{ quantity : 57 , tag : header }"
+  },
+  {
+    "input": "define tag 3 Footer",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "establish element 3 Fifth Level Title",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "build tag 5 Header Section",
+    "output": "{ quantity : 5 , tag : header }"
+  },
+  {
+    "input": "append element 39 footer",
+    "output": "{ quantity : 39 , tag : footer }"
+  },
+  {
+    "input": "construct tag 3 div",
+    "output": "{ quantity : 3 , tag : div }"
+  },
+  {
+    "input": "generate Subsection Headings",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "append tags footer [footer]",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "develop Main Content",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "generate tag 5 Header 3 (h3)",
+    "output": "{ quantity : 5 , tag : h3 }"
+  },
+  {
+    "input": "initialize elements 4 Top Headers",
+    "output": "{ quantity : 4 , tag : header }"
+  },
+  {
+    "input": "render Ordered Lists",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "add element 34 Asides",
+    "output": "{ quantity : 34 , tag : aside }"
+  },
+  {
+    "input": "construct tag 10 buttons",
+    "output": "{ quantity : 10 , tag : button }"
+  },
+  {
+    "input": "96 Headers",
+    "output": "{ quantity : 96 , tag : header }"
+  },
+  {
+    "input": "tags H5s",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "generate tag Main Title [h1]",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "append tags 41 h2",
+    "output": "{ quantity : 41 , tag : h2 }"
+  },
+  {
+    "input": "construct tag Content Area",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "append tag 80 uls",
+    "output": "{ quantity : 80 , tag : ul }"
+  },
+  {
+    "input": "initialize 1 h4s",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "build structure 5 Image Elements",
+    "output": "{ quantity : 5 , tag : img }"
+  },
+  {
+    "input": "generate element 21 Level 5 Heading",
+    "output": "{ quantity : 21 , tag : h5 }"
+  },
+  {
+    "input": "establish tag 2 Title 5",
+    "output": "{ quantity : 2 , tag : h5 }"
+  },
+  {
+    "input": "establish element 35 Video",
+    "output": "{ quantity : 35 , tag : video }"
+  },
+  {
+    "input": "initialize elements 2 ULs (ul)",
+    "output": "{ quantity : 2 , tag : ul }"
+  },
+  {
+    "input": "build 3 Pics",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "generate 7 Footer",
+    "output": "{ quantity : 7 , tag : footer }"
+  },
+  {
+    "input": "element Sub Heading",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "develop 3 ols",
+    "output": "{ quantity : 3 , tag : ol }"
+  },
+  {
+    "input": "initialize tag 2 Asides (aside)",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "Mains",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "H5s (h5)",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "add 2 Sidebar",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "create lis",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "define elements List Item [li]",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "append elements 16 section",
+    "output": "{ quantity : 16 , tag : section }"
+  },
+  {
+    "input": "construct elements 1 Header 5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "generate element 10 Content Area",
+    "output": "{ quantity : 10 , tag : section }"
+  },
+  {
+    "input": "compose element Header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "compose 18 Unordered List",
+    "output": "{ quantity : 18 , tag : ul }"
+  },
+  {
+    "input": "render elements 3 Bottom Section [footer]",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "element Soundtrack",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "construct element Content Area",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "create 14 Top Section [header]",
+    "output": "{ quantity : 14 , tag : header }"
+  },
+  {
+    "input": "add elements Top Headers",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "generate Action Button (button)",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "render elements 35 Container",
+    "output": "{ quantity : 35 , tag : div }"
+  },
+  {
+    "input": "compose tag 3 h5s (h5)",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "compose structure header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "add tag Video [video]",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "element img [img]",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "create 3 Header",
+    "output": "{ quantity : 3 , tag : header }"
+  },
+  {
+    "input": "create element 33 spans (span)",
+    "output": "{ quantity : 33 , tag : span }"
+  },
+  {
+    "input": "generate tag Form Field",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "build structure Blockquote",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "11 Multimedia (video)",
+    "output": "{ quantity : 11 , tag : video }"
+  },
+  {
+    "input": "5 h4",
+    "output": "{ quantity : 5 , tag : h4 }"
+  },
+  {
+    "input": "render 1 Fifth Level Headings (h5)",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "set elements 74 Audio Player",
+    "output": "{ quantity : 74 , tag : audio }"
+  },
+  {
+    "input": "render element Content Segments",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "element 91 section",
+    "output": "{ quantity : 91 , tag : section }"
+  },
+  {
+    "input": "construct tag Citation",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "generate elements 11 Body Text [p]",
+    "output": "{ quantity : 11 , tag : p }"
+  },
+  {
+    "input": "compose element 92 h3 [h3]",
+    "output": "{ quantity : 92 , tag : h3 }"
+  },
+  {
+    "input": "H3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "build 1 Title 3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "compose Section",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "create element 21 footer [footer]",
+    "output": "{ quantity : 21 , tag : footer }"
+  },
+  {
+    "input": "build 42 Action Button [button]",
+    "output": "{ quantity : 42 , tag : button }"
+  },
+  {
+    "input": "build Division",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "append tags divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "create tag h1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "initialize element Tertiary Title",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "generate 9 div",
+    "output": "{ quantity : 9 , tag : div }"
+  },
+  {
+    "input": "append element 2 Articles",
+    "output": "{ quantity : 2 , tag : article }"
+  },
+  {
+    "input": "1 Divs (div)",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "add element h1s",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "generate 8 Header 6 [h6]",
+    "output": "{ quantity : 8 , tag : h6 }"
+  },
+  {
+    "input": "append 1 Videos",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "elements 7 Header",
+    "output": "{ quantity : 7 , tag : header }"
+  },
+  {
+    "input": "define element 20 Small Text",
+    "output": "{ quantity : 20 , tag : span }"
+  },
+  {
+    "input": "add 8 Interactive Button",
+    "output": "{ quantity : 8 , tag : button }"
+  },
+  {
+    "input": "construct elements H2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "construct element 5 Title 2",
+    "output": "{ quantity : 5 , tag : h2 }"
+  },
+  {
+    "input": "define tag 1 Option Selector",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "create elements 5 ULs [ul]",
+    "output": "{ quantity : 5 , tag : ul }"
+  },
+  {
+    "input": "assign 10 Numbered List",
+    "output": "{ quantity : 10 , tag : ol }"
+  },
+  {
+    "input": "generate element Citation",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "set 69 Photo",
+    "output": "{ quantity : 69 , tag : img }"
+  },
+  {
+    "input": "establish tag 7 Subsection Headings",
+    "output": "{ quantity : 7 , tag : h4 }"
+  },
+  {
+    "input": "define elements 10 h5s",
+    "output": "{ quantity : 10 , tag : h5 }"
+  },
+  {
+    "input": "render tag 13 Subheadings",
+    "output": "{ quantity : 13 , tag : h2 }"
+  },
+  {
+    "input": "set element 1 Dropdown",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "generate elements Select Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "insert Select Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "set Form Element [input]",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "initialize elements Fifth Level Title",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "generate elements 4 Picture",
+    "output": "{ quantity : 4 , tag : img }"
+  },
+  {
+    "input": "set 2 Footer",
+    "output": "{ quantity : 2 , tag : footer }"
+  },
+  {
+    "input": "Title 4",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "set element 3 Citation (blockquote)",
+    "output": "{ quantity : 3 , tag : blockquote }"
+  },
+  {
+    "input": "tag 23 Soundtrack [audio]",
+    "output": "{ quantity : 23 , tag : audio }"
+  },
+  {
+    "input": "tag 1 Header 2 [h2]",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "create Subheadings [h2]",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "define 4 Footers",
+    "output": "{ quantity : 4 , tag : footer }"
+  },
+  {
+    "input": "establish element 3 Bullet Points [ul]",
+    "output": "{ quantity : 3 , tag : ul }"
+  },
+  {
+    "input": "define tag 1 Body Text",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "append tags 86 Complementary Section [aside]",
+    "output": "{ quantity : 86 , tag : aside }"
+  },
+  {
+    "input": "add elements 22 Subsection Headings",
+    "output": "{ quantity : 22 , tag : h4 }"
+  },
+  {
+    "input": "82 aside",
+    "output": "{ quantity : 82 , tag : aside }"
+  },
+  {
+    "input": "create tag Video Clip [video]",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "initialize element 2 button",
+    "output": "{ quantity : 2 , tag : button }"
+  },
+  {
+    "input": "create elements button",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "construct tag Complementary Section [aside]",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "establish elements Audio [audio]",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "create tags 23 li (li)",
+    "output": "{ quantity : 23 , tag : li }"
+  },
+  {
+    "input": "establish elements Bottom Headers",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "generate element Image Elements",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "element 2 Subsection Headings",
+    "output": "{ quantity : 2 , tag : h4 }"
+  },
+  {
+    "input": "append tags 8 Quinary Heading",
+    "output": "{ quantity : 8 , tag : h5 }"
+  },
+  {
+    "input": "render element Headers",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "append tag 13 List Elements [li]",
+    "output": "{ quantity : 13 , tag : li }"
+  },
+  {
+    "input": "generate element 3 Section",
+    "output": "{ quantity : 3 , tag : section }"
+  },
+  {
+    "input": "build structure 13 Clickable",
+    "output": "{ quantity : 13 , tag : button }"
+  },
+  {
+    "input": "set elements List Entries",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "build 8 Subsection Title",
+    "output": "{ quantity : 8 , tag : h4 }"
+  },
+  {
+    "input": "append elements 27 Primary Content Area",
+    "output": "{ quantity : 27 , tag : main }"
+  },
+  {
+    "input": "append tag 14 List Item",
+    "output": "{ quantity : 14 , tag : li }"
+  },
+  {
+    "input": "set Select Input",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "append tag 1 P",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "h1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "generate elements 6 Top Section [header]",
+    "output": "{ quantity : 6 , tag : header }"
+  },
+  {
+    "input": "append elements 3 Footers",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "tags 2 Select Box",
+    "output": "{ quantity : 2 , tag : select }"
+  },
+  {
+    "input": "19 Sidebar Elements (aside)",
+    "output": "{ quantity : 19 , tag : aside }"
+  },
+  {
+    "input": "append tags Level 3 Heading",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "compose tag Div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "1 span",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "compose element 8 Blockquotes",
+    "output": "{ quantity : 8 , tag : blockquote }"
+  },
+  {
+    "input": "tags 70 headers",
+    "output": "{ quantity : 70 , tag : header }"
+  },
+  {
+    "input": "define elements 1 H6s",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "establish element 2 Button [button]",
+    "output": "{ quantity : 2 , tag : button }"
+  },
+  {
+    "input": "render elements 10 Bottom Headers (footer)",
+    "output": "{ quantity : 10 , tag : footer }"
+  },
+  {
+    "input": "build element 8 sections",
+    "output": "{ quantity : 8 , tag : section }"
+  },
+  {
+    "input": "define element 5 Container",
+    "output": "{ quantity : 5 , tag : div }"
+  },
+  {
+    "input": "create 15 h4s",
+    "output": "{ quantity : 15 , tag : h4 }"
+  },
+  {
+    "input": "initialize Form Inputs",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "establish tag 25 Title 4",
+    "output": "{ quantity : 25 , tag : h4 }"
+  },
+  {
+    "input": "57 Containers",
+    "output": "{ quantity : 57 , tag : div }"
+  },
+  {
+    "input": "compose tag 41 Unordered List",
+    "output": "{ quantity : 41 , tag : ul }"
+  },
+  {
+    "input": "tag 95 Select Box",
+    "output": "{ quantity : 95 , tag : select }"
+  },
+  {
+    "input": "construct element 42 H5",
+    "output": "{ quantity : 42 , tag : h5 }"
+  },
+  {
+    "input": "build Options Menu",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "generate 3 Header 5",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "create elements 1 p [p]",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "construct elements Selection Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "set tag 31 Top Headers",
+    "output": "{ quantity : 31 , tag : header }"
+  },
+  {
+    "input": "render elements Interactive Button",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "set tag 1 Quinary Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "append tags Header 2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "append element Soundtrack",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "5 Asides",
+    "output": "{ quantity : 5 , tag : aside }"
+  },
+  {
+    "input": "append blockquote",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "establish elements 28 Sound Clip",
+    "output": "{ quantity : 28 , tag : audio }"
+  },
+  {
+    "input": "initialize h5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "element 7 Button [button]",
+    "output": "{ quantity : 7 , tag : button }"
+  },
+  {
+    "input": "define 10 Buttons",
+    "output": "{ quantity : 10 , tag : button }"
+  },
+  {
+    "input": "create element 55 li",
+    "output": "{ quantity : 55 , tag : li }"
+  },
+  {
+    "input": "insert elements li [li]",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "compose element h1s",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "create elements 3 Bottom Section",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "establish tag Audio",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "render tag 14 Senary Heading",
+    "output": "{ quantity : 14 , tag : h6 }"
+  },
+  {
+    "input": "set element 43 Top Headers",
+    "output": "{ quantity : 43 , tag : header }"
+  },
+  {
+    "input": "1 Video Clip",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "initialize elements 63 header [header]",
+    "output": "{ quantity : 63 , tag : header }"
+  },
+  {
+    "input": "create elements 3 mains",
+    "output": "{ quantity : 3 , tag : main }"
+  },
+  {
+    "input": "construct element Citation",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "add tag 1 Action Button",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "render element 1 Selection Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "develop 1 section",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "Asides",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "establish 3 Paragraph",
+    "output": "{ quantity : 3 , tag : p }"
+  },
+  {
+    "input": "tag Image Elements [img]",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "39 H4s (h4)",
+    "output": "{ quantity : 39 , tag : h4 }"
+  },
+  {
+    "input": "compose element 3 Primary Content Area (main)",
+    "output": "{ quantity : 3 , tag : main }"
+  },
+  {
+    "input": "initialize elements ULs",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "set Segment",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "build Audios",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "establish 8 video",
+    "output": "{ quantity : 8 , tag : video }"
+  },
+  {
+    "input": "tag 1 H1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "define tag 1 Header 2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "Form Element [input]",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "build tag Numbered Items",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "initialize tag 3 P",
+    "output": "{ quantity : 3 , tag : p }"
+  },
+  {
+    "input": "generate element Section",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "ol (ol)",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "construct element 4 img",
+    "output": "{ quantity : 4 , tag : img }"
+  },
+  {
+    "input": "insert Selection Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "element Pics",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "tags 72 selects",
+    "output": "{ quantity : 72 , tag : select }"
+  },
+  {
+    "input": "append element H1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "append elements 9 Header 5",
+    "output": "{ quantity : 9 , tag : h5 }"
+  },
+  {
+    "input": "tags 75 h5s",
+    "output": "{ quantity : 75 , tag : h5 }"
+  },
+  {
+    "input": "build structure 15 Audio Player [audio]",
+    "output": "{ quantity : 15 , tag : audio }"
+  },
+  {
+    "input": "append tag 91 sections",
+    "output": "{ quantity : 91 , tag : section }"
+  },
+  {
+    "input": "17 img",
+    "output": "{ quantity : 17 , tag : img }"
+  },
+  {
+    "input": "compose 1 Ordered Lists",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "insert tag 48 Option Selector [select]",
+    "output": "{ quantity : 48 , tag : select }"
+  },
+  {
+    "input": "generate element 4 Top Headers",
+    "output": "{ quantity : 4 , tag : header }"
+  },
+  {
+    "input": "render Clickable (button)",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "insert elements 1 div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "append 57 Blockquote (blockquote)",
+    "output": "{ quantity : 57 , tag : blockquote }"
+  },
+  {
+    "input": "create tags 3 Title 1",
+    "output": "{ quantity : 3 , tag : h1 }"
+  },
+  {
+    "input": "insert tag 5 Button",
+    "output": "{ quantity : 5 , tag : button }"
+  },
+  {
+    "input": "initialize element 8 aside",
+    "output": "{ quantity : 8 , tag : aside }"
+  },
+  {
+    "input": "element 58 H5s",
+    "output": "{ quantity : 58 , tag : h5 }"
+  },
+  {
+    "input": "set element 56 Quinary Heading",
+    "output": "{ quantity : 56 , tag : h5 }"
+  },
+  {
+    "input": "establish tag 35 h4s",
+    "output": "{ quantity : 35 , tag : h4 }"
+  },
+  {
+    "input": "add element 1 H6 [h6]",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "create tag 3 Sentences",
+    "output": "{ quantity : 3 , tag : p }"
+  },
+  {
+    "input": "7 Subheadings",
+    "output": "{ quantity : 7 , tag : h2 }"
+  },
+  {
+    "input": "compose 12 h6",
+    "output": "{ quantity : 12 , tag : h6 }"
+  },
+  {
+    "input": "create tags 3 Level 3 Heading",
+    "output": "{ quantity : 3 , tag : h3 }"
+  },
+  {
+    "input": "Top Section",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "construct elements 3 Unordered List",
+    "output": "{ quantity : 3 , tag : ul }"
+  },
+  {
+    "input": "assign 11 Div Blocks",
+    "output": "{ quantity : 11 , tag : div }"
+  },
+  {
+    "input": "2 Footers",
+    "output": "{ quantity : 2 , tag : footer }"
+  },
+  {
+    "input": "add elements 5 Header 3",
+    "output": "{ quantity : 5 , tag : h3 }"
+  },
+  {
+    "input": "render element 2 inputs",
+    "output": "{ quantity : 2 , tag : input }"
+  },
+  {
+    "input": "build structure 38 Header Section",
+    "output": "{ quantity : 38 , tag : header }"
+  },
+  {
+    "input": "construct tag 1 Quinary Heading (h5)",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "create tag Section",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "elements 15 Title 3",
+    "output": "{ quantity : 15 , tag : h3 }"
+  },
+  {
+    "input": "generate element H1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "construct element 3 Sound",
+    "output": "{ quantity : 3 , tag : audio }"
+  },
+  {
+    "input": "set element 10 Sentences [p]",
+    "output": "{ quantity : 10 , tag : p }"
+  },
+  {
+    "input": "compose Image",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "27 Title 2",
+    "output": "{ quantity : 27 , tag : h2 }"
+  },
+  {
+    "input": "21 Main Sections",
+    "output": "{ quantity : 21 , tag : main }"
+  },
+  {
+    "input": "construct 3 P",
+    "output": "{ quantity : 3 , tag : p }"
+  },
+  {
+    "input": "set elements 9 input",
+    "output": "{ quantity : 9 , tag : input }"
+  },
+  {
+    "input": "insert 83 Section",
+    "output": "{ quantity : 83 , tag : section }"
+  },
+  {
+    "input": "compose tag Header 3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "build structure 3 blockquotes",
+    "output": "{ quantity : 3 , tag : blockquote }"
+  },
+  {
+    "input": "set Audios (audio)",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "build tag 1 videos",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "add 2 UL",
+    "output": "{ quantity : 2 , tag : ul }"
+  },
+  {
+    "input": "2 Video Clip",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "compose structure div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "establish elements List Item",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "initialize tag 20 Content Area",
+    "output": "{ quantity : 20 , tag : div }"
+  },
+  {
+    "input": "Audio",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "append element Primary Title (h1)",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "add elements 3 Buttons",
+    "output": "{ quantity : 3 , tag : button }"
+  },
+  {
+    "input": "append element H1s [h1]",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "generate tag H1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "append tag 1 Buttons",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "establish tag 17 Span",
+    "output": "{ quantity : 17 , tag : span }"
+  },
+  {
+    "input": "set element 18 Audio Player",
+    "output": "{ quantity : 18 , tag : audio }"
+  },
+  {
+    "input": "create tags 1 main (main)",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "establish element header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "append 5 List Block",
+    "output": "{ quantity : 5 , tag : ul }"
+  },
+  {
+    "input": "render elements 1 h6",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "initialize element 13 ps [p]",
+    "output": "{ quantity : 13 , tag : p }"
+  },
+  {
+    "input": "set elements 2 Button",
+    "output": "{ quantity : 2 , tag : button }"
+  },
+  {
+    "input": "add element sections",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "2 Videos",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "insert elements Title 3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "build 11 aside (aside)",
+    "output": "{ quantity : 11 , tag : aside }"
+  },
+  {
+    "input": "generate elements Sixth Level Headings",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "33 Clickable",
+    "output": "{ quantity : 33 , tag : button }"
+  },
+  {
+    "input": "define element 1 Main Title",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "compose element 6 divs [div]",
+    "output": "{ quantity : 6 , tag : div }"
+  },
+  {
+    "input": "6 Title 5",
+    "output": "{ quantity : 6 , tag : h5 }"
+  },
+  {
+    "input": "append tag 34 Title 2",
+    "output": "{ quantity : 34 , tag : h2 }"
+  },
+  {
+    "input": "tags 8 Top Section",
+    "output": "{ quantity : 8 , tag : header }"
+  },
+  {
+    "input": "26 buttons",
+    "output": "{ quantity : 26 , tag : button }"
+  },
+  {
+    "input": "construct element Quinary Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "11 Form Field",
+    "output": "{ quantity : 11 , tag : input }"
+  },
+  {
+    "input": "render tag 4 H1s (h1)",
+    "output": "{ quantity : 4 , tag : h1 }"
+  },
+  {
+    "input": "append Quote Block",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "insert tag 10 Level 4 Heading [h4]",
+    "output": "{ quantity : 10 , tag : h4 }"
+  },
+  {
+    "input": "build tag Multimedia",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "compose element 77 Header 4",
+    "output": "{ quantity : 77 , tag : h4 }"
+  },
+  {
+    "input": "add element 4 Items",
+    "output": "{ quantity : 4 , tag : li }"
+  },
+  {
+    "input": "add elements 41 Quinary Heading",
+    "output": "{ quantity : 41 , tag : h5 }"
+  },
+  {
+    "input": "define tag H5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "set h1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "insert Header Section",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "compose tag 2 Sound Clip [audio]",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "add 2 Header 1",
+    "output": "{ quantity : 2 , tag : h1 }"
+  },
+  {
+    "input": "generate Content Entries (article)",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "create tag 8 Dropdown",
+    "output": "{ quantity : 8 , tag : select }"
+  },
+  {
+    "input": "define element 5 Container (div)",
+    "output": "{ quantity : 5 , tag : div }"
+  },
+  {
+    "input": "generate tag 3 Input",
+    "output": "{ quantity : 3 , tag : input }"
+  },
+  {
+    "input": "initialize element 5 Heading 1",
+    "output": "{ quantity : 5 , tag : h1 }"
+  },
+  {
+    "input": "audio",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "Soundtrack",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "add elements 1 spans",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "construct element H6 [h6]",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "append element Spans",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "Container",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "build tag 2 Mains",
+    "output": "{ quantity : 2 , tag : main }"
+  },
+  {
+    "input": "establish Sections",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "render tag Segment",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "insert 19 Citation",
+    "output": "{ quantity : 19 , tag : blockquote }"
+  },
+  {
+    "input": "compose tag 99 Items (li)",
+    "output": "{ quantity : 99 , tag : li }"
+  },
+  {
+    "input": "define element Level 4 Heading",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "add 6 Header 4",
+    "output": "{ quantity : 6 , tag : h4 }"
+  },
+  {
+    "input": "create tags Input",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "initialize element 45 h6s",
+    "output": "{ quantity : 45 , tag : h6 }"
+  },
+  {
+    "input": "tag 5 Header 5",
+    "output": "{ quantity : 5 , tag : h5 }"
+  },
+  {
+    "input": "set elements span",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "elements 53 Content Entries (article)",
+    "output": "{ quantity : 53 , tag : article }"
+  },
+  {
+    "input": "2 Sidebar Elements",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "generate elements 3 Quote Block",
+    "output": "{ quantity : 3 , tag : blockquote }"
+  },
+  {
+    "input": "create elements 2 Picture",
+    "output": "{ quantity : 2 , tag : img }"
+  },
+  {
+    "input": "compose element Buttons (button)",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "set Div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "add tag 8 sections",
+    "output": "{ quantity : 8 , tag : section }"
+  },
+  {
+    "input": "append elements 2 Videos",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "build tag 16 Articles",
+    "output": "{ quantity : 16 , tag : article }"
+  },
+  {
+    "input": "append element 1 Div Blocks [div]",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "create tags 3 blockquote",
+    "output": "{ quantity : 3 , tag : blockquote }"
+  },
+  {
+    "input": "define 72 Numbered List",
+    "output": "{ quantity : 72 , tag : ol }"
+  },
+  {
+    "input": "generate element 11 Inline Elements",
+    "output": "{ quantity : 11 , tag : span }"
+  },
+  {
+    "input": "6 span [span]",
+    "output": "{ quantity : 6 , tag : span }"
+  },
+  {
+    "input": "render element 3 Header 5",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "articles",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "establish element Lists",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "build element button",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "construct element 4 Content Piece",
+    "output": "{ quantity : 4 , tag : article }"
+  },
+  {
+    "input": "create 5 Subheadings",
+    "output": "{ quantity : 5 , tag : h2 }"
+  },
+  {
+    "input": "develop 1 buttons [button]",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "set element Header Section",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "21 Inline Text",
+    "output": "{ quantity : 21 , tag : span }"
+  },
+  {
+    "input": "compose element 35 button [button]",
+    "output": "{ quantity : 35 , tag : button }"
+  },
+  {
+    "input": "generate buttons",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "insert tag 39 Tertiary Title",
+    "output": "{ quantity : 39 , tag : h3 }"
+  },
+  {
+    "input": "build articles",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "initialize elements 5 Dropdown",
+    "output": "{ quantity : 5 , tag : select }"
+  },
+  {
+    "input": "insert tag 1 main",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "compose 2 List Entries",
+    "output": "{ quantity : 2 , tag : li }"
+  },
+  {
+    "input": "Citation",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "append element Selection Box [select]",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "add elements Content Area",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "5 Section Title",
+    "output": "{ quantity : 5 , tag : h3 }"
+  },
+  {
+    "input": "construct tag buttons",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "create tag 7 Action Button",
+    "output": "{ quantity : 7 , tag : button }"
+  },
+  {
+    "input": "insert 34 Text Field",
+    "output": "{ quantity : 34 , tag : input }"
+  },
+  {
+    "input": "h6s (h6)",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "3 Footers (footer)",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "add tag Footers [footer]",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "compose structure Footer Section",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "establish elements Sections",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "add elements aside",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "define element 2 Audio Player",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "establish element 2 input",
+    "output": "{ quantity : 2 , tag : input }"
+  },
+  {
+    "input": "set 28 List Block",
+    "output": "{ quantity : 28 , tag : ul }"
+  },
+  {
+    "input": "create element 27 Numbered Items",
+    "output": "{ quantity : 27 , tag : ol }"
+  },
+  {
+    "input": "generate elements 4 Form Field (input)",
+    "output": "{ quantity : 4 , tag : input }"
+  },
+  {
+    "input": "add tag 25 divs",
+    "output": "{ quantity : 25 , tag : div }"
+  },
+  {
+    "input": "elements Phrases",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "set element 57 asides [aside]",
+    "output": "{ quantity : 57 , tag : aside }"
+  },
+  {
+    "input": "insert element 48 Footer",
+    "output": "{ quantity : 48 , tag : footer }"
+  },
+  {
+    "input": "generate tag 1 blockquote",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "compose 4 Ordered Lists",
+    "output": "{ quantity : 4 , tag : ol }"
+  },
+  {
+    "input": "5 mains",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "insert element 74 Soundtrack",
+    "output": "{ quantity : 74 , tag : audio }"
+  },
+  {
+    "input": "set element 4 images",
+    "output": "{ quantity : 4 , tag : img }"
+  },
+  {
+    "input": "establish element 23 Title 4",
+    "output": "{ quantity : 23 , tag : h4 }"
+  },
+  {
+    "input": "h4s",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "render elements Textbox",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "create tag 2 Sound [audio]",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "append element 4 span",
+    "output": "{ quantity : 4 , tag : span }"
+  },
+  {
+    "input": "generate elements 10 Footer",
+    "output": "{ quantity : 10 , tag : footer }"
+  },
+  {
+    "input": "construct header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "define elements Sections",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "List Entries (li)",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "tag 4 H6s [h6]",
+    "output": "{ quantity : 4 , tag : h6 }"
+  },
+  {
+    "input": "define element 3 H1s",
+    "output": "{ quantity : 3 , tag : h1 }"
+  },
+  {
+    "input": "create elements 1 divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "insert tag Div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "establish articles",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "build 2 Citations",
+    "output": "{ quantity : 2 , tag : blockquote }"
+  },
+  {
+    "input": "element Videos",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "3 Division",
+    "output": "{ quantity : 3 , tag : div }"
+  },
+  {
+    "input": "2 videos (video)",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "add 4 ul (ul)",
+    "output": "{ quantity : 4 , tag : ul }"
+  },
+  {
+    "input": "define tag Title 3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "set 20 divs",
+    "output": "{ quantity : 20 , tag : div }"
+  },
+  {
+    "input": "compose 60 asides",
+    "output": "{ quantity : 60 , tag : aside }"
+  },
+  {
+    "input": "render 8 OLs",
+    "output": "{ quantity : 8 , tag : ol }"
+  },
+  {
+    "input": "tags 3 Sound Clip",
+    "output": "{ quantity : 3 , tag : audio }"
+  },
+  {
+    "input": "render tag 3 h5s [h5]",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "append 37 select",
+    "output": "{ quantity : 37 , tag : select }"
+  },
+  {
+    "input": "generate element Buttons",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "compose Image",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "elements 2 spans",
+    "output": "{ quantity : 2 , tag : span }"
+  },
+  {
+    "input": "initialize 10 Primary Title",
+    "output": "{ quantity : 10 , tag : h1 }"
+  },
+  {
+    "input": "insert tag 1 Tertiary Title",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "3 video",
+    "output": "{ quantity : 3 , tag : video }"
+  },
+  {
+    "input": "append elements Option Selector",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "set tag 3 headers",
+    "output": "{ quantity : 3 , tag : header }"
+  },
+  {
+    "input": "construct tag 24 h2s",
+    "output": "{ quantity : 24 , tag : h2 }"
+  },
+  {
+    "input": "set element Content Area",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "initialize 16 li",
+    "output": "{ quantity : 16 , tag : li }"
+  },
+  {
+    "input": "append element Paragraph",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "render element 5 headers",
+    "output": "{ quantity : 5 , tag : header }"
+  },
+  {
+    "input": "tag 3 Video Player (video)",
+    "output": "{ quantity : 3 , tag : video }"
+  },
+  {
+    "input": "initialize tag 1 Sixth Level Title",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "8 Content Segments",
+    "output": "{ quantity : 8 , tag : section }"
+  },
+  {
+    "input": "establish elements Title 1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "set sections [section]",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "add 15 images [img]",
+    "output": "{ quantity : 15 , tag : img }"
+  },
+  {
+    "input": "develop 2 Content Area",
+    "output": "{ quantity : 2 , tag : section }"
+  },
+  {
+    "input": "element Sidebar Elements",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "render Imgs",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "build Pics",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "generate Citation [blockquote]",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "insert blockquote [blockquote]",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "tags Level 4 Heading",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "establish Clickable",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "establish element 5 Span",
+    "output": "{ quantity : 5 , tag : span }"
+  },
+  {
+    "input": "Citations",
+    "output": "{ quantity : 1 , tag : blockquote }"
+  },
+  {
+    "input": "initialize elements 6 Input [input]",
+    "output": "{ quantity : 6 , tag : input }"
+  },
+  {
+    "input": "45 Picture",
+    "output": "{ quantity : 45 , tag : img }"
+  },
+  {
+    "input": "add elements div",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "build element ol",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "build element 7 Container",
+    "output": "{ quantity : 7 , tag : div }"
+  },
+  {
+    "input": "initialize tag 32 Subsection Headings",
+    "output": "{ quantity : 32 , tag : h4 }"
+  },
+  {
+    "input": "initialize element 4 H5s",
+    "output": "{ quantity : 4 , tag : h5 }"
+  },
+  {
+    "input": "element 10 H1",
+    "output": "{ quantity : 10 , tag : h1 }"
+  },
+  {
+    "input": "generate 3 Audio Player",
+    "output": "{ quantity : 3 , tag : audio }"
+  },
+  {
+    "input": "compose tag 29 Video Clip",
+    "output": "{ quantity : 29 , tag : video }"
+  },
+  {
+    "input": "create elements 7 Video Player",
+    "output": "{ quantity : 7 , tag : video }"
+  },
+  {
+    "input": "H3 (h3)",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "append tags 43 Sections",
+    "output": "{ quantity : 43 , tag : section }"
+  },
+  {
+    "input": "initialize element H6s",
+    "output": "{ quantity : 1 , tag : h6 }"
+  },
+  {
+    "input": "establish element Sentences",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "render 14 List Entries",
+    "output": "{ quantity : 14 , tag : li }"
+  },
+  {
+    "input": "set tag 42 Buttons [button]",
+    "output": "{ quantity : 42 , tag : button }"
+  },
+  {
+    "input": "compose tag 5 Ordered Lists",
+    "output": "{ quantity : 5 , tag : ol }"
+  },
+  {
+    "input": "build 12 audio clips",
+    "output": "{ quantity : 12 , tag : audio }"
+  },
+  {
+    "input": "establish 4 Content Area [div]",
+    "output": "{ quantity : 4 , tag : div }"
+  },
+  {
+    "input": "define 17 Footers",
+    "output": "{ quantity : 17 , tag : footer }"
+  },
+  {
+    "input": "11 Level 6 Heading",
+    "output": "{ quantity : 11 , tag : h6 }"
+  },
+  {
+    "input": "assign 3 Video",
+    "output": "{ quantity : 3 , tag : video }"
+  },
+  {
+    "input": "15 main",
+    "output": "{ quantity : 15 , tag : main }"
+  },
+  {
+    "input": "insert element 1 Entry",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "create tags Divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "construct tag 50 Fifth Level Headings",
+    "output": "{ quantity : 50 , tag : h5 }"
+  },
+  {
+    "input": "initialize tag Graphics",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "render elements 7 Paragraphs",
+    "output": "{ quantity : 7 , tag : p }"
+  },
+  {
+    "input": "insert elements Content Piece",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "compose element 13 Small Text",
+    "output": "{ quantity : 13 , tag : span }"
+  },
+  {
+    "input": "3 Main Headings",
+    "output": "{ quantity : 3 , tag : h1 }"
+  },
+  {
+    "input": "set 3 spans [span]",
+    "output": "{ quantity : 3 , tag : span }"
+  },
+  {
+    "input": "initialize 18 Bottom Headers",
+    "output": "{ quantity : 18 , tag : footer }"
+  },
+  {
+    "input": "define elements 14 Select Input",
+    "output": "{ quantity : 14 , tag : select }"
+  },
+  {
+    "input": "set element 3 Title 5",
+    "output": "{ quantity : 3 , tag : h5 }"
+  },
+  {
+    "input": "Photos [img]",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "add 41 Sections",
+    "output": "{ quantity : 41 , tag : section }"
+  },
+  {
+    "input": "build 1 Interactive Button",
+    "output": "{ quantity : 1 , tag : button }"
+  },
+  {
+    "input": "elements ol",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "establish elements 2 Audios",
+    "output": "{ quantity : 2 , tag : audio }"
+  },
+  {
+    "input": "insert elements Photos (img)",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "append element 20 Content Entries (article)",
+    "output": "{ quantity : 20 , tag : article }"
+  },
+  {
+    "input": "insert tag 2 Photos",
+    "output": "{ quantity : 2 , tag : img }"
+  },
+  {
+    "input": "establish tag 5 Form Inputs",
+    "output": "{ quantity : 5 , tag : input }"
+  },
+  {
+    "input": "append element 3 buttons",
+    "output": "{ quantity : 3 , tag : button }"
+  },
+  {
+    "input": "append 15 buttons [button]",
+    "output": "{ quantity : 15 , tag : button }"
+  },
+  {
+    "input": "construct 1 Input Fields",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "establish elements Section",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "append tag 16 Container",
+    "output": "{ quantity : 16 , tag : div }"
+  },
+  {
+    "input": "define element 3 Header 1",
+    "output": "{ quantity : 3 , tag : h1 }"
+  },
+  {
+    "input": "compose tag 15 Article",
+    "output": "{ quantity : 15 , tag : article }"
+  },
+  {
+    "input": "define tag Title 5 (h5)",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "append elements Image Elements",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "establish element Footer [footer]",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "initialize tag 2 input",
+    "output": "{ quantity : 2 , tag : input }"
+  },
+  {
+    "input": "append 3 h4s",
+    "output": "{ quantity : 3 , tag : h4 }"
+  },
+  {
+    "input": "add element 87 Sub Heading [h2]",
+    "output": "{ quantity : 87 , tag : h2 }"
+  },
+  {
+    "input": "develop Small Text",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "Content Piece (article)",
+    "output": "{ quantity : 1 , tag : article }"
+  },
+  {
+    "input": "generate 1 Select Input",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "58 LI",
+    "output": "{ quantity : 58 , tag : li }"
+  },
+  {
+    "input": "render 12 uls",
+    "output": "{ quantity : 12 , tag : ul }"
+  },
+  {
+    "input": "establish element 8 Form Element",
+    "output": "{ quantity : 8 , tag : input }"
+  },
+  {
+    "input": "generate element Video Clip [video]",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "build structure 2 Aside",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "render tag 43 Form Element",
+    "output": "{ quantity : 43 , tag : input }"
+  },
+  {
+    "input": "establish elements 2 h4",
+    "output": "{ quantity : 2 , tag : h4 }"
+  },
+  {
+    "input": "Aside",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "append 9 Picture",
+    "output": "{ quantity : 9 , tag : img }"
+  },
+  {
+    "input": "initialize tag ULs",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "9 audio clips",
+    "output": "{ quantity : 9 , tag : audio }"
+  },
+  {
+    "input": "create 52 Picture",
+    "output": "{ quantity : 52 , tag : img }"
+  },
+  {
+    "input": "add Header",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "insert elements 46 Sidebar Elements",
+    "output": "{ quantity : 46 , tag : aside }"
+  },
+  {
+    "input": "assign 17 Title 1",
+    "output": "{ quantity : 17 , tag : h1 }"
+  },
+  {
+    "input": "1 Small Text",
+    "output": "{ quantity : 1 , tag : span }"
+  },
+  {
+    "input": "initialize tag 44 Title 6",
+    "output": "{ quantity : 44 , tag : h6 }"
+  },
+  {
+    "input": "add tag Header 3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "render 14 Sound",
+    "output": "{ quantity : 14 , tag : audio }"
+  },
+  {
+    "input": "establish tag 23 Level 2 Heading",
+    "output": "{ quantity : 23 , tag : h2 }"
+  },
+  {
+    "input": "add 5 Main Sections",
+    "output": "{ quantity : 5 , tag : main }"
+  },
+  {
+    "input": "2 LI",
+    "output": "{ quantity : 2 , tag : li }"
+  },
+  {
+    "input": "establish Quinary Heading",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "set element Subsection Headings",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "add elements 2 h6",
+    "output": "{ quantity : 2 , tag : h6 }"
+  },
+  {
+    "input": "12 Subsection Title",
+    "output": "{ quantity : 12 , tag : h4 }"
+  },
+  {
+    "input": "compose 33 Subsection Title",
+    "output": "{ quantity : 33 , tag : h4 }"
+  },
+  {
+    "input": "ul",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "build element 85 aside",
+    "output": "{ quantity : 85 , tag : aside }"
+  },
+  {
+    "input": "compose tag Multimedia",
+    "output": "{ quantity : 1 , tag : video }"
+  },
+  {
+    "input": "build tag Subsection Title (h4)",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "append tag Audio Player",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "set tag H3 [h3]",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "define element 9 Main Title",
+    "output": "{ quantity : 9 , tag : h1 }"
+  },
+  {
+    "input": "define tag 2 Footers [footer]",
+    "output": "{ quantity : 2 , tag : footer }"
+  },
+  {
+    "input": "insert 4 Main Title",
+    "output": "{ quantity : 4 , tag : h1 }"
+  },
+  {
+    "input": "construct 17 Bullet Point [li]",
+    "output": "{ quantity : 17 , tag : li }"
+  },
+  {
+    "input": "set 2 blockquote",
+    "output": "{ quantity : 2 , tag : blockquote }"
+  },
+  {
+    "input": "set element 12 video",
+    "output": "{ quantity : 12 , tag : video }"
+  },
+  {
+    "input": "set element 3 img",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "1 Selection Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "render 3 Level 6 Heading",
+    "output": "{ quantity : 3 , tag : h6 }"
+  },
+  {
+    "input": "create 2 ps (p)",
+    "output": "{ quantity : 2 , tag : p }"
+  },
+  {
+    "input": "generate tag 1 audio",
+    "output": "{ quantity : 1 , tag : audio }"
+  },
+  {
+    "input": "insert element h5",
+    "output": "{ quantity : 1 , tag : h5 }"
+  },
+  {
+    "input": "3 Video Clip",
+    "output": "{ quantity : 3 , tag : video }"
+  },
+  {
+    "input": "initialize elements 9 P (p)",
+    "output": "{ quantity : 9 , tag : p }"
+  },
+  {
+    "input": "compose tag 31 Primary Content Area (main)",
+    "output": "{ quantity : 31 , tag : main }"
+  },
+  {
+    "input": "element 97 Footers",
+    "output": "{ quantity : 97 , tag : footer }"
+  },
+  {
+    "input": "compose structure H4s",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "set 5 selects",
+    "output": "{ quantity : 5 , tag : select }"
+  },
+  {
+    "input": "generate elements Image Elements",
+    "output": "{ quantity : 1 , tag : img }"
+  },
+  {
+    "input": "build element H4s",
+    "output": "{ quantity : 1 , tag : h4 }"
+  },
+  {
+    "input": "2 Phrases",
+    "output": "{ quantity : 2 , tag : p }"
+  },
+  {
+    "input": "add 3 Small Text",
+    "output": "{ quantity : 3 , tag : span }"
+  },
+  {
+    "input": "elements 16 Sixth Level Headings (h6)",
+    "output": "{ quantity : 16 , tag : h6 }"
+  },
+  {
+    "input": "construct tag 3 Content Segments",
+    "output": "{ quantity : 3 , tag : section }"
+  },
+  {
+    "input": "insert tag 3 Inline Elements",
+    "output": "{ quantity : 3 , tag : span }"
+  },
+  {
+    "input": "add tag mains",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "append tags 72 ULs",
+    "output": "{ quantity : 72 , tag : ul }"
+  },
+  {
+    "input": "H3",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "compose structure 3 Picture [img]",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "render element 4 Container [div]",
+    "output": "{ quantity : 4 , tag : div }"
+  },
+  {
+    "input": "render tag 75 P",
+    "output": "{ quantity : 75 , tag : p }"
+  },
+  {
+    "input": "84 Audios",
+    "output": "{ quantity : 84 , tag : audio }"
+  },
+  {
+    "input": "generate element 2 H6",
+    "output": "{ quantity : 2 , tag : h6 }"
+  },
+  {
+    "input": "initialize tag 82 H2",
+    "output": "{ quantity : 82 , tag : h2 }"
+  },
+  {
+    "input": "construct element 5 Content Area",
+    "output": "{ quantity : 5 , tag : div }"
+  },
+  {
+    "input": "define h3s",
+    "output": "{ quantity : 1 , tag : h3 }"
+  },
+  {
+    "input": "create element Form Element",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "insert 2 sections",
+    "output": "{ quantity : 2 , tag : section }"
+  },
+  {
+    "input": "16 Citation",
+    "output": "{ quantity : 16 , tag : blockquote }"
+  },
+  {
+    "input": "create element 4 Audios",
+    "output": "{ quantity : 4 , tag : audio }"
+  },
+  {
+    "input": "add elements 6 Header",
+    "output": "{ quantity : 6 , tag : header }"
+  },
+  {
+    "input": "establish 27 OL",
+    "output": "{ quantity : 27 , tag : ol }"
+  },
+  {
+    "input": "Bullet Points",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "add tag Heading 1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "set 5 Articles",
+    "output": "{ quantity : 5 , tag : article }"
+  },
+  {
+    "input": "define tag 2 Title 3",
+    "output": "{ quantity : 2 , tag : h3 }"
+  },
+  {
+    "input": "Main Content",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "establish tag 18 Unordered List",
+    "output": "{ quantity : 18 , tag : ul }"
+  },
+  {
+    "input": "37 Footer Section",
+    "output": "{ quantity : 37 , tag : footer }"
+  },
+  {
+    "input": "render tag List Item (li)",
+    "output": "{ quantity : 1 , tag : li }"
+  },
+  {
+    "input": "element h2",
+    "output": "{ quantity : 1 , tag : h2 }"
+  },
+  {
+    "input": "define tag Top Section",
+    "output": "{ quantity : 1 , tag : header }"
+  },
+  {
+    "input": "set elements 1 Div Blocks",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "set select (select)",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "create tags Sidebar Elements",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "create 16 Text Field",
+    "output": "{ quantity : 16 , tag : input }"
+  },
+  {
+    "input": "5 Audios",
+    "output": "{ quantity : 5 , tag : audio }"
+  },
+  {
+    "input": "element ols [ol]",
+    "output": "{ quantity : 1 , tag : ol }"
+  },
+  {
+    "input": "build tag mains",
+    "output": "{ quantity : 1 , tag : main }"
+  },
+  {
+    "input": "set tag 2 aside [aside]",
+    "output": "{ quantity : 2 , tag : aside }"
+  },
+  {
+    "input": "set element 3 Imgs",
+    "output": "{ quantity : 3 , tag : img }"
+  },
+  {
+    "input": "append tag 4 blockquotes",
+    "output": "{ quantity : 4 , tag : blockquote }"
+  },
+  {
+    "input": "construct tag 3 Containers",
+    "output": "{ quantity : 3 , tag : div }"
+  },
+  {
+    "input": "append 1 Heading 1",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "build element Text Field",
+    "output": "{ quantity : 1 , tag : input }"
+  },
+  {
+    "input": "add tag 2 video",
+    "output": "{ quantity : 2 , tag : video }"
+  },
+  {
+    "input": "add 3 Quote Block",
+    "output": "{ quantity : 3 , tag : blockquote }"
+  },
+  {
+    "input": "initialize H1s",
+    "output": "{ quantity : 1 , tag : h1 }"
+  },
+  {
+    "input": "establish tag Section [section]",
+    "output": "{ quantity : 1 , tag : section }"
+  },
+  {
+    "input": "initialize element 38 Drop-downs",
+    "output": "{ quantity : 38 , tag : select }"
+  },
+  {
+    "input": "generate 6 ol (ol)",
+    "output": "{ quantity : 6 , tag : ol }"
+  },
+  {
+    "input": "generate 70 Header 4",
+    "output": "{ quantity : 70 , tag : h4 }"
+  },
+  {
+    "input": "insert elements ULs",
+    "output": "{ quantity : 1 , tag : ul }"
+  },
+  {
+    "input": "Divs",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "generate 45 Buttons",
+    "output": "{ quantity : 45 , tag : button }"
+  },
+  {
+    "input": "construct elements 4 select [select]",
+    "output": "{ quantity : 4 , tag : select }"
+  },
+  {
+    "input": "construct elements 5 Content Segments",
+    "output": "{ quantity : 5 , tag : section }"
+  },
+  {
+    "input": "15 header",
+    "output": "{ quantity : 15 , tag : header }"
+  },
+  {
+    "input": "insert 4 Sound Clip",
+    "output": "{ quantity : 4 , tag : audio }"
+  },
+  {
+    "input": "render elements Footer Section",
+    "output": "{ quantity : 1 , tag : footer }"
+  },
+  {
+    "input": "append tags Phrases",
+    "output": "{ quantity : 1 , tag : p }"
+  },
+  {
+    "input": "compose structure Selection Box",
+    "output": "{ quantity : 1 , tag : select }"
+  },
+  {
+    "input": "append tags 45 Selection Field",
+    "output": "{ quantity : 45 , tag : select }"
+  },
+  {
+    "input": "add Container",
+    "output": "{ quantity : 1 , tag : div }"
+  },
+  {
+    "input": "develop 4 article (article)",
+    "output": "{ quantity : 4 , tag : article }"
+  },
+  {
+    "input": "build structure 1 Sidebar",
+    "output": "{ quantity : 1 , tag : aside }"
+  },
+  {
+    "input": "add element 3 Footer Section",
+    "output": "{ quantity : 3 , tag : footer }"
+  },
+  {
+    "input": "set elements 1 OL",
+    "output": "{ quantity : 1 , tag : ol }"
+  }
+]

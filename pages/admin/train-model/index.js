@@ -1,22 +1,22 @@
-import { getSession } from "next-auth/react"
-import { ProfileComponent } from "@/components/index"
 
+import { getSession } from "next-auth/react";
 
-export default function Profile({ user }) {
+import { TrainModelComponent } from "@/components/index";
 
+export default function TrainModel({ user }) {
 
-  return (
-    <>
-      <ProfileComponent user={user} />
+  return ( 
+    <> 
+      <TrainModelComponent user={user} />
     </>
   )
+
 
 }
 
 export async function getServerSideProps(context) {
 
   const { req, res } = context;
-
   const session = await getSession({ req });
 
   if (!session && !session?.user) {
@@ -26,6 +26,8 @@ export async function getServerSideProps(context) {
     return res.end();
 
   }
+
+
 
   let admin = false;
   if (session.user.email === process.env.ADMIN) admin = true;

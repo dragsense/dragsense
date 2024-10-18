@@ -2,6 +2,8 @@ export { default as LoginComponent,VerifyComponent, ErrorComponent } from "./Log
 export { default as RegisterComponent, ForgetComponent, ResetComponent, VerifyUserComponent } from "./Register";
 export { default as ProjectComponent } from "./Project";
 export { default as ProfileComponent } from "./Profile";
+export { default as UsersComponent } from "./Users";
+export { default as TrainModelComponent } from "./TrainModel";
 
 export {
     default as DashboardComponent,
@@ -13,7 +15,7 @@ export {
     CSSComponent,
     SettingComponent,
     MediaComponent,
-    FormComponent
+    FormComponent,
 } from './Dashboard';
 
 

@@ -1,5 +1,5 @@
 import { ValidateProps } from "@/api-helper/constants";
-import { findUserByEmail } from "@/api-helper/database";
+import { findUserByEmail, findUserById } from "@/api-helper/database";
 import { database, authorize } from "@/api-helper/middlewares";
 import { ncOpts } from "@/api-helper/nc";
 import nc from "next-connect";
@@ -12,7 +12,14 @@ handler.use(database, authorize);
 // Function to handle GET requests
 handler.get(async (req, res) => {
   try {
-    const user = await findUserByEmail(req.db, req.query.email);
+    let user = await findUserByEmail(req.db, req.query.userId);
+
+    if(!user) {
+
+     user = await findUserById(req.db, req.query.userId);
+
+    }
+
 
     if (!user) {
       res.status(404).json({ error: { message: "User Not Found." } });

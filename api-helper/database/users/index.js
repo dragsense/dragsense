@@ -12,17 +12,31 @@ export async function findUserWithEmailAndPassword(db, email, password) {
   return null;
 }
 
-
 export async function findUserById(db, userId) {
   return db
     .collection("users")
-    .findOne({ _id: new ObjectId(userId) }, { projection: dbProjectionUsers() })
+    .findOne(
+      { _id: new ObjectId(userId) },
+      { projection: { password: 0 } }
+    )
     .then((user) => user || null);
 }
 
+
+
 export async function findUsers(db, search, page = 0, limit = 10) {
-  const pageSize = parseInt(limit);
-  const pageNumber = parseInt(page);
+  const pageSize = parseInt(limit, 10);
+  const pageNumber = parseInt(page, 10);
+
+  // Create the search condition for reusability
+  const searchCondition = search
+    ? {
+        $or: [
+          { name: { $regex: search, $options: "i" } },
+          { email: { $regex: search, $options: "i" } },
+        ],
+      }
+    : {};
 
   const res = await db
     .collection("users")
@@ -30,30 +44,65 @@ export async function findUsers(db, search, page = 0, limit = 10) {
       {
         $facet: {
           users: [
+            { $match: searchCondition },
+            { $sort: { _id: -1 } }, // Sorting by descending order of _id
+            { $skip: (pageNumber - 1) * pageSize },
+            { $limit: pageSize }, // Limiting the number of documents returned
+            // Lookup to get projects count
             {
-              $match: {
-                ...(search && { name: { $regex: search, $options: 'i' } }) // Optional search filter
+              $lookup: {
+                from: "projects", // Name of the projects collection
+                localField: "_id", // Field in users collection
+                foreignField: "creatorId", // Field in projects collection that references user
+                as: "projects", // Name of the new array field to hold matching projects
               },
             },
-            { $sort: { _id: -1 } }, // Sorting by descending order of _id
-            { $skip: pageNumber * pageSize }, // Skipping documents for pagination
-            { $limit: pageSize } // Limiting the number of documents returned
+            // Lookup to get roles and their names
+            {
+              $lookup: {
+                from: "roles", // Name of the roles collection
+                localField: "_id", // Field in users collection
+                foreignField: "userId", // Field in roles collection that references user
+                as: "roles", // Name of the new array field to hold matching roles
+              },
+            },
+            {
+              $addFields: {
+                projectCount: { $size: "$projects" }, // Counting the number of projects
+                roleCount: { $size: "$roles" }, // Counting the number of roles
+                /* roleNames: {
+                  $map: {
+                    input: "$roles", // Array of roles
+                    as: "role", // Alias for each role
+                    in: "$$role.name", // Extracting the name of each role
+                  },
+                }, */
+              },
+            },
+            {
+              $project: {
+                projects: 0, // Optionally exclude the projects array from the output
+                roles: 0, // Optionally exclude the roles array from the output
+              },
+            },
           ],
           total: [
-            {
-              $match: {
-                ...(search && { name: { $regex: search, $options: 'i' } }) // Matching the same search filter
-              },
-            },
-            { $count: 'total' } // Counting the total number of documents
-          ]
-        }
-      }
+            { $match: searchCondition },
+            { $count: "total" }, // Counting the total number of documents
+          ],
+        },
+      },
     ])
     .toArray();
 
-  return { users: res[0].users, total: res[0].total[0]?.total ?? 0 };
+  // Handle case when total count exists but no users are returned
+  const users = res[0].users || []; // Ensure an empty array if no users found
+  const total = res[0].total[0]?.total ?? 0; // Default total to 0 if not found
+
+  return { users, total };
 }
+
+
 
 export async function findUserByEmail(db, email) {
   return db

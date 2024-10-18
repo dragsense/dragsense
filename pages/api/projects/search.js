@@ -11,12 +11,32 @@ handler.use(database);
 
 // Function to handle the GET request
 const handleGetRequest = async (req, res) => {
+
+
+      // Fetch user by email
+      const user = await findUserByEmail(req.db, req.user.email);
+
+      // If user not found, return 401 status
+      if (!user) return res.status(401).end();
+    
+      let by = user._id;
+    
+      if (user.email === process.env.ADMIN) {
+        by = null;
+      }
+    
+
+
   try {
-    // Fetch the projects based on the search query
-    const results = await findProjectsBySearch(
+    // Fetch projects with pagination
+    const results = await findProjects(
       req.db,
       req.query.search,
+      by,
+      req.query.page ? parseInt(req.query.page, 10) : 1,
+      req.query.limit ? parseInt(req.query.limit, 10) : 10
     );
+
 
     // Send the results as a response
     res.json(results);

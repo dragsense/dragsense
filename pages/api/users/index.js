@@ -23,6 +23,16 @@ handler.use(database);
 
 // Function to handle GET requests
 handler.get(authorize, async (req, res) => {
+
+
+  if (!req.user) {
+    return res.status(401).json({ error: { message: "Unauthorized access." } });
+  }
+  
+  if (req.user.email !== process.env.ADMIN) {
+    return res.status(401).json({ error: { message:  "Unauthorized access." } });
+  }
+
   // Fetch users from the database
   const users = await findUsers(
     req.db,

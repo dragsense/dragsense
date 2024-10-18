@@ -125,7 +125,7 @@ export async function findProjectsBySearch(db, search, limit = 25) {
   return { projects: res[0] };
 }
 
-export async function findProjects(db, page = 1, by, limit = 10) {
+export async function findProjects(db, search, by, page = 1, limit = 10) {
   const pageSize = parseInt(limit);
   const pageNumber = parseInt(page);
 
@@ -137,6 +137,7 @@ export async function findProjects(db, page = 1, by, limit = 10) {
           projects: [
             {
               $match: {
+                ...(search && { name: { $regex: search, $options: "i" } }),
                 ...(by && { creatorId: new ObjectId(by) }),
               },
             },
@@ -157,6 +158,7 @@ export async function findProjects(db, page = 1, by, limit = 10) {
           total: [
             {
               $match: {
+                ...(search && { name: { $regex: search, $options: "i" } }),
                 ...(by && { creatorId: new ObjectId(by) }),
               },
             },

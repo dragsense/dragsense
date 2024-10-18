@@ -1,4 +1,4 @@
-import { Alert, Typography, Card, message, Button, Tooltip, Space } from "antd";
+import { Alert, Typography, Card, message, Button, Tooltip, Space, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 
@@ -105,6 +105,7 @@ export default function Projects({ shared }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [page, setPage] = useState(1);
   const [downloadProject, setDownloadProject] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const load = async () => {
     try {
@@ -121,9 +122,31 @@ export default function Projects({ shared }) {
     }
   };
 
+  const search = async () => {
+    try {
+      dispatch({ type: "start" });
+      const res = await ProjectServices.search(
+        searchQuery,
+        page,
+        LIMIT,
+        shared
+      );
+
+      const data = Array.isArray(res.projects) ? res.projects : [];
+
+      dispatch({ type: "laod", data, total: res.total });
+    } catch (e) {
+      dispatch({ type: "error", error: e?.message || "Something went wrong." });
+    } finally {
+      dispatch({ type: "finish" });
+    }
+  };
+
   useEffect(() => {
-    load();
-  }, [page]);
+    if (!searchQuery) {
+      load();
+    } else search();
+  }, [page, searchQuery]);
 
   const onSubmit = useCallback(
     async (states) => {
@@ -211,12 +234,26 @@ export default function Projects({ shared }) {
     setDownloadProject(project);
   };
 
+  const onChange = (e) => {
+    if (!state.loading) setSearchQuery(e.target.value);
+  };
+
   return (
     <>
       <Card
         loading={state.loading && state.total == 0}
         title={
-          state.project ? state.label : `${shared ? "Shared" : ""} Projects:`
+          <>
+            {state.project
+              ? state.label
+              : `${shared ? "Shared" : ""} Projects:`}
+            <Input
+              onChange={onChange}
+              style={{ maxWidth: 300, width: "100%", marginLeft: 10 }}
+              type="search"
+              placeholder="search..."
+            />
+          </>
         }
         extra={
           state.project ? (

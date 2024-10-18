@@ -1,47 +1,45 @@
-import { findSharedProjectsBySearch } from '@/api-helper/database';
-import {  database } from '@/api-helper/middlewares';
+import { findRolesByUserProjects, findUserByEmail } from '@/api-helper/database';
+import { authorize, database } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
 
 // Initialize next-connect with options
 const handler = nc(ncOpts);
 
-// Use database middleware
-handler.use(database);
+// Use database and authorize middlewares
+handler.use(database, authorize);
 
-// Function to handle user validation
-async function validateUser(req, res) {
-  const user = await findUserByEmail(req.db, req.user.email);
-  if (!user) {
-    return res.status(401).end();
-  }
-  return user;
-}
+// Function to handle user roles
+const handleUserRoles = async (req, res, user) => {
+    try {
+        // Fetch roles by user projects
+        const results = await findRolesByUserProjects(
+            req.db,
+            Array.isArray(user.roles) ? user.roles : [],
+            req.query.search,
+            req.query.page ? parseInt(req.query.page, 10) : 1,
+            req.query.limit ? parseInt(req.query.limit, 10) : 10
+        );
+        // Return results
+        return res.status(200).json(results);
+    } catch (e) {
+        // Handle error
+        console.error(e);
+        res.status(500).json({ error: { message: 'Something went wrong.' } });
+    }
+};
 
-// Function to handle search results
-async function handleSearchResults(req, res, user) {
-  try {
-    // Fetch shared projects by search
-    const results = await findSharedProjectsBySearch(
-      req.db,
-      req.query.search,
-      user._id
-    );
-    // Return results
-    res.json(results);
-  } catch (e) {
-    // Handle error
-    console.error(e);
-    res.status(500).json({ error: { message: 'Something went wrong.' } });
-  }
-}
-
-// Handle GET request
 handler.get(async (req, res) => {
-  const user = await validateUser(req, res);
-  if (user) {
-    await handleSearchResults(req, res, user);
-  }
+    // Find user by email
+    const user = await findUserByEmail(req.db, req.user.email);
+
+    // If user not found, return 401
+    if (!user) {
+        return res.status(401).end();
+    }
+
+    // Handle user roles
+    return handleUserRoles(req, res, user);
 });
 
 // Export handler

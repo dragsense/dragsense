@@ -1,12 +1,12 @@
 
 import { findUsers } from '@/api-helper/database';
-import {  database } from '@/api-helper/middlewares';
+import {  authorize, database } from '@/api-helper/middlewares';
 import { ncOpts } from '@/api-helper/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database);
+handler.use(authorize, database);
 
 handler.get(async (req, res) => {
   try {
@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
   } catch (e) {
     res
       .status(403)
-      .json({ error: { message: 'Something went wrong.' } });
+      .json({ error: { message: e?.message || 'Something went wrong.' } });
     return;
   }
 

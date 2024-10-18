@@ -1,22 +1,22 @@
-import { getSession } from "next-auth/react"
-import { ProfileComponent } from "@/components/index"
 
+import { getSession } from "next-auth/react";
 
-export default function Profile({ user }) {
+import { UsersComponent } from "@/components/index";
 
+export default function Users({ user }) {
 
-  return (
-    <>
-      <ProfileComponent user={user} />
+  return ( 
+    <> 
+      <UsersComponent user={user} />
     </>
   )
+
 
 }
 
 export async function getServerSideProps(context) {
 
   const { req, res } = context;
-
   const session = await getSession({ req });
 
   if (!session && !session?.user) {

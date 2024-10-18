@@ -16,6 +16,7 @@ const handleUserRoles = async (req, res, user) => {
         const results = await findRolesByUserProjects(
             req.db,
             Array.isArray(user.roles) ? user.roles : [],
+            null,
             req.query.page ? parseInt(req.query.page, 10) : 1,
             req.query.limit ? parseInt(req.query.limit, 10) : 10
         );
