@@ -25,7 +25,6 @@ handler.post(async (req, res) => {
 
 
     const project = await _findProjectById(req.db, projectId);
-    console.log(project, projectId)
     if (!project) {
       return res.status(404).json({ error: { message: 'Project not found' } });
     }
@@ -33,7 +32,7 @@ handler.post(async (req, res) => {
     
 
     // Insert the role for the user
-    const role = await insertRole(req.db, { userId: user._id, projectId, name: roleName, permissions });
+    const role = await insertRole(req.db, { userId: user._id, projectId: project._id, name: roleName, permissions });
     await updateRoleInProjectById(req.db, projectId, role._id);
     await updateRoleInUserById(req.db, userId, role._id);
 

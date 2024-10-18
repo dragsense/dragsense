@@ -1,15 +1,11 @@
+import Projects from "./Projects";
 
-import Projects from "./Projects"
-
-
-export default function ProjectsComponent() {
-
-
-    return <>
-        <Projects  />
-        <br />
-        <Projects shared={true} />
+export default function ProjectsComponent({ user }) {
+  return (
+    <>
+      <Projects />
+      <br />
+      {!user.admin && <Projects shared={true} />}
     </>
-
-};
-
+  );
+}

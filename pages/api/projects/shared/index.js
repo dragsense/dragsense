@@ -20,6 +20,8 @@ const handleUserRoles = async (req, res, user) => {
             req.query.page ? parseInt(req.query.page, 10) : 1,
             req.query.limit ? parseInt(req.query.limit, 10) : 10
         );
+
+        
         // Return results
         return res.status(200).json(results);
     } catch (e) {

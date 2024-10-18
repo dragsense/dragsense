@@ -19,7 +19,7 @@ export default function ProjectComponent({ user }) {
             <Title> Wellcome, {" "}
                 <span style={{color: colorPrimary}}>{user.name.split(" ")[0]}</span>
             </Title>
-            <ProjectsComponent />
+            <ProjectsComponent user={user} />
 
         </ProjectLayout>
     );

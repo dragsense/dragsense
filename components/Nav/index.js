@@ -33,20 +33,20 @@ const Nav = ({ user }) => {
         </Link>
       ),
     },
+    {
+      key: '2',
+      label: (
+        <Link href="/admin/projects">
+          Projects
+        </Link>
+      ),
+    },
     ...(user.admin ? [
-      {
-        key: '2',
-        label: (
-          <Link href="/admin/users">
-            Users
-          </Link>
-        ),
-      },
       {
         key: '3',
         label: (
-          <Link href="/admin/projects">
-            Projects
+          <Link href="/admin/users">
+            Users
           </Link>
         ),
       },
