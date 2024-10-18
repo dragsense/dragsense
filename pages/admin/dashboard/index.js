@@ -21,10 +21,8 @@ export async function getServerSideProps(context) {
     return res.end();
   }
 
-  admin = false;
-  if (session.user.email === process.env.ADMIN) admin = true;
 
   return {
-    props: { user: { ...session.user, admin } },
+    props: { user: { ...session.user } },
   };
 }
