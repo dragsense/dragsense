@@ -23,8 +23,8 @@ const ForgetComponent = ({ signIn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrors([]);
-
+    setErrors([]); // Reset errors before validation
+  
     form
       .validateFields()
       .then(async (values) => {
@@ -33,30 +33,30 @@ const ForgetComponent = ({ signIn }) => {
             ...values,
             redirect: false,
           });
-
+  
           if (response.error === "EmailSignin") {
             setErrors([
-              ...errors,
               "The email you entered is incorrect. Please try again.",
             ]);
-          } else router.push("/auth/verify?status=2");
+          } else {
+            router.push("/auth/verify?status=2");
+          }
         } catch (error) {
-          setErrors([error?.message || "Someting went wrong."]);
+          setErrors([error?.message || "Something went wrong."]);
         } finally {
           setIsLoading(false);
         }
       })
       .catch((info) => {
         if (info?.errorFields?.length > 0) {
-          setErrors(info?.errorFields?.map((field) => field.errors));
+          setErrors(info.errorFields.map((field) => field.errors).flat());
         } else {
-          setErrors(["Validate Failed."]);
+          setErrors(["Validation failed."]);
         }
         setIsLoading(false);
-      })
-      .finally(() => {});
+      });
   };
-
+  
   return (
     <AuthLayout>
       <Divider orientationMargin="0">

@@ -105,7 +105,7 @@ handler.post(
           pass: process.env.EMAIL_HOST_PASS,
         },
         tls: {
-          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH === "true",
+          rejectUnauthorized: false,
         },
       });
 
@@ -113,7 +113,7 @@ handler.post(
       const result = await transport.sendMail({
         to: email,
         from: `"DragSense" <${process.env.EMAIL}>`,
-        subject: `Email Verification - ${process.env.NEXTAUTH_URL}`,
+        subject: `Email Verification - DragSense`,
         html: `
           <p>Hi ${name},</p>
           <p>Thank you for registering with DragSense. To complete the registration process, please click the link below to verify your email address:</p>

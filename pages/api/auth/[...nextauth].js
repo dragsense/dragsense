@@ -30,7 +30,7 @@ async function sendPasswordResetRequest(params) {
   const result = await transport.sendMail({
     to: identifier,
     from: `"DragSense" <${provider.from}>`,
-    subject: `Reset Password - ${process.env.NEXTAUTH_URL}`,
+    subject: `Reset Password - DragSense`,
     html: html({ url, host, theme, name: "Reset Password" }),
   });
 
@@ -87,13 +87,13 @@ const authOptions = {
       server: {
         host: process.env.EMAIL_HOST,
         port: parseInt(process.env.EMAIL_HOST_PORT), // Ensure port is parsed as integer
-        secure: process.env.EMAIL_HOST_SECURE === "true" ? true : false,
+        secure: process.env.EMAIL_HOST_SECURE === "true",
         auth: {
           user: process.env.EMAIL_HOST_USER,
           pass: process.env.EMAIL_HOST_PASS,
         },
         tls: {
-          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH === "true",
+          rejectUnauthorized: false,
         },
       },
       from: process.env.EMAIL,
@@ -112,6 +112,7 @@ const authOptions = {
             provider: { server, from },
           });
         } catch (error) {
+          console.log(error)
           throw new Error("Error sending verification email");
         }
       },
