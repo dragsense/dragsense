@@ -93,7 +93,7 @@ const authOptions = {
           pass: process.env.EMAIL_HOST_PASS,
         },
         tls: {
-          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH,
+          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH === "true",
         },
       },
       from: process.env.EMAIL,

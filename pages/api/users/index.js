@@ -28,9 +28,9 @@ handler.get(authorize, async (req, res) => {
   if (!req.user) {
     return res.status(401).json({ error: { message: "Unauthorized access." } });
   }
-  
+
   if (req.user.email !== process.env.ADMIN) {
-    return res.status(401).json({ error: { message:  "Unauthorized access." } });
+    return res.status(401).json({ error: { message: "Unauthorized access." } });
   }
 
   // Fetch users from the database
@@ -103,6 +103,9 @@ handler.post(
         auth: {
           user: process.env.EMAIL_HOST_USER,
           pass: process.env.EMAIL_HOST_PASS,
+        },
+        tls: {
+          rejectUnauthorized: process.env.EMAIL_SSL_UNAUTH === "true",
         },
       });
 
