@@ -115,7 +115,7 @@ handler.post(
         from: `"DragSense" <${process.env.EMAIL}>`,
         subject: `Email Verification - DragSense`,
         html: `
-          <p>Hi ${name},</p>
+          <p>Hi ${user.name.split(" ")[0]},</p>
           <p>Thank you for registering with DragSense. To complete the registration process, please click the link below to verify your email address:</p>
           <p><a href="${url}">${url}</a></p>
           <p>If you did not sign up for an account on our website, you can safely ignore this email.</p>

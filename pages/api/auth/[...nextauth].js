@@ -31,7 +31,7 @@ async function sendPasswordResetRequest(params) {
     to: identifier,
     from: `"DragSense" <${provider.from}>`,
     subject: `Reset Password - DragSense`,
-    html: html({ url, host, theme, name: "Reset Password" }),
+    html: html({ url, host, theme, name: user.name.split(" ")[0] }),
   });
 
   const failed = result.rejected.concat(result.pending).filter(Boolean);
